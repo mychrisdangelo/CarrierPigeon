@@ -58,8 +58,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="jew-DP-2ep"/>
                     <connections>
-                        <outlet property="passwordTextField" destination="QZr-Ia-aj8" id="mvt-ih-85o"/>
-                        <outlet property="usernameTextField" destination="QZr-Ia-aj8" id="aE6-8K-srw"/>
+                        <outlet property="passwordTextField" destination="QZr-Ia-aj8" id="b1e-HI-7hu"/>
+                        <outlet property="usernameTextField" destination="cfw-bm-svl" id="sgS-PB-Z0h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtC-fj-67X" userLabel="First Responder" sceneMemberID="firstResponder"/>

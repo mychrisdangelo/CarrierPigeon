@@ -49,8 +49,8 @@
         [alert show];
         return;
     } else {
-        KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.chrisdangelo.CarrierPigeon" accessGroup:nil];
-        NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField, kXMPPServer];
+        KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
+        NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPServer];
         [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];

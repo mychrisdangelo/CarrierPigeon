@@ -12,6 +12,7 @@
 // user info
 #define kXMPPmyJID @"kXMPPmyJID"
 #define kXMPPmyPassword @"kXMPPmyPassword"
+#define kKeyChainItemWrapperPasswordIdentifer @"kXMPPmyPasswordKeychain"
 
 #define kXMPPServer @"localhost"
 

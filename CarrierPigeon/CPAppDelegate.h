@@ -16,6 +16,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (nonatomic) BOOL allowSelfSignedCertificates;
+@property (nonatomic) BOOL allowSSLHostNameMismatch;
+@property (nonatomic) BOOL isXmppConnected;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
