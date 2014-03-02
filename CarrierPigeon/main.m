@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CarrierPigeonAppDelegate.h"
+#import "CPAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CarrierPigeonAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CPAppDelegate class]));
     }
 }

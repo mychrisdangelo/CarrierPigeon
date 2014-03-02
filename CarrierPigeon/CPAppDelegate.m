@@ -6,11 +6,23 @@
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
 
-#import "CarrierPigeonAppDelegate.h"
-
+#import "CPAppDelegate.h"
 #import "CPSignInViewController.h"
+#import "CPSignInViewController.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
 
-@implementation CarrierPigeonAppDelegate
+// Log levels: off, error, warn, info, verbose
+#if DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_INFO;
+#endif
+
+@interface CPAppDelegate() <CPSignInViewControllerDelegate>
+@end
+
+@implementation CPAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -30,7 +42,8 @@
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
         CPSignInViewController *controller = (CPSignInViewController *)navigationController.topViewController;
-        controller.managedObjectContext = self.managedObjectContext;
+        controller.delegate = self;
+//        controller.managedObjectContext = self.managedObjectContext;
     }
     return YES;
 }
@@ -75,6 +88,11 @@
             abort();
         } 
     }
+}
+
+- (BOOL)connect
+{
+    return YES;
 }
 
 #pragma mark - Core Data stack
@@ -157,5 +175,15 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+#pragma mark - CPSignInViewControllerDelegate
+
+- (void)CPSignInViewControllerDidStoreCredentials:(CPSignInViewController *)sender
+{
+    if (![self connect]) {
+        DDLogInfo(@"%s: self connect failed", __PRETTY_FUNCTION__);
+    }
+}
+
 
 @end

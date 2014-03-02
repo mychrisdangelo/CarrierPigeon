@@ -54,7 +54,7 @@
 		4032C55B18BDAE0500E0CDD1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55A18BDAE0500E0CDD1 /* CoreData.framework */; };
 		4032C56118BDAE0500E0CDD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4032C55F18BDAE0500E0CDD1 /* InfoPlist.strings */; };
 		4032C56318BDAE0500E0CDD1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C56218BDAE0500E0CDD1 /* main.m */; };
-		4032C56718BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C56618BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.m */; };
+		4032C56718BDAE0500E0CDD1 /* CPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */; };
 		4032C56A18BDAE0500E0CDD1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */; };
 		4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */; };
 		4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */; };
@@ -263,8 +263,8 @@
 		4032C56018BDAE0500E0CDD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4032C56218BDAE0500E0CDD1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CarrierPigeon-Prefix.pch"; sourceTree = "<group>"; };
-		4032C56518BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarrierPigeonAppDelegate.h; sourceTree = "<group>"; };
-		4032C56618BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonAppDelegate.m; sourceTree = "<group>"; };
+		4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPAppDelegate.h; sourceTree = "<group>"; };
+		4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPAppDelegate.m; sourceTree = "<group>"; };
 		4032C56918BDAE0500E0CDD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		4032C56C18BDAE0500E0CDD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		4032C56F18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarrierPigeon.xcdatamodel; sourceTree = "<group>"; };
@@ -460,6 +460,7 @@
 		40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		40ACCC6918C3254A00081B7F /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
 		40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignInViewController.m; sourceTree = "<group>"; };
+		40ACCC6C18C328AD00081B7F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -774,8 +775,8 @@
 			isa = PBXGroup;
 			children = (
 				40A994B818C31E0800C23AB6 /* XMPPFramework.h */,
-				4032C56518BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.h */,
-				4032C56618BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.m */,
+				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
+				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
 				40ACCC6918C3254A00081B7F /* CPSignInViewController.h */,
 				40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */,
 				4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */,
@@ -794,6 +795,7 @@
 				4032C55F18BDAE0500E0CDD1 /* InfoPlist.strings */,
 				4032C56218BDAE0500E0CDD1 /* main.m */,
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
+				40ACCC6C18C328AD00081B7F /* Constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1500,7 +1502,7 @@
 				400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */,
 				40A995F118C31E4800C23AB6 /* XEP_0223.m in Sources */,
 				40A995D118C31E4800C23AB6 /* XMPPIQ+XEP_0060.m in Sources */,
-				4032C56718BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.m in Sources */,
+				4032C56718BDAE0500E0CDD1 /* CPAppDelegate.m in Sources */,
 				40A995DB18C31E4800C23AB6 /* NSString+XEP_0106.m in Sources */,
 				40A995F018C31E4800C23AB6 /* NSXMLElement+XEP_0203.m in Sources */,
 				400DC21918C2ECD000C806ED /* XMPPIDTracker.m in Sources */,
