@@ -8,7 +8,7 @@
 
 #import "CarrierPigeonAppDelegate.h"
 
-#import "CarrierPigeonMasterViewController.h"
+#import "CPSignInViewController.h"
 
 @implementation CarrierPigeonAppDelegate
 
@@ -20,16 +20,16 @@
 {
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
-        
-        UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-        CarrierPigeonMasterViewController *controller = (CarrierPigeonMasterViewController *)masterNavigationController.topViewController;
-        controller.managedObjectContext = self.managedObjectContext;
+//        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+//        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+//        splitViewController.delegate = (id)navigationController.topViewController;
+//        
+//        UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+//        CarrierPigeonMasterViewController *controller = (CarrierPigeonMasterViewController *)masterNavigationController.topViewController;
+//        controller.managedObjectContext = self.managedObjectContext;
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        CarrierPigeonMasterViewController *controller = (CarrierPigeonMasterViewController *)navigationController.topViewController;
+        CPSignInViewController *controller = (CPSignInViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
     return YES;

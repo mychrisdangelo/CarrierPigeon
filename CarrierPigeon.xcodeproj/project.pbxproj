@@ -58,8 +58,6 @@
 		4032C56A18BDAE0500E0CDD1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */; };
 		4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */; };
 		4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */; };
-		4032C57318BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C57218BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.m */; };
-		4032C57618BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C57518BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.m */; };
 		4032C57818BDAE0500E0CDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4032C57718BDAE0500E0CDD1 /* Images.xcassets */; };
 		4032C57F18BDAE0600E0CDD1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C57E18BDAE0600E0CDD1 /* XCTest.framework */; };
 		4032C58018BDAE0600E0CDD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55418BDAE0500E0CDD1 /* Foundation.framework */; };
@@ -156,6 +154,8 @@
 		40A995F518C31E4800C23AB6 /* XMPPMessage+XEP_0308.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A9959818C31E4800C23AB6 /* XMPPMessage+XEP_0308.m */; };
 		40A995F618C31E4800C23AB6 /* XMPPMessage+XEP_0333.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A9959B18C31E4800C23AB6 /* XMPPMessage+XEP_0333.m */; };
 		40A995F718C31E4800C23AB6 /* NSXMLElement+XEP_0335.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A9959E18C31E4800C23AB6 /* NSXMLElement+XEP_0335.m */; };
+		40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		40ACCC6B18C3254A00081B7F /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,10 +268,6 @@
 		4032C56918BDAE0500E0CDD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		4032C56C18BDAE0500E0CDD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		4032C56F18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarrierPigeon.xcdatamodel; sourceTree = "<group>"; };
-		4032C57118BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarrierPigeonMasterViewController.h; sourceTree = "<group>"; };
-		4032C57218BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonMasterViewController.m; sourceTree = "<group>"; };
-		4032C57418BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarrierPigeonDetailViewController.h; sourceTree = "<group>"; };
-		4032C57518BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonDetailViewController.m; sourceTree = "<group>"; };
 		4032C57718BDAE0500E0CDD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4032C57D18BDAE0600E0CDD1 /* CarrierPigeonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarrierPigeonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4032C57E18BDAE0600E0CDD1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -460,6 +456,10 @@
 		40A9959B18C31E4800C23AB6 /* XMPPMessage+XEP_0333.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPMessage+XEP_0333.m"; sourceTree = "<group>"; };
 		40A9959D18C31E4800C23AB6 /* NSXMLElement+XEP_0335.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLElement+XEP_0335.h"; sourceTree = "<group>"; };
 		40A9959E18C31E4800C23AB6 /* NSXMLElement+XEP_0335.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLElement+XEP_0335.m"; sourceTree = "<group>"; };
+		40A995F918C31FF000C23AB6 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		40ACCC6918C3254A00081B7F /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
+		40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignInViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,6 +737,7 @@
 		4032C54818BDAE0500E0CDD1 = {
 			isa = PBXGroup;
 			children = (
+				40A995F818C31FDF00C23AB6 /* Externals */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
 				4032C55C18BDAE0500E0CDD1 /* CarrierPigeon */,
 				4032C58518BDAE0600E0CDD1 /* CarrierPigeonTests */,
@@ -775,12 +776,10 @@
 				40A994B818C31E0800C23AB6 /* XMPPFramework.h */,
 				4032C56518BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.h */,
 				4032C56618BDAE0500E0CDD1 /* CarrierPigeonAppDelegate.m */,
+				40ACCC6918C3254A00081B7F /* CPSignInViewController.h */,
+				40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */,
 				4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */,
 				4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */,
-				4032C57118BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.h */,
-				4032C57218BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.m */,
-				4032C57418BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.h */,
-				4032C57518BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.m */,
 				4032C57718BDAE0500E0CDD1 /* Images.xcassets */,
 				4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */,
 				4032C55D18BDAE0500E0CDD1 /* Supporting Files */,
@@ -1357,6 +1356,15 @@
 			path = "XEP-0335";
 			sourceTree = "<group>";
 		};
+		40A995F818C31FDF00C23AB6 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				40A995F918C31FF000C23AB6 /* KeychainItemWrapper.h */,
+				40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */,
+			);
+			name = Externals;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1481,7 +1489,6 @@
 				40A995C518C31E4800C23AB6 /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				40A995D318C31E4800C23AB6 /* TURNSocket.m in Sources */,
 				400DC19F18C2E9EA00C806ED /* DDFileLogger.m in Sources */,
-				4032C57618BDAE0500E0CDD1 /* CarrierPigeonDetailViewController.m in Sources */,
 				40A995A718C31E4800C23AB6 /* XMPPRosterCoreDataStorage.m in Sources */,
 				40A995F618C31E4800C23AB6 /* XMPPMessage+XEP_0333.m in Sources */,
 				40A995E718C31E4800C23AB6 /* XMPPMessage+XEP_0172.m in Sources */,
@@ -1559,6 +1566,7 @@
 				40A995D718C31E4800C23AB6 /* XMPPDateTimeProfiles.m in Sources */,
 				400DC21A18C2ECD000C806ED /* XMPPSRVResolver.m in Sources */,
 				40A995E918C31E4800C23AB6 /* XMPPMessage+XEP_0184.m in Sources */,
+				40ACCC6B18C3254A00081B7F /* CPSignInViewController.m in Sources */,
 				40A995AE18C31E4800C23AB6 /* XMPPIQ+JabberRPC.m in Sources */,
 				40A995B018C31E4800C23AB6 /* XMPPJabberRPCModule.m in Sources */,
 				400DC1DE18C2ECAE00C806ED /* XMPPDeprecatedPlainAuthentication.m in Sources */,
@@ -1571,11 +1579,11 @@
 				400DC1E218C2ECAE00C806ED /* XMPPXOAuth2Google.m in Sources */,
 				400DC19E18C2E9EA00C806ED /* DDASLLogger.m in Sources */,
 				40A995E818C31E4800C23AB6 /* XMPPPresence+XEP_0172.m in Sources */,
+				40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */,
 				40A995AC18C31E4800C23AB6 /* XMPPRoster.m in Sources */,
 				400DC1EA18C2ECC000C806ED /* NSData+XMPP.m in Sources */,
 				40A995E518C31E4800C23AB6 /* XMPPMessageArchiving.m in Sources */,
 				400DC1E018C2ECAE00C806ED /* XMPPPlainAuthentication.m in Sources */,
-				4032C57318BDAE0500E0CDD1 /* CarrierPigeonMasterViewController.m in Sources */,
 				40A995BC18C31E4800C23AB6 /* XMPPRoomMemoryStorage.m in Sources */,
 				400DC1BA18C2EB5600C806ED /* NSString+DDXML.m in Sources */,
 				40A995D618C31E4800C23AB6 /* NSDate+XMPPDateTimeProfiles.m in Sources */,
