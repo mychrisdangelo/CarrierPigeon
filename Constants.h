@@ -10,8 +10,8 @@
 #define CarrierPigeon_Constants_h
 
 // user info
-#define kXMPPmyJID                  @"kXMPPmyJID"
-#define kXMPPmyPassword             @"kXMPPmyPassword"
+#define kXMPPmyJID @"kXMPPmyJID"
+#define kXMPPmyPassword @"kXMPPmyPassword"
 
 #define kXMPPServer @"localhost"
 

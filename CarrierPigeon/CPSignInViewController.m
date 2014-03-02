@@ -49,7 +49,7 @@
         [alert show];
         return;
     } else {
-        KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.ColumbiaMobileComputing.CarrierPigeon" accessGroup:nil];
+        KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.chrisdangelo.CarrierPigeon" accessGroup:nil];
         NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField, kXMPPServer];
         [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
         [[NSUserDefaults standardUserDefaults] synchronize];
