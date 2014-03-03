@@ -741,8 +741,7 @@
 		4032C54818BDAE0500E0CDD1 = {
 			isa = PBXGroup;
 			children = (
-				40A995F818C31FDF00C23AB6 /* Externals */,
-				400DC18A18C2E9BC00C806ED /* XMPP */,
+				40A995F818C31FDF00C23AB6 /* External */,
 				4032C55C18BDAE0500E0CDD1 /* CarrierPigeon */,
 				4032C58518BDAE0600E0CDD1 /* CarrierPigeonTests */,
 				4032C55318BDAE0500E0CDD1 /* Frameworks */,
@@ -1379,13 +1378,22 @@
 			path = "XEP-0335";
 			sourceTree = "<group>";
 		};
-		40A995F818C31FDF00C23AB6 /* Externals */ = {
+		40A995F818C31FDF00C23AB6 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
+				400DC18A18C2E9BC00C806ED /* XMPP */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */ = {
 			isa = PBXGroup;
 			children = (
 				40A995F918C31FF000C23AB6 /* KeychainItemWrapper.h */,
 				40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */,
 			);
-			name = Externals;
+			name = KeyChainItemWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

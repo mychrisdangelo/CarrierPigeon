@@ -83,16 +83,29 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"ShowContactsList"]) {
-        
-        if ([segue.destinationViewController isMemberOfClass:[CPContactsTableViewController class]]) {
-            CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)segue.destinationViewController;
-            cpctvc.xmppStream = self.xmppStream;
-            
-            self.signInButton.enabled = YES;
-            [self.activityView stopAnimating];
+    if ([segue.identifier isEqualToString:@"ShowHomeTabBarController"]) {
+        if ([segue.destinationViewController isMemberOfClass:[UITabBarController class]]) {
+            UITabBarController *tbc = (UITabBarController *)segue.destinationViewController;
+            if ([tbc.viewControllers[0] isMemberOfClass:[UINavigationController class]]) {
+                UINavigationController *navController = (UINavigationController *)tbc.viewControllers[0];
+                if ([navController.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
+                    CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)navController.viewControllers[0];
+                    cpctvc.xmppStream = self.xmppStream;
+                }
+            }
         }
+        
+//        if ([segue.destinationViewController isMemberOfClass:[CPContactsTableViewController class]]) {
+//            CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)segue.destinationViewController;
+//            cpctvc.xmppStream = self.xmppStream;
+//            
+//            self.signInButton.enabled = YES;
+//            [self.activityView stopAnimating];
+//        }
     }
+    
+    self.signInButton.enabled = YES;
+    [self.activityView stopAnimating];
 }
 
 #pragma mark XMPPStreamDelegate
@@ -117,7 +130,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
-    [self performSegueWithIdentifier:@"ShowContactsList" sender:self];
+    [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
 }
 
 

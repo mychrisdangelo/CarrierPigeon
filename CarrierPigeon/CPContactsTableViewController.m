@@ -5,6 +5,7 @@
 //  Created by Chris D'Angelo on 3/2/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
+// Some Images in the storybarod come free frome: http://www.pixellove.com
 
 #import "CPContactsTableViewController.h"
 #import "DDLog.h"
@@ -47,7 +48,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
 }
 
 - (void)didReceiveMemoryWarning
