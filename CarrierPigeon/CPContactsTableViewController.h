@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "XMPPStream.h"
+#import "XMPPRoster.h"
+#import "CPAddFriendViewController.h"
 
-@interface CPContactsTableViewController : UITableViewController
+@interface CPContactsTableViewController : UITableViewController <CPAddFriendViewControllerDelegate>
 
 @property (nonatomic, strong) XMPPStream *xmppStream;
+@property (nonatomic, strong) XMPPRoster *xmppRoster;
 
 @end

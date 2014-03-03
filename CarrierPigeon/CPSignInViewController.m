@@ -91,17 +91,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 if ([navController.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
                     CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)navController.viewControllers[0];
                     cpctvc.xmppStream = self.xmppStream;
+                    cpctvc.xmppRoster = self.xmppRoster;
                 }
             }
         }
-        
-//        if ([segue.destinationViewController isMemberOfClass:[CPContactsTableViewController class]]) {
-//            CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)segue.destinationViewController;
-//            cpctvc.xmppStream = self.xmppStream;
-//            
-//            self.signInButton.enabled = YES;
-//            [self.activityView stopAnimating];
-//        }
     }
     
     self.signInButton.enabled = YES;

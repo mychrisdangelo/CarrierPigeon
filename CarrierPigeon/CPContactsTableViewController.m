@@ -50,10 +50,38 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowAddFriendController"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPAddFriendViewController class]]) {
+            CPAddFriendViewController *cpadfvc = (CPAddFriendViewController *)segue.destinationViewController;
+            cpadfvc.delegate = self;
+        }
+    }
+}
+
+#pragma mark - CPAddFriendViewControllerDelegate
+
+- (void)CPAddFriendViewControllerDidFinishAddingFriend:(CPAddFriendViewController *)sender withUserName:(NSString *)userName
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSString *jidString = [NSString stringWithFormat:@"%@@%@", userName, kXMPPServer];
+        [self.xmppRoster addUser:[XMPPJID jidWithString:jidString] withNickname:userName];
+        [self.xmppRoster subscribePresenceToUser:[XMPPJID jidWithString:jidString]];
+    }];
+}
+
+- (void)CPAddFriendViewControllerDidCancel:(CPAddFriendViewController *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source

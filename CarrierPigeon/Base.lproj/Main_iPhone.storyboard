@@ -80,7 +80,7 @@
             <objects>
                 <tabBarController definesPresentationContext="YES" id="3I6-Ny-I5y" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Niq-Wy-3Bf">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -152,6 +152,56 @@
             </objects>
             <point key="canvasLocation" x="1196" y="827"/>
         </scene>
+        <!--Add Friend View Controller - Add Friend-->
+        <scene sceneID="ljt-7N-PaT">
+            <objects>
+                <viewController id="P8K-5c-LIX" customClass="CPAddFriendViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JbA-dj-KEU"/>
+                        <viewControllerLayoutGuide type="bottom" id="hT8-7I-MQl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yER-Ou-CtY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jQB-5o-l3t">
+                                <rect key="frame" x="20" y="43" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJr-qK-wM1">
+                                <rect key="frame" x="224" y="81" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Friend">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addFriendButtonPressed:" destination="P8K-5c-LIX" eventType="touchUpInside" id="Gxa-za-ypk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YT-tX-Wfq">
+                                <rect key="frame" x="20" y="81" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="P8K-5c-LIX" eventType="touchUpInside" id="99o-AI-Gv1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Friend" id="bcD-Tz-PlM"/>
+                    <connections>
+                        <outlet property="usernameTextField" destination="jQB-5o-l3t" id="sSA-Fh-ZSR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AbS-fq-K9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1722" y="-1427"/>
+        </scene>
         <!--Contacts Table View Controller - Contacts-->
         <scene sceneID="ldg-u7-UoH">
             <objects>
@@ -195,6 +245,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="P8K-5c-LIX" kind="modal" identifier="ShowAddFriendController" id="nad-Hi-wxI"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -273,7 +326,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2163" y="-663"/>
+            <point key="canvasLocation" x="2557" y="-663"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AAL-9J-cnp">

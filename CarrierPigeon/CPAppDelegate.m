@@ -60,6 +60,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         CPSignInViewController *controller = (CPSignInViewController *)navigationController.topViewController;
         controller.delegate = self;
         controller.xmppStream = self.xmppStream;
+        controller.xmppRoster = self.xmppRoster;
         
         // controller.managedObjectContext = self.managedObjectContext;
     }
@@ -128,7 +129,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting"
 		                                                    message:@"See console for error details."
 		                                                   delegate:nil
-		                                          cancelButtonTitle:@"Ok"
+		                                          cancelButtonTitle:@"OK"
 		                                          otherButtonTitles:nil];
 		[alertView show];
         
@@ -341,7 +342,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
-#pragma mark XMPPStreamDelegate
+#pragma mark - XMPPStreamDelegate
 
 - (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
 {
@@ -430,7 +431,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
                                                                 message:body
                                                                delegate:nil
-                                                      cancelButtonTitle:@"Ok"
+                                                      cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
 			[alertView show];
 		}

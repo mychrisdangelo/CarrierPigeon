@@ -11,6 +11,7 @@
 
 #import <UIKit/UIKit.h>
 #import "XMPPStream.h"
+#import "XMPPRoster.h"
 
 @class CPSignInViewController;
 
@@ -24,5 +25,6 @@
 
 @property (nonatomic, strong) id<CPSignInViewControllerDelegate> delegate;
 @property (nonatomic, strong) XMPPStream *xmppStream;
+@property (nonatomic, strong) XMPPRoster *xmppRoster;
 
 @end
