@@ -10,6 +10,7 @@
 #import "KeychainItemWrapper.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
+#import "CPContactsTableViewController.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -21,6 +22,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface CPSignInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
 
 
 @end
@@ -72,6 +75,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [[NSUserDefaults standardUserDefaults] synchronize];
         [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
         [self.delegate CPSignInViewControllerDidStoreCredentials:self];
+        
+        sender.enabled = NO;
+        [self.activityView startAnimating];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowContactsList"]) {
+        
+        if ([segue.destinationViewController isMemberOfClass:[CPContactsTableViewController class]]) {
+            CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)segue.destinationViewController;
+            cpctvc.xmppStream = self.xmppStream;
+            
+            self.signInButton.enabled = YES;
+            [self.activityView stopAnimating];
+        }
     }
 }
 
@@ -94,5 +114,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         DDLogError(@"Inband registration is not supported");
     }
 }
+
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
+{
+    [self performSegueWithIdentifier:@"ShowContactsList" sender:self];
+}
+
 
 @end

@@ -14,7 +14,7 @@
 #import "XMPP.h"
 #import "XMPPReconnect.h"
 #import "XMPPRosterCoreDataStorage.h"
-#import "XMPPvCardCoreDataStorage.h"
+
 #import "XMPPCapabilitiesCoreDataStorage.h"
 #import "KeychainItemWrapper.h"
 
@@ -32,7 +32,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPRosterCoreDataStorage *xmppRosterStorage;
 @property (nonatomic, strong) XMPPvCardTempModule *xmppvCardTempModule;
-@property (nonatomic, strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
+
 @property (nonatomic, strong) XMPPvCardCoreDataStorage *xmppvCardStorage;
 @property (nonatomic, strong) XMPPCapabilities *xmppCapabilities;
 @property (nonatomic, strong) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;

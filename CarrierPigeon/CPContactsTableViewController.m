@@ -10,6 +10,8 @@
 #import "DDLog.h"
 #import <CoreData/CoreData.h>
 #import "CPAppDelegate.h"
+#import "XMPPUserCoreDataStorageObject.h"
+#import "CPAppDelegate.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -19,11 +21,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @interface CPContactsTableViewController () <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
 @implementation CPContactsTableViewController
+
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -43,6 +47,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,26 +60,60 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+	NSArray *sections = [self.fetchedResultsController sections];
+	
+	if (section < [sections count])
+	{
+		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+		return sectionInfo.numberOfObjects;
+	}
+	
+	return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+	static NSString *CellIdentifier = @"Cell";
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
+	}
+	
+	XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	
+	cell.textLabel.text = user.displayName;
+	[self configurePhotoForCell:cell user:user];
+	
+	return cell;
+}
+
+- (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user
+{
+	// Our xmppRosterStorage will cache photos as they arrive from the xmppvCardAvatarModule.
+	// We only need to ask the avatar module for a photo, if the roster doesn't have it.
+	
+	if (user.photo != nil)
+	{
+		cell.imageView.image = user.photo;
+	}
+	else
+	{
+        CPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+		NSData *photoData = [appDelegate.xmppvCardAvatarModule photoDataForJID:user.jid];
+        
+		if (photoData != nil)
+			cell.imageView.image = [UIImage imageWithData:photoData];
+		else
+			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
+	}
 }
 
 /*
@@ -132,7 +171,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-	if (self.fetchedResultsController == nil)
+	if (_fetchedResultsController == nil)
 	{
         CPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 		NSManagedObjectContext *moc = [appDelegate managedObjectContext_roster];
@@ -150,25 +189,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 		[fetchRequest setSortDescriptors:sortDescriptors];
 		[fetchRequest setFetchBatchSize:10];
 		
-		NSFetchedResultsController *aFetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+		_fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                             managedObjectContext:moc
                                                                               sectionNameKeyPath:@"sectionNum"
                                                                                        cacheName:nil];
         
-        self.fetchResultsController = aFetchResultsController;
         
-		[self.fetchedResultsController setDelegate:self];
+		[_fetchedResultsController setDelegate:self];
 		
 		
 		NSError *error = nil;
-		if (![self.fetchedResultsController performFetch:&error])
+		if (![_fetchedResultsController performFetch:&error])
 		{
 			DDLogError(@"Error performing fetch: %@", error);
 		}
         
 	}
 	
-	return self.fetchedResultsController;
+	return _fetchedResultsController;
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller

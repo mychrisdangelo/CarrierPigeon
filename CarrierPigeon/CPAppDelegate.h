@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "XMPPvCardCoreDataStorage.h"
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -16,6 +17,8 @@
 @property (nonatomic) BOOL allowSelfSignedCertificates;
 @property (nonatomic) BOOL allowSSLHostNameMismatch;
 @property (nonatomic) BOOL isXmppConnected;
+
+@property (nonatomic, strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;

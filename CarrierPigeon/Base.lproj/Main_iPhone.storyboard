@@ -53,12 +53,20 @@
                                     <action selector="signInButtonPressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="QTH-uq-tH8"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-mb-0jD">
+                                <rect key="frame" x="143" y="240" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.87450987099999999" green="0.019607843829999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="color" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="jew-DP-2ep"/>
                     <connections>
+                        <outlet property="activityView" destination="k1E-mb-0jD" id="7xn-Mx-voa"/>
                         <outlet property="passwordTextField" destination="QZr-Ia-aj8" id="b1e-HI-7hu"/>
+                        <outlet property="signInButton" destination="rxV-cZ-4KL" id="TOY-cn-iJd"/>
                         <outlet property="usernameTextField" destination="cfw-bm-svl" id="sgS-PB-Z0h"/>
                         <segue destination="YfI-BP-BbQ" kind="push" identifier="ShowContactsList" id="goP-Vk-nMQ"/>
                     </connections>
@@ -67,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="202" y="78"/>
         </scene>
-        <!--Table View Controller - Contacts-->
+        <!--Contacts Table View Controller - Contacts-->
         <scene sceneID="ldg-u7-UoH">
             <objects>
-                <tableViewController id="YfI-BP-BbQ" sceneMemberID="viewController">
+                <tableViewController id="YfI-BP-BbQ" customClass="CPContactsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GW7-oL-Wlv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,6 +125,7 @@
             <point key="canvasLocation" x="650" y="67"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.76078438758850098" green="0.070588238537311554" blue="0.81176477670669556" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

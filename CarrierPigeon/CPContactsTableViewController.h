@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMPPStream.h"
 
 @interface CPContactsTableViewController : UITableViewController
+
+@property (nonatomic, strong) XMPPStream *xmppStream;
 
 @end
