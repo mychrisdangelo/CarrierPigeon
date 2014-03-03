@@ -774,7 +774,6 @@
 		4032C55C18BDAE0500E0CDD1 /* CarrierPigeon */ = {
 			isa = PBXGroup;
 			children = (
-				40A994B818C31E0800C23AB6 /* XMPPFramework.h */,
 				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
 				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
 				40ACCC6918C3254A00081B7F /* CPSignInViewController.h */,
@@ -796,6 +795,7 @@
 				4032C56218BDAE0500E0CDD1 /* main.m */,
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
 				40ACCC6C18C328AD00081B7F /* Constants.h */,
+				40A994B818C31E0800C23AB6 /* XMPPFramework.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

@@ -8,6 +8,15 @@
 
 #import "CPSignInViewController.h"
 #import "KeychainItemWrapper.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+
+// Log levels: off, error, warn, info, verbose
+#if DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_INFO;
+#endif
 
 @interface CPSignInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -31,7 +40,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
 }
+
+- (void)dealloc
+{
+    [self.xmppStream removeDelegate:self];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -55,6 +72,26 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
         [self.delegate CPSignInViewControllerDidStoreCredentials:self];
+    }
+}
+
+#pragma mark XMPPStreamDelegate
+
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSError *err=nil;
+    // check if inband registration is supported
+    if (self.xmppStream.supportsInBandRegistration)
+    {
+        if (![self.xmppStream registerWithPassword:self.passwordTextField.text error:&err])
+        {
+            DDLogError(@"Oops, I forgot something: %@", error);
+        }
+    }
+    else
+    {
+        DDLogError(@"Inband registration is not supported");
     }
 }
 

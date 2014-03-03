@@ -10,6 +10,7 @@
 //  https://developer.apple.com/library/ios/samplecode/GenericKeychain/Listings/Classes_KeychainItemWrapper_h.html
 
 #import <UIKit/UIKit.h>
+#import "XMPPStream.h"
 
 @class CPSignInViewController;
 
@@ -22,6 +23,6 @@
 @interface CPSignInViewController : UIViewController
 
 @property (nonatomic, strong) id<CPSignInViewControllerDelegate> delegate;
-//@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) XMPPStream *xmppStream;
 
 @end
