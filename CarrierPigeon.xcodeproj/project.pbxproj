@@ -529,6 +529,7 @@
 		400DC18A18C2E9BC00C806ED /* XMPP */ = {
 			isa = PBXGroup;
 			children = (
+				40D2C09218C4681100A9E6FD /* XMPPFramework.h */,
 				40A994B918C31E4700C23AB6 /* Extensions */,
 				400DC20918C2ECD000C806ED /* Utilities */,
 				400DC1ED18C2ECC900C806ED /* Core */,
@@ -1418,7 +1419,6 @@
 				40D2C09318C46D0000A9E6FD /* PHFComposeBarView */,
 				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
-				40D2C09218C4681100A9E6FD /* XMPPFramework.h */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
 			);
 			name = External;
