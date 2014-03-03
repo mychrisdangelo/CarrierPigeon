@@ -342,6 +342,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
+
+#pragma mark - XMPPRosterDelegate
+
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
+{
+    XMPPUserCoreDataStorageObject *user = [self.xmppRosterStorage userForJID:[presence from]
+                                                                  xmppStream:self.xmppStream
+                                                        managedObjectContext:[self managedObjectContext_roster]];
+    DDLogVerbose(@"didReceivePresenceSubscriptionRequest from user %@ ", user.jidStr);
+    [self.xmppRoster acceptPresenceSubscriptionRequestFrom:[presence from] andAddToRoster:YES];
+}
+
+
 #pragma mark - XMPPStreamDelegate
 
 - (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
