@@ -65,6 +65,7 @@
 		4032C58218BDAE0600E0CDD1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55A18BDAE0500E0CDD1 /* CoreData.framework */; };
 		4032C58A18BDAE0600E0CDD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */; };
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
+		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
 		40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */; };
 		40A995A018C31E4800C23AB6 /* XMPPCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BF18C31E4700C23AB6 /* XMPPCoreDataStorage.m */; };
 		40A995A118C31E4800C23AB6 /* XMPPGoogleSharedStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994C318C31E4700C23AB6 /* XMPPGoogleSharedStatus.m */; };
@@ -274,6 +275,8 @@
 		4032C58718BDAE0600E0CDD1 /* CarrierPigeonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CarrierPigeonTests-Info.plist"; sourceTree = "<group>"; };
 		4032C58918BDAE0600E0CDD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonTests.m; sourceTree = "<group>"; };
+		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
+		408CFE5718C40E77009F991C /* CPContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewController.m; sourceTree = "<group>"; };
 		40A994B818C31E0800C23AB6 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		40A994BB18C31E4700C23AB6 /* XMPPBandwidthMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPBandwidthMonitor.h; sourceTree = "<group>"; };
 		40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPBandwidthMonitor.m; sourceTree = "<group>"; };
@@ -774,12 +777,10 @@
 		4032C55C18BDAE0500E0CDD1 /* CarrierPigeon */ = {
 			isa = PBXGroup;
 			children = (
-				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
-				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
-				40ACCC6918C3254A00081B7F /* CPSignInViewController.h */,
-				40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */,
 				4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */,
 				4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */,
+				408CFE5A18C40E93009F991C /* SignIn */,
+				408CFE5918C40E88009F991C /* Contacts */,
 				4032C57718BDAE0500E0CDD1 /* Images.xcassets */,
 				4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */,
 				4032C55D18BDAE0500E0CDD1 /* Supporting Files */,
@@ -796,6 +797,8 @@
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
 				40ACCC6C18C328AD00081B7F /* Constants.h */,
 				40A994B818C31E0800C23AB6 /* XMPPFramework.h */,
+				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
+				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -816,6 +819,24 @@
 				4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		408CFE5918C40E88009F991C /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				408CFE5618C40E77009F991C /* CPContactsTableViewController.h */,
+				408CFE5718C40E77009F991C /* CPContactsTableViewController.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		408CFE5A18C40E93009F991C /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				40ACCC6918C3254A00081B7F /* CPSignInViewController.h */,
+				40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */,
+			);
+			name = SignIn;
 			sourceTree = "<group>";
 		};
 		40A994B918C31E4700C23AB6 /* Extensions */ = {
@@ -1511,6 +1532,7 @@
 				40A995D218C31E4800C23AB6 /* XMPPPubSub.m in Sources */,
 				40A995A418C31E4800C23AB6 /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				40A995CF18C31E4800C23AB6 /* NSXMLElement+XEP_0059.m in Sources */,
+				408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */,
 				400DC20218C2ECC900C806ED /* XMPPIQ.m in Sources */,
 				40A995C618C31E4800C23AB6 /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
 				40A995C918C31E4800C23AB6 /* XMPPvCardTempAdrTypes.m in Sources */,

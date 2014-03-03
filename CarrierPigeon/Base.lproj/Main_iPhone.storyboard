@@ -60,11 +60,61 @@
                     <connections>
                         <outlet property="passwordTextField" destination="QZr-Ia-aj8" id="b1e-HI-7hu"/>
                         <outlet property="usernameTextField" destination="cfw-bm-svl" id="sgS-PB-Z0h"/>
+                        <segue destination="YfI-BP-BbQ" kind="push" identifier="ShowContactsList" id="goP-Vk-nMQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtC-fj-67X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212" y="73"/>
+            <point key="canvasLocation" x="202" y="78"/>
+        </scene>
+        <!--Table View Controller - Contacts-->
+        <scene sceneID="ldg-u7-UoH">
+            <objects>
+                <tableViewController id="YfI-BP-BbQ" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GW7-oL-Wlv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Rbz-vR-lS3">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="YfI-BP-BbQ" id="baE-Eg-tKV"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g5I-mi-roF">
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g5I-mi-roF" id="762-HE-JT8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="YfI-BP-BbQ" id="ibD-fy-Mui"/>
+                            <outlet property="delegate" destination="YfI-BP-BbQ" id="VXp-ts-dfa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Contacts" id="cuZ-z3-HnM"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="YFe-Iu-NWv" id="bK7-Kn-Xux"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xqf-Wh-ORH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="YFe-Iu-NWv">
+                    <connections>
+                        <outlet property="delegate" destination="YfI-BP-BbQ" id="0OA-WR-emB"/>
+                        <outlet property="searchBar" destination="Rbz-vR-lS3" id="56G-Gu-3jD"/>
+                        <outlet property="searchContentsController" destination="YfI-BP-BbQ" id="VGG-6P-dLf"/>
+                        <outlet property="searchResultsDataSource" destination="YfI-BP-BbQ" id="aKZ-6t-Pb6"/>
+                        <outlet property="searchResultsDelegate" destination="YfI-BP-BbQ" id="can-hb-7lL"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="650" y="67"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

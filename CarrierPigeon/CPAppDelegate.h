@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,5 +16,8 @@
 @property (nonatomic) BOOL allowSelfSignedCertificates;
 @property (nonatomic) BOOL allowSSLHostNameMismatch;
 @property (nonatomic) BOOL isXmppConnected;
+
+- (NSManagedObjectContext *)managedObjectContext_roster;
+- (NSManagedObjectContext *)managedObjectContext_capabilities;
 
 @end
