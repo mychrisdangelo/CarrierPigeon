@@ -160,6 +160,8 @@
 		40D2C07518C438CA00A9E6FD /* CPAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */; };
 		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
 		40D2C08918C4653400A9E6FD /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08818C4653400A9E6FD /* Chat.m */; };
+		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
+		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -280,7 +282,6 @@
 		4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonTests.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
 		408CFE5718C40E77009F991C /* CPContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewController.m; sourceTree = "<group>"; };
-		40A994B818C31E0800C23AB6 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		40A994BB18C31E4700C23AB6 /* XMPPBandwidthMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPBandwidthMonitor.h; sourceTree = "<group>"; };
 		40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPBandwidthMonitor.m; sourceTree = "<group>"; };
 		40A994BE18C31E4700C23AB6 /* XMPPCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCoreDataStorage.h; sourceTree = "<group>"; };
@@ -473,6 +474,11 @@
 		40D2C08118C45E0800A9E6FD /* Chat+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+Create.m"; sourceTree = "<group>"; };
 		40D2C08718C4653400A9E6FD /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
 		40D2C08818C4653400A9E6FD /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		40D2C08B18C4671100A9E6FD /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
+		40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
+		40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHelperFunctions.h; sourceTree = "<group>"; };
+		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
+		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -805,9 +811,10 @@
 				4032C56218BDAE0500E0CDD1 /* main.m */,
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
 				40ACCC6C18C328AD00081B7F /* Constants.h */,
-				40A994B818C31E0800C23AB6 /* XMPPFramework.h */,
 				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
 				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
+				40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */,
+				40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1391,7 +1398,9 @@
 		40A995F818C31FDF00C23AB6 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
+				40D2C09218C4681100A9E6FD /* XMPPFramework.h */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
 			);
 			name = External;
@@ -1433,6 +1442,15 @@
 				40D2C08818C4653400A9E6FD /* Chat.m */,
 			);
 			name = Chat;
+			sourceTree = "<group>";
+		};
+		40D2C08A18C4670300A9E6FD /* NSDate-Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				40D2C08B18C4671100A9E6FD /* NSDate-Utilities.h */,
+				40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */,
+			);
+			name = "NSDate-Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1552,6 +1570,7 @@
 				400DC1EB18C2ECC000C806ED /* NSNumber+XMPP.m in Sources */,
 				400DC1A818C2EA5000C806ED /* GCDAsyncSocket.m in Sources */,
 				40A995B918C31E4800C23AB6 /* XMPPRoomHybridStorage.m in Sources */,
+				40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */,
 				400DC1E118C2ECAE00C806ED /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				400DC1A318C2E9EA00C806ED /* DispatchQueueLogFormatter.m in Sources */,
 				400DC1DF18C2ECAE00C806ED /* XMPPDigestMD5Authentication.m in Sources */,
@@ -1659,6 +1678,7 @@
 				400DC1E218C2ECAE00C806ED /* XMPPXOAuth2Google.m in Sources */,
 				400DC19E18C2E9EA00C806ED /* DDASLLogger.m in Sources */,
 				40A995E818C31E4800C23AB6 /* XMPPPresence+XEP_0172.m in Sources */,
+				40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */,
 				40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */,
 				40A995AC18C31E4800C23AB6 /* XMPPRoster.m in Sources */,
 				400DC1EA18C2ECC000C806ED /* NSData+XMPP.m in Sources */,
