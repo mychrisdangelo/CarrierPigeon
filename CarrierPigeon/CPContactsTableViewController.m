@@ -15,7 +15,7 @@
 #import "CPAppDelegate.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "CPAppDelegate.h"
-#import "CPMessagesTableViewController.h"
+#import "CPMessagesViewController.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -140,8 +140,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     if ([segue.identifier isEqualToString:@"ShowContactMessages"]) {
-        if ([segue.destinationViewController isMemberOfClass:[CPMessagesTableViewController class]]) {
-            CPMessagesTableViewController *cpmtvc = (CPMessagesTableViewController *)segue.destinationViewController;
+        if ([segue.destinationViewController isMemberOfClass:[CPMessagesViewController class]]) {
+            CPMessagesViewController *cpmtvc = (CPMessagesViewController *)segue.destinationViewController;
             NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
             XMPPUserCoreDataStorageObject *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
             cpmtvc.user = user;
