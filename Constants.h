@@ -14,6 +14,6 @@
 #define kXMPPmyPassword @"kXMPPmyPassword"
 #define kKeyChainItemWrapperPasswordIdentifer @"kXMPPmyPasswordKeychain"
 
-#define kXMPPServer @"localhost"
+#define kXMPPServer @"macmini.local"
 
 #endif
