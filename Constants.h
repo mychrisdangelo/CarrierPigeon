@@ -16,4 +16,7 @@
 
 #define kXMPPServer @"macmini.local"
 
+// notification identifiers
+#define kNewMessageReceivedNotificationIdentifier @"kNewMessageReceivedNotificationIdentifier"
+
 #endif

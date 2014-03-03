@@ -13,13 +13,16 @@
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic) BOOL allowSelfSignedCertificates;
 @property (nonatomic) BOOL allowSSLHostNameMismatch;
 @property (nonatomic) BOOL isXmppConnected;
-
 @property (nonatomic, strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 
+- (void)saveContext;
+- (NSURL *)applicationDocumentsDirectory;
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
 

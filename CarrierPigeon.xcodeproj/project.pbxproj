@@ -158,6 +158,8 @@
 		40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		40ACCC6B18C3254A00081B7F /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */; };
 		40D2C07518C438CA00A9E6FD /* CPAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */; };
+		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
+		40D2C08918C4653400A9E6FD /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08818C4653400A9E6FD /* Chat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -467,6 +469,10 @@
 		40ACCC6C18C328AD00081B7F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Constants.h; sourceTree = "<group>"; };
 		40D2C07318C438CA00A9E6FD /* CPAddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAddFriendViewController.h; sourceTree = "<group>"; };
 		40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAddFriendViewController.m; sourceTree = "<group>"; };
+		40D2C08018C45E0800A9E6FD /* Chat+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+Create.h"; sourceTree = "<group>"; };
+		40D2C08118C45E0800A9E6FD /* Chat+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+Create.m"; sourceTree = "<group>"; };
+		40D2C08718C4653400A9E6FD /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		40D2C08818C4653400A9E6FD /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -781,11 +787,11 @@
 			children = (
 				4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */,
 				4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */,
+				40D2C07C18C45DAB00A9E6FD /* CoreData */,
 				408CFE5A18C40E93009F991C /* SignIn */,
 				40D2C07618C4393400A9E6FD /* AddFriendView */,
 				408CFE5918C40E88009F991C /* Contacts */,
 				4032C57718BDAE0500E0CDD1 /* Images.xcassets */,
-				4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */,
 				4032C55D18BDAE0500E0CDD1 /* Supporting Files */,
 			);
 			path = CarrierPigeon;
@@ -1409,6 +1415,26 @@
 			name = AddFriendView;
 			sourceTree = "<group>";
 		};
+		40D2C07C18C45DAB00A9E6FD /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */,
+				40D2C08318C45E1100A9E6FD /* Chat */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		40D2C08318C45E1100A9E6FD /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				40D2C08018C45E0800A9E6FD /* Chat+Create.h */,
+				40D2C08118C45E0800A9E6FD /* Chat+Create.m */,
+				40D2C08718C4653400A9E6FD /* Chat.h */,
+				40D2C08818C4653400A9E6FD /* Chat.m */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1457,6 +1483,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = ColumbiaMobileComputing;
 				TargetAttributes = {
+					4032C55018BDAE0500E0CDD1 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
 					4032C57C18BDAE0600E0CDD1 = {
 						TestTargetID = 4032C55018BDAE0500E0CDD1;
 					};
@@ -1573,6 +1606,7 @@
 				40A995B818C31E4800C23AB6 /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				40A995E318C31E4800C23AB6 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				400DC20618C2ECC900C806ED /* XMPPParser.m in Sources */,
+				40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */,
 				40A995DA18C31E4800C23AB6 /* XMPPTransports.m in Sources */,
 				40A995E618C31E4800C23AB6 /* XMPPvCardAvatarModule.m in Sources */,
 				40A995A318C31E4800C23AB6 /* XMPPReconnect.m in Sources */,
@@ -1629,6 +1663,7 @@
 				40A995AC18C31E4800C23AB6 /* XMPPRoster.m in Sources */,
 				400DC1EA18C2ECC000C806ED /* NSData+XMPP.m in Sources */,
 				40A995E518C31E4800C23AB6 /* XMPPMessageArchiving.m in Sources */,
+				40D2C08918C4653400A9E6FD /* Chat.m in Sources */,
 				400DC1E018C2ECAE00C806ED /* XMPPPlainAuthentication.m in Sources */,
 				40A995BC18C31E4800C23AB6 /* XMPPRoomMemoryStorage.m in Sources */,
 				400DC1BA18C2EB5600C806ED /* NSString+DDXML.m in Sources */,
