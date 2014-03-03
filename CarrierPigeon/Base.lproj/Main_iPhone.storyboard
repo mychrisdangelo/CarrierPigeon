@@ -219,7 +219,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g5I-mi-roF">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactsCell" id="g5I-mi-roF">
                                 <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g5I-mi-roF" id="762-HE-JT8">
@@ -227,7 +227,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="lX2-lm-x5P" kind="push" identifier="ShowContactMessages" id="SHh-EL-Me2"/>
+                                    <segue destination="lX2-lm-x5P" kind="push" identifier="ShowContactMessages" id="RXX-XA-CNJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -268,10 +268,10 @@
             </objects>
             <point key="canvasLocation" x="1722" y="-663"/>
         </scene>
-        <!--Table View Controller - Messages-->
+        <!--Messages Table View Controller - Messages-->
         <scene sceneID="3bm-8G-lPt">
             <objects>
-                <tableViewController id="lX2-lm-x5P" sceneMemberID="viewController">
+                <tableViewController id="lX2-lm-x5P" customClass="CPMessagesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3cE-Yj-bQe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -299,18 +299,8 @@
                             <outlet property="delegate" destination="lX2-lm-x5P" id="v3L-OF-lmu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Messages" id="Eu1-ue-CTJ">
-                        <barButtonItem key="rightBarButtonItem" id="JYt-RL-Tu4">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xSd-oG-KDk">
-                                <rect key="frame" x="281" y="10" width="23" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="NewMessage">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Messages" id="Eu1-ue-CTJ"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="xoU-jF-KYV" id="9Zt-AS-2GL"/>
                     </connections>
@@ -326,7 +316,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2351" y="-663"/>
+            <point key="canvasLocation" x="2213" y="-663"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AAL-9J-cnp">
@@ -350,7 +340,6 @@
     </scenes>
     <resources>
         <image name="HomeIcon" width="24" height="24"/>
-        <image name="NewMessage" width="23" height="23"/>
         <image name="SharingStats" width="26" height="23"/>
     </resources>
     <color key="tintColor" red="0.76078438758850098" green="0.070588238537311554" blue="0.81176477670669556" alpha="1" colorSpace="deviceRGB"/>

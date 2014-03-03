@@ -162,6 +162,11 @@
 		40D2C08918C4653400A9E6FD /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08818C4653400A9E6FD /* Chat.m */; };
 		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
+		40D2C09A18C46D1800A9E6FD /* PHFComposeBarView_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09518C46D1800A9E6FD /* PHFComposeBarView_Button.m */; };
+		40D2C09B18C46D1800A9E6FD /* PHFComposeBarView_TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09718C46D1800A9E6FD /* PHFComposeBarView_TextView.m */; };
+		40D2C09C18C46D1800A9E6FD /* PHFComposeBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09918C46D1800A9E6FD /* PHFComposeBarView.m */; };
+		40D2C09F18C46D4500A9E6FD /* CPMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09E18C46D4500A9E6FD /* CPMessagesTableViewController.m */; };
+		40D2C0A418C46F1D00A9E6FD /* PHFDelegateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -479,6 +484,16 @@
 		40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHelperFunctions.h; sourceTree = "<group>"; };
 		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
 		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
+		40D2C09418C46D1800A9E6FD /* PHFComposeBarView_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView_Button.h; sourceTree = "<group>"; };
+		40D2C09518C46D1800A9E6FD /* PHFComposeBarView_Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_Button.m; sourceTree = "<group>"; };
+		40D2C09618C46D1800A9E6FD /* PHFComposeBarView_TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView_TextView.h; sourceTree = "<group>"; };
+		40D2C09718C46D1800A9E6FD /* PHFComposeBarView_TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_TextView.m; sourceTree = "<group>"; };
+		40D2C09818C46D1800A9E6FD /* PHFComposeBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView.h; sourceTree = "<group>"; };
+		40D2C09918C46D1800A9E6FD /* PHFComposeBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView.m; sourceTree = "<group>"; };
+		40D2C09D18C46D4500A9E6FD /* CPMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPMessagesTableViewController.h; path = ../CPMessagesTableViewController.h; sourceTree = "<group>"; };
+		40D2C09E18C46D4500A9E6FD /* CPMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPMessagesTableViewController.m; path = ../CPMessagesTableViewController.m; sourceTree = "<group>"; };
+		40D2C0A218C46F1D00A9E6FD /* PHFDelegateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFDelegateChain.h; sourceTree = "<group>"; };
+		40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFDelegateChain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -794,6 +809,7 @@
 				4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */,
 				4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */,
 				40D2C07C18C45DAB00A9E6FD /* CoreData */,
+				40D2C0A018C46D5800A9E6FD /* Messages */,
 				408CFE5A18C40E93009F991C /* SignIn */,
 				40D2C07618C4393400A9E6FD /* AddFriendView */,
 				408CFE5918C40E88009F991C /* Contacts */,
@@ -1398,6 +1414,8 @@
 		40A995F818C31FDF00C23AB6 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				40D2C0A118C46F0800A9E6FD /* PHFDelegateChain */,
+				40D2C09318C46D0000A9E6FD /* PHFComposeBarView */,
 				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
 				40D2C09218C4681100A9E6FD /* XMPPFramework.h */,
@@ -1451,6 +1469,37 @@
 				40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */,
 			);
 			name = "NSDate-Extensions";
+			sourceTree = "<group>";
+		};
+		40D2C09318C46D0000A9E6FD /* PHFComposeBarView */ = {
+			isa = PBXGroup;
+			children = (
+				40D2C09418C46D1800A9E6FD /* PHFComposeBarView_Button.h */,
+				40D2C09518C46D1800A9E6FD /* PHFComposeBarView_Button.m */,
+				40D2C09618C46D1800A9E6FD /* PHFComposeBarView_TextView.h */,
+				40D2C09718C46D1800A9E6FD /* PHFComposeBarView_TextView.m */,
+				40D2C09818C46D1800A9E6FD /* PHFComposeBarView.h */,
+				40D2C09918C46D1800A9E6FD /* PHFComposeBarView.m */,
+			);
+			name = PHFComposeBarView;
+			sourceTree = "<group>";
+		};
+		40D2C0A018C46D5800A9E6FD /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				40D2C09D18C46D4500A9E6FD /* CPMessagesTableViewController.h */,
+				40D2C09E18C46D4500A9E6FD /* CPMessagesTableViewController.m */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		40D2C0A118C46F0800A9E6FD /* PHFDelegateChain */ = {
+			isa = PBXGroup;
+			children = (
+				40D2C0A218C46F1D00A9E6FD /* PHFDelegateChain.h */,
+				40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */,
+			);
+			name = PHFDelegateChain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1560,10 +1609,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D2C0A418C46F1D00A9E6FD /* PHFDelegateChain.m in Sources */,
 				40A995CB18C31E4800C23AB6 /* XMPPvCardTempEmail.m in Sources */,
 				40A995A018C31E4800C23AB6 /* XMPPCoreDataStorage.m in Sources */,
 				40A995A218C31E4800C23AB6 /* XMPPProcessOne.m in Sources */,
 				4032C56318BDAE0500E0CDD1 /* main.m in Sources */,
+				40D2C09F18C46D4500A9E6FD /* CPMessagesTableViewController.m in Sources */,
 				40A995B218C31E4800C23AB6 /* XMPPLastActivity.m in Sources */,
 				40A995CC18C31E4800C23AB6 /* XMPPvCardTempLabel.m in Sources */,
 				400DC1BB18C2EB5600C806ED /* DDXMLDocument.m in Sources */,
@@ -1642,6 +1693,7 @@
 				400DC20118C2ECC900C806ED /* XMPPElement.m in Sources */,
 				40A995BA18C31E4800C23AB6 /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				40A995B118C31E4800C23AB6 /* XMPPIQ+LastActivity.m in Sources */,
+				40D2C09B18C46D1800A9E6FD /* PHFComposeBarView_TextView.m in Sources */,
 				40A995B318C31E4800C23AB6 /* XMPPPrivacy.m in Sources */,
 				40A995EC18C31E4800C23AB6 /* XMPPAutoPing.m in Sources */,
 				40A995E218C31E4800C23AB6 /* XMPPMessageArchiving_Contact_CoreDataObject.m in Sources */,
@@ -1680,6 +1732,7 @@
 				40A995E818C31E4800C23AB6 /* XMPPPresence+XEP_0172.m in Sources */,
 				40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */,
 				40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */,
+				40D2C09C18C46D1800A9E6FD /* PHFComposeBarView.m in Sources */,
 				40A995AC18C31E4800C23AB6 /* XMPPRoster.m in Sources */,
 				400DC1EA18C2ECC000C806ED /* NSData+XMPP.m in Sources */,
 				40A995E518C31E4800C23AB6 /* XMPPMessageArchiving.m in Sources */,
@@ -1690,6 +1743,7 @@
 				40A995D618C31E4800C23AB6 /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				40A995EB18C31E4800C23AB6 /* XMPPBlocking.m in Sources */,
 				400DC20818C2ECC900C806ED /* XMPPStream.m in Sources */,
+				40D2C09A18C46D1800A9E6FD /* PHFComposeBarView_Button.m in Sources */,
 				40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */,
 				40A995BF18C31E4800C23AB6 /* XMPPMessage+XEP0045.m in Sources */,
 				40A995F418C31E4800C23AB6 /* NSXMLElement+XEP_0297.m in Sources */,

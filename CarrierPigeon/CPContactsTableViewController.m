@@ -15,6 +15,7 @@
 #import "CPAppDelegate.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "CPAppDelegate.h"
+#import "CPMessagesTableViewController.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -137,6 +138,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             cpadfvc.delegate = self;
         }
     }
+    
+    if ([segue.identifier isEqualToString:@"ShowContactMessages"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPMessagesTableViewController class]]) {
+            CPMessagesTableViewController *cpmtvc = (CPMessagesTableViewController *)segue.destinationViewController;
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            XMPPUserCoreDataStorageObject *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            cpmtvc.user = user;
+        }
+    }
 }
 
 - (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
@@ -190,7 +200,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *CellIdentifier = @"Cell";
+	static NSString *CellIdentifier = @"ContactsCell";
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
@@ -198,10 +208,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                       reuseIdentifier:CellIdentifier];
 	}
 	
-    [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];
-    
-
-	
+    [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];	
 	return cell;
 }
 
