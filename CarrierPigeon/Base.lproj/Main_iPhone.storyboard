@@ -61,6 +61,7 @@
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="jew-DP-2ep"/>
                     <connections>
@@ -305,6 +306,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="dAd-bt-sy6" id="qXd-GE-mal"/>
                                     <outlet property="delegate" destination="dAd-bt-sy6" id="bAT-Vg-8MD"/>
+                                    <outletCollection property="gestureRecognizers" destination="dfz-AW-rhz" appends="YES" id="o3F-i4-qBx"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RbZ-Hi-LiZ">
@@ -323,6 +325,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="Messages" id="a9U-M1-OYI"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -333,6 +336,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6M-ii-5dV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="dfz-AW-rhz">
+                    <connections>
+                        <outlet property="delegate" destination="dAd-bt-sy6" id="Iv0-4f-9M7"/>
+                    </connections>
+                </swipeGestureRecognizer>
                 <searchDisplayController id="2Re-YF-rWm">
                     <connections>
                         <outlet property="delegate" destination="dAd-bt-sy6" id="4fS-VW-AtP"/>

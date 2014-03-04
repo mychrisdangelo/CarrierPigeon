@@ -8,7 +8,8 @@
 
 #import "CPMessagesViewController.h"
 
-@interface CPMessagesViewController ()
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate>
+
 
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
@@ -162,6 +163,17 @@
     cell.textLabel.text = self.tmpArray[indexPath.row];
     
     return cell;
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (IBAction)userSwipedDownGesture:(UISwipeGestureRecognizer *)sender {
+    [self.composeBarView.textView resignFirstResponder];
 }
 
 @end
