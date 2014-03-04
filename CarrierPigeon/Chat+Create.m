@@ -17,7 +17,7 @@
     Chat *chat = [NSEntityDescription insertNewObjectForEntityForName:@"Chat" inManagedObjectContext:context];
     
     chat.messageBody = [[message elementForName:@"body"] stringValue];
-    chat.messageDate = [NSDate date];
+    chat.timeStamp = [NSDate date];
     chat.messageStatus = @"received";
     chat.isIncomingMessage = [NSNumber numberWithBool:YES];
     chat.isNew = [NSNumber numberWithBool:YES];

@@ -7,10 +7,12 @@
 //
 
 #import "CPMessagesViewController.h"
+#import "CPAppDelegate.h"
+#import "Chat.h"
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
 
-
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,11 +24,76 @@
 @implementation CPMessagesViewController
 
 @synthesize composeBarView = _composeBarView;
+@synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize managedObjectContext = _managedObjectContext;
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext == nil) {
+        _managedObjectContext = ((CPAppDelegate *)([[UIApplication sharedApplication] delegate])).managedObjectContext;
+    }
+    
+    return _managedObjectContext;
+}
+
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Chat" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fromJID == %@", self.user.jidStr];
+    [fetchRequest setPredicate:predicate];
+
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                                managedObjectContext:self.managedObjectContext
+                                                                                                  sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    _fetchedResultsController = aFetchedResultsController;
+    
+	NSError *error = nil;
+	if (![_fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	}
+    
+    return _fetchedResultsController;
+}
+
+- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
+{
+    Chat *chat = [fetchedResultsController objectAtIndexPath:theIndexPath];
+	
+	theCell.textLabel.text = chat.messageBody;
+}
+
+- (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
+{
+#warning todo add controller for search
+    return self.fetchedResultsController;
+}
+
 - (PHFComposeBarView *)composeBarView {
     if (!_composeBarView) {
         CGRect frame = self.composeViewContainer.frame;
         _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
-//        [_composeBarView setMaxCharCount:160];
         [_composeBarView setMaxLinesCount:5];
         [_composeBarView setPlaceholder:@"Type something..."];
         [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
@@ -154,12 +221,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [[[self fetchedResultsControllerForTableView:tableView] sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.tmpArray count];
+    NSInteger numberOfRows = 0;
+    NSFetchedResultsController *fetchController = [self fetchedResultsControllerForTableView:tableView];
+    NSArray *sections = fetchController.sections;
+    if(sections.count > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
+    
+    return numberOfRows;
 }
 
 #pragma mark - TableViewDelegate
@@ -170,7 +245,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = self.tmpArray[indexPath.row];
+    [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }

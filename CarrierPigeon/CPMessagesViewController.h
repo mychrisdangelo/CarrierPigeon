@@ -13,5 +13,6 @@
 @interface CPMessagesViewController : UIViewController <PHFComposeBarViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject *user;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
