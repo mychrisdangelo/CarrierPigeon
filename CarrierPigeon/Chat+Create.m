@@ -7,12 +7,11 @@
 //
 
 #import "Chat+Create.h"
-#import "XMPPMessage.h"
 
 
 @implementation Chat (Create)
 
-+ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(XMPPUserCoreDataStorageObject *)user inManagedObjectContext:(NSManagedObjectContext *)context
++ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Chat *chat = [NSEntityDescription insertNewObjectForEntityForName:@"Chat" inManagedObjectContext:context];
     
@@ -22,7 +21,9 @@
     chat.isIncomingMessage = [NSNumber numberWithBool:YES];
     chat.isNew = [NSNumber numberWithBool:YES];
     chat.hasMedia = [NSNumber numberWithBool:NO];
-    chat.fromJID = user.jidStr;
+    
+    chat.fromJID = fromUser;
+    chat.toJID = toUser;
     
     NSError *error = nil;
     if (![context save:&error]) {

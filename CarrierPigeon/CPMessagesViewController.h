@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "PHFComposeBarView.h"
 #import "XMPPUserCoreDataStorageObject.h"
+#import "XMPPStream.h"
 
 @interface CPMessagesViewController : UIViewController <PHFComposeBarViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject *user;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) XMPPStream *xmppStream;
 
 @end

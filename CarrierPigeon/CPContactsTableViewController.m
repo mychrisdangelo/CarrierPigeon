@@ -145,6 +145,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
             XMPPUserCoreDataStorageObject *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
             cpmtvc.user = user;
+            cpmtvc.xmppStream = self.xmppStream;
         }
     }
 }

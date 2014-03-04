@@ -8,7 +8,7 @@
 
 #import "CPMessagesViewController.h"
 #import "CPAppDelegate.h"
-#import "Chat.h"
+#import "Chat+Create.h"
 #import "CPHelperFunctions.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (nonatomic, strong) NSMutableArray *tmpArray;
 
 @end
 
@@ -53,11 +51,15 @@
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fromJID == %@", self.user.jidStr];
+    NSMutableArray *predicateArray = [NSMutableArray array];
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.user.jidStr, myJID]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", myJID, self.user.jidStr]];
+    NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
     [fetchRequest setPredicate:predicate];
 
     // Edit the section name key path and cache name if appropriate.
@@ -127,18 +129,11 @@
                                              selector:@selector(keyboardWillToggle:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-#warning todo observe and destroy message additions
-    
     [self.view addSubview:self.composeBarView];
     [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
     
     self.title = self.user.displayName;
-    
-    self.tmpArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 25; i++) {
-        [self.tmpArray addObject:[NSString stringWithFormat:@"object #%d", i]];
-    }
 }
 
 - (void)dealloc {
@@ -211,8 +206,25 @@
 }
 
 - (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
-    NSLog(@"Send button pressed%@", composeBarView.textView.text);
+    if (![composeBarView.textView.text isEqualToString:@""]) {
+        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+        NSString *messageBody = composeBarView.textView.text;
+        [body setStringValue:messageBody];
+         NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
+        [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
+        [messageElement addAttributeWithName:@"to" stringValue:self.user.jidStr];
+        [messageElement addChild:body];
+        NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
+        [messageElement addChild:status];
+        [self.xmppStream sendElement:messageElement];
+        
+        NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+        XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
+        [Chat addChatWithXMPPMessage:message fromUser:myJID toUser:self.user.jidStr inManagedObjectContext:self.managedObjectContext];
+    }
+    
     [composeBarView resignFirstResponder];
+
 }
 
 - (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
@@ -243,7 +255,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MessagesTableViewCell";
+    static NSString *CellIdentifier = @"MessagesTableViewCellReceived";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...

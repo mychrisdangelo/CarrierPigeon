@@ -22,5 +22,6 @@
 @dynamic timeStamp;
 @dynamic messageStatus;
 @dynamic mimeType;
+@dynamic toJID;
 
 @end

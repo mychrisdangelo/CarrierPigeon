@@ -525,7 +525,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                       xmppStream:self.xmppStream
                                                             managedObjectContext:[self managedObjectContext_roster]];
         
-        [Chat addChatWithXMPPMessage:message fromUser:user inManagedObjectContext:self.managedObjectContext];
+        NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID inManagedObjectContext:self.managedObjectContext];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
 		NSString *displayName = [user displayName];

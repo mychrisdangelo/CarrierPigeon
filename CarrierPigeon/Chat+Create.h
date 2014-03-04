@@ -7,10 +7,11 @@
 //
 
 #import "Chat.h"
+#import "XMPPMessage.h"
 #import "XMPPUserCoreDataStorageObject.h"
 
 @interface Chat (Create)
 
-+ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(XMPPUserCoreDataStorageObject *)fromUser inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

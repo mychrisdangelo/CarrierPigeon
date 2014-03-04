@@ -23,5 +23,6 @@
 @property (nonatomic, retain) NSDate * timeStamp;
 @property (nonatomic, retain) NSString * messageStatus;
 @property (nonatomic, retain) NSString * mimeType;
+@property (nonatomic, retain) NSString * toJID;
 
 @end
