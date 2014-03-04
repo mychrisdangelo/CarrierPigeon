@@ -26,5 +26,6 @@
 @property (nonatomic, strong) id<CPSignInViewControllerDelegate> delegate;
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
+@property (nonatomic) BOOL autoLoginHasBegun;
 
 @end

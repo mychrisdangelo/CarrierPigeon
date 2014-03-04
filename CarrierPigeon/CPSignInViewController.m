@@ -45,6 +45,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	// Do any additional setup after loading the view.
     
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    if (self.autoLoginHasBegun) {
+        [self.activityView startAnimating];
+        [self.signInButton setEnabled:NO];
+        [self.usernameTextField setHidden:YES];
+        [self.passwordTextField setHidden:YES];
+    }
 }
 
 - (void)dealloc

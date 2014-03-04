@@ -64,9 +64,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         controller.xmppStream = self.xmppStream;
         controller.xmppRoster = self.xmppRoster;
         
-        // controller.managedObjectContext = self.managedObjectContext;
+        if ([self userIsLoggedIn]) {
+            [self connect];
+            controller.autoLoginHasBegun = YES;
+        }
     }
     return YES;
+}
+
+- (BOOL)userIsLoggedIn
+{
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    
+    if (myJID) {
+        return YES;
+    }
+    
+    return NO;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
