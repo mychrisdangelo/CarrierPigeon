@@ -239,8 +239,7 @@
         [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr inManagedObjectContext:self.managedObjectContext];
     }
     
-    [composeBarView resignFirstResponder];
-
+    composeBarView.textView.text = @"";
 }
 
 - (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
