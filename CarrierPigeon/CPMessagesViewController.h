@@ -1,5 +1,5 @@
 //
-//  CPMessagesTableViewController.h
+//  CPMessagesViewController.h
 //  CarrierPigeon
 //
 //  Created by Chris D'Angelo on 3/3/14.
@@ -10,7 +10,7 @@
 #import "PHFComposeBarView.h"
 #import "XMPPUserCoreDataStorageObject.h"
 
-@interface CPMessagesTableViewController : UITableViewController <PHFComposeBarViewDelegate>
+@interface CPMessagesViewController : UIViewController <PHFComposeBarViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject *user;
 

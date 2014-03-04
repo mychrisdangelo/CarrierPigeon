@@ -48,6 +48,7 @@
 		400DC21A18C2ECD000C806ED /* XMPPSRVResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 400DC21318C2ECD000C806ED /* XMPPSRVResolver.m */; };
 		400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */ = {isa = PBXBuildFile; fileRef = 400DC21518C2ECD000C806ED /* XMPPStringPrep.m */; };
 		400DC21D18C2ECF200C806ED /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 400DC21C18C2ECF200C806ED /* libresolv.dylib */; };
+		401B0C8718C4FFAA00EE43CA /* CPMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */; };
 		4032C55518BDAE0500E0CDD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55418BDAE0500E0CDD1 /* Foundation.framework */; };
 		4032C55718BDAE0500E0CDD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55618BDAE0500E0CDD1 /* CoreGraphics.framework */; };
 		4032C55918BDAE0500E0CDD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55818BDAE0500E0CDD1 /* UIKit.framework */; };
@@ -165,7 +166,6 @@
 		40D2C09A18C46D1800A9E6FD /* PHFComposeBarView_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09518C46D1800A9E6FD /* PHFComposeBarView_Button.m */; };
 		40D2C09B18C46D1800A9E6FD /* PHFComposeBarView_TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09718C46D1800A9E6FD /* PHFComposeBarView_TextView.m */; };
 		40D2C09C18C46D1800A9E6FD /* PHFComposeBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09918C46D1800A9E6FD /* PHFComposeBarView.m */; };
-		40D2C09F18C46D4500A9E6FD /* CPMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C09E18C46D4500A9E6FD /* CPMessagesTableViewController.m */; };
 		40D2C0A418C46F1D00A9E6FD /* PHFDelegateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +265,8 @@
 		400DC21418C2ECD000C806ED /* XMPPStringPrep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPStringPrep.h; sourceTree = "<group>"; };
 		400DC21518C2ECD000C806ED /* XMPPStringPrep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPStringPrep.m; sourceTree = "<group>"; };
 		400DC21C18C2ECF200C806ED /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessagesViewController.h; sourceTree = "<group>"; };
+		401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessagesViewController.m; sourceTree = "<group>"; };
 		4032C55118BDAE0500E0CDD1 /* CarrierPigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarrierPigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4032C55418BDAE0500E0CDD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4032C55618BDAE0500E0CDD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -490,8 +492,6 @@
 		40D2C09718C46D1800A9E6FD /* PHFComposeBarView_TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_TextView.m; sourceTree = "<group>"; };
 		40D2C09818C46D1800A9E6FD /* PHFComposeBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView.h; sourceTree = "<group>"; };
 		40D2C09918C46D1800A9E6FD /* PHFComposeBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView.m; sourceTree = "<group>"; };
-		40D2C09D18C46D4500A9E6FD /* CPMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPMessagesTableViewController.h; path = ../CPMessagesTableViewController.h; sourceTree = "<group>"; };
-		40D2C09E18C46D4500A9E6FD /* CPMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPMessagesTableViewController.m; path = ../CPMessagesTableViewController.m; sourceTree = "<group>"; };
 		40D2C0A218C46F1D00A9E6FD /* PHFDelegateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFDelegateChain.h; sourceTree = "<group>"; };
 		40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFDelegateChain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -529,6 +529,7 @@
 		400DC18A18C2E9BC00C806ED /* XMPP */ = {
 			isa = PBXGroup;
 			children = (
+				40D2C09218C4681100A9E6FD /* XMPPFramework.h */,
 				40A994B918C31E4700C23AB6 /* Extensions */,
 				400DC20918C2ECD000C806ED /* Utilities */,
 				400DC1ED18C2ECC900C806ED /* Core */,
@@ -1418,7 +1419,6 @@
 				40D2C09318C46D0000A9E6FD /* PHFComposeBarView */,
 				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
-				40D2C09218C4681100A9E6FD /* XMPPFramework.h */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
 			);
 			name = External;
@@ -1487,8 +1487,8 @@
 		40D2C0A018C46D5800A9E6FD /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				40D2C09D18C46D4500A9E6FD /* CPMessagesTableViewController.h */,
-				40D2C09E18C46D4500A9E6FD /* CPMessagesTableViewController.m */,
+				401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */,
+				401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -1614,7 +1614,6 @@
 				40A995A018C31E4800C23AB6 /* XMPPCoreDataStorage.m in Sources */,
 				40A995A218C31E4800C23AB6 /* XMPPProcessOne.m in Sources */,
 				4032C56318BDAE0500E0CDD1 /* main.m in Sources */,
-				40D2C09F18C46D4500A9E6FD /* CPMessagesTableViewController.m in Sources */,
 				40A995B218C31E4800C23AB6 /* XMPPLastActivity.m in Sources */,
 				40A995CC18C31E4800C23AB6 /* XMPPvCardTempLabel.m in Sources */,
 				400DC1BB18C2EB5600C806ED /* DDXMLDocument.m in Sources */,
@@ -1656,6 +1655,7 @@
 				40A995D218C31E4800C23AB6 /* XMPPPubSub.m in Sources */,
 				40A995A418C31E4800C23AB6 /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				40A995CF18C31E4800C23AB6 /* NSXMLElement+XEP_0059.m in Sources */,
+				401B0C8718C4FFAA00EE43CA /* CPMessagesViewController.m in Sources */,
 				408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */,
 				400DC20218C2ECC900C806ED /* XMPPIQ.m in Sources */,
 				40A995C618C31E4800C23AB6 /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
