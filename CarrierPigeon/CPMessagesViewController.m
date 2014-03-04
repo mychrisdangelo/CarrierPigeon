@@ -26,7 +26,7 @@
     if (!_composeBarView) {
         CGRect frame = self.composeViewContainer.frame;
         _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
-        [_composeBarView setMaxCharCount:160];
+//        [_composeBarView setMaxCharCount:160];
         [_composeBarView setMaxLinesCount:5];
         [_composeBarView setPlaceholder:@"Type something..."];
         [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
@@ -61,6 +61,7 @@
 #warning todo observe and destroy message additions
     
     [self.view addSubview:self.composeBarView];
+    [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
     
     self.title = self.user.displayName;

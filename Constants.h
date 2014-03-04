@@ -19,4 +19,7 @@
 // notification identifiers
 #define kNewMessageReceivedNotificationIdentifier @"kNewMessageReceivedNotificationIdentifier"
 
+// Color
+#define kCarrierPigeonPurpleColor [UIColor colorWithRed:193.0/255.0 green:19.0/255.0 blue:207.0/255.0 alpha:1.0]
+
 #endif
