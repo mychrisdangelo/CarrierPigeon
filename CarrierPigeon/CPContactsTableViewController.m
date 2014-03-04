@@ -158,6 +158,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
 {
     XMPPUserCoreDataStorageObject *user = [fetchedResultsController objectAtIndexPath:theIndexPath];
+
 	
 	theCell.textLabel.text = user.displayName;
 	[self configurePhotoForCell:theCell user:user];

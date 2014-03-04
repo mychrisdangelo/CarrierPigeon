@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSString *myJid;
 
 @end
 
@@ -25,6 +26,16 @@
 @synthesize composeBarView = _composeBarView;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize myJid = _myJid;
+
+- (NSString *)myJid
+{
+    if (_myJid == nil) {
+        _myJid = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    }
+    
+    return _myJid;
+}
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -56,9 +67,9 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     NSMutableArray *predicateArray = [NSMutableArray array];
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.user.jidStr, myJID]];
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", myJID, self.user.jidStr]];
+
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.user.jidStr, self.myJid]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.myJid, self.user.jidStr]];
     NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
     [fetchRequest setPredicate:predicate];
 
@@ -83,9 +94,13 @@
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
 {
     Chat *chat = [fetchedResultsController objectAtIndexPath:theIndexPath];
-	
+    NSString *fromOrReceivedString = @"Received: ";
+    if ([chat.fromJID isEqualToString:self.myJid]) {
+        fromOrReceivedString = @"Sent: ";
+    }
+    
 	theCell.textLabel.text = chat.messageBody;
-    theCell.detailTextLabel.text = [CPHelperFunctions dayLabelForMessage:chat.timeStamp];
+    theCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", fromOrReceivedString, [CPHelperFunctions dayLabelForMessage:chat.timeStamp]];
 }
 
 - (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
@@ -99,7 +114,7 @@
         CGRect frame = self.composeViewContainer.frame;
         _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
         [_composeBarView setMaxLinesCount:5];
-        [_composeBarView setPlaceholder:@"Type something..."];
+        [_composeBarView setPlaceholder:@"Send a message"];
         [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
         [_composeBarView setDelegate:self];
     }
@@ -132,6 +147,8 @@
     [self.view addSubview:self.composeBarView];
     [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
+    
+
     
     self.title = self.user.displayName;
 }
@@ -218,9 +235,8 @@
         [messageElement addChild:status];
         [self.xmppStream sendElement:messageElement];
         
-        NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
         XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
-        [Chat addChatWithXMPPMessage:message fromUser:myJID toUser:self.user.jidStr inManagedObjectContext:self.managedObjectContext];
+        [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr inManagedObjectContext:self.managedObjectContext];
     }
     
     [composeBarView resignFirstResponder];
@@ -255,7 +271,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MessagesTableViewCellReceived";
+    
+    static NSString *CellIdentifier = @"MessagesTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
