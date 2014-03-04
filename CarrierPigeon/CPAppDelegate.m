@@ -1,4 +1,4 @@
-//
+// consider reorganizing assignments//
 //  CarrierPigeonAppDelegate.m
 //  CarrierPigeon
 //
@@ -7,8 +7,6 @@
 //
 
 #import "CPAppDelegate.h"
-#import "CPSignInViewController.h"
-#import "CPSignInViewController.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 #import "XMPP.h"
@@ -25,11 +23,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
-@interface CPAppDelegate() <CPSignInViewControllerDelegate>
+@interface CPAppDelegate() 
 
-@property (nonatomic, strong) XMPPStream *xmppStream;
+
 @property (nonatomic, strong) XMPPReconnect *xmppReconnect;
-@property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPRosterCoreDataStorage *xmppRosterStorage;
 @property (nonatomic, strong) XMPPvCardTempModule *xmppvCardTempModule;
 @property (nonatomic, strong) XMPPvCardCoreDataStorage *xmppvCardStorage;
@@ -60,9 +57,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
         CPSignInViewController *controller = (CPSignInViewController *)navigationController.topViewController;
+        
+        // consider reorganizing assignments
         controller.delegate = self;
         controller.xmppStream = self.xmppStream;
         controller.xmppRoster = self.xmppRoster;
+        [self.xmppStream addDelegate:controller delegateQueue:dispatch_get_main_queue()];
         
         if ([self userIsLoggedIn]) {
             [self connect];

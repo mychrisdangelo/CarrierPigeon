@@ -27,5 +27,6 @@
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic) BOOL autoLoginHasBegun;
+@property (nonatomic) BOOL userWantsToLogOut;
 
 @end

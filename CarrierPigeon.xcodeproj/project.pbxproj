@@ -66,6 +66,7 @@
 		4032C58218BDAE0600E0CDD1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55A18BDAE0500E0CDD1 /* CoreData.framework */; };
 		4032C58A18BDAE0600E0CDD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */; };
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
+		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
 		407CDFF218C58300003B6016 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 407CDFF118C58300003B6016 /* Chat.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
 		40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */; };
@@ -287,6 +288,8 @@
 		4032C58718BDAE0600E0CDD1 /* CarrierPigeonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CarrierPigeonTests-Info.plist"; sourceTree = "<group>"; };
 		4032C58918BDAE0600E0CDD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonTests.m; sourceTree = "<group>"; };
+		403972C718C661AD007F592D /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
+		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		407CDFF018C58300003B6016 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chat.h; path = ../Chat.h; sourceTree = "<group>"; };
 		407CDFF118C58300003B6016 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chat.m; path = ../Chat.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
@@ -810,6 +813,7 @@
 				4032C56818BDAE0500E0CDD1 /* Main_iPhone.storyboard */,
 				4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */,
 				40D2C07C18C45DAB00A9E6FD /* CoreData */,
+				403972CA18C661B4007F592D /* Settings */,
 				40D2C0A018C46D5800A9E6FD /* Messages */,
 				408CFE5A18C40E93009F991C /* SignIn */,
 				40D2C07618C4393400A9E6FD /* AddFriendView */,
@@ -852,6 +856,15 @@
 				4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		403972CA18C661B4007F592D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				403972C718C661AD007F592D /* CPSettingsViewController.h */,
+				403972C818C661AD007F592D /* CPSettingsViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		408CFE5918C40E88009F991C /* Contacts */ = {
@@ -1689,6 +1702,7 @@
 				40A995F318C31E4800C23AB6 /* XMPPMessage+XEP_0224.m in Sources */,
 				400DC1BC18C2EB5600C806ED /* DDXMLElement.m in Sources */,
 				40A995B418C31E4800C23AB6 /* XMPPRoom.xcdatamodeld in Sources */,
+				403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */,
 				40A995D918C31E4800C23AB6 /* XMPPSoftwareVersion.m in Sources */,
 				40A995EE18C31E4800C23AB6 /* XMPPAutoTime.m in Sources */,
 				400DC20118C2ECC900C806ED /* XMPPElement.m in Sources */,

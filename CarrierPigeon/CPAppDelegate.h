@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "XMPPvCardCoreDataStorage.h"
+#import "CPSignInViewController.h"
 
-@interface CPAppDelegate : UIResponder <UIApplicationDelegate>
+@interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPSignInViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -20,6 +21,8 @@
 @property (nonatomic) BOOL allowSSLHostNameMismatch;
 @property (nonatomic) BOOL isXmppConnected;
 @property (nonatomic, strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
+@property (nonatomic, strong) XMPPStream *xmppStream;
+@property (nonatomic, strong) XMPPRoster *xmppRoster;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

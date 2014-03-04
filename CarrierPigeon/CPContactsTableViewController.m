@@ -37,7 +37,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
 {
-    CPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *moc = [appDelegate managedObjectContext_roster];
     NSPredicate *filterPredicate;
     
@@ -225,7 +225,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	}
 	else
 	{
-        CPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
 		NSData *photoData = [appDelegate.xmppvCardAvatarModule photoDataForJID:user.jid];
         
 		if (photoData != nil)
