@@ -140,6 +140,15 @@
 
 }
 
+- (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
+    NSLog(@"Send button pressed%@", composeBarView.textView.text);
+    [composeBarView resignFirstResponder];
+}
+
+- (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
+    NSLog(@"utitility button pressed");
+}
+
 #pragma mark - TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

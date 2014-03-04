@@ -336,8 +336,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6M-ii-5dV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="down" id="dfz-AW-rhz">
+                <swipeGestureRecognizer delaysTouchesBegan="YES" delaysTouchesEnded="NO" direction="down" id="dfz-AW-rhz">
                     <connections>
+                        <action selector="userSwipedDownGesture:" destination="dAd-bt-sy6" id="KBO-eF-igv"/>
                         <outlet property="delegate" destination="dAd-bt-sy6" id="Iv0-4f-9M7"/>
                     </connections>
                 </swipeGestureRecognizer>
