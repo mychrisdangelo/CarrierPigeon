@@ -5,15 +5,18 @@
 //  Created by Chris D'Angelo on 3/3/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
+//  Sources:
+//  http://stackoverflow.com/questions/4471289/how-to-filter-nsfetchedresultscontroller-coredata-with-uisearchdisplaycontroll
 
 #import "CPMessagesViewController.h"
 #import "CPAppDelegate.h"
 #import "Chat+Create.h"
 #import "CPHelperFunctions.h"
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -46,13 +49,8 @@
     return _managedObjectContext;
 }
 
-
-- (NSFetchedResultsController *)fetchedResultsController
+- (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
 {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     // Edit the entity name as appropriate.
@@ -67,12 +65,20 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     NSMutableArray *predicateArray = [NSMutableArray array];
-
+    
     [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.user.jidStr, self.myJid]];
     [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.myJid, self.user.jidStr]];
-    NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
-    [fetchRequest setPredicate:predicate];
-
+    NSPredicate *filterPredicate = nil;
+    if (searchString.length) {
+        filterPredicate = [NSPredicate predicateWithFormat:@"messageBody CONTAINS[cd] %@", searchString];
+    }
+    if (filterPredicate) {
+        filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
+    } else {
+        filterPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
+    }
+    [fetchRequest setPredicate:filterPredicate];
+    
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
@@ -91,6 +97,25 @@
     return _fetchedResultsController;
 }
 
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    _fetchedResultsController = [self newFetchedResultsControllerWithSearch:nil];
+    return _fetchedResultsController;
+}
+
+- (NSFetchedResultsController *)searchFetchedResultsController
+{
+    if (_searchFetchedResultsController != nil) {
+        return _searchFetchedResultsController;
+    }
+    
+    _searchFetchedResultsController = [self newFetchedResultsControllerWithSearch:self.searchDisplayController.searchBar.text];
+    return _searchFetchedResultsController;
+}
+
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
 {
     Chat *chat = [fetchedResultsController objectAtIndexPath:theIndexPath];
@@ -105,8 +130,14 @@
 
 - (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
 {
-#warning todo add controller for search
-    return self.fetchedResultsController;
+    return tableView == self.tableView ? self.fetchedResultsController : self.searchFetchedResultsController;
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope
+{
+    // update the filter, in this case just blow away the FRC and let lazy evaluation create another with the relevant search info
+    self.searchFetchedResultsController.delegate = nil;
+    self.searchFetchedResultsController = nil;
 }
 
 - (PHFComposeBarView *)composeBarView {
@@ -272,7 +303,12 @@
 {
     
     static NSString *CellIdentifier = @"MessagesTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
+	}
     
     // Configure the cell...
     [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];
@@ -346,6 +382,34 @@
 {
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
     [tableView endUpdates];
+}
+
+#pragma mark - UISearchDisplayDelegate
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView;
+{
+    // search is done so get rid of the search FRC and reclaim memory
+    self.searchFetchedResultsController.delegate = nil;
+    self.searchFetchedResultsController = nil;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[self.searchDisplayController.searchBar selectedScopeButtonIndex]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text]
+                               scope:[self.searchDisplayController.searchBar selectedScopeButtonIndex]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
 }
 
 @end

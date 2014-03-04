@@ -180,7 +180,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 		//        If you do enableBackgroundingOnSocket on the simulator,
 		//        you will simply see an error message from the xmpp stack when it fails to set the property.
 		
-		xmppStream.enableBackgroundingOnSocket = YES;
+		_xmppStream.enableBackgroundingOnSocket = YES;
 	}
 #endif
 	
