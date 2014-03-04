@@ -9,6 +9,7 @@
 #import "CPMessagesViewController.h"
 #import "CPAppDelegate.h"
 #import "Chat.h"
+#import "CPHelperFunctions.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
 
@@ -82,6 +83,7 @@
     Chat *chat = [fetchedResultsController objectAtIndexPath:theIndexPath];
 	
 	theCell.textLabel.text = chat.messageBody;
+    theCell.detailTextLabel.text = [CPHelperFunctions dayLabelForMessage:chat.timeStamp];
 }
 
 - (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
