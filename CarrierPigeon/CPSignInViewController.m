@@ -99,7 +99,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         return;
     } else {
         KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
-        NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPServer];
+        NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
         [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];

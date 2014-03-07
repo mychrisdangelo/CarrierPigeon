@@ -181,6 +181,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	// Everything else plugs into the xmppStream, such as modules/extensions and delegates.
     
 	self.xmppStream = [[XMPPStream alloc] init];
+    self.xmppStream.hostName = kXMPPHostname;
 	
 #if !TARGET_IPHONE_SIMULATOR
 	{
@@ -288,7 +289,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	
     
 	// You may need to alter these settings depending on the server you're connecting to
-	self.allowSelfSignedCertificates = NO;
+	self.allowSelfSignedCertificates = YES;
 	self.allowSSLHostNameMismatch = NO;
 }
 

@@ -294,6 +294,7 @@
 		407CDFF118C58300003B6016 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chat.m; path = ../Chat.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
 		408CFE5718C40E77009F991C /* CPContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewController.m; sourceTree = "<group>"; };
+		40A64B8018CA3CCE0089CDA7 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
 		40A994BB18C31E4700C23AB6 /* XMPPBandwidthMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPBandwidthMonitor.h; sourceTree = "<group>"; };
 		40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPBandwidthMonitor.m; sourceTree = "<group>"; };
 		40A994BE18C31E4700C23AB6 /* XMPPCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCoreDataStorage.h; sourceTree = "<group>"; };
@@ -832,6 +833,7 @@
 				4032C56218BDAE0500E0CDD1 /* main.m */,
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
 				40ACCC6C18C328AD00081B7F /* Constants.h */,
+				40A64B8018CA3CCE0089CDA7 /* Credentials.h */,
 				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
 				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
 				40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */,

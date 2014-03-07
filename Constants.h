@@ -14,7 +14,7 @@
 #define kXMPPmyPassword @"kXMPPmyPassword"
 #define kKeyChainItemWrapperPasswordIdentifer @"kXMPPmyPasswordKeychain"
 
-#define kXMPPServer @"macmini.local"
+
 
 // notification identifiers
 #define kNewMessageReceivedNotificationIdentifier @"kNewMessageReceivedNotificationIdentifier"

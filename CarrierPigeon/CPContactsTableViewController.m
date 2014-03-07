@@ -169,7 +169,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)CPAddFriendViewControllerDidFinishAddingFriend:(CPAddFriendViewController *)sender withUserName:(NSString *)userName
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        NSString *jidString = [NSString stringWithFormat:@"%@@%@", userName, kXMPPServer];
+        NSString *jidString = [NSString stringWithFormat:@"%@@%@", userName, kXMPPDomainName];
         [self.xmppRoster addUser:[XMPPJID jidWithString:jidString] withNickname:userName];
         [self.xmppRoster subscribePresenceToUser:[XMPPJID jidWithString:jidString]];
     }];
