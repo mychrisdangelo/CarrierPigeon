@@ -14,8 +14,6 @@
 #define kXMPPmyPassword @"kXMPPmyPassword"
 #define kKeyChainItemWrapperPasswordIdentifer @"kXMPPmyPasswordKeychain"
 
-
-
 // notification identifiers
 #define kNewMessageReceivedNotificationIdentifier @"kNewMessageReceivedNotificationIdentifier"
 
