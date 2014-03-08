@@ -15,6 +15,7 @@
 #import "XMPPCapabilitiesCoreDataStorage.h"
 #import "KeychainItemWrapper.h"
 #import "Chat+Create.h"
+#import "TestFlight.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -69,6 +70,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             controller.autoLoginHasBegun = YES;
         }
     }
+    
+    [TestFlight takeOff:kTestFlightKey];
+    
     return YES;
 }
 

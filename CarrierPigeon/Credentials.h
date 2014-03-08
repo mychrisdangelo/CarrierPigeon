@@ -12,5 +12,6 @@
 // fill in with your credentials
 #define kXMPPDomainName @""
 #define kXMPPHostname @""
+#define kTestFlightKey @""
 
 #endif
