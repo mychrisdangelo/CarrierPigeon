@@ -129,7 +129,7 @@
     [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
     
-    [self scrollToLastRowWithAnimation:NO];
+    [self scrollToLastRowWithAnimation:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -149,7 +149,7 @@
     }
     
     if (numberOfRows != 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows - 1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:animated];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(numberOfRows - 1) inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:animated];
     }
 }
 
@@ -339,7 +339,7 @@
     
     [self.composeBarView setFrame:CGRectMake(self.composeBarView.frame.origin.x, self.composeBarView.frame.origin.y + (keyboardFrame.size.height * (up ? -1 : 1)), self.composeBarView.frame.size.width, self.composeBarView.frame.size.height)];
     
-    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, (up ? (self.composeBarView.frame.size.height + keyboardFrame.size.height) : self.composeBarView.frame.size.height), 0);
+    UIEdgeInsets insets = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20.0, 0, (up ? (self.composeBarView.frame.size.height + keyboardFrame.size.height) : self.composeBarView.frame.size.height), 0);
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
     
