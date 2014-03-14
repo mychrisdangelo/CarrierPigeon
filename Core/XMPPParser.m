@@ -11,8 +11,6 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
-
 #define CHECK_FOR_NULL(value)                       \
     do {                                            \
         if (value == NULL) {                        \
