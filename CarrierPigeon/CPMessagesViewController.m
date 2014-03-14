@@ -13,10 +13,9 @@
 #import "Chat+Create.h"
 #import "CPHelperFunctions.h"
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,8 +48,12 @@
     return _managedObjectContext;
 }
 
-- (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
+- (NSFetchedResultsController *)fetchedResultsController
 {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     // Edit the entity name as appropriate.
@@ -69,9 +72,6 @@
     [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.user.jidStr, self.myJid]];
     [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.myJid, self.user.jidStr]];
     NSPredicate *filterPredicate = nil;
-    if (searchString.length) {
-        filterPredicate = [NSPredicate predicateWithFormat:@"messageBody CONTAINS[cd] %@", searchString];
-    }
     if (filterPredicate) {
         filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
     } else {
@@ -95,25 +95,7 @@
 	}
     
     return _fetchedResultsController;
-}
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    _fetchedResultsController = [self newFetchedResultsControllerWithSearch:nil];
-    return _fetchedResultsController;
-}
-
-- (NSFetchedResultsController *)searchFetchedResultsController
-{
-    if (_searchFetchedResultsController != nil) {
-        return _searchFetchedResultsController;
-    }
     
-    _searchFetchedResultsController = [self newFetchedResultsControllerWithSearch:self.searchDisplayController.searchBar.text];
-    return _searchFetchedResultsController;
 }
 
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
@@ -126,18 +108,6 @@
     
 	theCell.textLabel.text = chat.messageBody;
     theCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", fromOrReceivedString, [CPHelperFunctions dayLabelForMessage:chat.timeStamp]];
-}
-
-- (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
-{
-    return tableView == self.tableView ? self.fetchedResultsController : self.searchFetchedResultsController;
-}
-
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope
-{
-    // update the filter, in this case just blow away the FRC and let lazy evaluation create another with the relevant search info
-    self.searchFetchedResultsController.delegate = nil;
-    self.searchFetchedResultsController = nil;
 }
 
 - (PHFComposeBarView *)composeBarView {
@@ -181,20 +151,19 @@
     
     self.title = self.user.displayName;
     
-    [self scrollToLastRowInTableView:self.tableView];
+    [self scrollToLastRow];
 }
 
-- (void)scrollToLastRowInTableView:(UITableView *)tableView
+- (void)scrollToLastRow
 {
     NSInteger numberOfRows = 0;
-    NSFetchedResultsController *fetchController = [self fetchedResultsControllerForTableView:tableView];
-    NSArray *sections = fetchController.sections;
+    NSArray *sections = self.fetchedResultsController.sections;
     if(sections.count > 0) {
         id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:0];
         numberOfRows = [sectionInfo numberOfObjects];
     }
     
-    [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 - (void)dealloc {
@@ -294,14 +263,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[[self fetchedResultsControllerForTableView:tableView] sections] count];
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger numberOfRows = 0;
-    NSFetchedResultsController *fetchController = [self fetchedResultsControllerForTableView:tableView];
-    NSArray *sections = fetchController.sections;
+    NSArray *sections = self.fetchedResultsController.sections;
     if(sections.count > 0) {
         id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
         numberOfRows = [sectionInfo numberOfObjects];
@@ -324,7 +292,7 @@
 	}
     
     // Configure the cell...
-    [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];
+    [self fetchedResultsController:self.fetchedResultsController configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
@@ -395,34 +363,6 @@
 {
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
     [tableView endUpdates];
-}
-
-#pragma mark - UISearchDisplayDelegate
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView;
-{
-    // search is done so get rid of the search FRC and reclaim memory
-    self.searchFetchedResultsController.delegate = nil;
-    self.searchFetchedResultsController = nil;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString
-                               scope:[self.searchDisplayController.searchBar selectedScopeButtonIndex]];
-    
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
-}
-
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text]
-                               scope:[self.searchDisplayController.searchBar selectedScopeButtonIndex]];
-    
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
 }
 
 @end

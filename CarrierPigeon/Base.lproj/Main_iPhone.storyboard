@@ -306,17 +306,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="ZRK-JG-L5e">
-                                    <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="dAd-bt-sy6" id="HwI-up-3pX"/>
-                                    </connections>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessagesTableViewCell" textLabel="Ra7-vn-yNx" detailTextLabel="6sU-iL-uj8" style="IBUITableViewCellStyleSubtitle" id="v4Z-mT-pFH">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4Z-mT-pFH" id="4Ty-tP-ltM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -368,7 +360,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="composeViewContainer" destination="RbZ-Hi-LiZ" id="Xic-wO-04y"/>
-                        <outlet property="searchDisplayController" destination="2Re-YF-rWm" id="uhd-0g-w8H"/>
                         <outlet property="tableView" destination="q2K-bi-tA2" id="AOt-OA-m4k"/>
                     </connections>
                 </viewController>
@@ -379,15 +370,6 @@
                         <outlet property="delegate" destination="dAd-bt-sy6" id="Iv0-4f-9M7"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <searchDisplayController id="2Re-YF-rWm">
-                    <connections>
-                        <outlet property="delegate" destination="dAd-bt-sy6" id="4fS-VW-AtP"/>
-                        <outlet property="searchBar" destination="ZRK-JG-L5e" id="db2-mI-gte"/>
-                        <outlet property="searchContentsController" destination="dAd-bt-sy6" id="Wvx-RF-Oga"/>
-                        <outlet property="searchResultsDataSource" destination="dAd-bt-sy6" id="Piv-rU-iq5"/>
-                        <outlet property="searchResultsDelegate" destination="dAd-bt-sy6" id="jMn-gQ-aHz"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2156" y="-656"/>
         </scene>
