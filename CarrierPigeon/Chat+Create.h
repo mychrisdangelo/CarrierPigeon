@@ -12,6 +12,6 @@
 
 @interface Chat (Create)
 
-+ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser deviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

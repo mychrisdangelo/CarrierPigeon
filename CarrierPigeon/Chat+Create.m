@@ -11,14 +11,14 @@
 
 @implementation Chat (Create)
 
-+ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser inManagedObjectContext:(NSManagedObjectContext *)context
++ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser deviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Chat *chat = [NSEntityDescription insertNewObjectForEntityForName:@"Chat" inManagedObjectContext:context];
     
     chat.messageBody = [[message elementForName:@"body"] stringValue];
     chat.timeStamp = [NSDate date];
     chat.messageStatus = @"received";
-    chat.isIncomingMessage = [NSNumber numberWithBool:YES];
+    chat.isIncomingMessage = [NSNumber numberWithBool:![deviceUser isEqualToString:fromUser]];
     chat.isNew = [NSNumber numberWithBool:YES];
     chat.hasMedia = [NSNumber numberWithBool:NO];
     

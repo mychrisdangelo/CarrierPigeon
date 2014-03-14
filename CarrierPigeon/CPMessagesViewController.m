@@ -99,16 +99,19 @@
     
 }
 
-- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
+- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
 {
     Chat *chat = [fetchedResultsController objectAtIndexPath:theIndexPath];
-    NSString *fromOrReceivedString = @"Received: ";
-    if ([chat.fromJID isEqualToString:self.myJid]) {
-        fromOrReceivedString = @"Sent: ";
-    }
+    MessageView *messageView = (MessageView *)[cell viewWithTag:MESSAGE_VIEW_TAG];
+    messageView.chat = chat;
     
-	theCell.textLabel.text = chat.messageBody;
-    theCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", fromOrReceivedString, [CPHelperFunctions dayLabelForMessage:chat.timeStamp]];
+//    NSString *fromOrReceivedString = @"Received: ";
+//    if ([chat.fromJID isEqualToString:self.myJid]) {
+//        fromOrReceivedString = @"Sent: ";
+//    }
+//    
+//	theCell.textLabel.text = chat.messageBody;
+//    theCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", fromOrReceivedString, [CPHelperFunctions dayLabelForMessage:chat.timeStamp]];
 }
 
 - (PHFComposeBarView *)composeBarView {
@@ -152,10 +155,10 @@
     
     self.title = self.user.displayName;
     
-    [self scrollToLastRow];
+    [self scrollToLastRowWithAnimation:NO];
 }
 
-- (void)scrollToLastRow
+- (void)scrollToLastRowWithAnimation:(BOOL)animated
 {
     NSInteger numberOfRows = 0;
     NSArray *sections = self.fetchedResultsController.sections;
@@ -165,7 +168,7 @@
     }
     
     if (numberOfRows != 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows - 1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:animated];
     }
 }
 
@@ -252,7 +255,7 @@
         [self.xmppStream sendElement:messageElement];
         
         XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
-        [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr inManagedObjectContext:self.managedObjectContext];
+        [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
     }
     
     composeBarView.textView.text = @"";
@@ -279,6 +282,13 @@
     }
     
     return numberOfRows;
+}
+
+// Return the height of the row based on the type of transfer and custom view it contains
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Chat *chat = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    return [MessageView viewHeightForChat:chat];
 }
 
 #pragma mark - TableViewDelegate
@@ -364,7 +374,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    [self scrollToLastRow];
+    [self scrollToLastRowWithAnimation:YES];
 }
 
 @end

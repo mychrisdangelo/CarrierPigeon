@@ -10,8 +10,8 @@
 #define CarrierPigeon_Credentials_h
 
 // fill in with your credentials
-#define kXMPPDomainName @""
-#define kXMPPHostname @""
-#define kTestFlightKey @""
+#define kXMPPDomainName @"localhost"
+#define kXMPPHostname @"162.243.64.234"
+#define kTestFlightKey @"b613e8bb-26d1-4139-9f6e-b3a37ce54375"
 
 #endif

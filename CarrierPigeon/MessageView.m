@@ -116,8 +116,8 @@
         _nameLabel.font = [UIFont systemFontOfSize:NAME_FONT_SIZE];
         _nameLabel.textColor = [UIColor colorWithRed:34.0/255.0 green:97.0/255.0 blue:221.0/255.0 alpha:1];
 
-        self.balloonImageLeft = [UIImage imageNamed:@"bubble-left.png"];
-        self.balloonImageRight = [UIImage imageNamed:@"bubble-right.png"];
+        self.balloonImageLeft = [UIImage imageNamed:@"BubbleLeft"];
+        self.balloonImageRight = [UIImage imageNamed:@"BubbleRight"];
 
         _balloonInsetsLeft = UIEdgeInsetsMake(BALLOON_INSET_TOP, BALLOON_INSET_RIGHT, BALLOON_INSET_BOTTOM, BALLOON_INSET_LEFT);
         _balloonInsetsRight = UIEdgeInsetsMake(BALLOON_INSET_TOP, BALLOON_INSET_LEFT, BALLOON_INSET_BOTTOM, BALLOON_INSET_RIGHT);
