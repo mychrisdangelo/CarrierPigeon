@@ -183,10 +183,25 @@
 - (void)composeBarView:(PHFComposeBarView *)composeBarView
    willChangeFromFrame:(CGRect)startFrame
                toFrame:(CGRect)endFrame
-              duration:(NSTimeInterval)duration
+              duration:(NSTimeInterval)animationDuration
         animationCurve:(UIViewAnimationCurve)animationCurve
 {
+    // Animate up or down
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
     
+    CGFloat difference = endFrame.size.height - startFrame.size.height;
+    
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom +=difference;
+    self.tableView.contentInset = insets;
+    self.tableView.scrollIndicatorInsets = insets;
+    [self scrollToLastRowWithAnimation:YES];
+    
+    [UIView commitAnimations];
+    
+
 }
 
 - (void)composeBarView:(PHFComposeBarView *)composeBarView
