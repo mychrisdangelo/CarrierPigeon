@@ -360,10 +360,10 @@
     
     [self.toolBar setFrame:CGRectMake(self.toolBar.frame.origin.x, self.toolBar.frame.origin.y + (keyboardFrame.size.height * (up ? -1 : 1)), self.toolBar.frame.size.width, self.toolBar.frame.size.height)];
     
-    CGRect newContainerFrame = [self.tableView frame];
-    newContainerFrame.size.height += self.toolBar.frame.size.height * (up ? -1 : 1);
-    self.tableView.frame = newContainerFrame;
-    
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, (up ? (self.toolBar.frame.size.height + keyboardFrame.size.height) : self.toolBar.frame.size.height), 0);
+    self.tableView.contentInset = insets;
+    self.tableView.scrollIndicatorInsets = insets;
+
     [UIView commitAnimations];
 }
 
