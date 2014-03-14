@@ -7,6 +7,7 @@
 //
 //  Sources:
 //  http://stackoverflow.com/questions/4471289/how-to-filter-nsfetchedresultscontroller-coredata-with-uisearchdisplaycontroll
+//  Apple Documentation Sample: "MultipeerGroupChat"
 
 #import "CPMessagesViewController.h"
 #import "CPAppDelegate.h"
@@ -14,11 +15,13 @@
 #import "CPHelperFunctions.h"
 #import "MessageView.h"
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
-@property (readonly, nonatomic) PHFComposeBarView *composeBarView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (weak, nonatomic) IBOutlet UITextField *composeTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSString *myJid;
 
@@ -26,7 +29,6 @@
 
 @implementation CPMessagesViewController
 
-@synthesize composeBarView = _composeBarView;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize myJid = _myJid;
@@ -114,19 +116,6 @@
 //    theCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", fromOrReceivedString, [CPHelperFunctions dayLabelForMessage:chat.timeStamp]];
 }
 
-- (PHFComposeBarView *)composeBarView {
-    if (!_composeBarView) {
-        CGRect frame = self.composeViewContainer.frame;
-        _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
-        [_composeBarView setMaxLinesCount:5];
-        [_composeBarView setPlaceholder:@"Send a message"];
-        [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
-        [_composeBarView setDelegate:self];
-    }
-    
-    return _composeBarView;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -141,21 +130,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillToggle:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillToggle:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    [self.view addSubview:self.composeBarView];
-    [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
-    [self.composeViewContainer removeFromSuperview];
-    
     self.title = self.user.displayName;
     
     [self scrollToLastRowWithAnimation:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // Listen for will show/hide notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)scrollToLastRowWithAnimation:(BOOL)animated
@@ -172,50 +156,47 @@
     }
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    // Stop listening for keyboard notifications
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)keyboardWillToggle:(NSNotification *)notification {
-    NSDictionary* userInfo = [notification userInfo];
-    NSTimeInterval duration;
-    UIViewAnimationCurve animationCurve;
-    CGRect startFrame;
-    CGRect endFrame;
-    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey]    getValue:&animationCurve];
-    [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]        getValue:&startFrame];
-    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]          getValue:&endFrame];
-
-    NSInteger signCorrection = 1;
-    if (startFrame.origin.y < 0 || startFrame.origin.x < 0 || endFrame.origin.y < 0 || endFrame.origin.x < 0)
-        signCorrection = -1;
-
-    CGFloat widthChange  = (endFrame.origin.x - startFrame.origin.x) * signCorrection;
-    CGFloat heightChange = (endFrame.origin.y - startFrame.origin.y) * signCorrection;
-
-    CGFloat sizeChange = UIInterfaceOrientationIsLandscape([self interfaceOrientation]) ? widthChange : heightChange;
-    
-    CGRect newContainerFrame = [self.tableView frame];
-    newContainerFrame.size.height += sizeChange;
-    
-    CGRect newComposeBarViewFrame = [self.composeBarView frame];
-    newComposeBarViewFrame.origin.y += sizeChange;
-    
-    [UIView animateWithDuration:duration
-                          delay:0
-                        options:(animationCurve << 16)|UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [self.tableView setFrame:newContainerFrame];
-                         [self.composeBarView setFrame:newComposeBarViewFrame];
-                     }
-                     completion:NULL];
-}
+//- (void)keyboardWillToggle:(NSNotification *)notification {
+//    NSDictionary* userInfo = [notification userInfo];
+//    NSTimeInterval duration;
+//    UIViewAnimationCurve animationCurve;
+//    CGRect startFrame;
+//    CGRect endFrame;
+//    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+//    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey]    getValue:&animationCurve];
+//    [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]        getValue:&startFrame];
+//    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]          getValue:&endFrame];
+//
+//    NSInteger signCorrection = 1;
+//    if (startFrame.origin.y < 0 || startFrame.origin.x < 0 || endFrame.origin.y < 0 || endFrame.origin.x < 0)
+//        signCorrection = -1;
+//
+//    CGFloat widthChange  = (endFrame.origin.x - startFrame.origin.x) * signCorrection;
+//    CGFloat heightChange = (endFrame.origin.y - startFrame.origin.y) * signCorrection;
+//
+//    CGFloat sizeChange = UIInterfaceOrientationIsLandscape([self interfaceOrientation]) ? widthChange : heightChange;
+//    
+//    CGRect newContainerFrame = [self.tableView frame];
+//    newContainerFrame.size.height += sizeChange;
+//    
+//    CGRect newComposeBarViewFrame = [self.composeBarView frame];
+//    newComposeBarViewFrame.origin.y += sizeChange;
+//    
+//    [UIView animateWithDuration:duration
+//                          delay:0
+//                        options:(animationCurve << 16)|UIViewAnimationOptionBeginFromCurrentState
+//                     animations:^{
+//                         [self.tableView setFrame:newContainerFrame];
+//                         [self.composeBarView setFrame:newComposeBarViewFrame];
+//                     }
+//                     completion:NULL];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -223,30 +204,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - PHFComposeBarViewDelegate
-
-- (void)composeBarView:(PHFComposeBarView *)composeBarView
-   willChangeFromFrame:(CGRect)startFrame
-               toFrame:(CGRect)endFrame
-              duration:(NSTimeInterval)duration
-        animationCurve:(UIViewAnimationCurve)animationCurve
+- (void)sendMessage:(id)sender
 {
-
-}
-
-- (void)composeBarView:(PHFComposeBarView *)composeBarView
-    didChangeFromFrame:(CGRect)startFrame
-               toFrame:(CGRect)endFrame
-{
-
-}
-
-- (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
-    if (![composeBarView.textView.text isEqualToString:@""]) {
+    if (![self.composeTextField.text isEqualToString:@""]) {
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-        NSString *messageBody = composeBarView.textView.text;
+        NSString *messageBody = self.composeTextField.text;
         [body setStringValue:messageBody];
-         NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
+        NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
         [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
         [messageElement addAttributeWithName:@"to" stringValue:self.user.jidStr];
         [messageElement addChild:body];
@@ -258,10 +222,15 @@
         [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
     }
     
-    composeBarView.textView.text = @"";
+    self.composeTextField.text = @"";
+    self.sendButton.enabled = NO;
 }
 
-- (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
+- (IBAction)sendButtonPressed:(UIBarButtonItem *)sender {
+    [self sendMessage:sender];
+}
+
+- (IBAction)cameraButtonPressed:(UIBarButtonItem *)sender {
     NSLog(@"utitility button pressed");
 }
 
@@ -318,7 +287,7 @@
 }
 
 - (IBAction)userSwipedDownGesture:(UISwipeGestureRecognizer *)sender {
-    [self.composeBarView.textView resignFirstResponder];
+    [self.composeTextField resignFirstResponder];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -375,6 +344,61 @@
 {
     [self.tableView endUpdates];
     [self scrollToLastRowWithAnimation:YES];
+}
+
+#pragma mark - UITextFieldDelegate methods
+
+// Override to dynamically enable/disable the send button based on user typing
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSUInteger length = self.composeTextField.text.length - range.length + string.length;
+    if (length > 0) {
+        self.sendButton.enabled = YES;
+    }
+    else {
+        self.sendButton.enabled = NO;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self sendMessage:textField];
+    return YES;
+}
+
+#pragma mark - Toolbar animation helpers
+
+// Helper method for moving the toolbar frame based on user action
+- (void)moveToolBarUp:(BOOL)up forKeyboardNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get animation info from userInfo
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    CGRect keyboardFrame;
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+    
+    // Animate up or down
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    [self.toolBar setFrame:CGRectMake(self.toolBar.frame.origin.x, self.toolBar.frame.origin.y + (keyboardFrame.size.height * (up ? -1 : 1)), self.toolBar.frame.size.width, self.toolBar.frame.size.height)];
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    // move the toolbar frame up as keyboard animates into view
+    [self moveToolBarUp:YES forKeyboardNotification:notification];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    // move the toolbar frame down as keyboard animates into view
+    [self moveToolBarUp:NO forKeyboardNotification:notification];
 }
 
 @end
