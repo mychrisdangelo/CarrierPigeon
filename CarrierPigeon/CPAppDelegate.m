@@ -15,7 +15,8 @@
 #import "XMPPCapabilitiesCoreDataStorage.h"
 #import "KeychainItemWrapper.h"
 #import "Chat+Create.h"
-#import "TestFlight.h"
+#import "XMPPMessageArchiving.h"
+#import "XMPPMessageArchivingCoreDataStorage.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -34,6 +35,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) XMPPCapabilities *xmppCapabilities;
 @property (nonatomic, strong) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
 @property (nonatomic, strong) NSString *userPassword;
+@property (nonatomic, strong) XMPPMessageArchivingCoreDataStorage *xmppMessageArchivingStorage;
+@property (nonatomic, strong) XMPPMessageArchiving *xmppMessageArchive;
 
 @end
 
@@ -71,9 +74,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
-    [TestFlight takeOff:kTestFlightKey];
-    
     [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
+    
+    
+    [self testMessageArchiving];
+    [self testContactArchiving];
     
     return YES;
 }
@@ -212,6 +217,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	// There's a bunch more information in the XMPPReconnect header file.
 	
 	self.xmppReconnect = [[XMPPReconnect alloc] init];
+    
+    
+    // Setup Archiving
+    //
+    self.xmppMessageArchivingStorage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+    self.xmppMessageArchive = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:self.xmppMessageArchivingStorage];
+
+    [self.xmppMessageArchive setClientSideMessageArchivingOnly:NO];
+
+    [self.xmppMessageArchive activate:self.xmppStream];
+    [self.xmppMessageArchive  addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+
 	
 	// Setup roster
 	//
@@ -590,5 +608,66 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	}
 }
 
+#pragma mark - TestingMessageArchiving
+
+// http://stackoverflow.com/questions/8568910/storing-messages-using-xmppframework-for-ios
+-(void)printMessages:(NSMutableArray*)messages{
+    @autoreleasepool {
+        NSLog(@"**********************************");
+        NSLog(@"** Print Archived Messages Test **");
+        NSLog(@"**********************************");
+        for (XMPPMessageArchiving_Message_CoreDataObject *message in messages) {
+            NSLog(@"messageStr param is %@",message.messageStr);
+            NSXMLElement *element = [[NSXMLElement alloc] initWithXMLString:message.messageStr error:nil];
+            NSLog(@"to param is %@",[element attributeStringValueForName:@"to"]);
+            NSLog(@"NSCore object id param is %@",message.objectID);
+            NSLog(@"bareJid param is %@",message.bareJid);
+            NSLog(@"bareJidStr param is %@",message.bareJidStr);
+            NSLog(@"body param is %@",message.body);
+            NSLog(@"timestamp param is %@",message.timestamp);
+            NSLog(@"outgoing param is %d",[message.outgoing intValue]);
+        }
+        NSLog(@"**********************************");
+    }
+}
+
+-(void)printContacts:(NSMutableArray*)contacts{
+    @autoreleasepool {
+        NSLog(@"**********************************");
+        NSLog(@"** Print Archived Contacts Test **");
+        NSLog(@"**********************************");
+        for (XMPPMessageArchiving_Contact_CoreDataObject *contact in contacts) {
+            NSLog(@"bareJidstr %@", contact.bareJidStr);
+            NSLog(@"mostRecentMessageBody %@", contact.mostRecentMessageBody);
+        }
+        NSLog(@"**********************************");
+    }
+}
+
+-(void)testMessageArchiving{
+    XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+    NSManagedObjectContext *moc = [storage mainThreadManagedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Contact_CoreDataObject"
+                                                         inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:entityDescription];
+    NSError *error;
+    NSArray *messages = [moc executeFetchRequest:request error:&error];
+    
+    [self printContacts:[[NSMutableArray alloc]initWithArray:messages]];
+}
+
+-(void)testContactArchiving{
+    XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+    NSManagedObjectContext *moc = [storage mainThreadManagedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
+                                                         inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:entityDescription];
+    NSError *error;
+    NSArray *messages = [moc executeFetchRequest:request error:&error];
+    
+    [self printMessages:[[NSMutableArray alloc]initWithArray:messages]];
+}
 
 @end
