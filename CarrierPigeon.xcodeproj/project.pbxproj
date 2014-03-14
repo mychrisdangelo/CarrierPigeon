@@ -165,7 +165,6 @@
 		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
 		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
-		40D2C0A418C46F1D00A9E6FD /* PHFDelegateChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */; };
 		40F7BDBE18CAF0F500608B80 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F7BDB818CAF0F500608B80 /* libTestFlight.a */; };
 		40F7BDBF18CAF0F500608B80 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 40F7BDB918CAF0F500608B80 /* README.md */; };
 		40F7BDC018CAF0F500608B80 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 40F7BDBA18CAF0F500608B80 /* release_notes.md */; };
@@ -494,8 +493,6 @@
 		40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHelperFunctions.h; sourceTree = "<group>"; };
 		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
 		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
-		40D2C0A218C46F1D00A9E6FD /* PHFDelegateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFDelegateChain.h; sourceTree = "<group>"; };
-		40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFDelegateChain.m; sourceTree = "<group>"; };
 		40F7BDB818CAF0F500608B80 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		40F7BDB918CAF0F500608B80 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		40F7BDBA18CAF0F500608B80 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -1439,7 +1436,6 @@
 			isa = PBXGroup;
 			children = (
 				40F7BDB718CAF0F500608B80 /* TestFlightSDK3 */,
-				40D2C0A118C46F0800A9E6FD /* PHFDelegateChain */,
 				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
@@ -1503,15 +1499,6 @@
 				40265B9E18D376D8005A7D7A /* MessageView.m */,
 			);
 			name = Messages;
-			sourceTree = "<group>";
-		};
-		40D2C0A118C46F0800A9E6FD /* PHFDelegateChain */ = {
-			isa = PBXGroup;
-			children = (
-				40D2C0A218C46F1D00A9E6FD /* PHFDelegateChain.h */,
-				40D2C0A318C46F1D00A9E6FD /* PHFDelegateChain.m */,
-			);
-			name = PHFDelegateChain;
 			sourceTree = "<group>";
 		};
 		40F7BDB718CAF0F500608B80 /* TestFlightSDK3 */ = {
@@ -1636,7 +1623,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40D2C0A418C46F1D00A9E6FD /* PHFDelegateChain.m in Sources */,
 				40A995CB18C31E4800C23AB6 /* XMPPvCardTempEmail.m in Sources */,
 				40A995A018C31E4800C23AB6 /* XMPPCoreDataStorage.m in Sources */,
 				40A995A218C31E4800C23AB6 /* XMPPProcessOne.m in Sources */,
