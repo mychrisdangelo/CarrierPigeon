@@ -73,6 +73,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [TestFlight takeOff:kTestFlightKey];
     
+    [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
+    
     return YES;
 }
 
