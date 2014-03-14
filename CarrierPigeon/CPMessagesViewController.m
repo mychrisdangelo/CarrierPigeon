@@ -12,6 +12,7 @@
 #import "CPAppDelegate.h"
 #import "Chat+Create.h"
 #import "CPHelperFunctions.h"
+#import "MessageView.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
 
@@ -63,7 +64,7 @@
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -163,7 +164,9 @@
         numberOfRows = [sectionInfo numberOfObjects];
     }
     
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    if (numberOfRows != 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (void)dealloc {
@@ -312,8 +315,7 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-    [tableView beginUpdates];
+    [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
@@ -361,8 +363,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-    [tableView endUpdates];
+    [self.tableView endUpdates];
+    [self scrollToLastRow];
 }
 
 @end

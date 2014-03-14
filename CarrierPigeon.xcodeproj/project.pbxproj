@@ -49,6 +49,7 @@
 		400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */ = {isa = PBXBuildFile; fileRef = 400DC21518C2ECD000C806ED /* XMPPStringPrep.m */; };
 		400DC21D18C2ECF200C806ED /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 400DC21C18C2ECF200C806ED /* libresolv.dylib */; };
 		401B0C8718C4FFAA00EE43CA /* CPMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */; };
+		40265B9F18D376D8005A7D7A /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40265B9E18D376D8005A7D7A /* MessageView.m */; };
 		4032C55518BDAE0500E0CDD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55418BDAE0500E0CDD1 /* Foundation.framework */; };
 		4032C55718BDAE0500E0CDD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55618BDAE0500E0CDD1 /* CoreGraphics.framework */; };
 		4032C55918BDAE0500E0CDD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55818BDAE0500E0CDD1 /* UIKit.framework */; };
@@ -272,6 +273,8 @@
 		400DC21C18C2ECF200C806ED /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessagesViewController.h; sourceTree = "<group>"; };
 		401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessagesViewController.m; sourceTree = "<group>"; };
+		40265B9D18D376D8005A7D7A /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
+		40265B9E18D376D8005A7D7A /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
 		4032C55118BDAE0500E0CDD1 /* CarrierPigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarrierPigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4032C55418BDAE0500E0CDD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4032C55618BDAE0500E0CDD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1519,6 +1522,8 @@
 			children = (
 				401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */,
 				401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */,
+				40265B9D18D376D8005A7D7A /* MessageView.h */,
+				40265B9E18D376D8005A7D7A /* MessageView.m */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -1762,6 +1767,7 @@
 				40A995C418C31E4800C23AB6 /* XMPPvCardCoreDataStorage.m in Sources */,
 				40A995CE18C31E4800C23AB6 /* XMPPvCardTempTel.m in Sources */,
 				40A995D718C31E4800C23AB6 /* XMPPDateTimeProfiles.m in Sources */,
+				40265B9F18D376D8005A7D7A /* MessageView.m in Sources */,
 				400DC21A18C2ECD000C806ED /* XMPPSRVResolver.m in Sources */,
 				40A995E918C31E4800C23AB6 /* XMPPMessage+XEP_0184.m in Sources */,
 				40ACCC6B18C3254A00081B7F /* CPSignInViewController.m in Sources */,
