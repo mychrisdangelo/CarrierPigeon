@@ -179,9 +179,22 @@
     [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
     
-
-    
     self.title = self.user.displayName;
+    
+    [self scrollToLastRowInTableView:self.tableView];
+}
+
+- (void)scrollToLastRowInTableView:(UITableView *)tableView
+{
+    NSInteger numberOfRows = 0;
+    NSFetchedResultsController *fetchController = [self fetchedResultsControllerForTableView:tableView];
+    NSArray *sections = fetchController.sections;
+    if(sections.count > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:0];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
+    
+    [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:(numberOfRows-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 - (void)dealloc {
