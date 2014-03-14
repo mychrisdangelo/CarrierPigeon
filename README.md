@@ -10,4 +10,6 @@ Abdullah Al-Syed (aza2105), Chris D’Angelo (cd2665), Ifeoma Okereke (iro2103),
 Getting Started
 ===============
 
-To successully connect you will need to complete the fields left empty in Credentials.h.
+1. Install [cocoapods](http://cocoapods.org).
+2. Before opening the project from command line run `pod install`.
+3. Open the .xcworkspace file.
