@@ -364,13 +364,7 @@
                         <gestureRecognizers/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Messages" id="a9U-M1-OYI">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="w8l-gz-slX">
-                            <connections>
-                                <action selector="pressed:" destination="dAd-bt-sy6" id="aQV-MG-pHP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Messages" id="a9U-M1-OYI"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cameraButton" destination="OLp-ht-Mbt" id="zZj-ZM-oGd"/>

@@ -160,12 +160,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)pressed:(id)sender {
-    self.fetchedResultsController = nil;
-    [self.tableView reloadData];
-    self.toolBar.frame = CGRectMake(0, 150, 320, 44);
-//    [self scrollToLastRowWithAnimation:YES];
-}
 
 - (void)sendMessage:(id)sender
 {
@@ -191,6 +185,7 @@
 
 - (IBAction)sendButtonPressed:(UIBarButtonItem *)sender {
     [self sendMessage:sender];
+    [self.composeTextField resignFirstResponder];
 }
 
 - (IBAction)cameraButtonPressed:(UIBarButtonItem *)sender {
@@ -275,8 +270,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-//    [self.tableView endUpdates];
-//    [self scrollToLastRowWithAnimation:YES];
+    [self.tableView endUpdates];
+    [self scrollToLastRowWithAnimation:YES];
 }
 
 #pragma mark - UITextFieldDelegate methods
