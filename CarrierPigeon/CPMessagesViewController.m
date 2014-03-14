@@ -18,7 +18,7 @@
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UITextField *composeTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
@@ -106,14 +106,6 @@
     Chat *chat = [fetchedResultsController objectAtIndexPath:theIndexPath];
     MessageView *messageView = (MessageView *)[cell viewWithTag:MESSAGE_VIEW_TAG];
     messageView.chat = chat;
-    
-//    NSString *fromOrReceivedString = @"Received: ";
-//    if ([chat.fromJID isEqualToString:self.myJid]) {
-//        fromOrReceivedString = @"Sent: ";
-//    }
-//    
-//	theCell.textLabel.text = chat.messageBody;
-//    theCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@", fromOrReceivedString, [CPHelperFunctions dayLabelForMessage:chat.timeStamp]];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -163,46 +155,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-//- (void)keyboardWillToggle:(NSNotification *)notification {
-//    NSDictionary* userInfo = [notification userInfo];
-//    NSTimeInterval duration;
-//    UIViewAnimationCurve animationCurve;
-//    CGRect startFrame;
-//    CGRect endFrame;
-//    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-//    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey]    getValue:&animationCurve];
-//    [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]        getValue:&startFrame];
-//    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]          getValue:&endFrame];
-//
-//    NSInteger signCorrection = 1;
-//    if (startFrame.origin.y < 0 || startFrame.origin.x < 0 || endFrame.origin.y < 0 || endFrame.origin.x < 0)
-//        signCorrection = -1;
-//
-//    CGFloat widthChange  = (endFrame.origin.x - startFrame.origin.x) * signCorrection;
-//    CGFloat heightChange = (endFrame.origin.y - startFrame.origin.y) * signCorrection;
-//
-//    CGFloat sizeChange = UIInterfaceOrientationIsLandscape([self interfaceOrientation]) ? widthChange : heightChange;
-//    
-//    CGRect newContainerFrame = [self.tableView frame];
-//    newContainerFrame.size.height += sizeChange;
-//    
-//    CGRect newComposeBarViewFrame = [self.composeBarView frame];
-//    newComposeBarViewFrame.origin.y += sizeChange;
-//    
-//    [UIView animateWithDuration:duration
-//                          delay:0
-//                        options:(animationCurve << 16)|UIViewAnimationOptionBeginFromCurrentState
-//                     animations:^{
-//                         [self.tableView setFrame:newContainerFrame];
-//                         [self.composeBarView setFrame:newComposeBarViewFrame];
-//                     }
-//                     completion:NULL];
-//}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)pressed:(id)sender {
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
+    self.toolBar.frame = CGRectMake(0, 150, 320, 44);
+//    [self scrollToLastRowWithAnimation:YES];
 }
 
 - (void)sendMessage:(id)sender
@@ -313,8 +275,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
-    [self scrollToLastRowWithAnimation:YES];
+//    [self.tableView endUpdates];
+//    [self scrollToLastRowWithAnimation:YES];
 }
 
 #pragma mark - UITextFieldDelegate methods
