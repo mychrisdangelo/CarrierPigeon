@@ -21,7 +21,7 @@
     chat.isIncomingMessage = [NSNumber numberWithBool:![deviceUser isEqualToString:fromUser]];
     chat.isNew = [NSNumber numberWithBool:YES];
     chat.hasMedia = [NSNumber numberWithBool:NO];
-    
+
     chat.fromJID = fromUser;
     chat.toJID = toUser;
     

@@ -132,6 +132,7 @@
     
     self.title = self.user.displayName;
     
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.toolBar.frame.size.height, 0);
     [self scrollToLastRowWithAnimation:NO];
 }
 
@@ -217,7 +218,7 @@
         NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
         [messageElement addChild:status];
         [self.xmppStream sendElement:messageElement];
-        
+
         XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
         [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
     }
@@ -298,47 +299,17 @@
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
-  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex
-     forChangeType:(NSFetchedResultsChangeType)type
-{
-    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)theIndexPath
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-    
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeUpdate:
-            [self fetchedResultsController:controller configureCell:[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
-            break;
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
-
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
@@ -388,6 +359,11 @@
     [UIView setAnimationCurve:animationCurve];
     
     [self.toolBar setFrame:CGRectMake(self.toolBar.frame.origin.x, self.toolBar.frame.origin.y + (keyboardFrame.size.height * (up ? -1 : 1)), self.toolBar.frame.size.width, self.toolBar.frame.size.height)];
+    
+    CGRect newContainerFrame = [self.tableView frame];
+    newContainerFrame.size.height += self.toolBar.frame.size.height * (up ? -1 : 1);
+    self.tableView.frame = newContainerFrame;
+    
     [UIView commitAnimations];
 }
 
