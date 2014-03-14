@@ -14,16 +14,15 @@
 #import "Chat+Create.h"
 #import "CPHelperFunctions.h"
 #import "MessageView.h"
+#import <PHFComposeBarView.h>
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
-@property (weak, nonatomic) IBOutlet UITextField *composeTextField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSString *myJid;
+@property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
+@property (readonly, nonatomic) PHFComposeBarView *composeBarView;
 
 @end
 
@@ -32,6 +31,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize myJid = _myJid;
+@synthesize composeBarView = _composeBarView;
 
 - (NSString *)myJid
 {
@@ -124,7 +124,11 @@
     
     self.title = self.user.displayName;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.toolBar.frame.size.height, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.composeViewContainer.frame.size.height, 0);
+    [self.view addSubview:self.composeBarView];
+    [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
+    [self.composeViewContainer removeFromSuperview];
+    
     [self scrollToLastRowWithAnimation:NO];
 }
 
@@ -161,11 +165,41 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)sendMessage:(id)sender
+- (PHFComposeBarView *)composeBarView {
+    if (!_composeBarView) {
+        CGRect frame = self.composeViewContainer.frame;
+        _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
+        [_composeBarView setMaxLinesCount:5];
+        [_composeBarView setPlaceholder:@"Send a message"];
+        [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
+        [_composeBarView setDelegate:self];
+    }
+    
+    return _composeBarView;
+}
+
+#pragma mark - PHFComposeBarViewDelegate
+
+- (void)composeBarView:(PHFComposeBarView *)composeBarView
+   willChangeFromFrame:(CGRect)startFrame
+               toFrame:(CGRect)endFrame
+              duration:(NSTimeInterval)duration
+        animationCurve:(UIViewAnimationCurve)animationCurve
 {
-    if (![self.composeTextField.text isEqualToString:@""]) {
+    
+}
+
+- (void)composeBarView:(PHFComposeBarView *)composeBarView
+    didChangeFromFrame:(CGRect)startFrame
+               toFrame:(CGRect)endFrame
+{
+    
+}
+
+- (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
+    if (![composeBarView.textView.text isEqualToString:@""]) {
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-        NSString *messageBody = self.composeTextField.text;
+        NSString *messageBody = composeBarView.textView.text;
         [body setStringValue:messageBody];
         NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
         [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
@@ -174,21 +208,15 @@
         NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
         [messageElement addChild:status];
         [self.xmppStream sendElement:messageElement];
-
+        
         XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
         [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
     }
     
-    self.composeTextField.text = @"";
-    self.sendButton.enabled = NO;
+    composeBarView.textView.text = @"";
 }
 
-- (IBAction)sendButtonPressed:(UIBarButtonItem *)sender {
-    [self sendMessage:sender];
-    [self.composeTextField resignFirstResponder];
-}
-
-- (IBAction)cameraButtonPressed:(UIBarButtonItem *)sender {
+- (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
     NSLog(@"utitility button pressed");
 }
 
@@ -245,7 +273,7 @@
 }
 
 - (IBAction)userSwipedDownGesture:(UISwipeGestureRecognizer *)sender {
-    [self.composeTextField resignFirstResponder];
+    [self.composeBarView.textView resignFirstResponder];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -274,27 +302,6 @@
     [self scrollToLastRowWithAnimation:YES];
 }
 
-#pragma mark - UITextFieldDelegate methods
-
-// Override to dynamically enable/disable the send button based on user typing
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSUInteger length = self.composeTextField.text.length - range.length + string.length;
-    if (length > 0) {
-        self.sendButton.enabled = YES;
-    }
-    else {
-        self.sendButton.enabled = NO;
-    }
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self sendMessage:textField];
-    return YES;
-}
-
 #pragma mark - Toolbar animation helpers
 
 // Helper method for moving the toolbar frame based on user action
@@ -315,11 +322,13 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    [self.toolBar setFrame:CGRectMake(self.toolBar.frame.origin.x, self.toolBar.frame.origin.y + (keyboardFrame.size.height * (up ? -1 : 1)), self.toolBar.frame.size.width, self.toolBar.frame.size.height)];
+    [self.composeBarView setFrame:CGRectMake(self.composeBarView.frame.origin.x, self.composeBarView.frame.origin.y + (keyboardFrame.size.height * (up ? -1 : 1)), self.composeBarView.frame.size.width, self.composeBarView.frame.size.height)];
     
-    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, (up ? (self.toolBar.frame.size.height + keyboardFrame.size.height) : self.toolBar.frame.size.height), 0);
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, (up ? (self.composeBarView.frame.size.height + keyboardFrame.size.height) : self.composeBarView.frame.size.height), 0);
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
+    
+    if (up) [self scrollToLastRowWithAnimation:YES];
 
     [UIView commitAnimations];
 }

@@ -330,35 +330,20 @@
                                     <outletCollection property="gestureRecognizers" destination="dfz-AW-rhz" appends="YES" id="o3F-i4-qBx"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I0K-PY-cz3">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJe-JR-PsS">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem image="Camera" id="OLp-ht-Mbt">
-                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <action selector="cameraButtonPressed:" destination="dAd-bt-sy6" id="IjY-cq-v80"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" id="KC9-g7-haD">
-                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="rcY-OQ-v7T">
-                                            <rect key="frame" x="51" y="7" width="211" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="dAd-bt-sy6" id="hkR-9t-eta"/>
-                                            </connections>
-                                        </textField>
-                                    </barButtonItem>
-                                    <barButtonItem enabled="NO" title="Send" id="DZP-vm-MhG">
-                                        <color key="tintColor" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
-                                        <connections>
-                                            <action selector="sendButtonPressed:" destination="dAd-bt-sy6" id="6ks-fW-52q"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="placeholder view" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybf-yP-Dhj">
+                                        <rect key="frame" x="95" y="11" width="130" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.70980393890000004" green="0.058823533359999999" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -367,11 +352,8 @@
                     <navigationItem key="navigationItem" title="Messages" id="a9U-M1-OYI"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="cameraButton" destination="OLp-ht-Mbt" id="zZj-ZM-oGd"/>
-                        <outlet property="composeTextField" destination="rcY-OQ-v7T" id="7ZM-6w-5Bv"/>
-                        <outlet property="sendButton" destination="DZP-vm-MhG" id="czN-UJ-TvS"/>
+                        <outlet property="composeViewContainer" destination="XJe-JR-PsS" id="U0L-at-RP6"/>
                         <outlet property="tableView" destination="q2K-bi-tA2" id="AOt-OA-m4k"/>
-                        <outlet property="toolBar" destination="I0K-PY-cz3" id="hyl-Ls-vJH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6M-ii-5dV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -405,7 +387,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Camera" width="25" height="18"/>
         <image name="HomeIcon" width="24" height="24"/>
         <image name="SharingStats" width="26" height="23"/>
     </resources>
