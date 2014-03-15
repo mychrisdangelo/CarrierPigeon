@@ -68,6 +68,7 @@
     }
     
     self.status.text = statusString;
+    self.sent.text = @"todo";
     self.delivered.text = @"todo";
     self.received.text = @"todo";
     self.read.text = @"todo";
