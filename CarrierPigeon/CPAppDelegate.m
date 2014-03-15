@@ -17,6 +17,7 @@
 #import "Chat+Create.h"
 #import "XMPPMessageArchiving.h"
 #import "XMPPMessageArchivingCoreDataStorage.h"
+#import "CPContactsTableViewController.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -59,31 +60,46 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         // TODO
     } else {
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        CPSignInViewController *controller = (CPSignInViewController *)navigationController.topViewController;
+
         
-        // consider reorganizing assignments
-        controller.delegate = self;
-        controller.xmppStream = self.xmppStream;
-        controller.xmppRoster = self.xmppRoster;
-        [self.xmppStream addDelegate:controller delegateQueue:dispatch_get_main_queue()];
-        
-        if ([self userIsLoggedIn]) {
+        if (![self userHasLoggedInPreviously]) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+            CPSignInViewController *controller = (CPSignInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
+            self.window.rootViewController = controller;
+            
+            controller.delegate = self;
+            controller.xmppStream = self.xmppStream;
+            controller.xmppRoster = self.xmppRoster;
+            [self.xmppStream addDelegate:controller delegateQueue:dispatch_get_main_queue()];
+            
             [self connect];
-            controller.autoLoginHasBegun = YES;
+        } else {
+            // we are not in contacts view
+            [self connect];
+            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+            if ([tabBarController.viewControllers[0] isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nc = (UINavigationController *)tabBarController.viewControllers[0];
+                if ([nc.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
+                    CPContactsTableViewController *controller = (CPContactsTableViewController *)nc.viewControllers[0];
+                    controller.xmppStream = self.xmppStream;
+                    controller.xmppRoster = self.xmppRoster;
+                } else {
+                    NSLog(@"Error: unexpected initial controller");
+                }
+            } else {
+                NSLog(@"Error: unexpected initial controller");
+            }
         }
     }
     
     [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
-    
-    
-    [self testMessageArchiving];
-    [self testContactArchiving];
+    // [self testMessageArchiving];
+    // [self testContactArchiving];
     
     return YES;
 }
 
-- (BOOL)userIsLoggedIn
+- (BOOL)userHasLoggedInPreviously
 {
     NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     
