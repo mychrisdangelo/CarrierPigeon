@@ -53,6 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.usernameTextField setHidden:YES];
         [self.passwordTextField setHidden:YES];
         self.autoLoginHasBegun = NO;
+
     }
     
     if (self.userWantsToLogOut) {
