@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPStream.h"
+#import "Contact.h"
 
 @interface CPMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) XMPPUserCoreDataStorageObject *user;
+@property (nonatomic, strong) Contact *contact;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) XMPPStream *xmppStream;
 

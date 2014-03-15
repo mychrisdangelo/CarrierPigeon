@@ -171,8 +171,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         if ([segue.destinationViewController isMemberOfClass:[CPMessagesViewController class]]) {
             CPMessagesViewController *cpmtvc = (CPMessagesViewController *)segue.destinationViewController;
             NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            XMPPUserCoreDataStorageObject *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            cpmtvc.user = user;
+            Contact *contact = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            cpmtvc.contact = contact;
             cpmtvc.xmppStream = self.xmppStream;
         }
     }

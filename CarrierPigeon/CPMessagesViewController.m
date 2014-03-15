@@ -72,8 +72,8 @@
     
     NSMutableArray *predicateArray = [NSMutableArray array];
     
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.user.jidStr, self.myJid]];
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.myJid, self.user.jidStr]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.contact.jidStr, self.myJid]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.myJid, self.contact.jidStr]];
     NSPredicate *filterPredicate = nil;
     if (filterPredicate) {
         filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
@@ -122,7 +122,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.title = self.user.displayName;
+    self.title = self.contact.displayName;
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.composeViewContainer.frame.size.height, 0);
     [self.view addSubview:self.composeBarView];
@@ -218,14 +218,14 @@
         [body setStringValue:messageBody];
         NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
         [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
-        [messageElement addAttributeWithName:@"to" stringValue:self.user.jidStr];
+        [messageElement addAttributeWithName:@"to" stringValue:self.contact.jidStr];
         [messageElement addChild:body];
         NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
         [messageElement addChild:status];
         [self.xmppStream sendElement:messageElement];
         
         XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
-        [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.user.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
+        [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.contact.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
     }
     
     composeBarView.textView.text = @"";
