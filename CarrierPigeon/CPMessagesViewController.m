@@ -16,6 +16,7 @@
 #import "MessageView.h"
 #import <PHFComposeBarView.h>
 #import "CPMessenger.h"
+#import "CPMessageDetailTableViewController.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate>
 
@@ -164,6 +165,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowMessageDetail"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPMessageDetailTableViewController class]]) {
+            CPMessageDetailTableViewController *mdtvc = (CPMessageDetailTableViewController *)segue.destinationViewController;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+            mdtvc.chat = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        }
+    }
 }
 
 - (PHFComposeBarView *)composeBarView {

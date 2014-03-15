@@ -169,6 +169,7 @@
 		40FBDCEA18D3E68C00A4D174 /* Contact+AddRemove.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */; };
 		40FBDCED18D3F81E00A4D174 /* CPMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */; };
 		40FBDCF918D400BE00A4D174 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCF818D400BE00A4D174 /* Chat.m */; };
+		40FBDCFC18D40D6800A4D174 /* CPMessageDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */; };
 		65B0D01390104F4DB6C3936C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6186C0F89A479687742E4D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -501,6 +502,8 @@
 		40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessenger.m; sourceTree = "<group>"; };
 		40FBDCF718D400BE00A4D174 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
 		40FBDCF818D400BE00A4D174 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		40FBDCFA18D40D6800A4D174 /* CPMessageDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessageDetailTableViewController.h; sourceTree = "<group>"; };
+		40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessageDetailTableViewController.m; sourceTree = "<group>"; };
 		4D6186C0F89A479687742E4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D5B48F07F14553BF53FCF8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1504,6 +1507,8 @@
 				401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */,
 				40265B9D18D376D8005A7D7A /* MessageView.h */,
 				40265B9E18D376D8005A7D7A /* MessageView.m */,
+				40FBDCFA18D40D6800A4D174 /* CPMessageDetailTableViewController.h */,
+				40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -1565,7 +1570,7 @@
 		4032C54918BDAE0500E0CDD1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = CarrierPigeon;
+				CLASSPREFIX = CP;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = ColumbiaMobileComputing;
 				TargetAttributes = {
@@ -1743,6 +1748,7 @@
 				40A995F318C31E4800C23AB6 /* XMPPMessage+XEP_0224.m in Sources */,
 				400DC1BC18C2EB5600C806ED /* DDXMLElement.m in Sources */,
 				40A995B418C31E4800C23AB6 /* XMPPRoom.xcdatamodeld in Sources */,
+				40FBDCFC18D40D6800A4D174 /* CPMessageDetailTableViewController.m in Sources */,
 				403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */,
 				40A995D918C31E4800C23AB6 /* XMPPSoftwareVersion.m in Sources */,
 				40A995EE18C31E4800C23AB6 /* XMPPAutoTime.m in Sources */,
