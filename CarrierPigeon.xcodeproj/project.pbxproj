@@ -168,6 +168,7 @@
 		40F7BDC218CAF33500608B80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F7BDC118CAF33500608B80 /* libz.dylib */; };
 		40FBDCE718D3E53A00A4D174 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE618D3E53A00A4D174 /* Contact.m */; };
 		40FBDCEA18D3E68C00A4D174 /* Contact+AddRemove.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */; };
+		40FBDCED18D3F81E00A4D174 /* CPMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */; };
 		65B0D01390104F4DB6C3936C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6186C0F89A479687742E4D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -498,6 +499,8 @@
 		40FBDCE618D3E53A00A4D174 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		40FBDCE818D3E68C00A4D174 /* Contact+AddRemove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+AddRemove.h"; sourceTree = "<group>"; };
 		40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+AddRemove.m"; sourceTree = "<group>"; };
+		40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessenger.h; sourceTree = "<group>"; };
+		40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessenger.m; sourceTree = "<group>"; };
 		4D6186C0F89A479687742E4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D5B48F07F14553BF53FCF8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1495,6 +1498,8 @@
 		40D2C0A018C46D5800A9E6FD /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */,
+				40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */,
 				401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */,
 				401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */,
 				40265B9D18D376D8005A7D7A /* MessageView.h */,
@@ -1688,6 +1693,7 @@
 				40A995E718C31E4800C23AB6 /* XMPPMessage+XEP_0172.m in Sources */,
 				400DC19D18C2E9EA00C806ED /* DDAbstractDatabaseLogger.m in Sources */,
 				4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */,
+				40FBDCED18D3F81E00A4D174 /* CPMessenger.m in Sources */,
 				40A995D818C31E4800C23AB6 /* XMPPMessage+XEP_0085.m in Sources */,
 				40FBDCE718D3E53A00A4D174 /* Contact.m in Sources */,
 				400DC1A218C2E9EA00C806ED /* ContextFilterLogFormatter.m in Sources */,

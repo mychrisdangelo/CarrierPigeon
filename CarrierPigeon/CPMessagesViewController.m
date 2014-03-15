@@ -15,6 +15,7 @@
 #import "CPHelperFunctions.h"
 #import "MessageView.h"
 #import <PHFComposeBarView.h>
+#import "CPMessenger.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate>
 
@@ -213,19 +214,13 @@
 
 - (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
     if (![composeBarView.textView.text isEqualToString:@""]) {
-        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-        NSString *messageBody = composeBarView.textView.text;
-        [body setStringValue:messageBody];
-        NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
-        [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
-        [messageElement addAttributeWithName:@"to" stringValue:self.contact.jidStr];
-        [messageElement addChild:body];
-        NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
-        [messageElement addChild:status];
-        [self.xmppStream sendElement:messageElement];
         
-        XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
-        [Chat addChatWithXMPPMessage:message fromUser:self.myJid toUser:self.contact.jidStr deviceUser:self.myJid inManagedObjectContext:self.managedObjectContext];
+        [CPMessenger sendMessage:self.composeBarView.text
+                            from:self.myJid
+                              to:self.contact.jidStr
+                      deviceUser:self.myJid
+                    onXMPPStream:self.xmppStream
+          inManagedObjectContext:self.managedObjectContext];
     }
     
     composeBarView.textView.text = @"";
