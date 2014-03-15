@@ -16,6 +16,7 @@
 #import "XMPPUserCoreDataStorageObject.h"
 #import "CPAppDelegate.h"
 #import "CPMessagesViewController.h"
+#import "Contact+AddRemove.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -27,6 +28,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -35,19 +37,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
 
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext == nil) {
+        _managedObjectContext = ((CPAppDelegate *)([[UIApplication sharedApplication] delegate])).managedObjectContext;
+    }
+    
+    return _managedObjectContext;
+}
+
 - (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
 {
-    CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *moc = [appDelegate managedObjectContext_roster];
+    NSManagedObjectContext *moc = self.managedObjectContext;
     NSPredicate *filterPredicate;
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
                                               inManagedObjectContext:moc];
     
-    NSSortDescriptor *sd1 = [[NSSortDescriptor alloc] initWithKey:@"sectionNum" ascending:YES];
-    NSSortDescriptor *sd2 = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
+    NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
     
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sd1, sd2, nil];
+    NSArray *sortDescriptors = @[s];
     
     NSMutableArray *predicateArray = [NSMutableArray array];
     if (searchString.length) {
@@ -69,7 +78,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                     managedObjectContext:moc
-                                                                      sectionNameKeyPath:@"sectionNum"
+                                                                      sectionNameKeyPath:nil
                                                                                cacheName:nil];
     
     
@@ -116,12 +125,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+// TODO: presently only an appending cache!
+- (void)refreshContactsCache
+{
+    CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext_roster];
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XMPPUserCoreDataStorageObject"];
+    NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"jidStr" ascending:YES];
+    [request setSortDescriptors:@[s]];
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    
+    for (XMPPUserCoreDataStorageObject *each in matches) {
+        [Contact addRemoveContactFromXMPPUserCoreDataStorageObject:each forCurrentUser:myJID inManagedObjectContext:self.managedObjectContext removeContact:NO];
+    }
+    
+    [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,13 +183,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return tableView == self.tableView ? self.fetchedResultsController : self.searchFetchedResultsController;
 }
 
-- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)theCell atIndexPath:(NSIndexPath *)theIndexPath
+- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
 {
-    XMPPUserCoreDataStorageObject *user = [fetchedResultsController objectAtIndexPath:theIndexPath];
+    Contact *contact = [fetchedResultsController objectAtIndexPath:theIndexPath];
 
 	
-	theCell.textLabel.text = user.displayName;
-	[self configurePhotoForCell:theCell user:user];
+	cell.textLabel.text = contact.displayName;
+	[self configurePhotoForCell:cell contact:contact];
 }
 
 #pragma mark - CPAddFriendViewControllerDelegate
@@ -214,24 +242,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	return cell;
 }
 
-- (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user
+- (void)configurePhotoForCell:(UITableViewCell *)cell contact:(Contact *)contact
 {
 	// Our xmppRosterStorage will cache photos as they arrive from the xmppvCardAvatarModule.
 	// We only need to ask the avatar module for a photo, if the roster doesn't have it.
 	
-	if (user.photo != nil)
+	if (contact.photo != nil)
 	{
-		cell.imageView.image = user.photo;
+		cell.imageView.image = contact.photo;
 	}
 	else
 	{
-        CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSData *photoData = [appDelegate.xmppvCardAvatarModule photoDataForJID:user.jid];
-        
-		if (photoData != nil)
-			cell.imageView.image = [UIImage imageWithData:photoData];
-		else
-			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
+		NSData *photoData = contact.photo;
+        cell.imageView.image = [UIImage imageWithData:photoData];
 	}
 }
 
@@ -241,57 +264,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.searchFetchedResultsController.delegate = nil;
     self.searchFetchedResultsController = nil;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 #pragma mark - UISearchDisplayDelegate
 
@@ -377,6 +349,5 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
     [tableView endUpdates];
 }
-
 
 @end

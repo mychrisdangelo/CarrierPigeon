@@ -166,6 +166,8 @@
 		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
 		40F7BDC218CAF33500608B80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F7BDC118CAF33500608B80 /* libz.dylib */; };
+		40FBDCE718D3E53A00A4D174 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE618D3E53A00A4D174 /* Contact.m */; };
+		40FBDCEA18D3E68C00A4D174 /* Contact+AddRemove.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */; };
 		65B0D01390104F4DB6C3936C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6186C0F89A479687742E4D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -492,6 +494,10 @@
 		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
 		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		40F7BDC118CAF33500608B80 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		40FBDCE518D3E53A00A4D174 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		40FBDCE618D3E53A00A4D174 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		40FBDCE818D3E68C00A4D174 /* Contact+AddRemove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+AddRemove.h"; sourceTree = "<group>"; };
+		40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+AddRemove.m"; sourceTree = "<group>"; };
 		4D6186C0F89A479687742E4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D5B48F07F14553BF53FCF8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1461,6 +1467,7 @@
 			children = (
 				4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */,
 				40D2C08318C45E1100A9E6FD /* Chat */,
+				40FBDCDE18D3E3DB00A4D174 /* Contact */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -1494,6 +1501,17 @@
 				40265B9E18D376D8005A7D7A /* MessageView.m */,
 			);
 			name = Messages;
+			sourceTree = "<group>";
+		};
+		40FBDCDE18D3E3DB00A4D174 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				40FBDCE518D3E53A00A4D174 /* Contact.h */,
+				40FBDCE618D3E53A00A4D174 /* Contact.m */,
+				40FBDCE818D3E68C00A4D174 /* Contact+AddRemove.h */,
+				40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */,
+			);
+			name = Contact;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1664,12 +1682,14 @@
 				40A995C518C31E4800C23AB6 /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				40A995D318C31E4800C23AB6 /* TURNSocket.m in Sources */,
 				400DC19F18C2E9EA00C806ED /* DDFileLogger.m in Sources */,
+				40FBDCEA18D3E68C00A4D174 /* Contact+AddRemove.m in Sources */,
 				40A995A718C31E4800C23AB6 /* XMPPRosterCoreDataStorage.m in Sources */,
 				40A995F618C31E4800C23AB6 /* XMPPMessage+XEP_0333.m in Sources */,
 				40A995E718C31E4800C23AB6 /* XMPPMessage+XEP_0172.m in Sources */,
 				400DC19D18C2E9EA00C806ED /* DDAbstractDatabaseLogger.m in Sources */,
 				4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */,
 				40A995D818C31E4800C23AB6 /* XMPPMessage+XEP_0085.m in Sources */,
+				40FBDCE718D3E53A00A4D174 /* Contact.m in Sources */,
 				400DC1A218C2E9EA00C806ED /* ContextFilterLogFormatter.m in Sources */,
 				40A995E418C31E4800C23AB6 /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */,

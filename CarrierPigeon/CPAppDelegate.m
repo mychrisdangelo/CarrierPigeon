@@ -64,15 +64,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         if (![self userHasLoggedInPreviously]) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-            CPSignInViewController *controller = (CPSignInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
-            self.window.rootViewController = controller;
+            UINavigationController *nc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
+            self.window.rootViewController = nc;
             
-            controller.delegate = self;
-            controller.xmppStream = self.xmppStream;
-            controller.xmppRoster = self.xmppRoster;
-            [self.xmppStream addDelegate:controller delegateQueue:dispatch_get_main_queue()];
-            
-            [self connect];
+            if ([nc.viewControllers[0] isMemberOfClass:[CPSignInViewController class]]) {
+                CPSignInViewController *sivc = (CPSignInViewController *)nc.viewControllers[0];
+                sivc.delegate = self;
+                sivc.xmppStream = self.xmppStream;
+                sivc.xmppRoster = self.xmppRoster;
+                [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
+                
+                [self connect];
+            } else {
+                NSLog(@"Error: unexpected initial controller");
+            }
         } else {
             // we are not in contacts view
             [self connect];
