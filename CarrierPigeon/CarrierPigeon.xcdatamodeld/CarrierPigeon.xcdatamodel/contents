@@ -9,7 +9,7 @@
         <attribute name="localFileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mediaType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageBody" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="messageStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="toJID" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,7 +21,7 @@
         <attribute name="photo" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="Chat" positionX="0" positionY="0" width="128" height="223"/>
         <element name="Contact" positionX="0" positionY="90" width="128" height="103"/>
     </elements>
 </model>

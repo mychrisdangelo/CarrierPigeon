@@ -213,14 +213,14 @@
 }
 
 - (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
-    if (![composeBarView.textView.text isEqualToString:@""]) {
-        
+    if (![composeBarView.textView.text isEqualToString:@""]) {        
         [CPMessenger sendMessage:self.composeBarView.text
                             from:self.myJid
                               to:self.contact.jidStr
                       deviceUser:self.myJid
                     onXMPPStream:self.xmppStream
           inManagedObjectContext:self.managedObjectContext];
+        
     }
     
     composeBarView.textView.text = @"";

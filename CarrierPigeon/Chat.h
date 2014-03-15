@@ -2,7 +2,7 @@
 //  Chat.h
 //  CarrierPigeon
 //
-//  Created by Chris D'Angelo on 3/3/14.
+//  Created by Chris D'Angelo on 3/14/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
 
@@ -20,9 +20,9 @@
 @property (nonatomic, retain) NSString * localFileName;
 @property (nonatomic, retain) NSString * mediaType;
 @property (nonatomic, retain) NSString * messageBody;
-@property (nonatomic, retain) NSDate * timeStamp;
-@property (nonatomic, retain) NSString * messageStatus;
+@property (nonatomic, retain) NSNumber * messageStatus;
 @property (nonatomic, retain) NSString * mimeType;
+@property (nonatomic, retain) NSDate * timeStamp;
 @property (nonatomic, retain) NSString * toJID;
 
 @end

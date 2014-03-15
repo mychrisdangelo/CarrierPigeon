@@ -10,8 +10,21 @@
 #import "XMPPMessage.h"
 #import "XMPPUserCoreDataStorageObject.h"
 
+typedef NS_ENUM(NSInteger, CPMessageStatus) {
+    CPChatSendStutusReceivedMessage,
+    CPChatSendStatusSending,
+    CPChatSendStatusSent,
+    CPChatStatusOfflinePending,
+    CPChatStatusRelaying
+};
+
 @interface Chat (Create)
 
-+ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message fromUser:(NSString *)fromUser toUser:(NSString *)toUser deviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message
+                        fromUser:(NSString *)fromUser
+                          toUser:(NSString *)toUser
+                      deviceUser:(NSString *)deviceUser
+          inManagedObjectContext:(NSManagedObjectContext *)context
+                  withMessageStatus:(CPMessageStatus)sendStatus;
 
 @end

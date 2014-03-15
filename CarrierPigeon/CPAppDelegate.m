@@ -586,7 +586,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                             managedObjectContext:[self managedObjectContext_roster]];
         
         NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext];
+        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext withMessageStatus:CPChatSendStutusReceivedMessage];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
 		NSString *displayName = [user displayName];

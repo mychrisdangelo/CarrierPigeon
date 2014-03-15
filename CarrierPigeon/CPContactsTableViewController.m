@@ -37,6 +37,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
+}
+
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (_managedObjectContext == nil) {
@@ -55,10 +62,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                               inManagedObjectContext:moc];
     
     NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
-    
     NSArray *sortDescriptors = @[s];
     
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     NSMutableArray *predicateArray = [NSMutableArray array];
+    filterPredicate = [NSPredicate predicateWithFormat:@"contactOwnerJidStr = %@", myJID];
     if (searchString.length) {
         // your search predicate(s) are added to this array
         [predicateArray addObject:[NSPredicate predicateWithFormat:@"displayName CONTAINS[cd] %@", searchString]];

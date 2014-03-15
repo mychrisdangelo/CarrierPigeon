@@ -26,10 +26,17 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     [messageElement addChild:body];
     NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
     [messageElement addChild:status];
-    [xmppStream sendElement:messageElement];
     
+    CPMessageStatus sendStatus;
+    if ([xmppStream isConnected]) {
+        sendStatus = CPChatSendStatusSending;
+        [xmppStream sendElement:messageElement];
+    } else {
+        sendStatus = CPChatStatusOfflinePending;
+    }
+        
     XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
-    [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context];
+    [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
 }
-
+    
 @end
