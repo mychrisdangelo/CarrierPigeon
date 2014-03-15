@@ -62,8 +62,11 @@
         case CPChatStatusRelaying:
             statusString = @"relaying";
             break;
+        case CPChatStatusRelayed:
+            statusString = @"relayed";
+            break;
         default:
-            statusString = @"Unknown";
+            statusString = @"unknown";
             break;
     }
     

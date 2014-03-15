@@ -18,4 +18,6 @@
       onXMPPStream:(XMPPStream *)xmppStream
 inManagedObjectContext:(NSManagedObjectContext *)context;
 
++ (void)sendPendingMessagesWithStream:(XMPPStream *)xmppStream;
+
 @end

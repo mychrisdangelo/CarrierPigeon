@@ -17,6 +17,7 @@
 #import "CPAppDelegate.h"
 #import "CPMessagesViewController.h"
 #import "Contact+AddRemove.h"
+#import "CPMessenger.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -29,6 +30,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic) int servicesRequiringRefreshing;
 
 @end
 
@@ -136,11 +138,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
 }
 
-// TODO: presently only an appending cache!
+- (void)endRefreshing
+{
+    if (--self.servicesRequiringRefreshing == 0) {
+        [self.refreshControl endRefreshing];
+    }
+}
+
+// TODO: this should happen whenever user goes online but for now it's manual
+- (void)sendUnsentMessages
+{
+    self.servicesRequiringRefreshing++;
+    
+    [CPMessenger sendPendingMessagesWithStream:self.xmppStream];
+    
+    [self endRefreshing];
+}
+
+// TODO: presently only an appending cache
 - (void)refreshContactsCache
 {
+    self.servicesRequiringRefreshing++;
+    
     CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext_roster];
     
@@ -157,7 +179,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [Contact addRemoveContactFromXMPPUserCoreDataStorageObject:each forCurrentUser:myJID inManagedObjectContext:self.managedObjectContext removeContact:NO];
     }
     
-    [self.refreshControl endRefreshing];
+    [self endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning

@@ -38,4 +38,18 @@
     return chat;
 }
 
++ (Chat *)updateChat:(Chat *)chat withStatus:(CPMessageStatus)messageStatus inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    chat.messageStatus = [NSNumber numberWithInteger:messageStatus];;
+    NSError *error = nil;
+    
+    if (![context save:&error]) {
+        NSLog(@"error saving");
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNewMessageReceivedNotificationIdentifier object:self userInfo:nil];
+    
+    return chat;
+}
+
 @end

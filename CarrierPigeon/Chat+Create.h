@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger, CPMessageStatus) {
     CPChatSendStatusSending,
     CPChatSendStatusSent,
     CPChatStatusOfflinePending,
-    CPChatStatusRelaying
+    CPChatStatusRelaying,
+    CPChatStatusRelayed
 };
 
 @interface Chat (Create)
@@ -26,5 +27,7 @@ typedef NS_ENUM(NSInteger, CPMessageStatus) {
                       deviceUser:(NSString *)deviceUser
           inManagedObjectContext:(NSManagedObjectContext *)context
                   withMessageStatus:(CPMessageStatus)sendStatus;
+
++ (Chat *)updateChat:(Chat *)chat withStatus:(CPMessageStatus)messageStatus inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
