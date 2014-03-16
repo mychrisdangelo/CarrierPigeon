@@ -295,6 +295,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.searchFetchedResultsController = nil;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id nc = [self.splitViewController.viewControllers lastObject];
+    id mvc = [nc topViewController];
+    if ([mvc isKindOfClass:[CPMessagesViewController class]]) {
+        Contact *contact = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [mvc setContact:contact];
+    }
+}
+
 #pragma mark - UISearchDisplayDelegate
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView;
