@@ -58,7 +58,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     UIStoryboard *storyboard;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
+        storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
 //        if (![self userHasLoggedInPreviously]) {
 //            CPSignInViewController *sivc = (CPSignInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
 //            self.window.rootViewController = sivc;
@@ -86,7 +86,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 NSLog(@"Error: unexpected initial controller");
             }
         } else {
-            // we are not in contacts view
+            // we are in contacts view
             [self connect];
             UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
             if ([tabBarController.viewControllers[0] isKindOfClass:[UINavigationController class]]) {
