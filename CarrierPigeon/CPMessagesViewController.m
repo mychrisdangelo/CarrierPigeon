@@ -18,7 +18,7 @@
 #import "CPMessenger.h"
 #import "CPMessageDetailTableViewController.h"
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate, UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -150,6 +150,8 @@
     [self.view addSubview:self.composeBarView];
     [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
+    
+    self.splitViewController.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -258,6 +260,12 @@
 
 - (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
     NSLog(@"utitility button pressed");
+}
+
+#pragma mark - UISplitViewController
+
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation{
+    return NO;
 }
 
 #pragma mark - TableViewDataSource
