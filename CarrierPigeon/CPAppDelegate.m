@@ -56,14 +56,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [self setupStream];
     
-    // Override point for customization after application launch.
+    UIStoryboard *storyboard;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        // TODO
+//        storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
+//        if (![self userHasLoggedInPreviously]) {
+//            CPSignInViewController *sivc = (CPSignInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
+//            self.window.rootViewController = sivc;
+//            sivc.delegate = self;
+//            sivc.xmppStream = self.xmppStream;
+//            sivc.xmppRoster = self.xmppRoster;
+//            [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
+//            [self connect];
+//        }
     } else {
-
-        
+        storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
         if (![self userHasLoggedInPreviously]) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
             UINavigationController *nc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
             self.window.rootViewController = nc;
             
@@ -97,6 +104,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
+    
+    
     [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
     // [self testMessageArchiving];
     // [self testContactArchiving];
@@ -106,13 +115,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (BOOL)userHasLoggedInPreviously
 {
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    
-    if (myJID) {
-        return YES;
-    }
-    
-    return NO;
+    return [[[NSUserDefaults standardUserDefaults] stringForKey:kUserHasConnectedPreviously] boolValue];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -545,6 +548,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	
 	self.isXmppConnected = YES;
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kUserHasConnectedPreviously];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	NSError *error = nil;
 	

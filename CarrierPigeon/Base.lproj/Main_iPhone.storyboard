@@ -69,6 +69,20 @@
                                 <color key="tintColor" red="0.87450987099999999" green="0.019607843829999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="color" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6fb-rS-dWc">
+                                <rect key="frame" x="130" y="274" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="diagnosticEasySwitchChanged:" destination="smd-CZ-2SU" eventType="valueChanged" id="0Tl-gB-RiH"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto Login User Specified in Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpm-9N-oUZ">
+                                <rect key="frame" x="28" y="313" width="265" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -76,6 +90,7 @@
                     <navigationItem key="navigationItem" title="Sign In" id="jew-DP-2ep"/>
                     <connections>
                         <outlet property="activityView" destination="k1E-mb-0jD" id="7xn-Mx-voa"/>
+                        <outlet property="diagnosticEasySwitch" destination="6fb-rS-dWc" id="Uxy-Wk-uwF"/>
                         <outlet property="passwordTextField" destination="QZr-Ia-aj8" id="b1e-HI-7hu"/>
                         <outlet property="signInButton" destination="rxV-cZ-4KL" id="TOY-cn-iJd"/>
                         <outlet property="usernameTextField" destination="cfw-bm-svl" id="sgS-PB-Z0h"/>
@@ -662,6 +677,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="djk-GV-hHB"/>
+        <segue reference="hnX-2W-MxQ"/>
     </inferredMetricsTieBreakers>
 </document>

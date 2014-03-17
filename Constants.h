@@ -13,6 +13,7 @@
 #define kXMPPmyJID @"kXMPPmyJID"
 #define kXMPPmyPassword @"kXMPPmyPassword"
 #define kKeyChainItemWrapperPasswordIdentifer @"kXMPPmyPasswordKeychain"
+#define kUserHasConnectedPreviously @"kUserHasConnectedPreviously"
 
 // notification identifiers
 #define kNewMessageReceivedNotificationIdentifier @"kNewMessageReceivedNotificationIdentifier"
