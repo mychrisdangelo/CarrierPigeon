@@ -261,6 +261,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="qT1-y4-jez" id="HAs-7D-k7O"/>
+                                    <outlet property="delegate" destination="qT1-y4-jez" id="6pw-pg-vNm"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5HO-ns-clT">
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
@@ -281,6 +285,10 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Messages" id="0mj-0y-imc"/>
+                    <connections>
+                        <outlet property="composeViewContainer" destination="5HO-ns-clT" id="jxo-dX-p5g"/>
+                        <outlet property="tableView" destination="Fkc-BG-3D5" id="Qjz-0O-QsM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="quc-xZ-7Rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

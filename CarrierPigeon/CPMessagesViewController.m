@@ -136,7 +136,7 @@
 - (void)loadMessages
 {
     [self.tableView reloadData];
-    [self scrollToLastRowWithAnimation:YES];
+//    [self scrollToLastRowWithAnimation:YES];
 }
 
 - (void)viewDidLoad
