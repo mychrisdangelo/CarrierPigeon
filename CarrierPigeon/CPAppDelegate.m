@@ -18,6 +18,7 @@
 #import "XMPPMessageArchiving.h"
 #import "XMPPMessageArchivingCoreDataStorage.h"
 #import "CPContactsTableViewController.h"
+#import <HockeySDK/HockeySDK.h>
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -118,7 +119,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
-    
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"b59fa6550fa8db450f5b3de968c6a4bd"];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+
     
     [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
     // [self testMessageArchiving];
