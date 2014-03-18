@@ -65,6 +65,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.usernameTextField becomeFirstResponder];
         self.userWantsToLogOut = NO;
         
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         // Reorganize this code. should not assign own delegate!
         CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
         self.delegate = delegate;

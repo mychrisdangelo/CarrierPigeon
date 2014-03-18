@@ -140,25 +140,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
     
-    [self showSignInNowIfNecessary];
-    
+    if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];    
 }
 
-- (void)showSignInNowIfNecessary
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (![delegate userHasLoggedInPreviously]) {
-            [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
-
-        } else {
-            [delegate connect];
-        }
-    } else {
-        // we're in the iPhone and launching Signin has been taken care of by CPAppDelegate
-    }
-
-}
+//- (void)showSignInNowIfNecessary
+//{
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+//        if (![delegate userHasLoggedInPreviously]) {
+//            [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+//
+//        } else {
+//            [delegate connect];
+//        }
+//    } else {
+//        // we're in the iPhone and launching Signin has been taken care of by CPAppDelegate
+//    }
+//
+//}
 
 - (void)endRefreshing
 {
@@ -337,6 +336,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([mvc isKindOfClass:[CPMessagesViewController class]]) {
         Contact *contact = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [mvc setContact:contact];
+        [mvc setXmppStream:self.xmppStream];
     }
 }
 

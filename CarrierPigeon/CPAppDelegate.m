@@ -56,9 +56,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [self setupStream];
     
-   
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        // launching of connection and sign-in view will be taken care of by CPContactsViewController
+        UISplitViewController *splitViewcontroller = (UISplitViewController *)self.window.rootViewController;
+        if ([splitViewcontroller.viewControllers[0] isKindOfClass:[UITabBarController class]]) {
+            UITabBarController *tabBarController = (UITabBarController *)splitViewcontroller.viewControllers[0];
+            if ([tabBarController.viewControllers[0] isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nc = (UINavigationController *)tabBarController.viewControllers[0];
+                if ([nc.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
+                    CPContactsTableViewController *controller = (CPContactsTableViewController *)nc.viewControllers[0];
+                    controller.xmppStream = self.xmppStream;
+                    controller.xmppRoster = self.xmppRoster;
+                    if (![self userHasLoggedInPreviously]) {
+                        controller.showPadSignInNow = YES;
+                    } else {
+                        controller.showPadSignInNow = NO;
+                        [self connect];
+                    }
+                } else {
+                    NSLog(@"Error: unexpected initial controller");
+                }
+            } else {
+                NSLog(@"Error: unexpected initial controller");
+            }
+        } else {
+            NSLog(@"Error: unexpected initial controller");
+        }
     } else {
         UIStoryboard *storyboard;
         storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
@@ -540,9 +562,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	
 	self.isXmppConnected = YES;
-    
-    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kUserHasConnectedPreviously];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	NSError *error = nil;
 	
@@ -555,6 +574,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kUserHasConnectedPreviously];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[self goOnline];
 }

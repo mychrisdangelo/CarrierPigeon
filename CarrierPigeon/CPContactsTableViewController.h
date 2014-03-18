@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
+@property (nonatomic) BOOL showPadSignInNow;
 
 @end

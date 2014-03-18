@@ -42,7 +42,7 @@
         _contact = contact;
     }
     
-    self.title = self.contact.displayName;
+    self.title = _contact.displayName;
     if (self.view.window) {
         [self loadMessages];
     }
@@ -135,8 +135,9 @@
 
 - (void)loadMessages
 {
+    self.fetchedResultsController = nil; // force reload
     [self.tableView reloadData];
-//    [self scrollToLastRowWithAnimation:YES];
+    [self scrollToLastRowWithAnimation:YES];
 }
 
 - (void)viewDidLoad
