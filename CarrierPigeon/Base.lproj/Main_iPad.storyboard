@@ -54,47 +54,40 @@
                                 <color key="tintColor" red="0.87450987099999999" green="0.019607843829999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="color" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNv-14-8fp">
-                                <rect key="frame" x="360" y="280" width="51" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4Q-o1-vZc">
+                                <rect key="frame" x="308" y="291" width="152" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Auto-Login for Testing">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="diagnosticEasySwitchChanged:" destination="1fi-uN-xbQ" eventType="valueChanged" id="K9n-Au-nzY"/>
+                                    <action selector="autoLoginButtonPressed:" destination="1fi-uN-xbQ" eventType="touchUpInside" id="BBy-TR-ita"/>
                                 </connections>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Login User Specified in Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abv-uQ-QBb">
-                                <rect key="frame" x="252" y="319" width="265" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="6dy-ck-PqJ" secondAttribute="leading" constant="20" symbolic="YES" id="05P-hb-MCn"/>
-                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="8" symbolic="YES" id="6YG-zn-LVh"/>
-                            <constraint firstItem="NAr-zB-uK2" firstAttribute="baseline" secondItem="beM-dZ-YUJ" secondAttribute="baseline" id="8I1-lm-a3v"/>
-                            <constraint firstItem="xNv-14-8fp" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="A7C-cP-rkP"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="Bkk-wg-TnV"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="leading" secondItem="beM-dZ-YUJ" secondAttribute="leading" id="JjP-4n-5N5"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" id="Qr0-RJ-Z8Q"/>
-                            <constraint firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" constant="20" symbolic="YES" id="Syd-cq-VBr"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="leading" secondItem="Mdh-qL-mmF" secondAttribute="leading" id="VCj-b5-ytc"/>
-                            <constraint firstItem="xNv-14-8fp" firstAttribute="centerX" secondItem="Abv-uQ-QBb" secondAttribute="centerX" id="WMF-cK-s9J"/>
-                            <constraint firstItem="Abv-uQ-QBb" firstAttribute="top" secondItem="xNv-14-8fp" secondAttribute="bottom" constant="8" symbolic="YES" id="YHo-yJ-PJO"/>
-                            <constraint firstItem="v0J-0t-2WM" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="59" id="YbR-H3-ZG6"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="top" secondItem="Mdh-qL-mmF" secondAttribute="bottom" constant="8" symbolic="YES" id="fet-CL-hdf"/>
-                            <constraint firstItem="xNv-14-8fp" firstAttribute="top" secondItem="v0J-0t-2WM" secondAttribute="bottom" constant="8" symbolic="YES" id="jx3-4D-jwr"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="NAr-zB-uK2" secondAttribute="trailing" id="r1h-XN-UeK"/>
-                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="top" secondItem="Ybd-QK-UoF" secondAttribute="bottom" constant="108" id="yKX-6G-vj6"/>
+                            <constraint firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" constant="20" symbolic="YES" id="Fyq-a6-jJg"/>
+                            <constraint firstItem="NAr-zB-uK2" firstAttribute="baseline" secondItem="beM-dZ-YUJ" secondAttribute="baseline" id="G1L-QV-s5e"/>
+                            <constraint firstItem="U4Q-o1-vZc" firstAttribute="top" secondItem="v0J-0t-2WM" secondAttribute="bottom" constant="19" id="I6D-9f-U2n"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="Qun-be-GcZ"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" id="Tu1-kO-ole"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="NAr-zB-uK2" secondAttribute="trailing" id="ZXf-fu-Bzr"/>
+                            <constraint firstItem="U4Q-o1-vZc" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="cJu-KB-NMy"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="top" secondItem="Mdh-qL-mmF" secondAttribute="bottom" constant="8" symbolic="YES" id="cSi-7R-u6H"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="gzr-Tk-Q9a"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="t8d-od-iDi"/>
+                            <constraint firstItem="v0J-0t-2WM" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="59" id="uhe-2b-xt5"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="8" symbolic="YES" id="xPz-UG-dXG"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="6dy-ck-PqJ" secondAttribute="leading" constant="20" symbolic="YES" id="zET-xv-I7f"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="top" secondItem="Ybd-QK-UoF" secondAttribute="bottom" constant="108" id="zVg-W5-4yG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="L2u-Z7-lCA"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="activityView" destination="v0J-0t-2WM" id="vKI-Nv-XPI"/>
-                        <outlet property="diagnosticEasySwitch" destination="xNv-14-8fp" id="EQJ-hk-b2S"/>
                         <outlet property="passwordTextField" destination="XCE-aJ-zBI" id="yMl-z7-3hT"/>
                         <outlet property="signInButton" destination="NAr-zB-uK2" id="jfc-kf-rtQ"/>
                         <outlet property="usernameTextField" destination="Mdh-qL-mmF" id="Zle-9o-Jqt"/>
@@ -687,6 +680,7 @@
         <image name="HomeIcon" width="24" height="24"/>
         <image name="SharingStats" width="26" height="23"/>
     </resources>
+    <color key="tintColor" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
         <simulatedOrientationMetrics key="orientation"/>

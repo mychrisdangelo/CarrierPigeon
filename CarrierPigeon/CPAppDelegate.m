@@ -56,19 +56,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [self setupStream];
     
-    UIStoryboard *storyboard;
+   
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
-//        if (![self userHasLoggedInPreviously]) {
-//            CPSignInViewController *sivc = (CPSignInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
-//            self.window.rootViewController = sivc;
-//            sivc.delegate = self;
-//            sivc.xmppStream = self.xmppStream;
-//            sivc.xmppRoster = self.xmppRoster;
-//            [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
-//            [self connect];
-//        }
+        // launching of connection and sign-in view will be taken care of by CPContactsViewController
     } else {
+        UIStoryboard *storyboard;
         storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
         if (![self userHasLoggedInPreviously]) {
             UINavigationController *nc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];

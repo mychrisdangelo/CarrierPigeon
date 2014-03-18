@@ -25,7 +25,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
-@property (weak, nonatomic) IBOutlet UISwitch *diagnosticEasySwitch;
 
 
 @end
@@ -73,23 +72,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.xmppStream disconnect];
         [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
-    
-    if (self.diagnosticEasySwitch.on) {
-        self.usernameTextField.text = @"chris";
-        self.passwordTextField.text = @"uknowme";
-    }
-    
-    
 }
 
-- (IBAction)diagnosticEasySwitchChanged:(UISwitch *)sender {
-    if (sender.on) {
-        self.usernameTextField.text = @"chris";
-        self.passwordTextField.text = @"uknowme";
-    } else {
-        self.usernameTextField.text = @"";
-        self.passwordTextField.text = @"";
-    }
+
+- (IBAction)autoLoginButtonPressed:(UIButton *)sender {
+    self.usernameTextField.text = @"chris";
+    self.passwordTextField.text = @"uknowme";
+    [self signInButtonPressed:nil];
 }
 
 

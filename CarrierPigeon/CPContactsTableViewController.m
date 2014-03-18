@@ -148,8 +148,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-        if ([delegate userHasLoggedInPreviously]) {
+        if (![delegate userHasLoggedInPreviously]) {
             [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+
+        } else {
+            [delegate connect];
         }
     } else {
         // we're in the iPhone and launching Signin has been taken care of by CPAppDelegate
