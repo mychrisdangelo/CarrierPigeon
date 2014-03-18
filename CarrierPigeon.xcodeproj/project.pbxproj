@@ -69,6 +69,7 @@
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
+		40A2AEBB18D7E6F800E4CD75 /* CPSharingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */; };
 		40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */; };
 		40A995A018C31E4800C23AB6 /* XMPPCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BF18C31E4700C23AB6 /* XMPPCoreDataStorage.m */; };
 		40A995A118C31E4800C23AB6 /* XMPPGoogleSharedStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994C318C31E4700C23AB6 /* XMPPGoogleSharedStatus.m */; };
@@ -297,6 +298,8 @@
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
 		408CFE5718C40E77009F991C /* CPContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewController.m; sourceTree = "<group>"; };
+		40A2AEB918D7E6F800E4CD75 /* CPSharingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSharingTableViewController.h; sourceTree = "<group>"; };
+		40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSharingTableViewController.m; sourceTree = "<group>"; };
 		40A64B8018CA3CCE0089CDA7 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
 		40A994BB18C31E4700C23AB6 /* XMPPBandwidthMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPBandwidthMonitor.h; sourceTree = "<group>"; };
 		40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPBandwidthMonitor.m; sourceTree = "<group>"; };
@@ -828,6 +831,7 @@
 				4032C56B18BDAE0500E0CDD1 /* Main_iPad.storyboard */,
 				40D2C07C18C45DAB00A9E6FD /* CoreData */,
 				403972CA18C661B4007F592D /* Settings */,
+				40A2AEB218D7E52200E4CD75 /* Sharing */,
 				40D2C0A018C46D5800A9E6FD /* Messages */,
 				408CFE5A18C40E93009F991C /* SignIn */,
 				40D2C07618C4393400A9E6FD /* AddFriendView */,
@@ -898,6 +902,15 @@
 				40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */,
 			);
 			name = SignIn;
+			sourceTree = "<group>";
+		};
+		40A2AEB218D7E52200E4CD75 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				40A2AEB918D7E6F800E4CD75 /* CPSharingTableViewController.h */,
+				40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */,
+			);
+			name = Sharing;
 			sourceTree = "<group>";
 		};
 		40A994B918C31E4700C23AB6 /* Extensions */ = {
@@ -1681,6 +1694,7 @@
 				400DC1A318C2E9EA00C806ED /* DispatchQueueLogFormatter.m in Sources */,
 				400DC1DF18C2ECAE00C806ED /* XMPPDigestMD5Authentication.m in Sources */,
 				400DC21618C2ECD000C806ED /* DDList.m in Sources */,
+				40A2AEBB18D7E6F800E4CD75 /* CPSharingTableViewController.m in Sources */,
 				40A995E118C31E4800C23AB6 /* XMPPMessageArchiving.xcdatamodeld in Sources */,
 				400DC1DC18C2ECAE00C806ED /* XMPPAnonymousAuthentication.m in Sources */,
 				40A995ED18C31E4800C23AB6 /* XMPPPing.m in Sources */,
