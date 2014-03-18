@@ -9,7 +9,7 @@
 #import "CPSettingsViewController.h"
 #import "CPSignInViewController.h"
 
-@interface CPSettingsViewController ()
+@interface CPSettingsViewController () <CPSignInViewControllerPresenterDelegate>
 
 @end
 
@@ -42,8 +42,17 @@
         if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
             CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
             cpsivc.userWantsToLogOut = YES;
+            cpsivc.presenterDelegate = self;
         }
     }
+}
+
+#pragma mark - CPSignInViewControllerPresenterDelegate
+
+- (void)CPSignInViewControllerDidSignIn:(CPSignInViewController *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tabBarController setSelectedIndex:0];
 }
 
 @end

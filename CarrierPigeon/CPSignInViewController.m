@@ -72,10 +72,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.xmppStream disconnect];
         [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
-    
-    
-    
 }
+
+
+- (IBAction)autoLoginButtonPressed:(UIButton *)sender {
+    self.usernameTextField.text = @"chris";
+    self.passwordTextField.text = @"uknowme";
+    [self signInButtonPressed:nil];
+}
+
+
 
 - (void)dealloc
 {
@@ -102,6 +108,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
         NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
         [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously]; // will set YES on connect
         [[NSUserDefaults standardUserDefaults] synchronize];
         [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
         [self.delegate CPSignInViewControllerDidStoreCredentials:self];
@@ -117,19 +124,30 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 }
 
+- (void)prepareContactsViewController:(NSArray *)viewControllers
+{
+    if ([viewControllers[0] isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)viewControllers[0];
+        if ([navController.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
+            CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)navController.viewControllers[0];
+            cpctvc.xmppStream = self.xmppStream;
+            cpctvc.xmppRoster = self.xmppRoster;
+        }
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowHomeTabBarController"]) {
         if ([segue.destinationViewController isMemberOfClass:[UITabBarController class]]) {
             UITabBarController *tbc = (UITabBarController *)segue.destinationViewController;
-            if ([tbc.viewControllers[0] isMemberOfClass:[UINavigationController class]]) {
-                UINavigationController *navController = (UINavigationController *)tbc.viewControllers[0];
-                if ([navController.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
-                    CPContactsTableViewController *cpctvc = (CPContactsTableViewController *)navController.viewControllers[0];
-                    cpctvc.xmppStream = self.xmppStream;
-                    cpctvc.xmppRoster = self.xmppRoster;
-                }
+            [self prepareContactsViewController:tbc.viewControllers];
+        }
+        if ([segue.destinationViewController isKindOfClass:[UISplitViewController class]]) {
+            UISplitViewController *svc = (UISplitViewController *)segue.destinationViewController;
+            if ([svc.viewControllers[0] isMemberOfClass:[UITabBarController class]]) {
+                UITabBarController *tbc = (UITabBarController *)svc.viewControllers[0];
+                [self prepareContactsViewController:tbc.viewControllers];
             }
         }
     }
@@ -178,7 +196,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
-    [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
+        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
+    } else {
+        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
+    }
+
 }
 
 

@@ -28,5 +28,7 @@
 - (NSURL *)applicationDocumentsDirectory;
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
+- (BOOL)userHasLoggedInPreviously;
+- (BOOL)connect;
 
 @end

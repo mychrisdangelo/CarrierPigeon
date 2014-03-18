@@ -18,7 +18,7 @@
 #import "CPMessenger.h"
 #import "CPMessageDetailTableViewController.h"
 
-@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate>
+@interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate, UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -34,6 +34,20 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize myJid = _myJid;
 @synthesize composeBarView = _composeBarView;
+@synthesize contact = _contact;
+
+- (void)setContact:(Contact *)contact
+{
+    if (_contact != contact) {
+        _contact = contact;
+    }
+    
+    self.title = self.contact.displayName;
+    if (self.view.window) {
+        [self loadMessages];
+    }
+    
+}
 
 - (NSString *)myJid
 {
@@ -119,19 +133,25 @@
     return self;
 }
 
+- (void)loadMessages
+{
+    [self.tableView reloadData];
+//    [self scrollToLastRowWithAnimation:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.title = self.contact.displayName;
+    if (self.contact) [self loadMessages];
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.composeViewContainer.frame.size.height, 0);
     [self.view addSubview:self.composeBarView];
     [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
     [self.composeViewContainer removeFromSuperview];
     
-    [self scrollToLastRowWithAnimation:YES];
+    self.splitViewController.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -240,6 +260,12 @@
 
 - (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
     NSLog(@"utitility button pressed");
+}
+
+#pragma mark - UISplitViewController
+
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation{
+    return NO;
 }
 
 #pragma mark - TableViewDataSource
