@@ -25,7 +25,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
-@interface CPContactsTableViewController () <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
+@interface CPContactsTableViewController () <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate, CPSignInViewControllerPresenterDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
@@ -139,6 +139,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
+    
+    [self showSignInNowIfNecessary];
+    
+}
+
+- (void)showSignInNowIfNecessary
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+        if ([delegate userHasLoggedInPreviously]) {
+            [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+        }
+    } else {
+        // we're in the iPhone and launching Signin has been taken care of by CPAppDelegate
+    }
+
 }
 
 - (void)endRefreshing
@@ -206,6 +222,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             cpmtvc.xmppStream = self.xmppStream;
         }
     }
+    
+    if ([segue.identifier isEqualToString:@"ShowSignInSegue"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
+            CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
+            cpsivc.userWantsToLogOut = YES;
+            cpsivc.presenterDelegate = self;
+        }
+    }
 }
 
 - (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
@@ -220,6 +244,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	
 	cell.textLabel.text = contact.displayName;
 	[self configurePhotoForCell:cell contact:contact];
+}
+
+#pragma mark - CPSignInViewControllerPresenterDelegate
+
+- (void)CPSignInViewControllerDidSignIn:(CPSignInViewController *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tabBarController setSelectedIndex:0];
 }
 
 #pragma mark - CPAddFriendViewControllerDelegate

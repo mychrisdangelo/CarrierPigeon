@@ -47,6 +47,8 @@
     }
 }
 
+#pragma mark - CPSignInViewControllerPresenterDelegate
+
 - (void)CPSignInViewControllerDidSignIn:(CPSignInViewController *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
