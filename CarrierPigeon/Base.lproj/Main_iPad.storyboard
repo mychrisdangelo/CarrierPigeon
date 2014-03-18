@@ -111,7 +111,7 @@
                     <connections>
                         <segue destination="Q1w-tx-SJZ" kind="relationship" relationship="viewControllers" id="ZJb-ah-qE3"/>
                         <segue destination="rd9-Es-Vcz" kind="relationship" relationship="viewControllers" id="U2x-HW-dA4"/>
-                        <segue destination="zPX-JP-UiR" kind="relationship" relationship="viewControllers" id="KfG-fB-zDR"/>
+                        <segue destination="7YG-9x-QrM" kind="relationship" relationship="viewControllers" id="KfG-fB-zDR"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZM5-Rf-hKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -146,7 +146,7 @@
             </objects>
             <point key="canvasLocation" x="-2284" y="-1866"/>
         </scene>
-        <!--Settings View Controller - Me-->
+        <!--Settings View Controller-->
         <scene sceneID="Y3c-2V-XmG">
             <objects>
                 <viewController id="zPX-JP-UiR" customClass="CPSettingsViewController" sceneMemberID="viewController">
@@ -179,11 +179,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Me" image="HomeIcon" id="aJb-RS-mtx"/>
+                    <navigationItem key="navigationItem" id="hWu-oD-rIB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mTS-iz-wkT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2276" y="-892"/>
+            <point key="canvasLocation" x="-1750" y="-892"/>
         </scene>
         <!--Add Friend View Controller - Add Friend-->
         <scene sceneID="EvK-vD-mIX">
@@ -247,7 +247,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Fkc-BG-3D5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Fkc-BG-3D5">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -257,11 +257,11 @@
                                         <rect key="frame" x="0.0" y="86" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7qS-tQ-5qu" id="Vbl-dT-ZyA">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtA-2O-I3j" customClass="MessageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </view>
@@ -681,6 +681,25 @@
             </objects>
             <point key="canvasLocation" x="-3014" y="125"/>
         </scene>
+        <!--Navigation Controller - Me-->
+        <scene sceneID="Z7C-0S-Epd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7YG-9x-QrM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Me" image="HomeIcon" id="aJb-RS-mtx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u3M-uf-Ixc">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zPX-JP-UiR" kind="relationship" relationship="rootViewController" id="5fB-QA-CQ6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uFq-kB-o54" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2276" y="-892"/>
+        </scene>
     </scenes>
     <resources>
         <image name="HomeIcon" width="24" height="24"/>
@@ -693,6 +712,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gfz-Zc-lfS"/>
+        <segue reference="uQh-MB-JLV"/>
     </inferredMetricsTieBreakers>
 </document>

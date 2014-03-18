@@ -28,6 +28,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+
+    
+    [self displayUserName];
+}
+
+- (void)displayUserName
+{
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    NSArray *parsedJID = [myJID componentsSeparatedByString: @"@"];
+    NSString *username = [parsedJID objectAtIndex:0];
+    self.title = username;
 }
 
 - (void)didReceiveMemoryWarning
