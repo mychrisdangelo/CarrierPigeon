@@ -207,7 +207,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
-    [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
+        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
+    } else {
+        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
+    }
+
 }
 
 

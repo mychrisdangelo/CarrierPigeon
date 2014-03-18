@@ -19,11 +19,16 @@
 - (void)CPSignInViewControllerDidStoreCredentials:(CPSignInViewController *)sender;
 @end
 
+@protocol CPSignInViewControllerPresenterDelegate <NSObject>
+- (void)CPSignInViewControllerDidSignIn:(CPSignInViewController *)sender;
+@end;
+
 
 
 @interface CPSignInViewController : UIViewController
 
 @property (nonatomic, strong) id<CPSignInViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<CPSignInViewControllerPresenterDelegate> presenterDelegate;
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic) BOOL autoLoginHasBegun;

@@ -16,19 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mdh-qL-mmF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mdh-qL-mmF">
                                 <rect key="frame" x="20" y="108" width="728" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCE-aJ-zBI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCE-aJ-zBI">
                                 <rect key="frame" x="20" y="146" width="728" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAr-zB-uK2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAr-zB-uK2">
                                 <rect key="frame" x="700" y="184" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign In">
@@ -38,7 +38,7 @@
                                     <action selector="signInButtonPressed:" destination="1fi-uN-xbQ" eventType="touchUpInside" id="3vW-si-bKy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beM-dZ-YUJ">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beM-dZ-YUJ">
                                 <rect key="frame" x="20" y="184" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up">
@@ -48,21 +48,21 @@
                                     <action selector="signUpButtonPressed:" destination="1fi-uN-xbQ" eventType="touchUpInside" id="ou7-tJ-z08"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="v0J-0t-2WM">
-                                <rect key="frame" x="366" y="219" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="v0J-0t-2WM">
+                                <rect key="frame" x="366" y="235" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.87450987099999999" green="0.019607843829999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="color" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNv-14-8fp">
-                                <rect key="frame" x="354" y="301" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNv-14-8fp">
+                                <rect key="frame" x="360" y="280" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="diagnosticEasySwitchChanged:" destination="1fi-uN-xbQ" eventType="valueChanged" id="K9n-Au-nzY"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto Login User Specified in Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abv-uQ-QBb">
-                                <rect key="frame" x="252" y="340" width="265" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Login User Specified in Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abv-uQ-QBb">
+                                <rect key="frame" x="252" y="319" width="265" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -71,6 +71,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="34Y-vQ-FaX"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="8" symbolic="YES" id="61O-Ps-m9y"/>
+                            <constraint firstItem="xNv-14-8fp" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="ApC-bC-i1r"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="top" secondItem="Mdh-qL-mmF" secondAttribute="bottom" constant="8" symbolic="YES" id="BJy-BA-HO6"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="baseline" secondItem="NAr-zB-uK2" secondAttribute="baseline" id="ELR-kl-Scu"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="NAr-zB-uK2" secondAttribute="trailing" id="EWr-bw-YZl"/>
+                            <constraint firstItem="v0J-0t-2WM" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="59" id="JSo-Ou-wq9"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="O7c-Wp-p21"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="top" secondItem="Ybd-QK-UoF" secondAttribute="bottom" constant="108" id="XHn-mv-F1d"/>
+                            <constraint firstItem="Abv-uQ-QBb" firstAttribute="top" secondItem="xNv-14-8fp" secondAttribute="bottom" constant="8" symbolic="YES" id="ZSq-OZ-9Ks"/>
+                            <constraint firstItem="xNv-14-8fp" firstAttribute="top" secondItem="v0J-0t-2WM" secondAttribute="bottom" constant="8" symbolic="YES" id="aZI-GX-nNu"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="lbh-eh-iH2"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="trailing" secondItem="XCE-aJ-zBI" secondAttribute="trailing" id="oD8-iu-4Qi"/>
+                            <constraint firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" constant="20" symbolic="YES" id="qAV-GS-rgF"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="6dy-ck-PqJ" secondAttribute="leading" constant="20" symbolic="YES" id="sWt-0h-sTV"/>
+                            <constraint firstItem="xNv-14-8fp" firstAttribute="centerX" secondItem="Abv-uQ-QBb" secondAttribute="centerX" id="vpn-s9-Idx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="L2u-Z7-lCA"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -162,7 +180,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="1fi-uN-xbQ" kind="modal" identifier="ShowSignInSegue" modalTransitionStyle="crossDissolve" id="uQh-MB-JLV"/>
+                                    <segue destination="1fi-uN-xbQ" kind="modal" identifier="ShowSignInSegue" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="uQh-MB-JLV"/>
                                 </connections>
                             </button>
                         </subviews>
