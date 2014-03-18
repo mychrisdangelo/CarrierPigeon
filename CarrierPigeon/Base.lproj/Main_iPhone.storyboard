@@ -284,7 +284,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q2K-bi-tA2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q2K-bi-tA2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -294,11 +294,11 @@
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4Z-mT-pFH" id="4Ty-tP-ltM">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3O9-MU-cKu" customClass="MessageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </view>
@@ -321,7 +321,7 @@
                                     <outletCollection property="gestureRecognizers" destination="dfz-AW-rhz" appends="YES" id="o3F-i4-qBx"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJe-JR-PsS">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJe-JR-PsS">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -338,6 +338,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="q2K-bi-tA2" firstAttribute="trailing" secondItem="XJe-JR-PsS" secondAttribute="trailing" id="1cc-r1-tKd"/>
+                            <constraint firstItem="q2K-bi-tA2" firstAttribute="leading" secondItem="XJe-JR-PsS" secondAttribute="leading" id="4UF-0b-9xL"/>
+                            <constraint firstItem="q2K-bi-tA2" firstAttribute="top" secondItem="4Dm-8W-deR" secondAttribute="top" id="Ex2-q0-s91"/>
+                            <constraint firstAttribute="trailing" secondItem="q2K-bi-tA2" secondAttribute="trailing" id="FnT-sm-UyD"/>
+                            <constraint firstItem="CHQ-Vu-u0O" firstAttribute="top" secondItem="q2K-bi-tA2" secondAttribute="bottom" id="K0e-VF-HET"/>
+                            <constraint firstItem="XJe-JR-PsS" firstAttribute="top" secondItem="pM8-jf-1PJ" secondAttribute="bottom" constant="460" id="cwV-tG-epP"/>
+                            <constraint firstItem="q2K-bi-tA2" firstAttribute="leading" secondItem="4Dm-8W-deR" secondAttribute="leading" id="mao-Y3-hqE"/>
+                            <constraint firstItem="q2K-bi-tA2" firstAttribute="bottom" secondItem="XJe-JR-PsS" secondAttribute="bottom" id="xD4-dN-1dR"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Messages" id="a9U-M1-OYI"/>

@@ -156,6 +156,9 @@
         _messageLabel.textColor = [UIColor whiteColor];
         // Set resizeable image
         _balloonView.image = [self.balloonImageRight resizableImageWithCapInsets:_balloonInsetsRight];
+        
+
+
     } else {
         // Received messages appear on left of view with additional display name label
         xOffsetBalloon = 0;
@@ -171,6 +174,34 @@
     // Set the dynamic frames
     _messageLabel.frame = CGRectMake(xOffsetLabel, yOffset + 5, labelSize.width, labelSize.height);
     _balloonView.frame = CGRectMake(xOffsetBalloon, yOffset, balloonSize.width, balloonSize.height);
+    
+//    _balloonView.translatesAutoresizingMaskIntoConstraints = NO;
+//    _messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    NSDictionary *viewsDictionary = @{@"balloonView" : _balloonView, @"messageLabel" : _messageLabel};
+//    NSDictionary *metricsDictionary = @{@"balloonWidth" : [NSNumber numberWithFloat:balloonSize.width], @"balloonHeight" : [NSNumber numberWithFloat:balloonSize.height],
+//                                        @"labelWidth" : [NSNumber numberWithFloat:labelSize.width+0.5], @"labelHeight" : [NSNumber numberWithFloat:labelSize.height]};
+//    
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[balloonView(>=balloonWidth)]-8-|"
+//                                                                      options:0
+//                                                                      metrics:metricsDictionary
+//                                                                        views:viewsDictionary]];
+//    
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[messageLabel(==labelWidth)]-24-|"
+//                                                                 options:0
+//                                                                 metrics:metricsDictionary
+//                                                                   views:viewsDictionary]];
+//    
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-4-[balloonView(>=balloonHeight)]"
+//                                                                 options:0
+//                                                                 metrics:metricsDictionary
+//                                                                   views:viewsDictionary]];
+//    
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[messageLabel(>=labelHeight)]"
+//                                                                 options:0
+//                                                                 metrics:metricsDictionary
+//                                                                   views:viewsDictionary]];
+//
+//    
 }
 
 #pragma - class methods for computing sizes based on strings
