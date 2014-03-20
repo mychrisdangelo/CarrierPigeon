@@ -25,7 +25,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
-
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 @end
 
@@ -45,15 +45,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-
-    
     if (self.autoLoginHasBegun) {
         [self.activityView startAnimating];
         [self.signInButton setEnabled:NO];
         [self.usernameTextField setHidden:YES];
         [self.passwordTextField setHidden:YES];
         self.autoLoginHasBegun = NO;
-
+        
     }
     
     if (self.userWantsToLogOut) {
@@ -84,13 +82,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self signInButtonPressed:nil];
 }
 
-
-
 - (void)dealloc
 {
     [self.xmppStream removeDelegate:self];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -101,22 +96,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (IBAction)signInButtonPressed:(UIButton *)sender {
     
     if ([self.usernameTextField.text length] == 0 || [self.passwordTextField.text length] == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required"
-                                                        message:@"Username & Password required."
-                                                       delegate:self cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-        return;
+        [self showAlertMissingUsernameOrPassword];
     } else {
-        KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
-        NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
-        [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
-        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously]; // will set YES on connect
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
-        [self.delegate CPSignInViewControllerDidStoreCredentials:self];
+        [self saveUserInfo];
         
         sender.enabled = NO;
+        self.signUpButton.enabled = NO;
         [self.activityView startAnimating];
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
@@ -124,9 +109,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 - (IBAction)signUpButtonPressed:(UIButton *)sender {
-
+    if ([self.usernameTextField.text length] == 0 || [self.passwordTextField.text length] == 0) {
+        [self showAlertMissingUsernameOrPassword];
+        
+    } else {
+        [self saveUserInfo];
+        
+        self.signUpButton.enabled = NO;
+        self.signInButton.enabled = NO;
+        [self.activityView startAnimating];
+        
+        [self.usernameTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        
+        NSError *err=nil;
+        // check if inband registration is supported
+        if (self.xmppStream.supportsInBandRegistration) {
+            if (![self.xmppStream registerWithPassword:self.passwordTextField.text error:&err]) {
+                DDLogError(@"Oops, I forgot something: %@", err);
+            }
+        } else {
+            DDLogError(@"Inband registration is not supported");
+        }
+    }
+    
 }
 
+//TODO fix bug: after successful login, contacts only display on pull-down. should display automatically
 - (void)prepareContactsViewController:(NSArray *)viewControllers
 {
     if ([viewControllers[0] isMemberOfClass:[UINavigationController class]]) {
@@ -163,38 +172,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
-    //    NSError *err=nil;
-    //    // check if inband registration is supported
-    //    if (self.xmppStream.supportsInBandRegistration)
-    //    {
-    //        if (![self.xmppStream registerWithPassword:self.passwordTextField.text error:&err])
-    //        {
-    //            DDLogError(@"Oops, I forgot something: %@", error);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        DDLogError(@"Inband registration is not supported");
-    //    }
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    //TODO: fix bug alert appears more than once on sign-in error
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login"
-                                                    message:@"Sign in error occured."
+                                                    message:@"Unable to sign in. Do you have an account?"
                                                    delegate:self cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
     [alert show];
     
-    self.usernameTextField.text = @"";
-    self.passwordTextField.text = @"";
-    
     [self.signInButton setEnabled:YES];
+    [self.signUpButton setEnabled:YES];
     [self.activityView stopAnimating];
-    [self.signInButton setEnabled:YES];
     [self.usernameTextField setHidden:NO];
     [self.passwordTextField setHidden:NO];
     [self.usernameTextField becomeFirstResponder];
     
-
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
@@ -204,8 +197,57 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     } else {
         [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
     }
-
+    
 }
 
+- (void)showAlertMissingUsernameOrPassword {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required"
+                                                    message:@"Username & Password required."
+                                                   delegate:self cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+    return;
+}
 
+- (void)saveUserInfo {
+    
+    KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
+    NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
+    [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously]; // will set YES on connect
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
+    [self.delegate CPSignInViewControllerDidStoreCredentials:self];
+    
+}
+
+- (void)xmppStreamDidRegister:(XMPPStream *)sender
+{
+	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+	
+	NSLog(@"Registered new user");
+    
+    //sign in user
+    // TODO: display sign up success message
+    [self xmppStreamDidAuthenticate:sender];
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
+{
+    [self.activityView stopAnimating];
+    [self.signInButton setEnabled:YES];
+    [self.signUpButton setEnabled:YES];
+    
+    //TODO: fix on server ejabberd config : "Users are not allowed to register accounts so quickly"
+    // must wait 10 minutes between each user registration
+    //TODO: fix bug alert appears more than once on sign-in error
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Unsuccessful"
+                                                    message:@"Unable to complete registration. Username may be taken."
+                                                   delegate:self cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+    return;
+}
+
+//suggested tasks: add emoticons
 @end

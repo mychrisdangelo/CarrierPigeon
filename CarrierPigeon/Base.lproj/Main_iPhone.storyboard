@@ -53,7 +53,7 @@
                                     <action selector="signInButtonPressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="QTH-uq-tH8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQX-TM-1M3">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQX-TM-1M3">
                                 <rect key="frame" x="20" y="184" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up">
@@ -88,6 +88,7 @@
                         <outlet property="activityView" destination="k1E-mb-0jD" id="7xn-Mx-voa"/>
                         <outlet property="passwordTextField" destination="QZr-Ia-aj8" id="b1e-HI-7hu"/>
                         <outlet property="signInButton" destination="rxV-cZ-4KL" id="TOY-cn-iJd"/>
+                        <outlet property="signUpButton" destination="AQX-TM-1M3" id="CIM-cp-RtJ"/>
                         <outlet property="usernameTextField" destination="cfw-bm-svl" id="sgS-PB-Z0h"/>
                         <segue destination="3I6-Ny-I5y" kind="modal" identifier="ShowHomeTabBarController" modalTransitionStyle="crossDissolve" id="3gF-Lf-6Nh"/>
                     </connections>
