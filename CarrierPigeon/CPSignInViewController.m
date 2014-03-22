@@ -225,6 +225,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStreamDidRegister:(XMPPStream *)sender
 {
+    
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self xmppStreamDidAuthenticateHandler];
 
