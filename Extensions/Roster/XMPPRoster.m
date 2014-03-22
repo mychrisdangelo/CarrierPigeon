@@ -471,7 +471,7 @@ enum XMPPRosterFlags
 }
 
 - (void)addUser:(XMPPJID *)jid withNickname:(NSString *)optionalName groups:(NSArray *)groups subscribeToPresence:(BOOL)subscribe{
-	
+
 	if (jid == nil) return;
 
 	XMPPJID *myJID = xmppStream.myJID;

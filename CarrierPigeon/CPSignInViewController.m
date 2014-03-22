@@ -135,7 +135,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
-//TODO fix bug: after successful login, contacts only display on pull-down. should display automatically
 - (void)prepareContactsViewController:(NSArray *)viewControllers
 {
     if ([viewControllers[0] isMemberOfClass:[UINavigationController class]]) {
@@ -168,11 +167,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.activityView stopAnimating];
 }
 
+- (void)xmppStreamDidAuthenticateHandler
+{
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
+        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
+    } else {
+        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
+    }
+}
+
 #pragma mark XMPPStreamDelegate
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
-    
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     //TODO: fix bug alert appears more than once on sign-in error
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login"
@@ -192,12 +199,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
-    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
-        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
-    } else {
-        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
-    }
-    
+    [self xmppStreamDidAuthenticateHandler];
 }
 
 - (void)showAlertMissingUsernameOrPassword {
@@ -224,12 +226,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStreamDidRegister:(XMPPStream *)sender
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
-	NSLog(@"Registered new user");
-    
-    //sign in user
-    // TODO: display sign up success message
-    [self xmppStreamDidAuthenticate:sender];
+    [self xmppStreamDidAuthenticateHandler];
+
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
@@ -238,8 +236,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.signInButton setEnabled:YES];
     [self.signUpButton setEnabled:YES];
     
-    //TODO: fix on server ejabberd config : "Users are not allowed to register accounts so quickly"
-    // must wait 10 minutes between each user registration
     //TODO: fix bug alert appears more than once on sign-in error
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Unsuccessful"
                                                     message:@"Unable to complete registration. Username may be taken."
@@ -249,5 +245,4 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return;
 }
 
-//suggested tasks: add emoticons
 @end

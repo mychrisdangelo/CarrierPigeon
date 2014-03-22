@@ -2014,7 +2014,7 @@
 				INFOPLIST_FILE = "CarrierPigeon/CarrierPigeon-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ifeoma/Developer/CNMC_Project/CarrierPigeon/libidn,
+					"$(SRCROOT)/libidn",
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2043,7 +2043,7 @@
 				INFOPLIST_FILE = "CarrierPigeon/CarrierPigeon-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ifeoma/Developer/CNMC_Project/CarrierPigeon/libidn,
+					"$(SRCROOT)/libidn",
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
