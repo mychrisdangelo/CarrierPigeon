@@ -55,6 +55,8 @@
 //
 //  Code Adapated from documenation provided by Apple (see above)
 
+@import MultipeerConnectivity;
+
 #import <Foundation/Foundation.h>
 
 @class Chat;
@@ -68,6 +70,9 @@
 
 - (id)initWithDisplayName:(NSString *)displayName serviceType:(NSString *)serviceType;
 - (void)sendChat:(Chat *)chat;
+
+- (void)testEncoding:(Chat *)chat;
+- (void)testDecoding:(NSData *)encodedChat;
 
 @end
 

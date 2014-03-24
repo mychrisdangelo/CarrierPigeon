@@ -18,6 +18,7 @@
 #import "CPMessagesViewController.h"
 #import "Contact+AddRemove.h"
 #import "CPMessenger.h"
+#import "CPSessionContainer.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -31,6 +32,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) int servicesRequiringRefreshing;
+@property (nonatomic, strong) CPSessionContainer *sessionContainer;
 
 @end
 
@@ -38,6 +40,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
+
+- (IBAction)testButtonPressed:(UIBarButtonItem *)sender {
+    self.sessionContainer = [[CPSessionContainer alloc] init];
+    [self.sessionContainer testEncoding:nil];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
