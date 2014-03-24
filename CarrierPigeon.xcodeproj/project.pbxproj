@@ -68,6 +68,8 @@
 		4032C58A18BDAE0600E0CDD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */; };
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
+		4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139A18E0A6AC00687944 /* CPSessionContainer.m */; };
+		4058139E18E0AA6000687944 /* Chat+EncodingDecoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139D18E0AA6000687944 /* Chat+EncodingDecoding.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
 		40A2AEBB18D7E6F800E4CD75 /* CPSharingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */; };
 		40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */; };
@@ -166,7 +168,6 @@
 		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
 		40E5B3D818D8DF6A00918FB3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */; };
-		40E5B3D918D8DF6A00918FB3 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 40E5B3D618D8DF6A00918FB3 /* HockeySDK.xcconfig */; };
 		40E5B3DA18D8DF6A00918FB3 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
@@ -302,6 +303,10 @@
 		4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonTests.m; sourceTree = "<group>"; };
 		403972C718C661AD007F592D /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
+		4058139918E0A6AC00687944 /* CPSessionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSessionContainer.h; sourceTree = "<group>"; };
+		4058139A18E0A6AC00687944 /* CPSessionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSessionContainer.m; sourceTree = "<group>"; };
+		4058139C18E0AA6000687944 /* Chat+EncodingDecoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+EncodingDecoding.h"; sourceTree = "<group>"; };
+		4058139D18E0AA6000687944 /* Chat+EncodingDecoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+EncodingDecoding.m"; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
 		408CFE5718C40E77009F991C /* CPContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewController.m; sourceTree = "<group>"; };
 		40A2AEB918D7E6F800E4CD75 /* CPSharingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSharingTableViewController.h; sourceTree = "<group>"; };
@@ -1516,6 +1521,8 @@
 			children = (
 				40D2C08018C45E0800A9E6FD /* Chat+Create.h */,
 				40D2C08118C45E0800A9E6FD /* Chat+Create.m */,
+				4058139C18E0AA6000687944 /* Chat+EncodingDecoding.h */,
+				4058139D18E0AA6000687944 /* Chat+EncodingDecoding.m */,
 				40FBDCF718D400BE00A4D174 /* Chat.h */,
 				40FBDCF818D400BE00A4D174 /* Chat.m */,
 			);
@@ -1534,6 +1541,8 @@
 		40D2C0A018C46D5800A9E6FD /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				4058139918E0A6AC00687944 /* CPSessionContainer.h */,
+				4058139A18E0A6AC00687944 /* CPSessionContainer.m */,
 				40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */,
 				40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */,
 				401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */,
@@ -1662,7 +1671,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E5B3D918D8DF6A00918FB3 /* HockeySDK.xcconfig in Resources */,
 				4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */,
 				40E5B3DA18D8DF6A00918FB3 /* HockeySDKResources.bundle in Resources */,
 				4032C57818BDAE0500E0CDD1 /* Images.xcassets in Resources */,
@@ -1767,6 +1775,7 @@
 				400DC1A018C2E9EA00C806ED /* DDLog.m in Sources */,
 				40A995A118C31E4800C23AB6 /* XMPPGoogleSharedStatus.m in Sources */,
 				40A995D218C31E4800C23AB6 /* XMPPPubSub.m in Sources */,
+				4058139E18E0AA6000687944 /* Chat+EncodingDecoding.m in Sources */,
 				40A995A418C31E4800C23AB6 /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				40A995CF18C31E4800C23AB6 /* NSXMLElement+XEP_0059.m in Sources */,
 				401B0C8718C4FFAA00EE43CA /* CPMessagesViewController.m in Sources */,
@@ -1782,6 +1791,7 @@
 				40A995AD18C31E4800C23AB6 /* XMPPSystemInputActivityMonitor.m in Sources */,
 				40A995CA18C31E4800C23AB6 /* XMPPvCardTempBase.m in Sources */,
 				40A995D418C31E4800C23AB6 /* XMPPIQ+XEP_0066.m in Sources */,
+				4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */,
 				40A995A518C31E4800C23AB6 /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				40A995B618C31E4800C23AB6 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				40A995AF18C31E4800C23AB6 /* XMPPIQ+JabberRPCResonse.m in Sources */,
