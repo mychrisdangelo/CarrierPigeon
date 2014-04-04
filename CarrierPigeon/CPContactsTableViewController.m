@@ -42,8 +42,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
 
 - (IBAction)testButtonPressed:(UIBarButtonItem *)sender {
-    self.sessionContainer = [[CPSessionContainer alloc] init];
-    [self.sessionContainer testEncoding:nil];
+     NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    self.sessionContainer = [[CPSessionContainer alloc] initWithDisplayName:myJID];
+    // [self.sessionContainer testEncoding:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
