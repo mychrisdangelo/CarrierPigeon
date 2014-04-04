@@ -76,9 +76,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 
-- (IBAction)autoLoginButtonPressed:(UIButton *)sender {
-    self.usernameTextField.text = @"chris";
-    self.passwordTextField.text = @"uknowme";
+- (IBAction)autoLoginButtonOnePressed:(UIButton *)sender {
+    self.usernameTextField.text = @"CarrierPigeon1";
+    self.passwordTextField.text = @"keyboardflub";
+    [self signInButtonPressed:nil];
+}
+
+- (IBAction)autoLoginButtonTworessed:(UIButton *)sender {
+    self.usernameTextField.text = @"CarrierPigeon2";
+    self.passwordTextField.text = @"keyboardflub";
     [self signInButtonPressed:nil];
 }
 

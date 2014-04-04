@@ -69,14 +69,24 @@
                                 <color key="tintColor" red="0.87450987099999999" green="0.019607843829999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="color" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXj-YL-dGY">
-                                <rect key="frame" x="84" y="269" width="152" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Oo-mh-Sab">
+                                <rect key="frame" x="70" y="279" width="183" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Auto-Login for Testing">
+                                <state key="normal" title="Auto-Login CarrierPigeon1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="autoLoginButtonPressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="KwA-Q4-Noc"/>
+                                    <action selector="autoLoginButtonOnePressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="lOn-35-zNj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff9-QR-kUM">
+                                <rect key="frame" x="70" y="317" width="183" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Auto-Login CarrierPigeon2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="autoLoginButtonTworessed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="sac-vZ-fYq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -714,7 +724,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3RS-3b-45x" style="IBUITableViewCellStyleDefault" id="fQE-ac-yK6">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3RS-3b-45x" detailTextLabel="ta1-0A-hcp" style="IBUITableViewCellStyleValue1" id="fQE-ac-yK6">
                                         <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fQE-ac-yK6" id="BTg-Z5-yXZ">
@@ -722,10 +732,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Nearby Pigeons" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3RS-3b-45x">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <rect key="frame" x="15" y="11" width="122" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ta1-0A-hcp">
+                                                    <rect key="frame" x="241" y="11" width="44" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -868,6 +885,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Sharing" id="EtG-a1-fGX"/>
                     <connections>
+                        <outlet property="nearbyPigeonsDetailLabel" destination="ta1-0A-hcp" id="JId-Dh-lhf"/>
                         <outlet property="networkStatus" destination="NjQ-kT-hlI" id="Yve-49-lC2"/>
                     </connections>
                 </tableViewController>

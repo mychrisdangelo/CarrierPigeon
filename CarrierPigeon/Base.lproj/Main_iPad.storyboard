@@ -55,33 +55,49 @@
                                 <color key="color" red="0.7607843876" green="0.070588238540000001" blue="0.81176477670000002" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4Q-o1-vZc">
-                                <rect key="frame" x="308" y="291" width="152" height="30"/>
+                                <rect key="frame" x="274" y="291" width="221" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Auto-Login for Testing">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="221" id="9LS-cl-uph"/>
+                                </constraints>
+                                <state key="normal" title="Auto-Login CarrierPigeon1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="autoLoginButtonPressed:" destination="1fi-uN-xbQ" eventType="touchUpInside" id="BBy-TR-ita"/>
+                                    <action selector="autoLoginButtonOnePressed:" destination="1fi-uN-xbQ" eventType="touchUpInside" id="bRf-WP-TqD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldk-WB-K4F">
+                                <rect key="frame" x="274" y="329" width="221" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Auto-Login CarrierPigeon2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="autoLoginButtonTworessed:" destination="1fi-uN-xbQ" eventType="touchUpInside" id="WZu-7t-eUu"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" constant="20" symbolic="YES" id="Fyq-a6-jJg"/>
-                            <constraint firstItem="NAr-zB-uK2" firstAttribute="baseline" secondItem="beM-dZ-YUJ" secondAttribute="baseline" id="G1L-QV-s5e"/>
-                            <constraint firstItem="U4Q-o1-vZc" firstAttribute="top" secondItem="v0J-0t-2WM" secondAttribute="bottom" constant="19" id="I6D-9f-U2n"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="Qun-be-GcZ"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" id="Tu1-kO-ole"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="NAr-zB-uK2" secondAttribute="trailing" id="ZXf-fu-Bzr"/>
-                            <constraint firstItem="U4Q-o1-vZc" firstAttribute="centerX" secondItem="v0J-0t-2WM" secondAttribute="centerX" id="cJu-KB-NMy"/>
-                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="top" secondItem="Mdh-qL-mmF" secondAttribute="bottom" constant="8" symbolic="YES" id="cSi-7R-u6H"/>
-                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="gzr-Tk-Q9a"/>
-                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="t8d-od-iDi"/>
-                            <constraint firstItem="v0J-0t-2WM" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="59" id="uhe-2b-xt5"/>
-                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="8" symbolic="YES" id="xPz-UG-dXG"/>
-                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="6dy-ck-PqJ" secondAttribute="leading" constant="20" symbolic="YES" id="zET-xv-I7f"/>
-                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="top" secondItem="Ybd-QK-UoF" secondAttribute="bottom" constant="108" id="zVg-W5-4yG"/>
+                            <constraint firstAttribute="trailing" secondItem="Mdh-qL-mmF" secondAttribute="trailing" constant="20" symbolic="YES" id="2T7-RD-i3V"/>
+                            <constraint firstItem="U4Q-o1-vZc" firstAttribute="top" secondItem="v0J-0t-2WM" secondAttribute="bottom" constant="19" id="MLj-Ge-2fT"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="top" secondItem="Mdh-qL-mmF" secondAttribute="bottom" constant="8" symbolic="YES" id="QOG-j6-WzN"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="8" symbolic="YES" id="S8C-zL-VoM"/>
+                            <constraint firstItem="v0J-0t-2WM" firstAttribute="top" secondItem="XCE-aJ-zBI" secondAttribute="bottom" constant="59" id="SL0-0e-hZn"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="top" secondItem="Ybd-QK-UoF" secondAttribute="bottom" constant="108" id="TqJ-4c-lum"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="baseline" secondItem="NAr-zB-uK2" secondAttribute="baseline" id="UWN-ul-BZn"/>
+                            <constraint firstItem="v0J-0t-2WM" firstAttribute="centerX" secondItem="U4Q-o1-vZc" secondAttribute="centerX" id="WPE-1i-Ujh"/>
+                            <constraint firstItem="beM-dZ-YUJ" firstAttribute="leading" secondItem="XCE-aJ-zBI" secondAttribute="leading" id="WeX-rW-kKU"/>
+                            <constraint firstItem="U4Q-o1-vZc" firstAttribute="leading" secondItem="ldk-WB-K4F" secondAttribute="leading" id="Xzn-s6-6He"/>
+                            <constraint firstItem="ldk-WB-K4F" firstAttribute="trailing" secondItem="U4Q-o1-vZc" secondAttribute="trailing" id="ZUE-en-rns"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="trailing" secondItem="XCE-aJ-zBI" secondAttribute="trailing" id="ai0-H2-6Zc"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="trailing" secondItem="NAr-zB-uK2" secondAttribute="trailing" id="b8x-x3-uao"/>
+                            <constraint firstItem="Mdh-qL-mmF" firstAttribute="leading" secondItem="6dy-ck-PqJ" secondAttribute="leading" constant="20" symbolic="YES" id="cEG-UY-8Br"/>
+                            <constraint firstItem="ldk-WB-K4F" firstAttribute="top" secondItem="U4Q-o1-vZc" secondAttribute="bottom" constant="8" symbolic="YES" id="jTf-T7-19b"/>
+                            <constraint firstItem="XCE-aJ-zBI" firstAttribute="leading" secondItem="Mdh-qL-mmF" secondAttribute="leading" id="uGD-GJ-GSe"/>
+                            <constraint firstItem="v0J-0t-2WM" firstAttribute="centerX" secondItem="XCE-aJ-zBI" secondAttribute="centerX" id="xRV-Gj-sVq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="L2u-Z7-lCA"/>
@@ -603,6 +619,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="MF6-k3-203">
+                        <barButtonItem key="leftBarButtonItem" title="Test" id="qvf-k4-N1U">
+                            <connections>
+                                <action selector="testButtonPressed:" destination="Pyi-FM-7SZ" id="7y5-cQ-djE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="dUA-yI-nWW">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="Z7H-ap-pUg">
                                 <rect key="frame" x="282" y="11" width="22" height="22"/>
@@ -634,6 +655,44 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-1754" y="-2868"/>
+        </scene>
+        <!--Nearby Pigeons Table View Controller - Nearby Pigeons-->
+        <scene sceneID="cuS-99-Id9">
+            <objects>
+                <tableViewController id="oOL-xG-hmT" customClass="CPNearbyPigeonsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QqB-Bd-7u2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NearbyPigeonCell" textLabel="ai7-SS-b6X" style="IBUITableViewCellStyleDefault" id="iay-4w-gBK">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iay-4w-gBK" id="wL9-4z-uDI">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ai7-SS-b6X">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oOL-xG-hmT" id="Qcj-7d-vtx"/>
+                            <outlet property="delegate" destination="oOL-xG-hmT" id="ei1-jh-X2G"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Nearby Pigeons" id="fef-ls-qfq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LNg-Si-Sge" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1055" y="-2461"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="j5H-TH-M6d">
@@ -736,7 +795,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="8j8-W4-Mlg" kind="push" id="zQS-sS-XNL"/>
+                                            <segue destination="oOL-xG-hmT" kind="push" id="mEq-9Y-AU1"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -899,25 +958,6 @@
             </objects>
             <point key="canvasLocation" x="-1055" y="-1330"/>
         </scene>
-        <!--View Controller - Nearby Pigeons Todo-->
-        <scene sceneID="KDG-R4-381">
-            <objects>
-                <viewController id="8j8-W4-Mlg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lBJ-xL-Klf"/>
-                        <viewControllerLayoutGuide type="bottom" id="ffZ-12-x02"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uJk-22-SY8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Nearby Pigeons Todo" id="ufk-QD-mey"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lqp-Fm-69f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1055" y="-2356"/>
-        </scene>
     </scenes>
     <resources>
         <image name="HomeIcon" width="24" height="24"/>
@@ -930,6 +970,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uQh-MB-JLV"/>
+        <segue reference="gfz-Zc-lfS"/>
     </inferredMetricsTieBreakers>
 </document>

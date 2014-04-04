@@ -169,8 +169,6 @@
 		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
 		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
-		40E5B3D818D8DF6A00918FB3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */; };
-		40E5B3DA18D8DF6A00918FB3 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
 		40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */; };
@@ -512,9 +510,6 @@
 		40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHelperFunctions.h; sourceTree = "<group>"; };
 		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
 		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
-		40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		40E5B3D618D8DF6A00918FB3 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		40E5B3DB18D8DF8600918FB3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -551,7 +546,6 @@
 				400DC1C418C2EC3F00C806ED /* libidn.a in Frameworks */,
 				400DC1AA18C2EB3100C806ED /* CFNetwork.framework in Frameworks */,
 				4032C55B18BDAE0500E0CDD1 /* CoreData.framework in Frameworks */,
-				40E5B3D818D8DF6A00918FB3 /* HockeySDK.framework in Frameworks */,
 				65B0D01390104F4DB6C3936C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1489,7 +1483,6 @@
 		40A995F818C31FDF00C23AB6 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				40E5B3D318D8DF6A00918FB3 /* HockeySDK.embeddedframework */,
 				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
@@ -1562,24 +1555,6 @@
 				40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */,
 			);
 			name = Messages;
-			sourceTree = "<group>";
-		};
-		40E5B3D318D8DF6A00918FB3 /* HockeySDK.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */,
-				40E5B3D518D8DF6A00918FB3 /* Resources */,
-			);
-			path = HockeySDK.embeddedframework;
-			sourceTree = "<group>";
-		};
-		40E5B3D518D8DF6A00918FB3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				40E5B3D618D8DF6A00918FB3 /* HockeySDK.xcconfig */,
-				40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		40FBDCDE18D3E3DB00A4D174 /* Contact */ = {
@@ -1681,7 +1656,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */,
-				40E5B3DA18D8DF6A00918FB3 /* HockeySDKResources.bundle in Resources */,
 				4032C57818BDAE0500E0CDD1 /* Images.xcassets in Resources */,
 				4032C56A18BDAE0500E0CDD1 /* Main_iPhone.storyboard in Resources */,
 				4032C56118BDAE0500E0CDD1 /* InfoPlist.strings in Resources */,

@@ -15,6 +15,7 @@
 @interface CPSharingTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *networkStatus;
 @property (nonatomic, strong) XMPPStream *xmppStream;
+@property (weak, nonatomic) IBOutlet UILabel *nearbyPigeonsDetailLabel;
 
 @end
 
@@ -38,6 +39,10 @@
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     [self refreshDisplayOfNetworkStatus];
+    
+    int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] currentPeers] count];
+    self.nearbyPigeonsDetailLabel.text = [NSString stringWithFormat:@"%d", currentPeersCount];
+    
 }
 
 - (void)refreshDisplayOfNetworkStatus
