@@ -106,13 +106,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([self.usernameTextField.text length] == 0 || [self.passwordTextField.text length] == 0) {
         [self showAlertMissingUsernameOrPassword];
     } else {
-        [self saveUserInfo];
-        
+        [self.activityView startAnimating];
         sender.enabled = NO;
         self.signUpButton.enabled = NO;
-        [self.activityView startAnimating];
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
+        
+        [self saveUserInfoAndBeginSignIn];
     }
 }
 
@@ -121,7 +121,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self showAlertMissingUsernameOrPassword];
         
     } else {
-        [self saveUserInfo];
+        [self saveUserInfoAndBeginSignIn];
         
         self.signUpButton.enabled = NO;
         self.signInButton.enabled = NO;
@@ -219,7 +219,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return;
 }
 
-- (void)saveUserInfo {
+- (void)saveUserInfoAndBeginSignIn {
     
     KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
     NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];

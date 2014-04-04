@@ -9,6 +9,7 @@
 #import "CPMessenger.h"
 #import "Chat+Create.h"
 #import "CPAppDelegate.h"
+#import "CPSessionContainer.h"
 
 @implementation CPMessenger
 
@@ -29,13 +30,18 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     [messageElement addChild:status];
     
     CPMessageStatus sendStatus = CPChatStatusOfflinePending;
+    XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
+    CPSessionContainer *sc = [CPSessionContainer sharedInstance];
+    // if we can send via the server do that
     if ([xmppStream isConnected]) {
         sendStatus = CPChatSendStatusSending;
         [xmppStream sendElement:messageElement];
+    } else if ([sc.currentPeers count] > 0) {
+        sendStatus = CPChatStatusRelayed;
+        [sc sendChat:[Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus]];
+    } else {
+        [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
     }
-        
-    XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
-    [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
 }
 
 + (void)sendPendingMessagesWithStream:(XMPPStream *)xmppStream

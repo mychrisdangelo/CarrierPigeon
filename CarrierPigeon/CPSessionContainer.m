@@ -18,6 +18,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 @property (nonatomic) MCNearbyServiceBrowser *serviceBrowser;
 @property (nonatomic) MCSession *session;
 @property (readwrite, nonatomic) NSMutableSet *currentPeers;
+@property (nonatomic) NSString *myDisplayName;
 
 @end
 
@@ -37,6 +38,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)signInUserWithDisplayName:(NSString *)displayName
 {
     MCPeerID *peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
+    self.myDisplayName = displayName;
     
     _session = [[MCSession alloc] initWithPeer:peerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
     _session.delegate = self;
@@ -105,122 +107,114 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 //    NSLog(@"myDictionary = %@", myDictionary);
 //}
 
+- (NSDictionary *)encodeChatAsDictionary:(Chat *)chat
+{
+    NSArray *attributes = [[[chat entity] attributesByName] allKeys];
+    NSMutableDictionary *chatDictionary = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *eachAttribute in attributes) {
+        id value = [chat valueForKey:eachAttribute];
+        
+        if (value != nil) {
+            chatDictionary[eachAttribute] = value;
+        }
+    }
+    
+    return [chatDictionary copy];
+}
+
+- (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary
+{
+    Chat *decodedChat = nil;
+    NSArray *attributes = [[[decodedChat entity] attributesByName] allKeys];
+    
+    for (NSString *eachAttribute in attributes) {
+        id value = chatDictionary[eachAttribute];
+        
+        if (value != nil) {
+            [decodedChat setValue:value forKey:eachAttribute];
+        }
+    }
+    
+    return decodedChat;
+}
 
 - (void)sendChat:(Chat *)chat
 {
-//    NSData *messageData = [chat dataUsingEncoding:NSUTF8StringEncoding];
-//    // Send text message to all connected peers
-//    NSError *error;
-//    [self.session sendData:messageData toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
-//    // Check the error return to know if there was an issue sending data to peers.  Note any peers in the 'toPeers' array argument are not connected this will fail.
-//    if (error) {
-//        NSLog(@"Error sending message to peers [%@]", error);
-//        return nil;
-//    }
-//    else {
-//        // Create a new send transcript
-//        return [[Transcript alloc] initWithPeerID:_session.myPeerID message:message direction:TRANSCRIPT_DIRECTION_SEND];
-//    }
+    NSDictionary *chatAsDictionary = [self encodeChatAsDictionary:chat];
+    NSData *messageData = [NSKeyedArchiver archivedDataWithRootObject:chatAsDictionary];
+    
+    NSError *error;
+    [self.session sendData:messageData toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
+    // Check the error return to know if there was an issue sending data to peers.  Note any peers in the 'toPeers' array argument are not connected this will fail.
+    if (error) {
+        NSLog(@"Error sending message to peers [%@]", error);
+    } else {
+#warning handle message sent out success case
+    }
 }
 
 #pragma mark - MCSessionDelegate methods
 
-// Override this method to handle changes to peer session state
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
-//    NSLog(@"Peer [%@] changed state to %@", peerID.displayName, [self stringForPeerConnectionState:state]);
-//
-//    NSString *adminMessage = [NSString stringWithFormat:@"'%@' is %@", peerID.displayName, [self stringForPeerConnectionState:state]];
-//    // Create an local transcript
-//    Transcript *transcript = [[Transcript alloc] initWithPeerID:peerID message:adminMessage direction:TRANSCRIPT_DIRECTION_LOCAL];
-//
-//    // Notify the delegate that we have received a new chunk of data from a peer
-//    [self.delegate receivedTranscript:transcript];
+    NSLog(@"Me: %@ ... Peer [%@] changed state to %@", self.myDisplayName, peerID.displayName, [self stringForPeerConnectionState:state]);
 }
 
-// MCSession Delegate callback when receiving data from a peer in a given session
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-//    // Decode the incoming data to a UTF8 encoded string
-//    NSString *receivedMessage = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
-//    // Create an received transcript
-//    Transcript *transcript = [[Transcript alloc] initWithPeerID:peerID message:receivedMessage direction:TRANSCRIPT_DIRECTION_RECEIVE];
-//    
-//    // Notify the delegate that we have received a new chunk of data from a peer
-//    [self.delegate receivedTranscript:transcript];
+    NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    Chat *chat = [self decodeDictionaryToChat:chatAsDictionary];
+    NSLog(@"%@", chat);
 }
 
-// MCSession delegate callback when we start to receive a resource from a peer in a given session
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
 {
-//    NSLog(@"Start receiving resource [%@] from peer %@ with progress [%@]", resourceName, peerID.displayName, progress);
-//    // Create a resource progress transcript
-//    Transcript *transcript = [[Transcript alloc] initWithPeerID:peerID imageName:resourceName progress:progress direction:TRANSCRIPT_DIRECTION_RECEIVE];
-//    // Notify the UI delegate
-//    [self.delegate receivedTranscript:transcript];
+    
 }
 
-// MCSession delegate callback when a incoming resource transfer ends (possibly with error)
 - (void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
 {
-//    // If error is not nil something went wrong
-//    if (error)
-//    {
-//        NSLog(@"Error [%@] receiving resource from peer %@ ", [error localizedDescription], peerID.displayName);
-//    }
-//    else
-//    {
-//        // No error so this is a completed transfer.  The resources is located in a temporary location and should be copied to a permenant locatation immediately.
-//        // Write to documents directory
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *copyPath = [NSString stringWithFormat:@"%@/%@", [paths objectAtIndex:0], resourceName];
-//        if (![[NSFileManager defaultManager] copyItemAtPath:[localURL path] toPath:copyPath error:nil])
-//        {
-//            NSLog(@"Error copying resource to documents directory");
-//        }
-//        else {
-//            // Get a URL for the path we just copied the resource to
-//            NSURL *imageUrl = [NSURL fileURLWithPath:copyPath];
-//            // Create an image transcript for this received image resource
-//            Transcript *transcript = [[Transcript alloc] initWithPeerID:peerID imageUrl:imageUrl direction:TRANSCRIPT_DIRECTION_RECEIVE];
-//            [self.delegate updateTranscript:transcript];
-//        }
-//    }
+
 }
 
 // Streaming API not utilized in this sample code
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
 {
-//    NSLog(@"Received data over stream with name %@ from peer %@", streamName, peerID.displayName);
+
 }
 
 #pragma mark - MCNearbyServiceAdvertiserDelegate
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
 }
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    invitationHandler(YES, self.session);
+    NSLog(@"Me %@ From %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
 
 #pragma mark - MCNearbyServiceBrowserDelegate
 
 - (void)browser:(MCNearbyServiceBrowser *)browser didNotStartBrowsingForPeers:(NSError *)error
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+     NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
+    [browser invitePeer:peerID toSession:self.session withContext:nil timeout:1.0];
     [self.currentPeers addObject:peerID];
+    NSLog(@"Me %@ foundPeer %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
     [self.currentPeers removeObject:peerID];
+    NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
 }
 
 @end
