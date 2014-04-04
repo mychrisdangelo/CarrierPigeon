@@ -35,7 +35,9 @@
 
 - (void)refreshPigeonListing:(id)sender
 {
-    self.nearbyPigeons = [[[CPSessionContainer sharedInstance] peersInRange] allObjects];
+    CPSessionContainer *sc = [CPSessionContainer sharedInstance];
+    self.nearbyPigeons = [[sc peersInRange] allObjects];
+    self.nearbyPigeonsConnected = [[sc peersInRangeConnected] copy];
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
 }
