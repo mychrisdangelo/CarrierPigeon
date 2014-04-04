@@ -8,8 +8,9 @@
 //  Code Adapated from documenation provided by Apple (see above)
 
 @import MultipeerConnectivity;
-
 #import <Foundation/Foundation.h>
+
+extern NSString * const kPeerListChangedNotification;
 
 @class Chat;
 

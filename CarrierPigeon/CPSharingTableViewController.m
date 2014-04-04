@@ -15,7 +15,7 @@
 @interface CPSharingTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *networkStatus;
 @property (nonatomic, strong) XMPPStream *xmppStream;
-@property (weak, nonatomic) IBOutlet UILabel *nearbyPigeonsDetailLabel;
+@property (weak, nonatomic) IBOutlet UITableViewCell *nearByPigeonsCell;
 
 @end
 
@@ -40,9 +40,27 @@
     
     [self refreshDisplayOfNetworkStatus];
     
+    [self updatePigeonCountInTableView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePigeonCountInTableView) name:kPeerListChangedNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updatePigeonCountInTableView];
+}
+
+- (void)updatePigeonCountInTableView
+{
     int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] currentPeers] count];
-    self.nearbyPigeonsDetailLabel.text = [NSString stringWithFormat:@"%d", currentPeersCount];
-    
+    self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d", currentPeersCount];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0]; // getting indexPathForCell doesn't work in static table it seems
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kPeerListChangedNotification];
 }
 
 - (void)refreshDisplayOfNetworkStatus

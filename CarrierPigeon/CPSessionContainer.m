@@ -7,10 +7,10 @@
 //
 //  Code Adapated from documenation provided by Apple (see above)
 
-
-
 #import "CPSessionContainer.h"
 #import "Chat.h"
+
+NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 @interface CPSessionContainer() <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
@@ -22,6 +22,17 @@
 @end
 
 @implementation CPSessionContainer
+
+- (id)init
+{
+    if (self = [super init]) {
+        
+        
+        return self;
+    }
+    
+    return self;
+}
 
 - (void)signInUserWithDisplayName:(NSString *)displayName
 {
@@ -204,13 +215,13 @@
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPeerListChangedNotification object:nil userInfo:nil];
     [self.currentPeers addObject:peerID];
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPeerListChangedNotification object:nil userInfo:nil];
     [self.currentPeers removeObject:peerID];
 }
 

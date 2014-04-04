@@ -880,7 +880,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Sharing" id="EtG-a1-fGX"/>
                     <connections>
-                        <outlet property="nearbyPigeonsDetailLabel" destination="ta1-0A-hcp" id="JId-Dh-lhf"/>
+                        <outlet property="nearByPigeonsCell" destination="fQE-ac-yK6" id="TIz-rH-eeV"/>
                         <outlet property="networkStatus" destination="NjQ-kT-hlI" id="Yve-49-lC2"/>
                     </connections>
                 </tableViewController>
