@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *networkStatus;
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (weak, nonatomic) IBOutlet UITableViewCell *nearByPigeonsCell;
+@property (nonatomic) int servicesRequiringRefreshing;
 
 @end
 
@@ -39,32 +40,33 @@
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     [self refreshDisplayOfNetworkStatus];
-    
     [self updatePigeonCountInTableView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePigeonCountInTableView) name:kPeerListChangedNotification object:nil];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(updatePigeonCountInTableView) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(refreshDisplayOfNetworkStatus) forControlEvents:UIControlEventValueChanged];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)endRefreshing
 {
-    [super viewWillAppear:animated];
-    [self updatePigeonCountInTableView];
+    if (--self.servicesRequiringRefreshing == 0) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 - (void)updatePigeonCountInTableView
 {
+    self.servicesRequiringRefreshing++;
     int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] currentPeers] count];
     self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d", currentPeersCount];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0]; // getting indexPathForCell doesn't work in static table it seems
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kPeerListChangedNotification];
+    [self endRefreshing];
 }
 
 - (void)refreshDisplayOfNetworkStatus
 {
+    self.servicesRequiringRefreshing++;
     if ([self.xmppStream isConnected]) {
         self.networkStatus.imageView.image = [UIImage imageNamed:@"GreenCircle"];
         self.networkStatus.textLabel.text = @"Connected";
@@ -75,6 +77,7 @@
     }
     
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning

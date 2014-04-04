@@ -215,13 +215,11 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPeerListChangedNotification object:nil userInfo:nil];
     [self.currentPeers addObject:peerID];
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPeerListChangedNotification object:nil userInfo:nil];
     [self.currentPeers removeObject:peerID];
 }
 
