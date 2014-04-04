@@ -19,6 +19,7 @@
 #import "Contact+AddRemove.h"
 #import "CPMessenger.h"
 #import "CPSessionContainer.h"
+#import "CPSettingsViewController.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -143,7 +144,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
     
-    if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];    
+    if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+    
+    [self setSettingsTabBarName];
+}
+
+- (void)setSettingsTabBarName
+{
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    NSArray *parsedJID = [myJID componentsSeparatedByString: @"@"];
+    NSString *username = [parsedJID objectAtIndex:0];
+    for (UIViewController *eachViewController in self.tabBarController.viewControllers) {
+        if ([eachViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navigationController = (UINavigationController *)eachViewController;
+            UIViewController *settingsViewController = [navigationController topViewController];
+            if ([settingsViewController isMemberOfClass:[CPSettingsViewController class]]) {
+                [settingsViewController setTitle:username];
+            }
+        }
+
+    }
 }
 
 //- (void)showSignInNowIfNecessary
