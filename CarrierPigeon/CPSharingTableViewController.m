@@ -9,6 +9,8 @@
 #import "CPSharingTableViewController.h"
 #import "CPAppDelegate.h"
 #import "XMPP.h"
+#import "CPNearbyPigeonsTableViewController.h"
+#import "CPSessionContainer.h"
 
 @interface CPSharingTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *networkStatus;
@@ -56,6 +58,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowNearbyPigeons"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPNearbyPigeonsTableViewController class]]) {
+            CPNearbyPigeonsTableViewController *nptvc = (CPNearbyPigeonsTableViewController *)segue.destinationViewController;
+            nptvc.nearbyPigeons = [[[CPSessionContainer sharedInstance] currentPeers] allObjects];
+        }
+    }
 }
 
 #pragma mark - XMPPStreamDelegate

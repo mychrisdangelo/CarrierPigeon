@@ -14,9 +14,10 @@
 
 @interface CPSessionContainer() <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
-@property (strong, nonatomic) MCNearbyServiceAdvertiser *serviceAdvertiser;
-@property (strong, nonatomic) MCNearbyServiceBrowser *serviceBrowser;
-@property (strong, nonatomic) MCSession *session;
+@property (nonatomic) MCNearbyServiceAdvertiser *serviceAdvertiser;
+@property (nonatomic) MCNearbyServiceBrowser *serviceBrowser;
+@property (nonatomic) MCSession *session;
+@property (readwrite, nonatomic) NSMutableSet *currentPeers;
 
 @end
 
@@ -24,11 +25,12 @@
 
 - (id)init
 {
-    return [self initWithDisplayName:nil];
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    return [self initWithDisplayName:myJID];
 }
 
 - (instancetype)initWithDisplayName:(NSString *)displayName
-{
+{    
     if (self = [super init]) {
         MCPeerID *peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
 
@@ -43,8 +45,20 @@
         [_serviceBrowser startBrowsingForPeers];
         _serviceBrowser.delegate = self;
         
+        _currentPeers = [[NSMutableSet alloc] init];
+        
     }
     return self;
+}
+
++ (id)sharedInstance
+{
+    static CPSessionContainer *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
 }
 
 - (void)dealloc
@@ -195,11 +209,13 @@
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self.currentPeers addObject:peerID];
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self.currentPeers removeObject:peerID];
 }
 
 @end

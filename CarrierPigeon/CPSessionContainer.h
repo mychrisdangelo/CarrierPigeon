@@ -17,8 +17,10 @@
 
 @interface CPSessionContainer : NSObject
 
++ (instancetype)sharedInstance;
 - (id)initWithDisplayName:(NSString *)displayName;
 - (void)sendChat:(Chat *)chat;
+@property (readonly, nonatomic) NSMutableSet *currentPeers;
 
 //- (void)testEncoding:(Chat *)chat;
 //- (void)testDecoding:(NSData *)encodedChat;

@@ -731,7 +731,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="OJq-cP-KPm" kind="push" id="QMl-aW-qK3"/>
+                                            <segue destination="XaD-fB-wgB" kind="push" identifier="ShowNearbyPigeons" id="B2X-zo-Ixh"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -875,6 +875,44 @@
             </objects>
             <point key="canvasLocation" x="1727" y="79"/>
         </scene>
+        <!--Nearby Pigeons Table View Controller - Nearby Pigeons-->
+        <scene sceneID="cTR-oR-eoF">
+            <objects>
+                <tableViewController id="XaD-fB-wgB" customClass="CPNearbyPigeonsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vx4-XV-ndi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NearbyPigeonCell" textLabel="1tf-bb-TWr" style="IBUITableViewCellStyleDefault" id="ir9-nL-40T">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ir9-nL-40T" id="lhE-iC-kEQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1tf-bb-TWr">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XaD-fB-wgB" id="tGI-9K-wRn"/>
+                            <outlet property="delegate" destination="XaD-fB-wgB" id="sHC-jF-EIi"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Nearby Pigeons" id="Ohf-5a-2jg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mQZ-Lm-h4Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2244" y="-635"/>
+        </scene>
         <!--View Controller - Graph Todo-->
         <scene sceneID="Lr9-op-O8W">
             <objects>
@@ -893,25 +931,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="quZ-Jd-eD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2244" y="78"/>
-        </scene>
-        <!--View Controller - Nearby Pigeons Todo-->
-        <scene sceneID="w4f-cb-IRf">
-            <objects>
-                <viewController id="OJq-cP-KPm" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="viG-c9-INw"/>
-                        <viewControllerLayoutGuide type="bottom" id="waQ-hR-i5J"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yfV-wI-iZe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Nearby Pigeons Todo" id="RrI-nw-skM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="15t-mO-2LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2244" y="-604"/>
         </scene>
     </scenes>
     <resources>
