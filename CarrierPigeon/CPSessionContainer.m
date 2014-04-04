@@ -17,7 +17,8 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 @property (nonatomic) MCNearbyServiceAdvertiser *serviceAdvertiser;
 @property (nonatomic) MCNearbyServiceBrowser *serviceBrowser;
 @property (nonatomic) MCSession *session;
-@property (readwrite, nonatomic) NSMutableSet *currentPeers;
+@property (readwrite, nonatomic) NSMutableSet *peersInRange;
+@property (readwrite, nonatomic) NSMutableSet *peersInRangeConnected;
 @property (nonatomic) NSString *myDisplayName;
 
 @end
@@ -51,7 +52,8 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     [_serviceBrowser startBrowsingForPeers];
     _serviceBrowser.delegate = self;
     
-    _currentPeers = [[NSMutableSet alloc] init];
+    _peersInRange = [[NSMutableSet alloc] init];
+    _peersInRangeConnected = [[NSMutableSet alloc] init];
 }
 
 - (void)signOutUser
@@ -158,6 +160,16 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
+    switch (state) {
+        case MCSessionStateConnected:
+            [self.peersInRangeConnected addObject:peerID];
+            break;
+        case MCSessionStateNotConnected:
+        case MCSessionStateConnecting:
+            [self.peersInRangeConnected removeObject:peerID];
+            break;
+    }
+    
     NSLog(@"Me: %@ ... Peer [%@] changed state to %@", self.myDisplayName, peerID.displayName, [self stringForPeerConnectionState:state]);
 }
 
@@ -207,13 +219,13 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
     [browser invitePeer:peerID toSession:self.session withContext:nil timeout:1.0];
-    [self.currentPeers addObject:peerID];
+    [self.peersInRange addObject:peerID];
     NSLog(@"Me %@ foundPeer %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
-    [self.currentPeers removeObject:peerID];
+    [self.peersInRange removeObject:peerID];
     NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
 }
 

@@ -57,7 +57,7 @@
 - (void)updatePigeonCountInTableView
 {
     self.servicesRequiringRefreshing++;
-    int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] currentPeers] count];
+    int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] peersInRange] count];
     self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d", currentPeersCount];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0]; // getting indexPathForCell doesn't work in static table it seems
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -91,7 +91,9 @@
     if ([segue.identifier isEqualToString:@"ShowNearbyPigeons"]) {
         if ([segue.destinationViewController isMemberOfClass:[CPNearbyPigeonsTableViewController class]]) {
             CPNearbyPigeonsTableViewController *nptvc = (CPNearbyPigeonsTableViewController *)segue.destinationViewController;
-            nptvc.nearbyPigeons = [[[CPSessionContainer sharedInstance] currentPeers] allObjects];
+            CPSessionContainer *sc = [CPSessionContainer sharedInstance];
+            nptvc.nearbyPigeons = [[sc peersInRange] allObjects];
+            nptvc.nearbyPigeonsConnected = [[sc peersInRangeConnected] copy];
         }
     }
 }

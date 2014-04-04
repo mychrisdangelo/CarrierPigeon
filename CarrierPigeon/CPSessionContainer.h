@@ -21,7 +21,8 @@
 - (void)signInUserWithDisplayName:(NSString *)displayName;
 - (void)signOutUser;
 
-@property (readonly, nonatomic) NSMutableSet *currentPeers;
+@property (readonly, nonatomic) NSMutableSet *peersInRange;
+@property (readonly, nonatomic) NSMutableSet *peersInRangeConnected;
 
 //- (void)testEncoding:(Chat *)chat;
 //- (void)testDecoding:(NSData *)encodedChat;

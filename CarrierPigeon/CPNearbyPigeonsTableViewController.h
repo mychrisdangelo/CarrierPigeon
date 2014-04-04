@@ -11,5 +11,6 @@
 @interface CPNearbyPigeonsTableViewController : UITableViewController
 
 @property (nonatomic) NSArray *nearbyPigeons;
+@property (nonatomic) NSSet *nearbyPigeonsConnected;
 
 @end

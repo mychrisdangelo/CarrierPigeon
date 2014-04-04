@@ -35,7 +35,7 @@
 
 - (void)refreshPigeonListing:(id)sender
 {
-    self.nearbyPigeons = [[[CPSessionContainer sharedInstance] currentPeers] allObjects];
+    self.nearbyPigeons = [[[CPSessionContainer sharedInstance] peersInRange] allObjects];
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
 }
@@ -60,6 +60,7 @@
     
     MCPeerID *peerID = (MCPeerID *)self.nearbyPigeons[indexPath.row];
     cell.textLabel.text = [self parseOutHostIfInDisplayName:peerID.displayName];
+    cell.detailTextLabel.text = [self.nearbyPigeonsConnected containsObject:peerID] ? @"Connected" : @"Unavailable";
     
     return cell;
 }

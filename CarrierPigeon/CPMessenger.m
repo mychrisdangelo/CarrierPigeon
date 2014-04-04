@@ -36,7 +36,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     if ([xmppStream isConnected]) {
         sendStatus = CPChatSendStatusSending;
         [xmppStream sendElement:messageElement];
-    } else if ([sc.currentPeers count] > 0) {
+    } else if ([sc.peersInRange count] > 0) {
         sendStatus = CPChatStatusRelayed;
         [sc sendChat:[Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus]];
     } else {
