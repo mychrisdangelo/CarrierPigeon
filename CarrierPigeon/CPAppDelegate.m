@@ -18,6 +18,7 @@
 #import "XMPPMessageArchiving.h"
 #import "XMPPMessageArchivingCoreDataStorage.h"
 #import "CPContactsTableViewController.h"
+#import "CPSessionContainer.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -214,6 +215,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
 		return NO;
 	}
+    
+    [[CPSessionContainer sharedInstance] signInUserWithDisplayName:myJID];
     
 	return YES;
 }

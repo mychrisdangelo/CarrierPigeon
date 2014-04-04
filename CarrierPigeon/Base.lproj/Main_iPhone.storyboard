@@ -252,11 +252,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="cuZ-z3-HnM">
-                        <barButtonItem key="leftBarButtonItem" title="test" id="pgh-aE-hNE">
-                            <connections>
-                                <action selector="testButtonPressed:" destination="YfI-BP-BbQ" id="Ns7-sl-saf"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="17K-Yd-Ly8">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="5Wb-EZ-ToQ">
                                 <rect key="frame" x="282" y="11" width="22" height="22"/>

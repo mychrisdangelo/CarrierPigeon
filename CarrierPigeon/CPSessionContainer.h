@@ -20,6 +20,8 @@
 + (instancetype)sharedInstance;
 - (void)sendChat:(Chat *)chat;
 @property (readonly, nonatomic) NSMutableSet *currentPeers;
+- (void)signInUserWithDisplayName:(NSString *)displayName;
+- (void)signOutUser;
 
 //- (void)testEncoding:(Chat *)chat;
 //- (void)testDecoding:(NSData *)encodedChat;

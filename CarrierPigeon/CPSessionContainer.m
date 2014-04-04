@@ -23,32 +23,30 @@
 
 @implementation CPSessionContainer
 
-- (id)init
+- (void)signInUserWithDisplayName:(NSString *)displayName
 {
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    return [self initWithDisplayName:myJID];
+    MCPeerID *peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
+    
+    _session = [[MCSession alloc] initWithPeer:peerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
+    _session.delegate = self;
+    
+    _serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:peerID discoveryInfo:nil serviceType:@"cp-chat"];
+    [_serviceAdvertiser startAdvertisingPeer];
+    _serviceAdvertiser.delegate = self;
+    
+    _serviceBrowser = [[MCNearbyServiceBrowser alloc] initWithPeer:peerID serviceType:@"cp-chat"];
+    [_serviceBrowser startBrowsingForPeers];
+    _serviceBrowser.delegate = self;
+    
+    _currentPeers = [[NSMutableSet alloc] init];
 }
 
-- (instancetype)initWithDisplayName:(NSString *)displayName
-{    
-    if (self = [super init]) {
-        MCPeerID *peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
-
-        _session = [[MCSession alloc] initWithPeer:peerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
-        _session.delegate = self;
-        
-        _serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:peerID discoveryInfo:nil serviceType:@"cp-chat"];
-        [_serviceAdvertiser startAdvertisingPeer];
-        _serviceAdvertiser.delegate = self;
-        
-        _serviceBrowser = [[MCNearbyServiceBrowser alloc] initWithPeer:peerID serviceType:@"cp-chat"];
-        [_serviceBrowser startBrowsingForPeers];
-        _serviceBrowser.delegate = self;
-        
-        _currentPeers = [[NSMutableSet alloc] init];
-        
-    }
-    return self;
+- (void)signOutUser
+{
+    CPSessionContainer *si = [CPSessionContainer sharedInstance];
+    [si.serviceAdvertiser stopAdvertisingPeer];
+    [si.serviceBrowser stopBrowsingForPeers];
+    [si.session disconnect];
 }
 
 + (id)sharedInstance
@@ -63,9 +61,7 @@
 
 - (void)dealloc
 {
-    [self.serviceAdvertiser stopAdvertisingPeer];
-    [self.serviceBrowser stopBrowsingForPeers];
-    [self.session disconnect];
+    [self signOutUser];
 }
 
 // Helper method for human readable printing of MCSessionState.  This state is per peer.

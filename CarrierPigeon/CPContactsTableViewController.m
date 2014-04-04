@@ -41,11 +41,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
 
-- (IBAction)testButtonPressed:(UIBarButtonItem *)sender {
-    self.sessionContainer = [CPSessionContainer sharedInstance];
-    // [self.sessionContainer testEncoding:nil];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -145,6 +140,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
     
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];    
@@ -180,6 +176,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [CPMessenger sendPendingMessagesWithStream:self.xmppStream];
     
+    [self endRefreshing];
+}
+
+// TODO: this should happen whenever app turns on and should remain on for as long as possible. for now it's manual
+- (void)setupPeerToPeerSession
+{
+    self.servicesRequiringRefreshing++;
+    self.sessionContainer = [CPSessionContainer sharedInstance];
     [self endRefreshing];
 }
 

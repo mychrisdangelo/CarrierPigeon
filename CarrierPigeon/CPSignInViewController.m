@@ -12,6 +12,7 @@
 #import "DDTTYLogger.h"
 #import "CPContactsTableViewController.h"
 #import "CPAppDelegate.h"
+#import "CPSessionContainer.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -61,6 +62,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.usernameTextField setHidden:NO];
         [self.passwordTextField setHidden:NO];
         [self.usernameTextField becomeFirstResponder];
+        [[CPSessionContainer sharedInstance] signOutUser];
         self.userWantsToLogOut = NO;
         
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously];
