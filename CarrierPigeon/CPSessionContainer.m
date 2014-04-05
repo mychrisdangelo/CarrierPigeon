@@ -44,10 +44,12 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     _session = [[MCSession alloc] initWithPeer:peerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
     _session.delegate = self;
     
+    // for telling nearby peers I am available so you can invite me to a session
     _serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:peerID discoveryInfo:nil serviceType:@"cp-chat"];
     [_serviceAdvertiser startAdvertisingPeer];
     _serviceAdvertiser.delegate = self;
     
+    // for looking for nearby peers to invite them to a session
     _serviceBrowser = [[MCNearbyServiceBrowser alloc] initWithPeer:peerID serviceType:@"cp-chat"];
     [_serviceBrowser startBrowsingForPeers];
     _serviceBrowser.delegate = self;
@@ -205,6 +207,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
+
     invitationHandler(YES, self.session);
     NSLog(@"Me %@ From %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
@@ -218,7 +221,14 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
-    [browser invitePeer:peerID toSession:self.session withContext:nil timeout:1.0];
+    // don't recipricate invites. insight comes from: https://github.com/shrtlist/MCSessionP2P
+    NSString *remotePeerName = peerID.displayName;
+    MCPeerID *myPeerID = self.session.myPeerID;
+    BOOL shouldInvite = ([myPeerID.displayName compare:remotePeerName] == NSOrderedDescending);
+    if (shouldInvite) {
+        [browser invitePeer:peerID toSession:self.session withContext:nil timeout:5.0];
+    }
+    
     [self.peersInRange addObject:peerID];
     NSLog(@"Me %@ foundPeer %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
