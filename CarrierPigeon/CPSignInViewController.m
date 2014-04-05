@@ -12,6 +12,7 @@
 #import "DDTTYLogger.h"
 #import "CPContactsTableViewController.h"
 #import "CPAppDelegate.h"
+#import "CPSessionContainer.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -61,6 +62,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.usernameTextField setHidden:NO];
         [self.passwordTextField setHidden:NO];
         [self.usernameTextField becomeFirstResponder];
+        [[CPSessionContainer sharedInstance] signOutUser];
         self.userWantsToLogOut = NO;
         
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously];
@@ -76,9 +78,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 
-- (IBAction)autoLoginButtonPressed:(UIButton *)sender {
-    self.usernameTextField.text = @"chris";
-    self.passwordTextField.text = @"uknowme";
+- (IBAction)autoLoginButtonOnePressed:(UIButton *)sender {
+    self.usernameTextField.text = @"CarrierPigeon1";
+    self.passwordTextField.text = @"keyboardflub";
+    [self signInButtonPressed:nil];
+}
+
+- (IBAction)autoLoginButtonTworessed:(UIButton *)sender {
+    self.usernameTextField.text = @"CarrierPigeon2";
+    self.passwordTextField.text = @"keyboardflub";
     [self signInButtonPressed:nil];
 }
 
@@ -98,13 +106,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([self.usernameTextField.text length] == 0 || [self.passwordTextField.text length] == 0) {
         [self showAlertMissingUsernameOrPassword];
     } else {
-        [self saveUserInfo];
-        
+        [self.activityView startAnimating];
         sender.enabled = NO;
         self.signUpButton.enabled = NO;
-        [self.activityView startAnimating];
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
+        
+        [self saveUserInfoAndBeginSignIn];
     }
 }
 
@@ -113,7 +121,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self showAlertMissingUsernameOrPassword];
         
     } else {
-        [self saveUserInfo];
+        [self saveUserInfoAndBeginSignIn];
         
         self.signUpButton.enabled = NO;
         self.signInButton.enabled = NO;
@@ -211,7 +219,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return;
 }
 
-- (void)saveUserInfo {
+- (void)saveUserInfoAndBeginSignIn {
     
     KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
     NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];

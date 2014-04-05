@@ -18,11 +18,11 @@
 #import "XMPPMessageArchiving.h"
 #import "XMPPMessageArchivingCoreDataStorage.h"
 #import "CPContactsTableViewController.h"
-#import <HockeySDK/HockeySDK.h>
+#import "CPSessionContainer.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_ERROR;
 #else
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
@@ -118,11 +118,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             }
         }
     }
-    
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"b59fa6550fa8db450f5b3de968c6a4bd"];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-
     
     [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
     // [self testMessageArchiving];
@@ -220,6 +215,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
 		return NO;
 	}
+    
+    [[CPSessionContainer sharedInstance] signInUserWithDisplayName:myJID];
     
 	return YES;
 }
@@ -610,7 +607,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                             managedObjectContext:[self managedObjectContext_roster]];
         
         NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext withMessageStatus:CPChatSendStutusReceivedMessage];
+        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext withMessageStatus:CPChatSendStatusReceivedMessage];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
 		NSString *displayName = [user displayName];

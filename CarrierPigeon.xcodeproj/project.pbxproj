@@ -68,6 +68,13 @@
 		4032C58A18BDAE0600E0CDD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */; };
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
+		4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139A18E0A6AC00687944 /* CPSessionContainer.m */; };
+		405813A018E0AF5400687944 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */; };
+		4067D50618EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */; };
+		4067D50918EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4067D50818EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m */; };
+		4067D50C18EF91EC002F6163 /* Chat+EncoderDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4067D50B18EF91EC002F6163 /* Chat+EncoderDecoder.m */; };
+		4071A66118EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */; };
+		4071A66518EF5C1F00E62A95 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4071A66418EF5C1F00E62A95 /* Chat.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
 		40A2AEBB18D7E6F800E4CD75 /* CPSharingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */; };
 		40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A994BC18C31E4700C23AB6 /* XMPPBandwidthMonitor.m */; };
@@ -165,9 +172,6 @@
 		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
 		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
-		40E5B3D818D8DF6A00918FB3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */; };
-		40E5B3D918D8DF6A00918FB3 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 40E5B3D618D8DF6A00918FB3 /* HockeySDK.xcconfig */; };
-		40E5B3DA18D8DF6A00918FB3 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
 		40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */; };
@@ -175,7 +179,6 @@
 		40FBDCE718D3E53A00A4D174 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE618D3E53A00A4D174 /* Contact.m */; };
 		40FBDCEA18D3E68C00A4D174 /* Contact+AddRemove.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */; };
 		40FBDCED18D3F81E00A4D174 /* CPMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */; };
-		40FBDCF918D400BE00A4D174 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCF818D400BE00A4D174 /* Chat.m */; };
 		40FBDCFC18D40D6800A4D174 /* CPMessageDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */; };
 		65B0D01390104F4DB6C3936C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6186C0F89A479687742E4D /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -302,6 +305,19 @@
 		4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonTests.m; sourceTree = "<group>"; };
 		403972C718C661AD007F592D /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
+		4058139918E0A6AC00687944 /* CPSessionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSessionContainer.h; sourceTree = "<group>"; };
+		4058139A18E0A6AC00687944 /* CPSessionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSessionContainer.m; sourceTree = "<group>"; };
+		4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		4067D50418EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCarrierPendingMessagesTableViewController.h; sourceTree = "<group>"; };
+		4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCarrierPendingMessagesTableViewController.m; sourceTree = "<group>"; };
+		4067D50718EF87D6002F6163 /* CPYourPendingMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPYourPendingMessagesTableViewController.h; sourceTree = "<group>"; };
+		4067D50818EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPYourPendingMessagesTableViewController.m; sourceTree = "<group>"; };
+		4067D50A18EF91EC002F6163 /* Chat+EncoderDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+EncoderDecoder.h"; sourceTree = "<group>"; };
+		4067D50B18EF91EC002F6163 /* Chat+EncoderDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+EncoderDecoder.m"; sourceTree = "<group>"; };
+		4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNearbyPigeonsTableViewController.h; sourceTree = "<group>"; };
+		4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNearbyPigeonsTableViewController.m; sourceTree = "<group>"; };
+		4071A66318EF5C1F00E62A95 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		4071A66418EF5C1F00E62A95 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
 		408CFE5718C40E77009F991C /* CPContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewController.m; sourceTree = "<group>"; };
 		40A2AEB918D7E6F800E4CD75 /* CPSharingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSharingTableViewController.h; sourceTree = "<group>"; };
@@ -502,9 +518,6 @@
 		40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHelperFunctions.h; sourceTree = "<group>"; };
 		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
 		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
-		40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		40E5B3D618D8DF6A00918FB3 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		40E5B3DB18D8DF8600918FB3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -515,8 +528,6 @@
 		40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+AddRemove.m"; sourceTree = "<group>"; };
 		40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessenger.h; sourceTree = "<group>"; };
 		40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessenger.m; sourceTree = "<group>"; };
-		40FBDCF718D400BE00A4D174 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
-		40FBDCF818D400BE00A4D174 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		40FBDCFA18D40D6800A4D174 /* CPMessageDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessageDetailTableViewController.h; sourceTree = "<group>"; };
 		40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessageDetailTableViewController.m; sourceTree = "<group>"; };
 		4D6186C0F89A479687742E4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -528,6 +539,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				405813A018E0AF5400687944 /* MultipeerConnectivity.framework in Frameworks */,
 				4032C55918BDAE0500E0CDD1 /* UIKit.framework in Frameworks */,
 				40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */,
 				400DC1AC18C2EB4100C806ED /* Security.framework in Frameworks */,
@@ -540,7 +552,6 @@
 				400DC1C418C2EC3F00C806ED /* libidn.a in Frameworks */,
 				400DC1AA18C2EB3100C806ED /* CFNetwork.framework in Frameworks */,
 				4032C55B18BDAE0500E0CDD1 /* CoreData.framework in Frameworks */,
-				40E5B3D818D8DF6A00918FB3 /* HockeySDK.framework in Frameworks */,
 				65B0D01390104F4DB6C3936C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,6 +837,7 @@
 		4032C55318BDAE0500E0CDD1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */,
 				40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */,
 				40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */,
 				40E5B3DB18D8DF8600918FB3 /* CoreText.framework */,
@@ -928,6 +940,12 @@
 			children = (
 				40A2AEB918D7E6F800E4CD75 /* CPSharingTableViewController.h */,
 				40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */,
+				4067D50718EF87D6002F6163 /* CPYourPendingMessagesTableViewController.h */,
+				4067D50818EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m */,
+				4067D50418EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.h */,
+				4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */,
+				4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */,
+				4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -1475,7 +1493,6 @@
 		40A995F818C31FDF00C23AB6 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				40E5B3D318D8DF6A00918FB3 /* HockeySDK.embeddedframework */,
 				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
@@ -1516,8 +1533,10 @@
 			children = (
 				40D2C08018C45E0800A9E6FD /* Chat+Create.h */,
 				40D2C08118C45E0800A9E6FD /* Chat+Create.m */,
-				40FBDCF718D400BE00A4D174 /* Chat.h */,
-				40FBDCF818D400BE00A4D174 /* Chat.m */,
+				4067D50A18EF91EC002F6163 /* Chat+EncoderDecoder.h */,
+				4067D50B18EF91EC002F6163 /* Chat+EncoderDecoder.m */,
+				4071A66318EF5C1F00E62A95 /* Chat.h */,
+				4071A66418EF5C1F00E62A95 /* Chat.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1534,6 +1553,8 @@
 		40D2C0A018C46D5800A9E6FD /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				4058139918E0A6AC00687944 /* CPSessionContainer.h */,
+				4058139A18E0A6AC00687944 /* CPSessionContainer.m */,
 				40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */,
 				40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */,
 				401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */,
@@ -1544,24 +1565,6 @@
 				40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */,
 			);
 			name = Messages;
-			sourceTree = "<group>";
-		};
-		40E5B3D318D8DF6A00918FB3 /* HockeySDK.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				40E5B3D418D8DF6A00918FB3 /* HockeySDK.framework */,
-				40E5B3D518D8DF6A00918FB3 /* Resources */,
-			);
-			path = HockeySDK.embeddedframework;
-			sourceTree = "<group>";
-		};
-		40E5B3D518D8DF6A00918FB3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				40E5B3D618D8DF6A00918FB3 /* HockeySDK.xcconfig */,
-				40E5B3D718D8DF6A00918FB3 /* HockeySDKResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		40FBDCDE18D3E3DB00A4D174 /* Contact */ = {
@@ -1662,9 +1665,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E5B3D918D8DF6A00918FB3 /* HockeySDK.xcconfig in Resources */,
 				4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */,
-				40E5B3DA18D8DF6A00918FB3 /* HockeySDKResources.bundle in Resources */,
 				4032C57818BDAE0500E0CDD1 /* Images.xcassets in Resources */,
 				4032C56A18BDAE0500E0CDD1 /* Main_iPhone.storyboard in Resources */,
 				4032C56118BDAE0500E0CDD1 /* InfoPlist.strings in Resources */,
@@ -1722,6 +1723,7 @@
 			files = (
 				40A995CB18C31E4800C23AB6 /* XMPPvCardTempEmail.m in Sources */,
 				40A995A018C31E4800C23AB6 /* XMPPCoreDataStorage.m in Sources */,
+				4071A66118EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m in Sources */,
 				40A995A218C31E4800C23AB6 /* XMPPProcessOne.m in Sources */,
 				4032C56318BDAE0500E0CDD1 /* main.m in Sources */,
 				40A995B218C31E4800C23AB6 /* XMPPLastActivity.m in Sources */,
@@ -1753,6 +1755,7 @@
 				400DC19D18C2E9EA00C806ED /* DDAbstractDatabaseLogger.m in Sources */,
 				4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */,
 				40FBDCED18D3F81E00A4D174 /* CPMessenger.m in Sources */,
+				4071A66518EF5C1F00E62A95 /* Chat.m in Sources */,
 				40A995D818C31E4800C23AB6 /* XMPPMessage+XEP_0085.m in Sources */,
 				40FBDCE718D3E53A00A4D174 /* Contact.m in Sources */,
 				400DC1A218C2E9EA00C806ED /* ContextFilterLogFormatter.m in Sources */,
@@ -1782,11 +1785,13 @@
 				40A995AD18C31E4800C23AB6 /* XMPPSystemInputActivityMonitor.m in Sources */,
 				40A995CA18C31E4800C23AB6 /* XMPPvCardTempBase.m in Sources */,
 				40A995D418C31E4800C23AB6 /* XMPPIQ+XEP_0066.m in Sources */,
+				4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */,
 				40A995A518C31E4800C23AB6 /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				40A995B618C31E4800C23AB6 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				40A995AF18C31E4800C23AB6 /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				40A995A818C31E4800C23AB6 /* XMPPUserCoreDataStorageObject.m in Sources */,
 				40A995BD18C31E4800C23AB6 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
+				4067D50618EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m in Sources */,
 				40A995B818C31E4800C23AB6 /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				40A995E318C31E4800C23AB6 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				400DC20618C2ECC900C806ED /* XMPPParser.m in Sources */,
@@ -1796,7 +1801,6 @@
 				40A995A318C31E4800C23AB6 /* XMPPReconnect.m in Sources */,
 				40A995B718C31E4800C23AB6 /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				400DC20518C2ECC900C806ED /* XMPPModule.m in Sources */,
-				40FBDCF918D400BE00A4D174 /* Chat.m in Sources */,
 				400DC1BD18C2EB5600C806ED /* DDXMLNode.m in Sources */,
 				400DC20718C2ECC900C806ED /* XMPPPresence.m in Sources */,
 				40A995CD18C31E4800C23AB6 /* XMPPvCardTempModule.m in Sources */,
@@ -1808,6 +1812,7 @@
 				40A995D918C31E4800C23AB6 /* XMPPSoftwareVersion.m in Sources */,
 				40A995EE18C31E4800C23AB6 /* XMPPAutoTime.m in Sources */,
 				400DC20118C2ECC900C806ED /* XMPPElement.m in Sources */,
+				4067D50918EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m in Sources */,
 				40A995BA18C31E4800C23AB6 /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				40A995B118C31E4800C23AB6 /* XMPPIQ+LastActivity.m in Sources */,
 				40A995B318C31E4800C23AB6 /* XMPPPrivacy.m in Sources */,
@@ -1841,6 +1846,7 @@
 				40A995AB18C31E4800C23AB6 /* XMPPUserMemoryStorageObject.m in Sources */,
 				40A995E018C31E4800C23AB6 /* XMPPCapabilities.m in Sources */,
 				400DC20418C2ECC900C806ED /* XMPPMessage.m in Sources */,
+				4067D50C18EF91EC002F6163 /* Chat+EncoderDecoder.m in Sources */,
 				40A995D018C31E4800C23AB6 /* XMPPResultSet.m in Sources */,
 				40A995A618C31E4800C23AB6 /* XMPPRoster.xcdatamodel in Sources */,
 				40A995C318C31E4800C23AB6 /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,

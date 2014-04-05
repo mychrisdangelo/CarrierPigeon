@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *message;
 @property (weak, nonatomic) IBOutlet UILabel *from;
 @property (weak, nonatomic) IBOutlet UILabel *to;
-@property (weak, nonatomic) IBOutlet UILabel *carriers;
+@property (weak, nonatomic) IBOutlet UILabel *reallyFrom;
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UILabel *sent;
 @property (weak, nonatomic) IBOutlet UILabel *delivered;
@@ -42,33 +42,9 @@
     self.message.text = self.chat.messageBody;
     self.from.text = self.chat.fromJID;
     self.to.text = self.chat.toJID;
-    self.carriers.text = @"todo";
+    self.reallyFrom.text = self.chat.reallyFromJID ? self.chat.reallyFromJID : self.chat.fromJID;
     
-    NSString *statusString;
-    
-    switch ([self.chat.messageStatus intValue]) {
-        case CPChatSendStatusSent:
-            statusString = @"sent";
-            break;
-        case CPChatSendStatusSending:
-            statusString = @"sending";
-            break;
-        case CPChatSendStutusReceivedMessage:
-            statusString = @"received";
-            break;
-        case CPChatStatusOfflinePending:
-            statusString = @"pending";
-            break;
-        case CPChatStatusRelaying:
-            statusString = @"relaying";
-            break;
-        case CPChatStatusRelayed:
-            statusString = @"relayed";
-            break;
-        default:
-            statusString = @"unknown";
-            break;
-    }
+    NSString *statusString = [Chat stringForMessageStatus:[self.chat.messageStatus intValue]];
     
     self.status.text = statusString;
     self.sent.text = @"todo";

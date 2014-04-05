@@ -18,6 +18,8 @@
 #import "CPMessagesViewController.h"
 #import "Contact+AddRemove.h"
 #import "CPMessenger.h"
+#import "CPSessionContainer.h"
+#import "CPSettingsViewController.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -31,6 +33,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) int servicesRequiringRefreshing;
+@property (nonatomic, strong) CPSessionContainer *sessionContainer;
 
 @end
 
@@ -38,6 +41,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
+
+
+- (IBAction)forceOfflineButtonPressed:(UIBarButtonItem *)sender {
+    [self.xmppStream disconnect];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -138,9 +147,30 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
     
-    if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];    
+    if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+    
+    [self setSettingsTabBarName];
+}
+
+- (void)setSettingsTabBarName
+{
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    NSArray *parsedJID = [myJID componentsSeparatedByString: @"@"];
+    NSString *username = [parsedJID objectAtIndex:0];
+    for (UIViewController *eachViewController in self.tabBarController.viewControllers) {
+        if ([eachViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navigationController = (UINavigationController *)eachViewController;
+            UIViewController *settingsViewController = [navigationController topViewController];
+            if ([settingsViewController isMemberOfClass:[CPSettingsViewController class]]) {
+                [settingsViewController setTitle:username];
+                return;
+            }
+        }
+
+    }
 }
 
 //- (void)showSignInNowIfNecessary
@@ -173,6 +203,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [CPMessenger sendPendingMessagesWithStream:self.xmppStream];
     
+    [self endRefreshing];
+}
+
+// TODO: this should happen whenever app turns on and should remain on for as long as possible. for now it's manual
+- (void)setupPeerToPeerSession
+{
+    self.servicesRequiringRefreshing++;
+    self.sessionContainer = [CPSessionContainer sharedInstance];
     [self endRefreshing];
 }
 
