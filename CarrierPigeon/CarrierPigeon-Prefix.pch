@@ -16,4 +16,5 @@
     #import <CoreData/CoreData.h>
     #import "Constants.h"
     #import "Credentials.h"
+    #import "CPHelperFunctions.h"
 #endif

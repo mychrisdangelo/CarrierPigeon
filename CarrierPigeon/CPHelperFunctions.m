@@ -35,4 +35,11 @@
     return retStr;
 }
 
++ (NSString *)parseOutHostIfInDisplayName:(NSString *)displayName
+{
+    NSArray *parsedJID = [displayName componentsSeparatedByString: @"@"];
+    NSString *username = [parsedJID objectAtIndex:0];
+    return username;
+}
+
 @end

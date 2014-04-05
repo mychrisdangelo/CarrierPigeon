@@ -12,6 +12,8 @@
 
 @interface CPHelperFunctions : NSObject
 
-+(NSString *)dayLabelForMessage:(NSDate *)msgDate;
++ (NSString *)dayLabelForMessage:(NSDate *)msgDate;
+
++ (NSString *)parseOutHostIfInDisplayName:(NSString *)displayName;
 
 @end

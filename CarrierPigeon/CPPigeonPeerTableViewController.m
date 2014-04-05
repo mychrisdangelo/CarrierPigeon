@@ -25,13 +25,6 @@
     [super viewDidLoad];
 }
 
-- (NSString *)parseOutHostIfInDisplayName:(NSString *)displayName
-{
-    NSArray *parsedJID = [displayName componentsSeparatedByString: @"@"];
-    NSString *username = [parsedJID objectAtIndex:0];
-    return username;
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -44,7 +37,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PigeonPeerCell" forIndexPath:indexPath];
     
     PigeonPeer *pigeon = self.pigeonPeers[indexPath.row];
-    cell.textLabel.text = [self parseOutHostIfInDisplayName:pigeon.jidStr];
+    cell.textLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:pigeon.jidStr];
     
     return cell;
 }

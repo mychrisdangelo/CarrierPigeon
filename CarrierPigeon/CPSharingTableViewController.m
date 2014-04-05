@@ -70,10 +70,12 @@
     if ([self.xmppStream isConnected]) {
         self.networkStatus.imageView.image = [UIImage imageNamed:@"GreenCircle"];
         self.networkStatus.textLabel.text = @"Connected";
+    } else if ([[CPSessionContainer sharedInstance] peersInRangeConnected]) {
+        self.networkStatus.imageView.image = [UIImage imageNamed:@"YellowCircle"];
+        self.networkStatus.textLabel.text = @"Nearby Pigeons Connected";
     } else {
         self.networkStatus.imageView.image = [UIImage imageNamed:@"RedCircle"];
         self.networkStatus.textLabel.text = @"No network connection";
-        // todo: handle case of @"YellowCircle" when there is no network but there is a connection to other users
     }
     
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];

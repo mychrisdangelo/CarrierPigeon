@@ -61,17 +61,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NearbyPigeonCell" forIndexPath:indexPath];
     
     MCPeerID *peerID = (MCPeerID *)self.nearbyPigeons[indexPath.row];
-    cell.textLabel.text = [self parseOutHostIfInDisplayName:peerID.displayName];
+    cell.textLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:peerID.displayName];
     cell.detailTextLabel.text = [self.nearbyPigeonsConnected containsObject:peerID] ? @"Connected" : @"Unavailable";
     
     return cell;
-}
-
-- (NSString *)parseOutHostIfInDisplayName:(NSString *)displayName
-{
-    NSArray *parsedJID = [displayName componentsSeparatedByString: @"@"];
-    NSString *username = [parsedJID objectAtIndex:0];
-    return username;
 }
 
 

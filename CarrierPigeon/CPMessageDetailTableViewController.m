@@ -46,22 +46,17 @@
     }
 }
 
-- (NSString *)parseOutHostIfInDisplayName:(NSString *)displayName
-{
-    NSArray *parsedJID = [displayName componentsSeparatedByString: @"@"];
-    NSString *username = [parsedJID objectAtIndex:0];
-    return username;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.message.text = self.chat.messageBody;
-    self.from.text = [self parseOutHostIfInDisplayName:self.chat.fromJID];
-    self.to.text = [self parseOutHostIfInDisplayName:self.chat.toJID];
+    self.from.text = [CPHelperFunctions parseOutHostIfInDisplayName:self.chat.fromJID];
+    self.to.text = [CPHelperFunctions parseOutHostIfInDisplayName:self.chat.toJID];
     NSString *reallyFrom = self.chat.reallyFromJID ? self.chat.reallyFromJID : self.chat.fromJID;
-    self.reallyFrom.text = [self parseOutHostIfInDisplayName:reallyFrom];
+    self.reallyFrom.text = [CPHelperFunctions parseOutHostIfInDisplayName:reallyFrom];
     
     // setup carrierCell
     int pigeonsCarryingMessageCount = (int)[self.chat.pigeonsCarryingMessage count];

@@ -77,6 +77,7 @@
 		406FAD0518F05707003FDF89 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0418F05707003FDF89 /* Chat.m */; };
 		406FAD0818F05AE0003FDF89 /* PigeonPeer+MCPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0718F05AE0003FDF89 /* PigeonPeer+MCPeer.m */; };
 		406FAD1018F078B2003FDF89 /* CPPigeonPeerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0F18F078B2003FDF89 /* CPPigeonPeerTableViewController.m */; };
+		406FAD1318F087E7003FDF89 /* CPNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD1218F087E7003FDF89 /* CPNetworkStatus.m */; };
 		4071A66118EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
 		40A2AEBB18D7E6F800E4CD75 /* CPSharingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */; };
@@ -325,6 +326,8 @@
 		406FAD0718F05AE0003FDF89 /* PigeonPeer+MCPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PigeonPeer+MCPeer.m"; sourceTree = "<group>"; };
 		406FAD0E18F078B2003FDF89 /* CPPigeonPeerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPigeonPeerTableViewController.h; sourceTree = "<group>"; };
 		406FAD0F18F078B2003FDF89 /* CPPigeonPeerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPigeonPeerTableViewController.m; sourceTree = "<group>"; };
+		406FAD1118F087E7003FDF89 /* CPNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNetworkStatus.h; sourceTree = "<group>"; };
+		406FAD1218F087E7003FDF89 /* CPNetworkStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNetworkStatus.m; sourceTree = "<group>"; };
 		4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNearbyPigeonsTableViewController.h; sourceTree = "<group>"; };
 		4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNearbyPigeonsTableViewController.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
@@ -894,6 +897,8 @@
 				40A64B8018CA3CCE0089CDA7 /* Credentials.h */,
 				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
 				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
+				406FAD1118F087E7003FDF89 /* CPNetworkStatus.h */,
+				406FAD1218F087E7003FDF89 /* CPNetworkStatus.m */,
 				40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */,
 				40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */,
 			);
@@ -1901,6 +1906,7 @@
 				40A995BF18C31E4800C23AB6 /* XMPPMessage+XEP0045.m in Sources */,
 				40A995F418C31E4800C23AB6 /* NSXMLElement+XEP_0297.m in Sources */,
 				40A995F518C31E4800C23AB6 /* XMPPMessage+XEP_0308.m in Sources */,
+				406FAD1318F087E7003FDF89 /* CPNetworkStatus.m in Sources */,
 				40A995C818C31E4800C23AB6 /* XMPPvCardTempAdr.m in Sources */,
 				40A995EF18C31E4800C23AB6 /* XMPPTime.m in Sources */,
 				406FAD0818F05AE0003FDF89 /* PigeonPeer+MCPeer.m in Sources */,
