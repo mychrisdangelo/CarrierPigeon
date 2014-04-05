@@ -683,7 +683,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
--(void)printContacts:(NSMutableArray*)contacts{
+- (void)printContacts:(NSMutableArray*)contacts
+{
     @autoreleasepool {
         NSLog(@"**********************************");
         NSLog(@"** Print Archived Contacts Test **");
@@ -696,7 +697,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
--(void)testMessageArchiving{
+- (void)testMessageArchiving
+{
     XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
     NSManagedObjectContext *moc = [storage mainThreadManagedObjectContext];
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Contact_CoreDataObject"
@@ -709,7 +711,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self printContacts:[[NSMutableArray alloc]initWithArray:messages]];
 }
 
--(void)testContactArchiving{
+- (void)testContactArchiving
+{
     XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
     NSManagedObjectContext *moc = [storage mainThreadManagedObjectContext];
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
@@ -724,7 +727,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 #pragma mark - Friend Request Helpers
--(void) showFriendRequestAlertView: (NSString*) alertMessage {
+- (void)showFriendRequestAlertView:(NSString*)alertMessage
+{
     //TODO: add button "Not Now" to alert view
     //TODO: develop a friend request list that shows pending requests received only.
     // The pending requests would be removed from the list as they are accepted by the user.
@@ -740,13 +744,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     NSString *atkXMPPDomainName = [@"@" stringByAppendingString:kXMPPDomainName];
     
     self.friendRequestFrom = [self.friendRequestFrom stringByAppendingString:atkXMPPDomainName];
     
-    if (buttonIndex == 0){
+    if (buttonIndex == 0) {
         //Reject clicked
         if ([self.friendRequestFrom length] != 0) {
             [self.xmppRoster rejectPresenceSubscriptionRequestFrom:[XMPPJID jidWithString:self.friendRequestFrom]];
