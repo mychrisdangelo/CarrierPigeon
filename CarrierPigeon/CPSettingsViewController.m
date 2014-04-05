@@ -29,12 +29,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-
-    
-    [self displayUserName];
+    [self refreshUserNameInTitle];
 }
 
-- (void)displayUserName
+- (void)refreshUserNameInTitle
 {
     NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     NSArray *parsedJID = [myJID componentsSeparatedByString: @"@"];
@@ -65,6 +63,8 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tabBarController setSelectedIndex:0];
+    
+    [self refreshUserNameInTitle];
 }
 
 @end
