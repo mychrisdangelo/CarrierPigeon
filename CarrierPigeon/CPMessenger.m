@@ -84,8 +84,16 @@ inManagedObjectContext:(NSManagedObjectContext *)context
             [xmppStream sendElement:messageElement];
             [Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context];
         } else if ([sc.peersInRange count] > 0) {
-            sendStatus = CPChatSendStatusRelaying;
-            [sc sendChat:[Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context]];
+            /*
+             * Messages received from others to relay are not sent to subsquent peers. Here, the current
+             * user is a carrier of the message. They should not send out a relayed messages to other peers. They
+             * should only send directly to the server if they can.
+             */
+            
+            if (!each.reallyFromJID) {
+                sendStatus = CPChatSendStatusRelaying;
+                [sc sendChat:[Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context]];
+            }
         } else {
             [Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context];
         }

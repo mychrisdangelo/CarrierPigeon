@@ -21,4 +21,6 @@
 // Color
 #define kCarrierPigeonPurpleColor [UIColor colorWithRed:193.0/255.0 green:19.0/255.0 blue:207.0/255.0 alpha:1.0]
 
+#define kMaxCarrierPigeonsThatMayReceiveMessagePeerToPeer 5
+
 #endif

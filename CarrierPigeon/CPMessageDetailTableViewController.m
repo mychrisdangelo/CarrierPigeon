@@ -8,6 +8,7 @@
 
 #import "CPMessageDetailTableViewController.h"
 #import "Chat+Create.h"
+#import "CPPigeonPeerTableViewController.h"
 
 @interface CPMessageDetailTableViewController ()
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *delivered;
 @property (weak, nonatomic) IBOutlet UILabel *received;
 @property (weak, nonatomic) IBOutlet UILabel *read;
+@property (weak, nonatomic) IBOutlet UITableViewCell *carrierCell;
 
 @end
 
@@ -34,15 +36,47 @@
     return self;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowCarriers"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPPigeonPeerTableViewController class]]) {
+            CPPigeonPeerTableViewController *pptvc = (CPPigeonPeerTableViewController *)segue.destinationViewController;
+            pptvc.pigeonPeers = [self.chat.pigeonsCarryingMessage allObjects];
+        }
+    }
+}
+
+- (NSString *)parseOutHostIfInDisplayName:(NSString *)displayName
+{
+    NSArray *parsedJID = [displayName componentsSeparatedByString: @"@"];
+    NSString *username = [parsedJID objectAtIndex:0];
+    return username;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-
     self.message.text = self.chat.messageBody;
-    self.from.text = self.chat.fromJID;
-    self.to.text = self.chat.toJID;
-    self.reallyFrom.text = self.chat.reallyFromJID ? self.chat.reallyFromJID : self.chat.fromJID;
+    self.from.text = [self parseOutHostIfInDisplayName:self.chat.fromJID];
+    self.to.text = [self parseOutHostIfInDisplayName:self.chat.toJID];
+    NSString *reallyFrom = self.chat.reallyFromJID ? self.chat.reallyFromJID : self.chat.fromJID;
+    self.reallyFrom.text = [self parseOutHostIfInDisplayName:reallyFrom];
+    
+    // setup carrierCell
+    int pigeonsCarryingMessageCount = (int)[self.chat.pigeonsCarryingMessage count];
+    NSString *carriersCountDescription = nil;
+    if (!pigeonsCarryingMessageCount) {
+        carriersCountDescription = @"None";
+        self.carrierCell.userInteractionEnabled = NO;
+        self.carrierCell.accessoryType = UITableViewCellAccessoryNone;
+    } else {
+        carriersCountDescription = [NSString stringWithFormat:@"%d", pigeonsCarryingMessageCount];
+        self.carrierCell.userInteractionEnabled = YES;
+        self.carrierCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    self.carrierCell.detailTextLabel.text = carriersCountDescription;
+    
     
     NSString *statusString = [Chat stringForMessageStatus:[self.chat.messageStatus intValue]];
     

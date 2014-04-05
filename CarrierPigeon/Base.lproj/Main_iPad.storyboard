@@ -619,7 +619,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="MF6-k3-203">
-                        <barButtonItem key="leftBarButtonItem" title="Force Offline" id="cQ8-J1-0QT">
+                        <barButtonItem key="leftBarButtonItem" title="Disconnect XMPP" id="cQ8-J1-0QT">
                             <connections>
                                 <action selector="forceOfflineButtonPressed:" destination="Pyi-FM-7SZ" id="nc3-0B-CXj"/>
                             </connections>
@@ -1119,6 +1119,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uQh-MB-JLV"/>
+        <segue reference="gfz-Zc-lfS"/>
     </inferredMetricsTieBreakers>
 </document>
