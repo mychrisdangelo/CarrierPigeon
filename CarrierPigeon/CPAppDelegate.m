@@ -39,6 +39,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) NSString *userPassword;
 @property (nonatomic, strong) XMPPMessageArchivingCoreDataStorage *xmppMessageArchivingStorage;
 @property (nonatomic, strong) XMPPMessageArchiving *xmppMessageArchive;
+@property (nonatomic, strong) NSString * friendRequestFrom;
 
 @end
 
@@ -286,7 +287,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:self.xmppRosterStorage];
 	
 	self.xmppRoster.autoFetchRoster = YES;
-	self.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
+	self.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
 	
 	// Setup vCard support
 	//
@@ -518,7 +519,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                   xmppStream:self.xmppStream
                                                         managedObjectContext:[self managedObjectContext_roster]];
     DDLogVerbose(@"didReceivePresenceSubscriptionRequest from user %@ ", user.jidStr);
-    [self.xmppRoster acceptPresenceSubscriptionRequestFrom:[presence from] andAddToRoster:YES];
+    DDLogVerbose(@"didReceivePresenceSubscriptionRequest from user %@ ", [presence from]);
+    
+    NSString *atkXMPPDomainName = [@"@" stringByAppendingString:kXMPPDomainName];
+    
+    self.friendRequestFrom = [presence.fromStr stringByReplacingOccurrencesOfString: atkXMPPDomainName withString:@""];
+    
+    NSString *alertMessage = [NSString stringWithFormat:@"%@ would like to add you as a friend", self.friendRequestFrom];
+    
+    /* display an alert to let the user know of the new friend request */
+    [self showFriendRequestAlertView:alertMessage];
 }
 
 
@@ -710,6 +720,43 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSArray *messages = [moc executeFetchRequest:request error:&error];
     
     [self printMessages:[[NSMutableArray alloc]initWithArray:messages]];
+}
+
+
+#pragma mark - Friend Request Helpers
+-(void) showFriendRequestAlertView: (NSString*) alertMessage {
+    //TODO: add button "Not Now" to alert view
+    //TODO: develop a friend request list that shows pending requests received only.
+    // The pending requests would be removed from the list as they are accepted by the user.
+    // I think this feature is needed to manage multiple requests coming to the user at the same time.
+    // Please suggest a better approach for managing multiple friend request if this is inappropriate.
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Friend Request"
+                                                        message:alertMessage
+                                                       delegate:self
+                                              cancelButtonTitle:@"Reject"
+                                              otherButtonTitles:@"Accept", nil];
+    
+    [alertView show];
+    
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSString *atkXMPPDomainName = [@"@" stringByAppendingString:kXMPPDomainName];
+    
+    self.friendRequestFrom = [self.friendRequestFrom stringByAppendingString:atkXMPPDomainName];
+    
+    if (buttonIndex == 0){
+        //Reject clicked
+        if ([self.friendRequestFrom length] != 0) {
+            [self.xmppRoster rejectPresenceSubscriptionRequestFrom:[XMPPJID jidWithString:self.friendRequestFrom]];
+        }
+    } else if (buttonIndex == 1) {
+        //Accept clicked
+        if ([self.friendRequestFrom length] != 0) {
+            [self.xmppRoster acceptPresenceSubscriptionRequestFrom:[XMPPJID jidWithString:self.friendRequestFrom] andAddToRoster:YES];
+        }
+    }
 }
 
 @end

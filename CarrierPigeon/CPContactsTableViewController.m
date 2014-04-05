@@ -300,7 +300,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [self dismissViewControllerAnimated:YES completion:^{
         NSString *jidString = [NSString stringWithFormat:@"%@@%@", userName, kXMPPDomainName];
-        NSLog(@"received request to add friend: %@", jidString);
+        //TODO: before calling addUser, check that the user exists
+        //TODO: add a "pending" tag to the newly added contact, which would be removed when the
+        // add friend request is accepted.
+        // An alternative to this would be to create a separate list that shows all pending friend requests
         [self.xmppRoster addUser:[XMPPJID jidWithString:jidString] withNickname:userName];
         [self.xmppRoster subscribePresenceToUser:[XMPPJID jidWithString:jidString]];
     }];

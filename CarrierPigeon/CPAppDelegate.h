@@ -11,7 +11,7 @@
 #import "XMPPvCardCoreDataStorage.h"
 #import "CPSignInViewController.h"
 
-@interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPSignInViewControllerDelegate>
+@interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPSignInViewControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
