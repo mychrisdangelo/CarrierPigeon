@@ -8,7 +8,8 @@
 //  Code Adapated from documenation provided by Apple (see above)
 
 #import "CPSessionContainer.h"
-#import "Chat.h"
+#import "Chat+EncoderDecoder.h"
+#import "CPAppDelegate.h"
 
 NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
@@ -20,20 +21,20 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 @property (readwrite, nonatomic) NSMutableSet *peersInRange;
 @property (readwrite, nonatomic) NSMutableSet *peersInRangeConnected;
 @property (nonatomic) NSString *myDisplayName;
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
 @implementation CPSessionContainer
 
-- (id)init
+
+- (NSManagedObjectContext *)managedObjectContext
 {
-    if (self = [super init]) {
-        
-        
-        return self;
+    if (_managedObjectContext == nil) {
+        _managedObjectContext = ((CPAppDelegate *)([[UIApplication sharedApplication] delegate])).managedObjectContext;
     }
     
-    return self;
+    return _managedObjectContext;
 }
 
 - (void)signInUserWithDisplayName:(NSString *)displayName
@@ -111,41 +112,11 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 //    NSLog(@"myDictionary = %@", myDictionary);
 //}
 
-- (NSDictionary *)encodeChatAsDictionary:(Chat *)chat
-{
-    NSArray *attributes = [[[chat entity] attributesByName] allKeys];
-    NSMutableDictionary *chatDictionary = [[NSMutableDictionary alloc] init];
-    
-    for (NSString *eachAttribute in attributes) {
-        id value = [chat valueForKey:eachAttribute];
-        
-        if (value != nil) {
-            chatDictionary[eachAttribute] = value;
-        }
-    }
-    
-    return [chatDictionary copy];
-}
 
-- (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary
-{
-    Chat *decodedChat = nil;
-    NSArray *attributes = [[[decodedChat entity] attributesByName] allKeys];
-    
-    for (NSString *eachAttribute in attributes) {
-        id value = chatDictionary[eachAttribute];
-        
-        if (value != nil) {
-            [decodedChat setValue:value forKey:eachAttribute];
-        }
-    }
-    
-    return decodedChat;
-}
 
 - (void)sendChat:(Chat *)chat
 {
-    NSDictionary *chatAsDictionary = [self encodeChatAsDictionary:chat];
+    NSDictionary *chatAsDictionary = [Chat encodeChatAsDictionary:chat];
     NSData *messageData = [NSKeyedArchiver archivedDataWithRootObject:chatAsDictionary];
     
     NSError *error;
@@ -178,7 +149,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
     NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    Chat *chat = [self decodeDictionaryToChat:chatAsDictionary];
+    Chat *chat = [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext];
     NSLog(@"%@", chat);
 }
 
