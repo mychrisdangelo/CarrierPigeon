@@ -63,17 +63,23 @@
         case CPChatSendStatusSending:
             statusString = @"sending";
             break;
-        case CPChatSendStutusReceivedMessage:
+        case CPChatSendStatusReceivedMessage:
             statusString = @"received";
             break;
-        case CPChatStatusOfflinePending:
+        case CPChatSendStatusOfflinePending:
             statusString = @"pending";
             break;
-        case CPChatStatusRelaying:
+        case CPChatSendStatusRelaying:
             statusString = @"relaying";
             break;
-        case CPChatStatusRelayed:
+        case CPChatSendStatusRelayed:
             statusString = @"relayed";
+            break;
+        case CPChatSendStatusArrived:
+            statusString = @"arrived";
+            break;
+        case CPChatSendStatusRead:
+            statusString = @"read";
             break;
         default:
             statusString = @"unknown";

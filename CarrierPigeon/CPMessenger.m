@@ -29,7 +29,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
     [messageElement addChild:status];
     
-    CPMessageStatus sendStatus = CPChatStatusOfflinePending;
+    CPMessageStatus sendStatus = CPChatSendStatusOfflinePending;
     XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
     CPSessionContainer *sc = [CPSessionContainer sharedInstance];
     // if we can send via the server do that
@@ -37,7 +37,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         sendStatus = CPChatSendStatusSending;
         [xmppStream sendElement:messageElement];
     } else if ([sc.peersInRange count] > 0) {
-        sendStatus = CPChatStatusRelayed;
+        sendStatus = CPChatSendStatusRelayed;
         [sc sendChat:[Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus]];
     } else {
         [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
@@ -49,8 +49,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     NSManagedObjectContext *context = ((CPAppDelegate *)([[UIApplication sharedApplication] delegate])).managedObjectContext;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Chat" inManagedObjectContext:context];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageStatus = %@ OR messageStatus = %@ OR messageStatus = %@",
-                              [NSNumber numberWithInt:CPChatStatusOfflinePending], [NSNumber numberWithInt:CPChatStatusRelaying],
-                              [NSNumber numberWithInt:CPChatStatusRelayed]];
+                              [NSNumber numberWithInt:CPChatSendStatusOfflinePending], [NSNumber numberWithInt:CPChatSendStatusRelaying],
+                              [NSNumber numberWithInt:CPChatSendStatusRelayed]];
     NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -71,7 +71,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
         [messageElement addChild:status];
         
-        CPMessageStatus sendStatus = CPChatStatusOfflinePending;
+        CPMessageStatus sendStatus = CPChatSendStatusOfflinePending;
         if ([xmppStream isConnected]) {
             sendStatus = CPChatSendStatusSending;
             [xmppStream sendElement:messageElement];

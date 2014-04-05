@@ -11,12 +11,14 @@
 #import "XMPPUserCoreDataStorageObject.h"
 
 typedef NS_ENUM(NSInteger, CPMessageStatus) {
-    CPChatSendStutusReceivedMessage,
+    CPChatSendStatusReceivedMessage,
     CPChatSendStatusSending,
     CPChatSendStatusSent,
-    CPChatStatusOfflinePending,
-    CPChatStatusRelaying,
-    CPChatStatusRelayed
+    CPChatSendStatusArrived,
+    CPChatSendStatusRead,
+    CPChatSendStatusOfflinePending,
+    CPChatSendStatusRelaying,
+    CPChatSendStatusRelayed
 };
 
 @interface Chat (Create)
