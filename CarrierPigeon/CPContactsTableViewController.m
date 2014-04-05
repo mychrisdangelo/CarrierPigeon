@@ -168,9 +168,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)updateNetworkStatusIndicators
 {
     self.servicesRequiringRefreshing++;
-    // UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatus];
-    // [self.navigationController.navigationBar setBarTintColor:barTintColor];
-    // [self.view setNeedsDisplay]; // hack: setBarTintColor: wasn't always setting the color immediately
+    UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:YES];
+    [self.navigationController.navigationBar setBarTintColor:barTintColor];
+    [self.view setNeedsDisplay]; // hack: setBarTintColor: wasn't always setting the color immediately
     [self endRefreshing];
 }
 

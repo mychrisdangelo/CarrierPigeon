@@ -21,6 +21,6 @@ typedef NS_OPTIONS(NSUInteger, CPNetworkStatus) {
 + (CPNetworkStatus)networkStatus;
 + (CPNetworkStatusAssistant *)sharedInstance;
 + (CPNetworkStatusAssistant *)start;
-+ (UIColor *)colorForNetworkStatus;
++ (UIColor *)colorForNetworkStatusWithLightColor:(BOOL)lightColor;
 
 @end

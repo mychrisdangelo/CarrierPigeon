@@ -65,13 +65,20 @@ NSString * const kNetworkStatusDidChangeNotification = @"kNetworkStatusDidChange
     return networkStatus;
 }
 
-+ (UIColor *)colorForNetworkStatus
++ (UIColor *)colorForNetworkStatusWithLightColor:(BOOL)lightColor
 {
     CPNetworkStatus status = [CPNetworkStatusAssistant networkStatus];
+    UIColor *networkStatusColor = lightColor ? kCarrierPigeonLightRedColor : kCarrierPigeonRedColor;
     
-    if (status & CPNetworkStatusConnectedToXMPPStream) return kCarrierPigeonGreenColor;
-    if (status & CPNetworkStatusConnectedToPeerPigeons) return kCarrierPigeonYellowColor;
-    return kCarrierPigeonRedColor;
+    if (status & CPNetworkStatusConnectedToXMPPStream) {
+        networkStatusColor = lightColor ? kCarrierPigeonLightGreenColor : kCarrierPigeonGreenColor;
+    }
+    
+    if (status & CPNetworkStatusConnectedToPeerPigeons) {
+        networkStatusColor = lightColor ? kCarrierPigeonLightYellowColor : kCarrierPigeonYellowColor;
+    }
+    
+    return networkStatusColor;
 }
 
 

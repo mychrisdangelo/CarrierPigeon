@@ -168,7 +168,7 @@
 
 - (void)updateNetworkStatusIndicators
 {
-    self.sendButtonColor = [CPNetworkStatusAssistant colorForNetworkStatus];
+    self.sendButtonColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO];
 }
 
 - (void)viewDidUnload
