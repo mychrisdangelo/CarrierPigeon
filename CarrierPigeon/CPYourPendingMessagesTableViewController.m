@@ -22,12 +22,6 @@
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-}
-
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (_managedObjectContext == nil) {

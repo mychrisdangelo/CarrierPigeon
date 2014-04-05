@@ -7,32 +7,69 @@
 //
 
 #import "CPCarrierPendingMessagesTableViewController.h"
+#import "CPAppDelegate.h"
+#import "Chat+Create.h"
+#import "CPMessageDetailTableViewController.h"
 
-@interface CPCarrierPendingMessagesTableViewController ()
+@interface CPCarrierPendingMessagesTableViewController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
 @implementation CPCarrierPendingMessagesTableViewController
 
+@synthesize fetchedResultsController = _fetchedResultsController;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (NSManagedObjectContext *)managedObjectContext
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    if (_managedObjectContext == nil) {
+        _managedObjectContext = ((CPAppDelegate *)([[UIApplication sharedApplication] delegate])).managedObjectContext;
     }
-    return self;
+    
+    return _managedObjectContext;
 }
 
-- (void)viewDidLoad
+- (NSFetchedResultsController *)fetchedResultsController
 {
-    [super viewDidLoad];
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Chat" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSPredicate *msgStatusPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusOfflinePending],
+                                                                                          [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelayed],
+                                                                                          [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelaying]]];
+    
+#warning todo when the really from is filled in
+    
+    [fetchRequest setPredicate:msgStatusPredicate];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                                managedObjectContext:self.managedObjectContext
+                                                                                                  sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    _fetchedResultsController = aFetchedResultsController;
+    
+	NSError *error = nil;
+	if (![_fetchedResultsController performFetch:&error]) {
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	}
+    
+    return _fetchedResultsController;
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,20 +78,52 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowMessageDetail"]) {
+        if ([segue.destinationViewController isMemberOfClass:[CPMessageDetailTableViewController class]]) {
+            CPMessageDetailTableViewController *mdtvc = (CPMessageDetailTableViewController *)segue.destinationViewController;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+            mdtvc.chat = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    NSInteger numberOfRows = 0;
+    NSArray *sections = self.fetchedResultsController.sections;
+    if(sections.count > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
+    
+    return numberOfRows;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"PendingMessagesTableViewCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
+	}
+    
+    Chat *chat = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = chat.messageBody;
+    cell.detailTextLabel.text = [Chat stringForMessageStatus:[chat.messageStatus intValue]];
+    
+    return cell;
 }
 
 
