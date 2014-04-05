@@ -40,9 +40,7 @@ NSString * const kNetworkStatusDidChangeNotification = @"kNetworkStatusDidChange
 
 - (void)sendNetworkStatusChangeNotification
 {
-    CPNetworkStatus status = [CPNetworkStatusAssistant networkStatus];
-    NSNumber *statusAsObject = [NSNumber numberWithInt:status];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkStatusDidChangeNotification object:statusAsObject userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkStatusDidChangeNotification object:nil userInfo:nil];
 }
 
 + (CPNetworkStatus)networkStatus;

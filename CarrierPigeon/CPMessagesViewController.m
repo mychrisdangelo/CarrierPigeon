@@ -160,13 +160,13 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.composeViewContainer.frame.size.height, 0);
     [self.view addSubview:self.composeBarView];
     [self.composeViewContainer removeFromSuperview];
-    [self updateNetworkStatusIndicators];
+    [self updateNetworkStatusIndicatorsInMessagesView];
     self.splitViewController.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicators) name:kNetworkStatusDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicatorsInMessagesView) name:kNetworkStatusDidChangeNotification object:nil];
 }
 
-- (void)updateNetworkStatusIndicators
+- (void)updateNetworkStatusIndicatorsInMessagesView
 {
     self.sendButtonColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO];
 }

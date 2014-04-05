@@ -274,7 +274,12 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
     [self.xmppMessageArchive activate:self.xmppStream];
     [self.xmppMessageArchive  addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
-
+    // Setup Message Delivery Receipts
+    //
+//    XMPPMessageDeliveryReceipts* xmppMessageDeliveryRecipts = [[XMPPMessageDeliveryReceipts alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+//    xmppMessageDeliveryRecipts.autoSendMessageDeliveryReceipts = YES;
+//    xmppMessageDeliveryRecipts.autoSendMessageDeliveryRequests = YES;
+//    [xmppMessageDeliveryRecipts activate:self.xmppStream];
 	
 	// Setup roster
 	//

@@ -53,7 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewWillAppear:animated];
     self.fetchedResultsController = nil;
-    [self updateNetworkStatusIndicators];
+    [self updateNetworkStatusIndicatorsInContactsView];
     [self.tableView reloadData];
 }
 
@@ -151,12 +151,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
-    [self.refreshControl addTarget:self action:@selector(updateNetworkStatusIndicators) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(updateNetworkStatusIndicatorsInContactsView) forControlEvents:UIControlEventValueChanged];
     
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
     [self setSettingsTabBarName];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicators) name:kNetworkStatusDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicatorsInContactsView) name:kNetworkStatusDidChangeNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -165,7 +165,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kNetworkStatusDidChangeNotification];
 }
 
-- (void)updateNetworkStatusIndicators
+- (void)updateNetworkStatusIndicatorsInContactsView
 {
     self.servicesRequiringRefreshing++;
     UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:YES];

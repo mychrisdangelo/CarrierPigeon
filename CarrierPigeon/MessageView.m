@@ -59,7 +59,7 @@
 @import MultipeerConnectivity;
 
 #import "MessageView.h"
-#import "Chat.h"
+#import "Chat+Create.h"
 
 // Constants for view sizing and alignment
 #define MESSAGE_FONT_SIZE       (17.0)
@@ -95,6 +95,9 @@
 // Cache the background images and stretchable insets
 @property (retain, nonatomic) UIImage *balloonImageLeft;
 @property (retain, nonatomic) UIImage *balloonImageRight;
+@property (nonatomic) UIImage *balloonImageRightSending;
+@property (nonatomic) UIImage *balloonImageRightRelaying;
+@property (nonatomic) UIImage *balloonImageRightOffline;
 @property (assign, nonatomic) UIEdgeInsets balloonInsetsLeft;
 @property (assign, nonatomic) UIEdgeInsets balloonInsetsRight;
 
@@ -118,6 +121,9 @@
 
         self.balloonImageLeft = [UIImage imageNamed:@"BubbleLeft"];
         self.balloonImageRight = [UIImage imageNamed:@"BubbleRight"];
+        self.balloonImageRightSending = [UIImage imageNamed:@"BubbleRightSending"];
+        self.balloonImageRightRelaying = [UIImage imageNamed:@"BubbleRightRelaying"];
+        self.balloonImageRightOffline = [UIImage imageNamed:@"BubbleRightOffline"];
 
         _balloonInsetsLeft = UIEdgeInsetsMake(BALLOON_INSET_TOP, BALLOON_INSET_RIGHT, BALLOON_INSET_BOTTOM, BALLOON_INSET_LEFT);
         _balloonInsetsRight = UIEdgeInsetsMake(BALLOON_INSET_TOP, BALLOON_INSET_LEFT, BALLOON_INSET_BOTTOM, BALLOON_INSET_RIGHT);
@@ -155,9 +161,30 @@
         // Set text color
         _messageLabel.textColor = [UIColor whiteColor];
         // Set resizeable image
-        _balloonView.image = [self.balloonImageRight resizableImageWithCapInsets:_balloonInsetsRight];
+        switch ([chat.messageStatus intValue]) {
+            case CPChatSendStatusSent:
+            case CPChatSendStatusArrived:
+            case CPChatSendStatusRead:
+                _balloonView.image = [self.balloonImageRight resizableImageWithCapInsets:_balloonInsetsRight];
+                break;
+            case CPChatSendStatusRelayed:
+            case CPChatSendStatusRelaying:
+                _balloonView.image = [self.balloonImageRightRelaying resizableImageWithCapInsets:_balloonInsetsRight];
+                break;
+            case CPChatSendStatusSending:
+                _balloonView.image = [self.balloonImageRightSending resizableImageWithCapInsets:_balloonInsetsRight];
+                break;
+            case CPChatSendStatusOfflinePending:
+                _balloonView.image = [self.balloonImageRightOffline resizableImageWithCapInsets:_balloonInsetsRight];
+                break;
+            case CPChatSendStatusReceivedMessage:
+            default:
+                NSLog(@"Unexpected case %s", __PRETTY_FUNCTION__);
+                break;
+        }
         
-
+        
+        
 
     } else {
         // Received messages appear on left of view with additional display name label
