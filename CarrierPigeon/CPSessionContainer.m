@@ -128,6 +128,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     Chat *chat = [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedWithCurrentUser:self.myDisplayName];
     NSLog(@"%@", chat);
+#warning here actually attempt to send the message
 }
 
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
