@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mTS-iz-wkT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1750" y="-892"/>
+            <point key="canvasLocation" x="-1758" y="652"/>
         </scene>
         <!--Add Friend View Controller - Add Friend-->
         <scene sceneID="EvK-vD-mIX">
@@ -297,7 +297,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="quc-xZ-7Rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1883" y="132"/>
+            <point key="canvasLocation" x="-1891" y="1876"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MYu-8h-eu6">
@@ -329,7 +329,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jp8-j1-A3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4062" y="120"/>
+            <point key="canvasLocation" x="-4070" y="1864"/>
         </scene>
         <!--Message Detail Table View Controller - Message Detail-->
         <scene sceneID="bZ6-U4-iyv">
@@ -585,7 +585,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddr-Wz-vHN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-802" y="125"/>
+            <point key="canvasLocation" x="-810" y="1869"/>
         </scene>
         <!--Contacts Table View Controller - Contacts-->
         <scene sceneID="HL0-wq-Ttl">
@@ -717,7 +717,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfF-y5-oJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3014" y="125"/>
+            <point key="canvasLocation" x="-3022" y="1869"/>
         </scene>
         <!--Navigation Controller - Me-->
         <scene sceneID="Z7C-0S-Epd">
@@ -736,7 +736,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uFq-kB-o54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2276" y="-892"/>
+            <point key="canvasLocation" x="-2284" y="652"/>
         </scene>
         <!--Navigation Controller - Sharing-->
         <scene sceneID="D0G-ka-x3C">
@@ -814,10 +814,54 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Outbox" id="XQr-HD-HNH">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Qmg-Ia-wmn" style="IBUITableViewCellStyleDefault" id="X3t-Jd-fYO">
+                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X3t-Jd-fYO" id="uQn-Aq-hwm">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Your Pending Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qmg-Ia-wmn">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="OoO-4r-tgh" kind="push" id="WyD-Yr-Ne0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nTn-Bh-Hmm" style="IBUITableViewCellStyleDefault" id="5lI-vq-C5f">
+                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5lI-vq-C5f" id="nxl-qz-n4L">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Carrier Pending Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nTn-Bh-Hmm">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="PXO-N6-nuU" kind="push" id="GdX-zU-oWC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Your Generosity" id="Yb1-h1-DLW">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="TTx-az-pvq" rowHeight="194" style="IBUITableViewCellStyleDefault" id="7fF-aG-stz">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="194"/>
+                                        <rect key="frame" x="0.0" y="391" width="320" height="194"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7fF-aG-stz" id="trM-p4-vGb">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="193"/>
@@ -841,7 +885,7 @@
                             <tableViewSection headerTitle="Network Usage" id="9gx-je-eKf">
                                 <cells>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9b9-6m-yDO" detailTextLabel="jP2-G2-VQS" style="IBUITableViewCellStyleValue1" id="HI3-Yf-fpy">
-                                        <rect key="frame" x="0.0" y="497" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="633" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HI3-Yf-fpy" id="Ds0-KN-tyf">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -865,7 +909,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="gTT-iV-OkQ" detailTextLabel="nF2-xH-34A" style="IBUITableViewCellStyleValue1" id="Cf1-bv-TXn">
-                                        <rect key="frame" x="0.0" y="541" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="677" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cf1-bv-TXn" id="eVN-9v-TSz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -889,7 +933,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="kFu-CN-UYp" detailTextLabel="N3b-hs-cVh" style="IBUITableViewCellStyleValue1" id="nOR-ZN-2Wh">
-                                        <rect key="frame" x="0.0" y="585" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="721" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nOR-ZN-2Wh" id="e2y-5L-lq0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -913,7 +957,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cdG-mC-YQT" detailTextLabel="Jpd-qR-ZFN" style="IBUITableViewCellStyleValue1" id="P5Z-bB-rJB">
-                                        <rect key="frame" x="0.0" y="629" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="765" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P5Z-bB-rJB" id="SuZ-Ej-1Hc">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -971,7 +1015,97 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULd-yP-wrs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055" y="-1330"/>
+            <point key="canvasLocation" x="-1055" y="666"/>
+        </scene>
+        <!--Your Pending Messages Table View Controller - Your Pending Messages-->
+        <scene sceneID="BOa-lx-afP">
+            <objects>
+                <tableViewController id="OoO-4r-tgh" customClass="CPYourPendingMessagesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wTc-E9-1ia">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PendingMessagesTableViewCell" textLabel="qPV-jb-khm" detailTextLabel="C7Q-Yi-4fk" style="IBUITableViewCellStyleValue1" id="8zO-l9-bqZ">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8zO-l9-bqZ" id="ggz-gM-itN">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qPV-jb-khm">
+                                            <rect key="frame" x="15" y="11" width="33" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C7Q-Yi-4fk">
+                                            <rect key="frame" x="261" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OoO-4r-tgh" id="cqy-HA-3Wx"/>
+                            <outlet property="delegate" destination="OoO-4r-tgh" id="7CX-0Q-Fwc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Your Pending Messages" id="DIE-Si-7Nb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HLu-bP-nIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1048" y="-1418"/>
+        </scene>
+        <!--Carrier Pending Messages Table View Controller - Carrier Pending Messages-->
+        <scene sceneID="pCp-z0-FDo">
+            <objects>
+                <tableViewController id="PXO-N6-nuU" customClass="CPCarrierPendingMessagesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Uvb-XH-NEq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CarrierPendingMessagesTableViewCell" textLabel="PEB-AV-RmC" detailTextLabel="oMs-xV-iQK" style="IBUITableViewCellStyleValue1" id="aXT-BO-Kg0">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXT-BO-Kg0" id="mJc-5j-geU">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PEB-AV-RmC">
+                                            <rect key="frame" x="15" y="11" width="33" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oMs-xV-iQK">
+                                            <rect key="frame" x="261" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PXO-N6-nuU" id="hQS-ZQ-jFz"/>
+                            <outlet property="delegate" destination="PXO-N6-nuU" id="vFs-wP-FdC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Carrier Pending Messages" id="qg5-c4-ObP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UPa-ZJ-zy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1055" y="-343"/>
         </scene>
     </scenes>
     <resources>
@@ -985,6 +1119,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gfz-Zc-lfS"/>
+        <segue reference="uQh-MB-JLV"/>
     </inferredMetricsTieBreakers>
 </document>

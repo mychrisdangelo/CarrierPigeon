@@ -166,6 +166,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             UIViewController *settingsViewController = [navigationController topViewController];
             if ([settingsViewController isMemberOfClass:[CPSettingsViewController class]]) {
                 [settingsViewController setTitle:username];
+                return;
             }
         }
 
