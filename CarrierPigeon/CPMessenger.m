@@ -36,6 +36,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     if ([xmppStream isConnected]) {
         sendStatus = CPChatSendStatusSending;
         [xmppStream sendElement:messageElement];
+        [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
     } else if ([sc.peersInRange count] > 0) {
         sendStatus = CPChatSendStatusRelaying;
         [sc sendChat:[Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus]];
@@ -77,12 +78,17 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         }
         
         CPMessageStatus sendStatus = CPChatSendStatusOfflinePending;
+        CPSessionContainer *sc = [CPSessionContainer sharedInstance];
         if ([xmppStream isConnected]) {
             sendStatus = CPChatSendStatusSending;
             [xmppStream sendElement:messageElement];
+            [Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context];
+        } else if ([sc.peersInRange count] > 0) {
+            sendStatus = CPChatSendStatusRelaying;
+            [sc sendChat:[Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context]];
+        } else {
+            [Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context];
         }
-        
-        [Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context];
     }
 }
 
