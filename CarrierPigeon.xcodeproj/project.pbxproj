@@ -76,6 +76,7 @@
 		406FAD0218F05706003FDF89 /* PigeonPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0118F05706003FDF89 /* PigeonPeer.m */; };
 		406FAD0518F05707003FDF89 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0418F05707003FDF89 /* Chat.m */; };
 		406FAD0818F05AE0003FDF89 /* PigeonPeer+MCPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0718F05AE0003FDF89 /* PigeonPeer+MCPeer.m */; };
+		406FAD1018F078B2003FDF89 /* CPPigeonPeerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FAD0F18F078B2003FDF89 /* CPPigeonPeerTableViewController.m */; };
 		4071A66118EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
 		40A2AEBB18D7E6F800E4CD75 /* CPSharingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */; };
@@ -322,6 +323,8 @@
 		406FAD0418F05707003FDF89 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		406FAD0618F05AE0003FDF89 /* PigeonPeer+MCPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PigeonPeer+MCPeer.h"; sourceTree = "<group>"; };
 		406FAD0718F05AE0003FDF89 /* PigeonPeer+MCPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PigeonPeer+MCPeer.m"; sourceTree = "<group>"; };
+		406FAD0E18F078B2003FDF89 /* CPPigeonPeerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPigeonPeerTableViewController.h; sourceTree = "<group>"; };
+		406FAD0F18F078B2003FDF89 /* CPPigeonPeerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPigeonPeerTableViewController.m; sourceTree = "<group>"; };
 		4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNearbyPigeonsTableViewController.h; sourceTree = "<group>"; };
 		4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNearbyPigeonsTableViewController.m; sourceTree = "<group>"; };
 		408CFE5618C40E77009F991C /* CPContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewController.h; sourceTree = "<group>"; };
@@ -870,6 +873,7 @@
 				403972CA18C661B4007F592D /* Settings */,
 				40A2AEB218D7E52200E4CD75 /* Sharing */,
 				40D2C0A018C46D5800A9E6FD /* Messages */,
+				406FAD0A18F077F0003FDF89 /* Message Detail */,
 				408CFE5A18C40E93009F991C /* SignIn */,
 				40D2C07618C4393400A9E6FD /* AddFriendView */,
 				408CFE5918C40E88009F991C /* Contacts */,
@@ -932,6 +936,17 @@
 				406FAD0718F05AE0003FDF89 /* PigeonPeer+MCPeer.m */,
 			);
 			name = PigeonPeer;
+			sourceTree = "<group>";
+		};
+		406FAD0A18F077F0003FDF89 /* Message Detail */ = {
+			isa = PBXGroup;
+			children = (
+				40FBDCFA18D40D6800A4D174 /* CPMessageDetailTableViewController.h */,
+				40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */,
+				406FAD0E18F078B2003FDF89 /* CPPigeonPeerTableViewController.h */,
+				406FAD0F18F078B2003FDF89 /* CPPigeonPeerTableViewController.m */,
+			);
+			name = "Message Detail";
 			sourceTree = "<group>";
 		};
 		408CFE5918C40E88009F991C /* Contacts */ = {
@@ -1579,8 +1594,6 @@
 				401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */,
 				40265B9D18D376D8005A7D7A /* MessageView.h */,
 				40265B9E18D376D8005A7D7A /* MessageView.m */,
-				40FBDCFA18D40D6800A4D174 /* CPMessageDetailTableViewController.h */,
-				40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -1863,6 +1876,7 @@
 				400DC1DE18C2ECAE00C806ED /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				40A995AB18C31E4800C23AB6 /* XMPPUserMemoryStorageObject.m in Sources */,
 				40A995E018C31E4800C23AB6 /* XMPPCapabilities.m in Sources */,
+				406FAD1018F078B2003FDF89 /* CPPigeonPeerTableViewController.m in Sources */,
 				400DC20418C2ECC900C806ED /* XMPPMessage.m in Sources */,
 				4067D50C18EF91EC002F6163 /* Chat+EncoderDecoder.m in Sources */,
 				40A995D018C31E4800C23AB6 /* XMPPResultSet.m in Sources */,
