@@ -168,11 +168,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
-    // don't recipricate invites. insight comes from: https://github.com/shrtlist/MCSessionP2P
-    NSString *remotePeerName = peerID.displayName;
-    MCPeerID *myPeerID = self.session.myPeerID;
-    BOOL shouldInvite = ([myPeerID.displayName compare:remotePeerName] == NSOrderedDescending);
-    if (shouldInvite) {
+    if (![self.session.connectedPeers containsObject:peerID]) {
         [browser invitePeer:peerID toSession:self.session withContext:nil timeout:5.0];
     }
     
