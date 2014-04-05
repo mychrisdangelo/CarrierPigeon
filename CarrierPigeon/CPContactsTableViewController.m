@@ -53,6 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewWillAppear:animated];
     self.fetchedResultsController = nil;
+    [self updateNetworkStatusIndicators];
     [self.tableView reloadData];
 }
 
@@ -155,7 +156,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
     [self setSettingsTabBarName];
-    [self updateNetworkStatusIndicators];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicators) name:kNetworkStatusDidChangeNotification object:nil];
 }
 
