@@ -10,6 +10,8 @@
 @import MultipeerConnectivity;
 #import <Foundation/Foundation.h>
 
+extern NSString * const kPeerListChangedNotification;
+
 @class Chat;
 
 @protocol SessionContainerDelegate;

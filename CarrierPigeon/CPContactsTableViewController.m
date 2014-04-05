@@ -20,6 +20,7 @@
 #import "CPMessenger.h"
 #import "CPSessionContainer.h"
 #import "CPSettingsViewController.h"
+#import "CPNetworkStatusAssistant.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -153,6 +154,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
     [self setSettingsTabBarName];
+    [self updateNetworkStatusTopBar];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusTopBar) name:kNetworkStatusDidChangeNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.tableView forKeyPath:kNetworkStatusDidChangeNotification];
+}
+
+- (void)updateNetworkStatusTopBar
+{
+    [self.navigationController.navigationBar setBarTintColor:[CPNetworkStatusAssistant colorForNetworkStatus]];
 }
 
 - (void)setSettingsTabBarName
@@ -169,7 +182,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 return;
             }
         }
-
     }
 }
 

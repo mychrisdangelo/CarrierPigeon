@@ -70,7 +70,7 @@
     if ([self.xmppStream isConnected]) {
         self.networkStatus.imageView.image = [UIImage imageNamed:@"GreenCircle"];
         self.networkStatus.textLabel.text = @"Connected";
-    } else if ([[CPSessionContainer sharedInstance] peersInRangeConnected]) {
+    } else if ([[[CPSessionContainer sharedInstance] peersInRangeConnected] count]) {
         self.networkStatus.imageView.image = [UIImage imageNamed:@"YellowCircle"];
         self.networkStatus.textLabel.text = @"Nearby Pigeons Connected";
     } else {

@@ -19,6 +19,7 @@
 #import "XMPPMessageArchivingCoreDataStorage.h"
 #import "CPContactsTableViewController.h"
 #import "CPSessionContainer.h"
+#import "CPNetworkStatusAssistant.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -26,6 +27,8 @@ static const int ddLogLevel = LOG_LEVEL_ERROR;
 #else
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
+
+NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConnectionDidChangeNotification";
 
 @interface CPAppDelegate() 
 
@@ -51,6 +54,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [CPNetworkStatusAssistant start];
     
     // Configure logging framework
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
@@ -590,6 +595,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[self goOnline];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPStreamConnectionDidChangeNotification object:nil userInfo:nil];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
@@ -658,6 +664,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	{
 		DDLogError(@"Unable to connect to server. Check xmppStream.hostName");
 	}
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPStreamConnectionDidChangeNotification object:nil userInfo:nil];
 }
 
 #pragma mark - TestingMessageArchiving

@@ -11,6 +11,8 @@
 #import "XMPPvCardCoreDataStorage.h"
 #import "CPSignInViewController.h"
 
+extern NSString * const kXMPPStreamConnectionDidChangeNotification;
+
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPSignInViewControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

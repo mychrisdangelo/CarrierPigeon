@@ -164,6 +164,8 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
             [self.peersInRangeConnected removeObject:peerID];
             break;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPeerListChangedNotification object:nil userInfo:nil];
 }
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
