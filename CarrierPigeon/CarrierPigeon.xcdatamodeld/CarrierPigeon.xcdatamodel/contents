@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Chat" representedClassName="Chat" syncable="YES">
+        <attribute name="chatIDNumberPerOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="chatOwner" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filenameAsSent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fromJID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hasMedia" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -27,7 +29,7 @@
         <relationship name="messagesPigeonIsCarrying" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="pigeonsCarryingMessage" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-405" positionY="-108" width="128" height="253"/>
+        <element name="Chat" positionX="-405" positionY="-108" width="128" height="283"/>
         <element name="Contact" positionX="-11" positionY="32" width="128" height="103"/>
         <element name="PigeonPeer" positionX="-173" positionY="-108" width="182" height="73"/>
     </elements>

@@ -20,6 +20,7 @@
 #import "CPContactsTableViewController.h"
 #import "CPSessionContainer.h"
 #import "CPNetworkStatusAssistant.h"
+#import "XMPPMessageDeliveryReceipts.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -276,10 +277,10 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
     
     // Setup Message Delivery Receipts
     //
-//    XMPPMessageDeliveryReceipts* xmppMessageDeliveryRecipts = [[XMPPMessageDeliveryReceipts alloc] initWithDispatchQueue:dispatch_get_main_queue()];
-//    xmppMessageDeliveryRecipts.autoSendMessageDeliveryReceipts = YES;
-//    xmppMessageDeliveryRecipts.autoSendMessageDeliveryRequests = YES;
-//    [xmppMessageDeliveryRecipts activate:self.xmppStream];
+    XMPPMessageDeliveryReceipts* xmppMessageDeliveryRecipts = [[XMPPMessageDeliveryReceipts alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+    xmppMessageDeliveryRecipts.autoSendMessageDeliveryReceipts = YES;
+    xmppMessageDeliveryRecipts.autoSendMessageDeliveryRequests = YES;
+    [xmppMessageDeliveryRecipts activate:self.xmppStream];
 	
 	// Setup roster
 	//
@@ -628,7 +629,7 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
                                                             managedObjectContext:[self managedObjectContext_roster]];
         
         NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext withMessageStatus:CPChatSendStatusReceivedMessage];
+        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext withMessageStatus:CPChatSendStatusReceivedMessage withChatIDNumber:(-1)];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
 		NSString *displayName = [user displayName];

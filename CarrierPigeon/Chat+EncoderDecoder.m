@@ -27,7 +27,7 @@
     return [chatDictionary copy];
 }
 
-+ (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary inManagedObjectContext:(NSManagedObjectContext *)context asMessageRelayedWithCurrentUser:(NSString *)currentUser
++ (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary inManagedObjectContext:(NSManagedObjectContext *)context asMessageRelayedByCurrentUser:(NSString *)currentUser
 {
     Chat *decodedChat = [NSEntityDescription insertNewObjectForEntityForName:@"Chat" inManagedObjectContext:context];
     
@@ -50,6 +50,11 @@
         decodedChat.reallyFromJID = decodedChat.fromJID;
         decodedChat.fromJID = currentUser;
         decodedChat.messageStatus = [NSNumber numberWithInt:CPChatSendStatusOfflinePending];
+        /*
+         * chatOwner represents the user that is logged in. they can hold onto messages they are sending, they have received
+         * or any message that they are relaying is always "owned" by the chatOwner
+         */
+        decodedChat.chatOwner = currentUser;
     }
     
     return decodedChat;

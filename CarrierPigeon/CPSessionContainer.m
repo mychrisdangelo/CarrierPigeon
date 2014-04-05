@@ -171,7 +171,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
     NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedWithCurrentUser:self.myDisplayName];
+    [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedByCurrentUser:self.myDisplayName];
 
     CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     [CPMessenger sendPendingMessagesWithStream:delegate.xmppStream];

@@ -10,6 +10,8 @@
 #import "Chat+Create.h"
 #import "CPAppDelegate.h"
 #import "CPSessionContainer.h"
+#import "XMPPMessageDeliveryReceipts.h"
+#import "Chat+IdentificationNumberMaker.h"
 
 @implementation CPMessenger
 
@@ -20,28 +22,41 @@
       onXMPPStream:(XMPPStream *)xmppStream
 inManagedObjectContext:(NSManagedObjectContext *)context
 {
+    NSUInteger chatIDNumber = [Chat generateNewIDNumberWithManagedObjectContext:context withCurrentUser:deviceUser];
+    
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:messageBody];
     NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
     [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
     [messageElement addAttributeWithName:@"to" stringValue:to];
     [messageElement addChild:body];
+    [messageElement addAttributeWithName:@"id" stringValue:[NSString stringWithFormat:@"%lu", chatIDNumber]];
     NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
     [messageElement addChild:status];
     
     CPMessageStatus sendStatus = CPChatSendStatusOfflinePending;
     XMPPMessage *message = [XMPPMessage messageFromElement:messageElement];
     CPSessionContainer *sc = [CPSessionContainer sharedInstance];
+    
     // if we can send via the server do that
     if ([xmppStream isConnected]) {
         sendStatus = CPChatSendStatusSending;
-        [xmppStream sendElement:messageElement];
-        [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
+        
+        
+        XMPPElementReceipt *receipt = [[XMPPElementReceipt alloc] init];
+        [xmppStream sendElement:messageElement andGetReceipt:&receipt];
+        
+        
+        
+        
+        
+        [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus withChatIDNumber:chatIDNumber];
+        
     } else if ([sc.peersInRange count] > 0) {
         sendStatus = CPChatSendStatusRelaying;
-        [sc sendChat:[Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus]];
+        [sc sendChat:[Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus withChatIDNumber:chatIDNumber]];
     } else {
-        [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus];
+        [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus withChatIDNumber:chatIDNumber];
     }
 }
 

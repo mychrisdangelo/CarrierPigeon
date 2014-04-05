@@ -25,6 +25,8 @@
 @dynamic reallyFromJID;
 @dynamic timeStamp;
 @dynamic toJID;
+@dynamic chatOwner;
+@dynamic chatIDNumberPerOwner;
 @dynamic pigeonsCarryingMessage;
 
 @end

@@ -26,6 +26,8 @@
 @property (nonatomic, retain) NSString * reallyFromJID;
 @property (nonatomic, retain) NSDate * timeStamp;
 @property (nonatomic, retain) NSString * toJID;
+@property (nonatomic, retain) NSString * chatOwner;
+@property (nonatomic, retain) NSNumber * chatIDNumberPerOwner;
 @property (nonatomic, retain) NSSet *pigeonsCarryingMessage;
 @end
 

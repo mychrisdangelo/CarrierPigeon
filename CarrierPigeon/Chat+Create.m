@@ -8,6 +8,7 @@
 
 #import "Chat+Create.h"
 #import "PigeonPeer+MCPeer.h"
+#import "Chat+IdentificationNumberMaker.h"
 
 @implementation Chat (Create)
 
@@ -16,7 +17,8 @@
                           toUser:(NSString *)toUser
                       deviceUser:(NSString *)deviceUser
           inManagedObjectContext:(NSManagedObjectContext *)context
-                  withMessageStatus:(CPMessageStatus)messageStatus
+               withMessageStatus:(CPMessageStatus)messageStatus
+                withChatIDNumber:(NSUInteger)chatIDNumber
 {
     Chat *chat = [NSEntityDescription insertNewObjectForEntityForName:@"Chat" inManagedObjectContext:context];
     
@@ -28,6 +30,17 @@
     chat.hasMedia = [NSNumber numberWithBool:NO];
     chat.fromJID = fromUser;
     chat.toJID = toUser;
+    /*
+     * chatOwner represents the user that is logged in. they can hold onto messages they are sending, they have received
+     * or any message that they are relaying is always "owned" by the chatOwner
+     */
+    chat.chatOwner = deviceUser;
+    if (chatIDNumber == -1) {
+        // TODO: incoming message. server should hand back an id of some kind.
+    } else {
+        chat.chatIDNumberPerOwner = [NSNumber numberWithInteger:chatIDNumber];
+    }
+
     
     NSError *error = nil;
     if (![context save:&error]) {

@@ -28,7 +28,8 @@ typedef NS_ENUM(NSInteger, CPMessageStatus) {
                           toUser:(NSString *)toUser
                       deviceUser:(NSString *)deviceUser
           inManagedObjectContext:(NSManagedObjectContext *)context
-                  withMessageStatus:(CPMessageStatus)sendStatus;
+               withMessageStatus:(CPMessageStatus)messageStatus
+                withChatIDNumber:(NSUInteger)chatIDNumber;
 
 + (Chat *)updateChat:(Chat *)chat withStatus:(CPMessageStatus)messageStatus inManagedObjectContext:(NSManagedObjectContext *)context;
 
