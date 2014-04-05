@@ -23,6 +23,9 @@
 #define kCarrierPigeonLightRedColor [UIColor colorWithRed:255.0/255.0 green:228.0/255.0 blue:229.0/255.0 alpha:1.0]
 #define kCarrierPigeonLightGreenColor [UIColor colorWithRed:189.0/255.0 green:255.0/255.0 blue:122.0/255.0 alpha:1.0]
 #define kCarrierPigeonLightYellowColor [UIColor colorWithRed:255.0/255.0 green:243.0/255.0 blue:110.0/255.0 alpha:1.0]
+#define kCarrierPigeonRedColor [UIColor colorWithRed:222.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0]
+#define kCarrierPigeonGreenColor [UIColor colorWithRed:110.0/255.0 green:187.0/255.0 blue:31.0/255.0 alpha:1.0]
+#define kCarrierPigeonYellowColor [UIColor colorWithRed:253.0/255.0 green:234.0/255.0 blue:23.0/255.0 alpha:1.0]
 
 #define kMaxCarrierPigeonsThatMayReceiveMessagePeerToPeer 5
 

@@ -17,6 +17,7 @@
 #import <PHFComposeBarView.h>
 #import "CPMessenger.h"
 #import "CPMessageDetailTableViewController.h"
+#import "CPNetworkStatusAssistant.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate, UISplitViewControllerDelegate>
 
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) NSString *myJid;
 @property (weak, nonatomic) IBOutlet UIView *composeViewContainer;
 @property (readonly, nonatomic) PHFComposeBarView *composeBarView;
+@property (nonatomic, strong) UIColor *sendButtonColor;
 
 @end
 
@@ -36,6 +38,16 @@
 @synthesize composeBarView = _composeBarView;
 @synthesize contact = _contact;
 
+- (void)setSendButtonColor:(UIColor *)sendButtonColor
+{
+    if (sendButtonColor == _sendButtonColor) {
+        return;
+    }
+    
+    _sendButtonColor = sendButtonColor;
+    [self.composeBarView setButtonTintColor:_sendButtonColor];
+}
+
 - (void)setContact:(Contact *)contact
 {
     if (_contact != contact) {
@@ -46,7 +58,6 @@
     if (self.view.window) {
         [self loadMessages];
     }
-    
 }
 
 - (NSString *)myJid
@@ -148,10 +159,22 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.composeViewContainer.frame.size.height, 0);
     [self.view addSubview:self.composeBarView];
-    [self.composeBarView setButtonTintColor:kCarrierPigeonBlueColor];
     [self.composeViewContainer removeFromSuperview];
-    
+    [self updateNetworkStatusIndicators];
     self.splitViewController.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicators) name:kNetworkStatusDidChangeNotification object:nil];
+}
+
+- (void)updateNetworkStatusIndicators
+{
+    self.sendButtonColor = [CPNetworkStatusAssistant colorForNetworkStatus];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kNetworkStatusDidChangeNotification];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

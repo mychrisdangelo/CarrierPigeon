@@ -150,26 +150,27 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
-    [self.refreshControl addTarget:self action:@selector(updateNetworkStatusTopBar) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(updateNetworkStatusIndicators) forControlEvents:UIControlEventValueChanged];
     
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
     [self setSettingsTabBarName];
-    [self updateNetworkStatusTopBar];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusTopBar) name:kNetworkStatusDidChangeNotification object:nil];
+    [self updateNetworkStatusIndicators];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicators) name:kNetworkStatusDidChangeNotification object:nil];
 }
 
-- (void)dealloc
+- (void)viewDidUnload
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self.tableView forKeyPath:kNetworkStatusDidChangeNotification];
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kNetworkStatusDidChangeNotification];
 }
 
-- (void)updateNetworkStatusTopBar
+- (void)updateNetworkStatusIndicators
 {
     self.servicesRequiringRefreshing++;
-    UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatus];
-    [self.navigationController.navigationBar setBarTintColor:barTintColor];
-    [self.view setNeedsDisplay]; // hack: setBarTintColor: wasn't always setting the color immediately
+    // UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatus];
+    // [self.navigationController.navigationBar setBarTintColor:barTintColor];
+    // [self.view setNeedsDisplay]; // hack: setBarTintColor: wasn't always setting the color immediately
     [self endRefreshing];
 }
 

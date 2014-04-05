@@ -69,9 +69,9 @@ NSString * const kNetworkStatusDidChangeNotification = @"kNetworkStatusDidChange
 {
     CPNetworkStatus status = [CPNetworkStatusAssistant networkStatus];
     
-    if (status & CPNetworkStatusConnectedToXMPPStream) return kCarrierPigeonLightGreenColor;
-    if (status & CPNetworkStatusConnectedToPeerPigeons) return kCarrierPigeonLightYellowColor;
-    return kCarrierPigeonLightRedColor;
+    if (status & CPNetworkStatusConnectedToXMPPStream) return kCarrierPigeonGreenColor;
+    if (status & CPNetworkStatusConnectedToPeerPigeons) return kCarrierPigeonYellowColor;
+    return kCarrierPigeonRedColor;
 }
 
 
