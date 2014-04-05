@@ -125,7 +125,7 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
         }
     }
     
-    [[UITabBar appearance] setTintColor:kCarrierPigeonPurpleColor];
+    [[UITabBar appearance] setTintColor:kCarrierPigeonBlueColor];
     // [self testMessageArchiving];
     // [self testContactArchiving];
     

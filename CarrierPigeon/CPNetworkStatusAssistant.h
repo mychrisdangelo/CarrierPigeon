@@ -12,8 +12,8 @@ extern NSString * const kNetworkStatusDidChangeNotification;
 
 typedef NS_OPTIONS(NSUInteger, CPNetworkStatus) {
     CPNetworkStatusNoConnections = 0,
-    CPNetworkStatusConnectedToXMPPStream = 1 << 0,
-    CPNetworkStatusConnectedToPeerPigeons = 1 << 1,
+    CPNetworkStatusConnectedToXMPPStream = 1 << 1,
+    CPNetworkStatusConnectedToPeerPigeons = 1 << 2,
 };
 
 @interface CPNetworkStatusAssistant : NSObject

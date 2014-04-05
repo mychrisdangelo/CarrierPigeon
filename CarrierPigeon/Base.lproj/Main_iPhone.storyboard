@@ -151,7 +151,6 @@
                                 <rect key="frame" x="137" y="143" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log Out">
-                                    <color key="titleColor" red="0.76078438758850098" green="0.070588238537311554" blue="0.81176477670669556" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1168,14 +1167,14 @@
         <image name="HomeIcon" width="24" height="24"/>
         <image name="SharingStats" width="26" height="23"/>
     </resources>
-    <color key="tintColor" red="0.76078438758850098" green="0.070588238537311554" blue="0.81176477670669556" alpha="1" colorSpace="deviceRGB"/>
+    <color key="tintColor" red="0.39607843139999999" green="0.65098039220000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hnX-2W-MxQ"/>
+        <segue reference="djk-GV-hHB"/>
         <segue reference="Ejs-QW-Xex"/>
     </inferredMetricsTieBreakers>
 </document>

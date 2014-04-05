@@ -148,7 +148,7 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.composeViewContainer.frame.size.height, 0);
     [self.view addSubview:self.composeBarView];
-    [self.composeBarView setButtonTintColor:kCarrierPigeonPurpleColor];
+    [self.composeBarView setButtonTintColor:kCarrierPigeonBlueColor];
     [self.composeViewContainer removeFromSuperview];
     
     self.splitViewController.delegate = self;

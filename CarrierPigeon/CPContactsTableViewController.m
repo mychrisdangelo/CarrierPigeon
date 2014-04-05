@@ -150,6 +150,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(updateNetworkStatusTopBar) forControlEvents:UIControlEventValueChanged];
     
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
@@ -165,7 +166,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)updateNetworkStatusTopBar
 {
-    [self.navigationController.navigationBar setBarTintColor:[CPNetworkStatusAssistant colorForNetworkStatus]];
+    self.servicesRequiringRefreshing++;
+    UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatus];
+    [self.navigationController.navigationBar setBarTintColor:barTintColor];
+    [self.view setNeedsDisplay]; // hack: setBarTintColor: wasn't always setting the color immediately
+    [self endRefreshing];
 }
 
 - (void)setSettingsTabBarName
