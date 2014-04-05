@@ -7,7 +7,7 @@
 //
 
 #import "Chat+Create.h"
-
+#import "PigeonPeer+MCPeer.h"
 
 @implementation Chat (Create)
 
@@ -48,6 +48,21 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNewMessageReceivedNotificationIdentifier object:self userInfo:nil];
+    
+    return chat;
+}
+
++ (Chat *)updateChat:(Chat *)chat withPigeonsCarryingMessage:(NSArray *)carrierPigeons inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    for (MCPeerID *eachPeer in carrierPigeons) {
+        PigeonPeer *pigeon = [PigeonPeer addPigeonPeerWithMCPeerID:eachPeer inManagedObjectContext:context];
+        [chat addPigeonsCarryingMessageObject:pigeon];
+    }
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"error saving");
+    }
     
     return chat;
 }

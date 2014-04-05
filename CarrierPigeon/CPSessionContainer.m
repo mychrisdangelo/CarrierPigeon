@@ -9,7 +9,11 @@
 
 #import "CPSessionContainer.h"
 #import "Chat+EncoderDecoder.h"
+#import "Chat+Create.h"
 #import "CPAppDelegate.h"
+#import "CPMessenger.h"
+#import "CPAppDelegate.h"
+#import "PigeonPeer.h"
 
 NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
@@ -96,15 +100,54 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     }
 }
 
+- (NSArray *)getPeersNotCurrentlyCarryingMessageAndOnlyGetPeersIfMessageShareLimitIsNotMaxed:(NSArray *)connectedPeers withChat:(Chat *)chat
+{
+    NSMutableArray *peersToSendTo = [[NSMutableArray alloc] init];
+    NSMutableArray *previousCarriersOfThisMessageInStringArray = [[NSMutableArray alloc] init];
+    int pigeonsCarryingMessageCount = (int)[chat.pigeonsCarryingMessage count];
+    
+    if (pigeonsCarryingMessageCount > kMaxCarrierPigeonsThatMayReceiveMessagePeerToPeer) {
+        return nil;
+    }
+    
+    for (PigeonPeer *eachPreviousCarrierOfThismessage in chat.pigeonsCarryingMessage) {
+        [previousCarriersOfThisMessageInStringArray addObject:eachPreviousCarrierOfThismessage.jidStr];
+    }
+    
+    for (MCPeerID *eachConnectedPeer in connectedPeers) {
+        NSString *eachConnectedPeerDisplayName = eachConnectedPeer.displayName;
+        if ([previousCarriersOfThisMessageInStringArray containsObject:eachConnectedPeerDisplayName]) {
+            // do nothing. this user pigeon peer is already carrying the message
+            NSLog(@"DO NOTHING");
+        } else {
+            if (pigeonsCarryingMessageCount++ < kMaxCarrierPigeonsThatMayReceiveMessagePeerToPeer) {
+                [peersToSendTo addObject:eachConnectedPeer];
+            } else {
+                // we've found enough people to send to
+                return peersToSendTo;
+            }
+        }
+    }
+    
+    // we didn't max out there are people that haven't received our message
+    return [peersToSendTo copy];
+}
+
 - (void)sendChat:(Chat *)chat
 {
     NSDictionary *chatAsDictionary = [Chat encodeChatAsDictionary:chat];
     NSData *messageData = [NSKeyedArchiver archivedDataWithRootObject:chatAsDictionary];
     
+    NSArray *peersToSendTo = [self getPeersNotCurrentlyCarryingMessageAndOnlyGetPeersIfMessageShareLimitIsNotMaxed:self.session.connectedPeers withChat:chat];
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [Chat updateChat:chat withPigeonsCarryingMessage:peersToSendTo inManagedObjectContext:delegate.managedObjectContext];
+    
     NSError *error;
     [self.session sendData:messageData toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
     if (error) {
-        NSLog(@"Error sending message to peers [%@]", error);
+        NSLog(@"Error: %@ %s", [error userInfo], __PRETTY_FUNCTION__);
+    } else {
+        
     }
 }
 
@@ -126,9 +169,10 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
     NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    Chat *chat = [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedWithCurrentUser:self.myDisplayName];
-    NSLog(@"%@", chat);
-#warning here actually attempt to send the message
+    [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedWithCurrentUser:self.myDisplayName];
+
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [CPMessenger sendPendingMessagesWithStream:delegate.xmppStream];
 }
 
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
