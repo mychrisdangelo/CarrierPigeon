@@ -114,7 +114,6 @@
 	}
     
     return _fetchedResultsController;
-    
 }
 
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath

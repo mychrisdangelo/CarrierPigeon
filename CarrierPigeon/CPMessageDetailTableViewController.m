@@ -44,31 +44,7 @@
     self.to.text = self.chat.toJID;
     self.carriers.text = @"todo";
     
-    NSString *statusString;
-    
-    switch ([self.chat.messageStatus intValue]) {
-        case CPChatSendStatusSent:
-            statusString = @"sent";
-            break;
-        case CPChatSendStatusSending:
-            statusString = @"sending";
-            break;
-        case CPChatSendStutusReceivedMessage:
-            statusString = @"received";
-            break;
-        case CPChatStatusOfflinePending:
-            statusString = @"pending";
-            break;
-        case CPChatStatusRelaying:
-            statusString = @"relaying";
-            break;
-        case CPChatStatusRelayed:
-            statusString = @"relayed";
-            break;
-        default:
-            statusString = @"unknown";
-            break;
-    }
+    NSString *statusString = [Chat stringForMessageStatus:[self.chat.messageStatus intValue]];
     
     self.status.text = statusString;
     self.sent.text = @"todo";

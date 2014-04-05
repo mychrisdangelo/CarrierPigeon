@@ -52,4 +52,35 @@
     return chat;
 }
 
++ (NSString *)stringForMessageStatus:(CPMessageStatus)messageStatus
+{
+    NSString *statusString;
+    
+    switch (messageStatus) {
+        case CPChatSendStatusSent:
+            statusString = @"sent";
+            break;
+        case CPChatSendStatusSending:
+            statusString = @"sending";
+            break;
+        case CPChatSendStutusReceivedMessage:
+            statusString = @"received";
+            break;
+        case CPChatStatusOfflinePending:
+            statusString = @"pending";
+            break;
+        case CPChatStatusRelaying:
+            statusString = @"relaying";
+            break;
+        case CPChatStatusRelayed:
+            statusString = @"relayed";
+            break;
+        default:
+            statusString = @"unknown";
+            break;
+    }
+    
+    return statusString;
+}
+
 @end

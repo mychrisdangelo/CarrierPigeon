@@ -69,8 +69,9 @@
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
 		4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139A18E0A6AC00687944 /* CPSessionContainer.m */; };
-		4058139E18E0AA6000687944 /* Chat+EncodingDecoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139D18E0AA6000687944 /* Chat+EncodingDecoding.m */; };
 		405813A018E0AF5400687944 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */; };
+		4067D50618EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */; };
+		4067D50918EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4067D50818EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m */; };
 		4071A66118EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */; };
 		4071A66518EF5C1F00E62A95 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4071A66418EF5C1F00E62A95 /* Chat.m */; };
 		408CFE5818C40E77009F991C /* CPContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408CFE5718C40E77009F991C /* CPContactsTableViewController.m */; };
@@ -305,9 +306,11 @@
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		4058139918E0A6AC00687944 /* CPSessionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSessionContainer.h; sourceTree = "<group>"; };
 		4058139A18E0A6AC00687944 /* CPSessionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSessionContainer.m; sourceTree = "<group>"; };
-		4058139C18E0AA6000687944 /* Chat+EncodingDecoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+EncodingDecoding.h"; sourceTree = "<group>"; };
-		4058139D18E0AA6000687944 /* Chat+EncodingDecoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+EncodingDecoding.m"; sourceTree = "<group>"; };
 		4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		4067D50418EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCarrierPendingMessagesTableViewController.h; sourceTree = "<group>"; };
+		4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCarrierPendingMessagesTableViewController.m; sourceTree = "<group>"; };
+		4067D50718EF87D6002F6163 /* CPYourPendingMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPYourPendingMessagesTableViewController.h; sourceTree = "<group>"; };
+		4067D50818EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPYourPendingMessagesTableViewController.m; sourceTree = "<group>"; };
 		4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNearbyPigeonsTableViewController.h; sourceTree = "<group>"; };
 		4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNearbyPigeonsTableViewController.m; sourceTree = "<group>"; };
 		4071A66318EF5C1F00E62A95 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
@@ -934,6 +937,10 @@
 			children = (
 				40A2AEB918D7E6F800E4CD75 /* CPSharingTableViewController.h */,
 				40A2AEBA18D7E6F800E4CD75 /* CPSharingTableViewController.m */,
+				4067D50718EF87D6002F6163 /* CPYourPendingMessagesTableViewController.h */,
+				4067D50818EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m */,
+				4067D50418EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.h */,
+				4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */,
 				4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */,
 				4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */,
 			);
@@ -1523,8 +1530,6 @@
 			children = (
 				40D2C08018C45E0800A9E6FD /* Chat+Create.h */,
 				40D2C08118C45E0800A9E6FD /* Chat+Create.m */,
-				4058139C18E0AA6000687944 /* Chat+EncodingDecoding.h */,
-				4058139D18E0AA6000687944 /* Chat+EncodingDecoding.m */,
 				4071A66318EF5C1F00E62A95 /* Chat.h */,
 				4071A66418EF5C1F00E62A95 /* Chat.m */,
 			);
@@ -1760,7 +1765,6 @@
 				400DC1A018C2E9EA00C806ED /* DDLog.m in Sources */,
 				40A995A118C31E4800C23AB6 /* XMPPGoogleSharedStatus.m in Sources */,
 				40A995D218C31E4800C23AB6 /* XMPPPubSub.m in Sources */,
-				4058139E18E0AA6000687944 /* Chat+EncodingDecoding.m in Sources */,
 				40A995A418C31E4800C23AB6 /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				40A995CF18C31E4800C23AB6 /* NSXMLElement+XEP_0059.m in Sources */,
 				401B0C8718C4FFAA00EE43CA /* CPMessagesViewController.m in Sources */,
@@ -1782,6 +1786,7 @@
 				40A995AF18C31E4800C23AB6 /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				40A995A818C31E4800C23AB6 /* XMPPUserCoreDataStorageObject.m in Sources */,
 				40A995BD18C31E4800C23AB6 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
+				4067D50618EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m in Sources */,
 				40A995B818C31E4800C23AB6 /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				40A995E318C31E4800C23AB6 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				400DC20618C2ECC900C806ED /* XMPPParser.m in Sources */,
@@ -1802,6 +1807,7 @@
 				40A995D918C31E4800C23AB6 /* XMPPSoftwareVersion.m in Sources */,
 				40A995EE18C31E4800C23AB6 /* XMPPAutoTime.m in Sources */,
 				400DC20118C2ECC900C806ED /* XMPPElement.m in Sources */,
+				4067D50918EF87D6002F6163 /* CPYourPendingMessagesTableViewController.m in Sources */,
 				40A995BA18C31E4800C23AB6 /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				40A995B118C31E4800C23AB6 /* XMPPIQ+LastActivity.m in Sources */,
 				40A995B318C31E4800C23AB6 /* XMPPPrivacy.m in Sources */,
