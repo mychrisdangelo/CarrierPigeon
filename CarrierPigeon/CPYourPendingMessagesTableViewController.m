@@ -54,7 +54,10 @@
                                                                                           [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatSendStatusRelayed],
                                                                                           [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatSendStatusRelaying]]];
     
-    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[msgStatusPredicate, [NSPredicate predicateWithFormat:@"reallyFromJID == nil"]]];
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[msgStatusPredicate,
+                                                                                  [NSPredicate predicateWithFormat:@"reallyFromJID == nil"],
+                                                                                  [NSPredicate predicateWithFormat:@"fromJID == %@", myJID]]];
     
     [fetchRequest setPredicate:predicate];
     

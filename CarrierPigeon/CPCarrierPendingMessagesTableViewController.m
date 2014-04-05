@@ -50,11 +50,12 @@
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    NSPredicate *msgStatusPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatSendStatusOfflinePending],
-                                                                                          [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatSendStatusRelayed],
-                                                                                          [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatSendStatusRelaying]]];
+    NSPredicate *msgStatusPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatSendStatusOfflinePending]]];
     
-    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[msgStatusPredicate, [NSPredicate predicateWithFormat:@"reallyFromJID != nil"]]];
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[msgStatusPredicate,
+                                                                                  [NSPredicate predicateWithFormat:@"reallyFromJID != nil"],
+                                                                                  [NSPredicate predicateWithFormat:@"fromJID == %@", myJID]]];
     
     [fetchRequest setPredicate:predicate];
     

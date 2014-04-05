@@ -82,7 +82,6 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     [self signOutUser];
 }
 
-// Helper method for human readable printing of MCSessionState.  This state is per peer.
 - (NSString *)stringForPeerConnectionState:(MCSessionState)state
 {
     switch (state) {
@@ -104,7 +103,6 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     
     NSError *error;
     [self.session sendData:messageData toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
-    // Check the error return to know if there was an issue sending data to peers.  Note any peers in the 'toPeers' array argument are not connected this will fail.
     if (error) {
         NSLog(@"Error sending message to peers [%@]", error);
     }

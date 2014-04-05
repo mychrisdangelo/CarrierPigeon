@@ -7,6 +7,7 @@
 //
 
 #import "Chat+EncoderDecoder.h"
+#import "Chat+Create.h"
 
 @implementation Chat (EncoderDecoder)
 
@@ -48,6 +49,7 @@
     if (currentUser) {
         decodedChat.reallyFromJID = decodedChat.fromJID;
         decodedChat.fromJID = currentUser;
+        decodedChat.messageStatus = [NSNumber numberWithInt:CPChatSendStatusOfflinePending];
     }
     
     return decodedChat;
