@@ -97,23 +97,6 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     }
 }
 
-#pragma mark - Public methods
-
-//- (void)testEncoding:(Chat *)chat
-//{
-//    NSDictionary *dict = @{@"key" : @"value"};
-//    NSData *messageData = [NSKeyedArchiver archivedDataWithRootObject:dict];
-//    [self testDecoding:messageData];
-//}
-//
-//- (void)testDecoding:(NSData *)encodedChat
-//{
-//    NSDictionary *myDictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:encodedChat];
-//    NSLog(@"myDictionary = %@", myDictionary);
-//}
-
-
-
 - (void)sendChat:(Chat *)chat
 {
     NSDictionary *chatAsDictionary = [Chat encodeChatAsDictionary:chat];
@@ -124,8 +107,6 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     // Check the error return to know if there was an issue sending data to peers.  Note any peers in the 'toPeers' array argument are not connected this will fail.
     if (error) {
         NSLog(@"Error sending message to peers [%@]", error);
-    } else {
-#warning handle message sent out success case
     }
 }
 
@@ -142,52 +123,47 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
             [self.peersInRangeConnected removeObject:peerID];
             break;
     }
-    
-    NSLog(@"Me: %@ ... Peer [%@] changed state to %@", self.myDisplayName, peerID.displayName, [self stringForPeerConnectionState:state]);
 }
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
     NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    Chat *chat = [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext];
+    Chat *chat = [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedWithCurrentUser:self.myDisplayName];
     NSLog(@"%@", chat);
 }
 
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
 {
-    
+    // nothing
 }
 
 - (void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
 {
-
+    // nothing
 }
 
-// Streaming API not utilized in this sample code
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
 {
-
+    // nothing
 }
 
 #pragma mark - MCNearbyServiceAdvertiserDelegate
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error
 {
-    NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
+    NSLog(@"Error: %@ %s", [error userInfo], __PRETTY_FUNCTION__);
 }
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
-
     invitationHandler(YES, self.session);
-    NSLog(@"Me %@ From %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
 
 #pragma mark - MCNearbyServiceBrowserDelegate
 
 - (void)browser:(MCNearbyServiceBrowser *)browser didNotStartBrowsingForPeers:(NSError *)error
 {
-     NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
+    NSLog(@"Error: %@ %s", [error userInfo], __PRETTY_FUNCTION__);
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
@@ -201,13 +177,11 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     }
     
     [self.peersInRange addObject:peerID];
-    NSLog(@"Me %@ foundPeer %@: %s", self.myDisplayName, peerID.displayName, __PRETTY_FUNCTION__);
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
     [self.peersInRange removeObject:peerID];
-    NSLog(@"Me %@: %s", self.myDisplayName, __PRETTY_FUNCTION__);
 }
 
 @end

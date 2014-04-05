@@ -26,7 +26,7 @@
     return [chatDictionary copy];
 }
 
-+ (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary inManagedObjectContext:(NSManagedObjectContext *)context
++ (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary inManagedObjectContext:(NSManagedObjectContext *)context asMessageRelayedWithCurrentUser:(NSString *)currentUser
 {
     Chat *decodedChat = [NSEntityDescription insertNewObjectForEntityForName:@"Chat" inManagedObjectContext:context];
     
@@ -43,6 +43,11 @@
     NSError *error = nil;
     if (![context save:&error]) {
         NSLog(@"error saving");
+    }
+    
+    if (currentUser) {
+        decodedChat.reallyFromJID = decodedChat.fromJID;
+        decodedChat.fromJID = currentUser;
     }
     
     return decodedChat;

@@ -50,9 +50,12 @@
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusOfflinePending],
-                                                                                 [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelayed],
-                                                                                 [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelaying]]];
+    NSPredicate *msgStatusPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusOfflinePending],
+                                                                                          [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelayed],
+                                                                                          [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelaying]]];
+    
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[msgStatusPredicate, [NSPredicate predicateWithFormat:@"reallyFromJID == nil"]]];
+    
     [fetchRequest setPredicate:predicate];
     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest

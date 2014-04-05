@@ -54,9 +54,9 @@
                                                                                           [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelayed],
                                                                                           [NSPredicate predicateWithFormat:@"messageStatus == %d", CPChatStatusRelaying]]];
     
-#warning todo when the really from is filled in
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[msgStatusPredicate, [NSPredicate predicateWithFormat:@"reallyFromJID != nil"]]];
     
-    [fetchRequest setPredicate:msgStatusPredicate];
+    [fetchRequest setPredicate:predicate];
     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                 managedObjectContext:self.managedObjectContext
@@ -111,7 +111,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"PendingMessagesTableViewCell";
+    static NSString *CellIdentifier = @"CarrierPendingMessagesTableViewCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {

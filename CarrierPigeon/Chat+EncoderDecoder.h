@@ -10,7 +10,7 @@
 
 @interface Chat (EncoderDecoder)
 
-+ (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Chat *)decodeDictionaryToChat:(NSDictionary *)chatDictionary inManagedObjectContext:(NSManagedObjectContext *)context asMessageRelayedWithCurrentUser:(NSString *)currentUser;
 + (NSDictionary *)encodeChatAsDictionary:(Chat *)chat;
 
 @end
