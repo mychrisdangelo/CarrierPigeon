@@ -149,6 +149,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super viewDidLoad];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO];
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
@@ -169,9 +170,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)updateNetworkStatusIndicatorsInContactsView
 {
     self.servicesRequiringRefreshing++;
-    UIColor *barTintColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:YES];
-    [self.navigationController.navigationBar setBarTintColor:barTintColor];
-    [self.view setNeedsDisplay]; // hack: setBarTintColor: wasn't always setting the color immediately
+    self.refreshControl.backgroundColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO];
     [self endRefreshing];
 }
 

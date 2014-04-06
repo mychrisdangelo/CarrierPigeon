@@ -181,10 +181,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // keep barTintColor white for messages view
-    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    [self.view setNeedsDisplay];
-    
     CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     delegate.conversationFromUserCurrentlyViewing = self.contact.jidStr;
     

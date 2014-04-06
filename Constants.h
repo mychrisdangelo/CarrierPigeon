@@ -20,6 +20,7 @@
 
 // Color
 #define kCarrierPigeonBlueColor [UIColor colorWithRed:101.0/255.0 green:166.0/255.0 blue:230.0/255.0 alpha:1.0]
+#define kCarrierPigeonDarkGrayColor [UIColor colorWithRed:56.0/255.0 green:56.0/255.0 blue:56.0/255.0 alpha:1.0]
 
 #define kCarrierPigeonLightRedColor [UIColor colorWithRed:255.0/255.0 green:233.0/255.0 blue:233.0/255.0 alpha:1.0]
 #define kCarrierPigeonLightGreenColor [UIColor colorWithRed:232.0/255.0 green:255.0/255.0 blue:220.0/255.0 alpha:1.0]
