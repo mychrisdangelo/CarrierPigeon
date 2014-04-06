@@ -652,7 +652,7 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
 //                                                               delegate:nil
 //                                                      cancelButtonTitle:@"OK"
 //                                                      otherButtonTitles:nil];
-//			[alertView show];
+//			[alertView show];            
 		} else {
 			// We are not active, so use a local notification instead
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
