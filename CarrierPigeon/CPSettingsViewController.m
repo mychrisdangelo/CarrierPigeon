@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *onlyUsePigeonsSwitch;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSString *myJID;
+@property (weak, nonatomic) IBOutlet UITableViewCell *versionCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *buildCell;
 
 @end
 
@@ -58,6 +60,11 @@
     [self.onlyUsePigeonsSwitch setOn:[user.onlyUsePigeons boolValue]];
     
     [self refreshUserNameInTitle];
+    
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    self.versionCell.detailTextLabel.text = versionString;
+    self.buildCell.detailTextLabel.text = build;
 }
 
 - (void)refreshUserNameInTitle
