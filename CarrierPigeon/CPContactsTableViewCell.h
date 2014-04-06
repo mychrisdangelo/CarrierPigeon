@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageBodyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end

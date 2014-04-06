@@ -174,7 +174,6 @@
 		40ACCC6B18C3254A00081B7F /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */; };
 		40D2C07518C438CA00A9E6FD /* CPAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */; };
 		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
-		40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */; };
 		40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */; };
 		40E000ED18F0D97600EB0858 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E000EC18F0D97600EB0858 /* User.m */; };
 		40E000F018F0D9D000EB0858 /* User+AddOrUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E000EF18F0D9D000EB0858 /* User+AddOrUpdate.m */; };
@@ -202,6 +201,8 @@
 		40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */; };
 		40E2205318F12BFC009B0E0B /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205218F12BFC009B0E0B /* Contact.m */; };
 		40E2205618F12BFC009B0E0B /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205518F12BFC009B0E0B /* Chat.m */; };
+		40E2205B18F13CD3009B0E0B /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205918F13CD3009B0E0B /* NSDate+Helper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		40E2205C18F13CD3009B0E0B /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 40E2205A18F13CD3009B0E0B /* README.textile */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
 		40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */; };
@@ -550,8 +551,6 @@
 		40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAddFriendViewController.m; sourceTree = "<group>"; };
 		40D2C08018C45E0800A9E6FD /* Chat+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+Create.h"; sourceTree = "<group>"; };
 		40D2C08118C45E0800A9E6FD /* Chat+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+Create.m"; sourceTree = "<group>"; };
-		40D2C08B18C4671100A9E6FD /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
-		40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
 		40D2C08E18C4678000A9E6FD /* CPHelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHelperFunctions.h; sourceTree = "<group>"; };
 		40D2C08F18C4678000A9E6FD /* CPHelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHelperFunctions.m; sourceTree = "<group>"; };
 		40D2C09218C4681100A9E6FD /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
@@ -590,6 +589,9 @@
 		40E2205218F12BFC009B0E0B /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		40E2205418F12BFC009B0E0B /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
 		40E2205518F12BFC009B0E0B /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		40E2205818F13CD3009B0E0B /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		40E2205918F13CD3009B0E0B /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		40E2205A18F13CD3009B0E0B /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
 		40E5B3DB18D8DF8600918FB3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1590,8 +1592,8 @@
 		40A995F818C31FDF00C23AB6 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				40E2205718F13CC2009B0E0B /* NSDate-Helper */,
 				40E21FEC18F10465009B0E0B /* TSMessagesAndDependencies */,
-				40D2C08A18C4670300A9E6FD /* NSDate-Extensions */,
 				40A9D71D18C41FE7006DBDC6 /* KeyChainItemWrapper */,
 				400DC18A18C2E9BC00C806ED /* XMPP */,
 			);
@@ -1641,15 +1643,6 @@
 				40E2205518F12BFC009B0E0B /* Chat.m */,
 			);
 			name = Chat;
-			sourceTree = "<group>";
-		};
-		40D2C08A18C4670300A9E6FD /* NSDate-Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				40D2C08B18C4671100A9E6FD /* NSDate-Utilities.h */,
-				40D2C08C18C4671100A9E6FD /* NSDate-Utilities.m */,
-			);
-			name = "NSDate-Extensions";
 			sourceTree = "<group>";
 		};
 		40D2C0A018C46D5800A9E6FD /* Messages */ = {
@@ -1758,6 +1751,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		40E2205718F13CC2009B0E0B /* NSDate-Helper */ = {
+			isa = PBXGroup;
+			children = (
+				40E2205818F13CD3009B0E0B /* NSDate+Helper.h */,
+				40E2205918F13CD3009B0E0B /* NSDate+Helper.m */,
+				40E2205A18F13CD3009B0E0B /* README.textile */,
+			);
+			name = "NSDate-Helper";
+			sourceTree = "<group>";
+		};
 		40FBDCDE18D3E3DB00A4D174 /* Contact */ = {
 			isa = PBXGroup;
 			children = (
@@ -1862,6 +1865,7 @@
 				40E2201018F104BC009B0E0B /* NotificationBackgroundErrorIcon.png in Resources */,
 				40E2201818F104BC009B0E0B /* NotificationBackgroundWarning.png in Resources */,
 				40E2201D18F104BC009B0E0B /* NotificationButtonBackground@2x.png in Resources */,
+				40E2205C18F13CD3009B0E0B /* README.textile in Resources */,
 				4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */,
 				40E2201318F104BC009B0E0B /* NotificationBackgroundMessage@2x.png in Resources */,
 				4032C57818BDAE0500E0CDD1 /* Images.xcassets in Resources */,
@@ -2069,7 +2073,6 @@
 				400DC1E218C2ECAE00C806ED /* XMPPXOAuth2Google.m in Sources */,
 				400DC19E18C2E9EA00C806ED /* DDASLLogger.m in Sources */,
 				40A995E818C31E4800C23AB6 /* XMPPPresence+XEP_0172.m in Sources */,
-				40D2C08D18C4671100A9E6FD /* NSDate-Utilities.m in Sources */,
 				40E000ED18F0D97600EB0858 /* User.m in Sources */,
 				40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */,
 				406FAD0218F05706003FDF89 /* PigeonPeer.m in Sources */,
@@ -2082,6 +2085,7 @@
 				40A995D618C31E4800C23AB6 /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				40A995EB18C31E4800C23AB6 /* XMPPBlocking.m in Sources */,
 				400DC20818C2ECC900C806ED /* XMPPStream.m in Sources */,
+				40E2205B18F13CD3009B0E0B /* NSDate+Helper.m in Sources */,
 				40A9959F18C31E4800C23AB6 /* XMPPBandwidthMonitor.m in Sources */,
 				40A995BF18C31E4800C23AB6 /* XMPPMessage+XEP0045.m in Sources */,
 				40A995F418C31E4800C23AB6 /* NSXMLElement+XEP_0297.m in Sources */,

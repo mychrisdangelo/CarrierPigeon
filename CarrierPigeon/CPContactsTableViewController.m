@@ -23,6 +23,7 @@
 #import "CPNetworkStatusAssistant.h"
 #import "CPContactsTableViewCell.h"
 #import "Chat.h"
+#import "NSDate+Helper.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -70,8 +71,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
                                               inManagedObjectContext:moc];
     
-    NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
-    NSArray *sortDescriptors = @[s];
+    NSSortDescriptor *lastMessage = [[NSSortDescriptor alloc] initWithKey:@"lastMessageAuthoredOrReceived.timeStamp" ascending:NO];
+    NSSortDescriptor *userNameAlpha = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
+    NSArray *sortDescriptors = @[lastMessage, userNameAlpha];
     
     NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     NSMutableArray *predicateArray = [NSMutableArray array];
@@ -79,6 +81,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (searchString.length) {
         // your search predicate(s) are added to this array
         [predicateArray addObject:[NSPredicate predicateWithFormat:@"displayName CONTAINS[cd] %@", searchString]];
+        [predicateArray addObject:[NSPredicate predicateWithFormat:@"ANY messagesReceived.messageBody CONTAINS[cd] %@", searchString]];
+        [predicateArray addObject:[NSPredicate predicateWithFormat:@"ANY messagesAuthored.messageBody CONTAINS[cd] %@", searchString]];
+        
         // finally add the filter predicate for this view
         if (filterPredicate) {
             filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
@@ -316,8 +321,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	
 	cell.authorLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     cell.messageBodyLabel.text = [contact.lastMessageAuthoredOrReceived messageBody];
+    NSDate *timeStamp = nil;
+    if ((timeStamp = contact.lastMessageAuthoredOrReceived.timeStamp)) {
+        // NSDate+Helper doesn't accept nil
+        cell.dateLabel.text = [NSDate stringForDisplayFromDate:contact.lastMessageAuthoredOrReceived.timeStamp];
+    } else {
+        cell.dateLabel.text = @"";
+    }
+
     
 	[self configurePhotoForCell:cell contact:contact];
 }
