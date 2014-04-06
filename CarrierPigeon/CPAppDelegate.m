@@ -277,6 +277,7 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
     
     // Setup Message Delivery Receipts
     //
+    // TODO: Waiting on server side implementation of message receipts
     XMPPMessageDeliveryReceipts* xmppMessageDeliveryRecipts = [[XMPPMessageDeliveryReceipts alloc] initWithDispatchQueue:dispatch_get_main_queue()];
     xmppMessageDeliveryRecipts.autoSendMessageDeliveryReceipts = YES;
     xmppMessageDeliveryRecipts.autoSendMessageDeliveryRequests = YES;

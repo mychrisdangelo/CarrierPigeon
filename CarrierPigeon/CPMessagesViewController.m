@@ -54,7 +54,7 @@
         _contact = contact;
     }
     
-    self.title = _contact.displayName;
+    self.title = [CPHelperFunctions parseOutHostIfInDisplayName:_contact.displayName];
     if (self.view.window) {
         [self loadMessages];
     }
@@ -99,8 +99,8 @@
     
     NSMutableArray *predicateArray = [NSMutableArray array];
     
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.contact.jidStr, self.myJid]];
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@", self.myJid, self.contact.jidStr]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@ AND chatOwner == %@", self.contact.jidStr, self.myJid, self.myJid]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@ AND chatOwner == %@", self.myJid, self.contact.jidStr, self.myJid]];
     NSPredicate *filterPredicate = nil;
     if (filterPredicate) {
         filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];

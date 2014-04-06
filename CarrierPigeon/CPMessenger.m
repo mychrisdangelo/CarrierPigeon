@@ -42,13 +42,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     if ([xmppStream isConnected]) {
         sendStatus = CPChatSendStatusSending;
         
-        
+        // TODO: Waiting on server side implementation of message receipts
         XMPPElementReceipt *receipt = [[XMPPElementReceipt alloc] init];
         [xmppStream sendElement:messageElement andGetReceipt:&receipt];
-        
-        
-        
-        
         
         [Chat addChatWithXMPPMessage:message fromUser:from toUser:to deviceUser:deviceUser inManagedObjectContext:context withMessageStatus:sendStatus withChatIDNumber:chatIDNumber];
         

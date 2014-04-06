@@ -298,9 +298,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
 {
     Contact *contact = [fetchedResultsController objectAtIndexPath:theIndexPath];
-
 	
-	cell.textLabel.text = contact.displayName;
+	cell.textLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
 	[self configurePhotoForCell:cell contact:contact];
 }
 
