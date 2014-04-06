@@ -68,9 +68,10 @@
 - (void)refreshDisplayOfNetworkStatus
 {
     self.servicesRequiringRefreshing++;
-    if ([self.xmppStream isConnected]) {
+    CPNetworkStatus networkStatus = [CPNetworkStatusAssistant networkStatus];
+    if (networkStatus & CPNetworkStatusConnectedToXMPPStream) {
         self.networkStatus.textLabel.text = @"Connected";
-    } else if ([[[CPSessionContainer sharedInstance] peersInRangeConnected] count]) {
+    } else if (networkStatus & CPNetworkStatusConnectedToPeerPigeons) {
         self.networkStatus.textLabel.text = @"Nearby Pigeons Connected";
     } else {
         self.networkStatus.textLabel.text = @"No network connection";

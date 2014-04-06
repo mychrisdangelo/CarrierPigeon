@@ -1785,9 +1785,9 @@
 			buildConfigurationList = 4032C58F18BDAE0600E0CDD1 /* Build configuration list for PBXNativeTarget "CarrierPigeon" */;
 			buildPhases = (
 				859BAF79BCC74A358D32E016 /* Check Pods Manifest.lock */,
-				4032C54D18BDAE0500E0CDD1 /* Sources */,
 				4032C54E18BDAE0500E0CDD1 /* Frameworks */,
 				4032C54F18BDAE0500E0CDD1 /* Resources */,
+				4032C54D18BDAE0500E0CDD1 /* Sources */,
 				D9CAA8282CAA43ADA09894D3 /* Copy Pods Resources */,
 			);
 			buildRules = (

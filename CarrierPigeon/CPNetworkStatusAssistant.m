@@ -43,7 +43,7 @@ NSString * const kNetworkStatusDidChangeNotification = @"kNetworkStatusDidChange
     [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkStatusDidChangeNotification object:nil userInfo:nil];
 }
 
-+ (CPNetworkStatus)networkStatus;
++ (CPNetworkStatus)networkStatus
 {
     CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     XMPPStream *xmppStream = delegate.xmppStream;
