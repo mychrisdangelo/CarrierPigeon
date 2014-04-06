@@ -1789,6 +1789,7 @@
 				4032C54F18BDAE0500E0CDD1 /* Resources */,
 				4032C54D18BDAE0500E0CDD1 /* Sources */,
 				D9CAA8282CAA43ADA09894D3 /* Copy Pods Resources */,
+				4067B66718F20D4300DCB03E /* Update Version and Build Number with Git Tag & Commit Count respectively */,
 			);
 			buildRules = (
 			);
@@ -1901,6 +1902,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4067B66718F20D4300DCB03E /* Update Version and Build Number with Git Tag & Commit Count respectively */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version and Build Number with Git Tag & Commit Count respectively";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Assumes that you tag versions with the version number (e.g., \"1.1\") and then the build number is\n# that plus the number of commits since the tag (e.g., \"1.1.17\")\n\necho \"Updating version/build number from git...\"\nplist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\n# increment the build number (ie 115 to 116)\nversionnum=`git tag | awk '{split($0,a,\"-\"); print a[1]}'`\nbuildnum=`git tag | awk '{split($0,a,\"-\"); print a[1] \".\" a[2]}'`\n\nif [[ \"${versionnum}\" == \"\" ]]; then\necho \"No version number from git\"\nexit 2\nfi\n\nif [[ \"${buildnum}\" == \"\" ]]; then\necho \"No build number from git\"\nexit 2\nfi\n\n/usr/libexec/Plistbuddy -c \"Set CFBundleShortVersionString $versionnum\" \"${plist}\"\necho \"Updated version number to $versionnum\"\n\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\necho \"Updated build number to $buildnum\"";
+		};
 		859BAF79BCC74A358D32E016 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
