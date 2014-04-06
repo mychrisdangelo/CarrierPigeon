@@ -43,12 +43,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
 
-
-- (IBAction)forceOfflineButtonPressed:(UIBarButtonItem *)sender {
-    [self.xmppStream disconnect];
-}
-
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

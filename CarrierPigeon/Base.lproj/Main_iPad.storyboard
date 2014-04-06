@@ -676,11 +676,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="MF6-k3-203">
-                        <barButtonItem key="leftBarButtonItem" title="Disconnect XMPP" id="cQ8-J1-0QT">
-                            <connections>
-                                <action selector="forceOfflineButtonPressed:" destination="Pyi-FM-7SZ" id="nc3-0B-CXj"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="dUA-yI-nWW">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="Z7H-ap-pUg">
                                 <rect key="frame" x="282" y="11" width="22" height="22"/>
