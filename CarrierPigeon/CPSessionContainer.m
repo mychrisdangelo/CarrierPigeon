@@ -117,8 +117,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     for (MCPeerID *eachConnectedPeer in connectedPeers) {
         NSString *eachConnectedPeerDisplayName = eachConnectedPeer.displayName;
         if ([previousCarriersOfThisMessageInStringArray containsObject:eachConnectedPeerDisplayName]) {
-            // do nothing. this user pigeon peer is already carrying the message
-            NSLog(@"DO NOTHING");
+            NSLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
         } else {
             if (pigeonsCarryingMessageCount++ < kMaxCarrierPigeonsThatMayReceiveMessagePeerToPeer) {
                 [peersToSendTo addObject:eachConnectedPeer];
@@ -143,7 +142,9 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     [Chat updateChat:chat withPigeonsCarryingMessage:peersToSendTo inManagedObjectContext:delegate.managedObjectContext];
     
     NSError *error;
-    [self.session sendData:messageData toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
+    if ([peersToSendTo count]) {
+        [self.session sendData:messageData toPeers:peersToSendTo withMode:MCSessionSendDataReliable error:&error];
+    }
     if (error) {
         NSLog(@"Error: %@ %s", [error userInfo], __PRETTY_FUNCTION__);
     } else {

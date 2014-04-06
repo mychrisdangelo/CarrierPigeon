@@ -13,12 +13,12 @@
 
 @implementation Chat (Create)
 
-+ (Contact *)getContactForThisMessageWithFromUser:(NSString *)fromUser andWithDeviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context
++ (Contact *)getContactForThisMessageForUser:(NSString *)user andWithDeviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Contact *contact;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
-    request.predicate = [NSPredicate predicateWithFormat:@"jidStr = %@ AND contactOwnerJidStr = %@", fromUser, deviceUser];
+    request.predicate = [NSPredicate predicateWithFormat:@"jidStr = %@ AND contactOwnerJidStr = %@", user, deviceUser];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"jidStr" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -29,7 +29,7 @@
         // sanity check
         NSLog(@"contact exists more than once");
     } else if ([matches count] == 0) {
-        NSLog(@"contact doesn't exist for sent/received message");
+        NSLog(@"contact doesn't exist for sent/received message. %s", __PRETTY_FUNCTION__);
     } else {
         // only one object found
         contact = [matches lastObject];
@@ -67,8 +67,8 @@
         chat.chatIDNumberPerOwner = [NSNumber numberWithInteger:chatIDNumber];
     }
 
-    if (chat.isIncomingMessage) {
-        Contact *author = [self getContactForThisMessageWithFromUser:fromUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
+    if ([chat.isIncomingMessage boolValue]) {
+        Contact *author = [self getContactForThisMessageForUser:fromUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
         [author addMessagesAuthoredObject:chat];
         chat.authorOfMessage = author;
         chat.recipientOfMessage = nil;
@@ -77,7 +77,7 @@
         author.lastMessageAuthoredOrReceived = chat;
     } else {
         // wire up relationship to chat's recipient
-        Contact *recipient = [self getContactForThisMessageWithFromUser:toUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
+        Contact *recipient = [self getContactForThisMessageForUser:toUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
         [recipient addMessagesReceivedObject:chat];
         chat.recipientOfMessage = recipient;
         chat.authorOfMessage = nil;
