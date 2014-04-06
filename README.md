@@ -1,7 +1,11 @@
 Carrier Pigeon
 =============
 
-iOS Messaging App that allows users to relay messages offline.
+Carrier Pigeon is an iOS app that allows you to send messages to your friends while online and offline. If you go offline your messages are shared with the people next to you. If they reach the internet sooner than you, they will deliver the message on your behalf.
+
+Use Case
+========		
+Say you're in the subway and you want to send your mom a message that you'll be late. Your message can piggy back on other users who access the internet sooner. These "Carrier Pigeons" will bring your message to your mom faster than you can because you don't have the internet!
 
 Authors
 =======
