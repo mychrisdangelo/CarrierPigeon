@@ -40,7 +40,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     
     // if we can send via the server do that
     if ([xmppStream isConnected]) {
-        sendStatus = CPChatSendStatusSending;
+        // TODO: this is premature. We should wait for message receipt
+        sendStatus = CPChatSendStatusSent;
         
         // TODO: Waiting on server side implementation of message receipts
         XMPPElementReceipt *receipt = [[XMPPElementReceipt alloc] init];
@@ -91,8 +92,13 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         CPMessageStatus sendStatus = CPChatSendStatusOfflinePending;
         CPSessionContainer *sc = [CPSessionContainer sharedInstance];
         if ([xmppStream isConnected]) {
-            sendStatus = CPChatSendStatusSending;
-            [xmppStream sendElement:messageElement];
+            // TODO: this is premature. We should wait for message receipt
+            sendStatus = CPChatSendStatusSent;
+            
+            // TODO: Waiting on server side implementation of message receipts
+            XMPPElementReceipt *receipt = [[XMPPElementReceipt alloc] init];
+            [xmppStream sendElement:messageElement andGetReceipt:&receipt];
+            
             [Chat updateChat:each withStatus:sendStatus inManagedObjectContext:context];
         } else if ([sc.peersInRange count] > 0) {
             /*

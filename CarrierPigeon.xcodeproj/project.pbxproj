@@ -203,6 +203,7 @@
 		40E2205618F12BFC009B0E0B /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205518F12BFC009B0E0B /* Chat.m */; };
 		40E2205B18F13CD3009B0E0B /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205918F13CD3009B0E0B /* NSDate+Helper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		40E2205C18F13CD3009B0E0B /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 40E2205A18F13CD3009B0E0B /* README.textile */; };
+		40E2206718F14E2E009B0E0B /* CPEditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2206618F14E2E009B0E0B /* CPEditProfileTableViewController.m */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
 		40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */; };
@@ -592,6 +593,8 @@
 		40E2205818F13CD3009B0E0B /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		40E2205918F13CD3009B0E0B /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		40E2205A18F13CD3009B0E0B /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
+		40E2206518F14E2E009B0E0B /* CPEditProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEditProfileTableViewController.h; sourceTree = "<group>"; };
+		40E2206618F14E2E009B0E0B /* CPEditProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEditProfileTableViewController.m; sourceTree = "<group>"; };
 		40E5B3DB18D8DF8600918FB3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -988,6 +991,8 @@
 			children = (
 				403972C718C661AD007F592D /* CPSettingsViewController.h */,
 				403972C818C661AD007F592D /* CPSettingsViewController.m */,
+				40E2206518F14E2E009B0E0B /* CPEditProfileTableViewController.h */,
+				40E2206618F14E2E009B0E0B /* CPEditProfileTableViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -2005,6 +2010,7 @@
 				40A995A518C31E4800C23AB6 /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				40A995B618C31E4800C23AB6 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				40A995AF18C31E4800C23AB6 /* XMPPIQ+JabberRPCResonse.m in Sources */,
+				40E2206718F14E2E009B0E0B /* CPEditProfileTableViewController.m in Sources */,
 				40A995A818C31E4800C23AB6 /* XMPPUserCoreDataStorageObject.m in Sources */,
 				40A995BD18C31E4800C23AB6 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
 				4067D50618EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m in Sources */,
