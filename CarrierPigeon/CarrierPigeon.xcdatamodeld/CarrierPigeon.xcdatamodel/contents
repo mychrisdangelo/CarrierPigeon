@@ -28,9 +28,14 @@
         <attribute name="jidStr" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="messagesPigeonIsCarrying" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="pigeonsCarryingMessage" inverseEntity="Chat" syncable="YES"/>
     </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="jidStr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="onlyUsePigeons" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Chat" positionX="-405" positionY="-108" width="128" height="283"/>
         <element name="Contact" positionX="-11" positionY="32" width="128" height="103"/>
         <element name="PigeonPeer" positionX="-173" positionY="-108" width="182" height="73"/>
+        <element name="User" positionX="-198" positionY="27" width="128" height="73"/>
     </elements>
 </model>

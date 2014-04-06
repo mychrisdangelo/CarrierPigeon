@@ -8,12 +8,37 @@
 
 #import "CPSettingsViewController.h"
 #import "CPSignInViewController.h"
+#import "CPAppDelegate.h"
+#import "User+AddOrUpdate.h"
 
 @interface CPSettingsViewController () <CPSignInViewControllerPresenterDelegate>
+
+@property (weak, nonatomic) IBOutlet UISwitch *onlyUsePigeonsSwitch;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) NSString *myJID;
 
 @end
 
 @implementation CPSettingsViewController
+
+- (NSString *)myJID
+{
+    if (_myJID == nil) {
+        _myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    }
+    
+    return _myJID;
+}
+
+- (NSManagedObjectContext *)context
+{
+    if (_context == nil) {
+        CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+        _context = [delegate managedObjectContext];
+    }
+    
+    return _context;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,16 +53,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    User *user = [User addOrUpdateWithJidStr:self.myJID withOnlyUsePigeonsSettings:NO forUpdate:NO inManagedObjectContext:self.context];
+    [self.onlyUsePigeonsSwitch setOn:[user.onlyUsePigeons boolValue]];
     
     [self refreshUserNameInTitle];
 }
 
 - (void)refreshUserNameInTitle
 {
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    NSArray *parsedJID = [myJID componentsSeparatedByString: @"@"];
-    NSString *username = [parsedJID objectAtIndex:0];
-    self.title = username;
+    self.title = [CPHelperFunctions parseOutHostIfInDisplayName:self.myJID];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,6 +80,12 @@
             cpsivc.presenterDelegate = self;
         }
     }
+}
+
+- (IBAction)onlyUsePigeonsSwitchDidChange:(UISwitch *)sender
+{
+
+    [User addOrUpdateWithJidStr:self.myJID withOnlyUsePigeonsSettings:sender.on forUpdate:YES inManagedObjectContext:self.context];
 }
 
 #pragma mark - CPSignInViewControllerPresenterDelegate

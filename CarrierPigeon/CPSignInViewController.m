@@ -13,6 +13,7 @@
 #import "CPContactsTableViewController.h"
 #import "CPAppDelegate.h"
 #import "CPSessionContainer.h"
+#import "User+AddOrUpdate.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -227,6 +228,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously]; // will set YES on connect
     [[NSUserDefaults standardUserDefaults] synchronize];
     [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
+    
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [User addOrUpdateWithJidStr:jid withOnlyUsePigeonsSettings:NO forUpdate:NO inManagedObjectContext:delegate.managedObjectContext];
+    
     [self.delegate CPSignInViewControllerDidStoreCredentials:self];
     
 }
