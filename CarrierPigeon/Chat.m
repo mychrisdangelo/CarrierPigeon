@@ -30,5 +30,7 @@
 @dynamic toJID;
 @dynamic pigeonsCarryingMessage;
 @dynamic authorOfMessage;
+@dynamic recipientOfMessage;
+@dynamic lastAuthorOrRecipient;
 
 @end

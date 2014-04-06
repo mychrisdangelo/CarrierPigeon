@@ -17,14 +17,21 @@
 @property (nonatomic, retain) NSString * displayName;
 @property (nonatomic, retain) NSString * jidStr;
 @property (nonatomic, retain) id photo;
-@property (nonatomic, retain) NSSet *messageAuthored;
+@property (nonatomic, retain) Chat *lastMessageAuthoredOrReceived;
+@property (nonatomic, retain) NSSet *messagesReceived;
+@property (nonatomic, retain) NSSet *messagesAuthored;
 @end
 
 @interface Contact (CoreDataGeneratedAccessors)
 
-- (void)addMessageAuthoredObject:(Chat *)value;
-- (void)removeMessageAuthoredObject:(Chat *)value;
-- (void)addMessageAuthored:(NSSet *)values;
-- (void)removeMessageAuthored:(NSSet *)values;
+- (void)addMessagesReceivedObject:(Chat *)value;
+- (void)removeMessagesReceivedObject:(Chat *)value;
+- (void)addMessagesReceived:(NSSet *)values;
+- (void)removeMessagesReceived:(NSSet *)values;
+
+- (void)addMessagesAuthoredObject:(Chat *)value;
+- (void)removeMessagesAuthoredObject:(Chat *)value;
+- (void)addMessagesAuthored:(NSSet *)values;
+- (void)removeMessagesAuthored:(NSSet *)values;
 
 @end

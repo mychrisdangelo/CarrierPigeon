@@ -22,6 +22,7 @@
 #import "CPSettingsViewController.h"
 #import "CPNetworkStatusAssistant.h"
 #import "CPContactsTableViewCell.h"
+#import "Chat.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -315,6 +316,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	
 	cell.authorLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    cell.messageBodyLabel.text = [contact.lastMessageAuthoredOrReceived messageBody];
+    
 	[self configurePhotoForCell:cell contact:contact];
 }
 
@@ -415,8 +419,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"ShowContactMessages" sender:cell];
     }
-    
-    
 }
 
 #pragma mark - UISearchDisplayDelegate

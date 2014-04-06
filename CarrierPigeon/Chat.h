@@ -30,6 +30,8 @@
 @property (nonatomic, retain) NSString * toJID;
 @property (nonatomic, retain) NSSet *pigeonsCarryingMessage;
 @property (nonatomic, retain) Contact *authorOfMessage;
+@property (nonatomic, retain) Contact *recipientOfMessage;
+@property (nonatomic, retain) Contact *lastAuthorOrRecipient;
 @end
 
 @interface Chat (CoreDataGeneratedAccessors)

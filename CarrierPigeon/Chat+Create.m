@@ -67,9 +67,24 @@
         chat.chatIDNumberPerOwner = [NSNumber numberWithInteger:chatIDNumber];
     }
 
-    Contact *author = [self getContactForThisMessageWithFromUser:fromUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
-    [author addMessageAuthoredObject:chat];
-    chat.authorOfMessage = author;
+    if (chat.isIncomingMessage) {
+        Contact *author = [self getContactForThisMessageWithFromUser:fromUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
+        [author addMessagesAuthoredObject:chat];
+        chat.authorOfMessage = author;
+        chat.recipientOfMessage = nil;
+        
+        chat.lastAuthorOrRecipient = author;
+        author.lastMessageAuthoredOrReceived = chat;
+    } else {
+        // wire up relationship to chat's recipient
+        Contact *recipient = [self getContactForThisMessageWithFromUser:toUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
+        [recipient addMessagesReceivedObject:chat];
+        chat.recipientOfMessage = recipient;
+        chat.authorOfMessage = nil;
+        
+        chat.lastAuthorOrRecipient = recipient;
+        recipient.lastMessageAuthoredOrReceived = chat;
+    }
     
     NSError *error = nil;
     if (![context save:&error]) {

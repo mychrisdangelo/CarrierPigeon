@@ -199,9 +199,9 @@
 		40E2201E18F104BC009B0E0B /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 40E2200718F104BC009B0E0B /* TSMessagesDefaultDesign.json */; };
 		40E2201F18F104BC009B0E0B /* TSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2200A18F104BC009B0E0B /* TSBlurView.m */; };
 		40E2202018F104BC009B0E0B /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2200C18F104BC009B0E0B /* TSMessageView.m */; };
-		40E2202918F11AB5009B0E0B /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2202818F11AB5009B0E0B /* Chat.m */; };
-		40E2202F18F11AE0009B0E0B /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2202E18F11AE0009B0E0B /* Contact.m */; };
 		40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */; };
+		40E2205318F12BFC009B0E0B /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205218F12BFC009B0E0B /* Contact.m */; };
+		40E2205618F12BFC009B0E0B /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205518F12BFC009B0E0B /* Chat.m */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
 		40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */; };
@@ -584,12 +584,12 @@
 		40E2200A18F104BC009B0E0B /* TSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBlurView.m; sourceTree = "<group>"; };
 		40E2200B18F104BC009B0E0B /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageView.h; sourceTree = "<group>"; };
 		40E2200C18F104BC009B0E0B /* TSMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessageView.m; sourceTree = "<group>"; };
-		40E2202718F11AB5009B0E0B /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
-		40E2202818F11AB5009B0E0B /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
-		40E2202D18F11AE0009B0E0B /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		40E2202E18F11AE0009B0E0B /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		40E2203318F1222F009B0E0B /* CPContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewCell.h; sourceTree = "<group>"; };
 		40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewCell.m; sourceTree = "<group>"; };
+		40E2205118F12BFC009B0E0B /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		40E2205218F12BFC009B0E0B /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		40E2205418F12BFC009B0E0B /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		40E2205518F12BFC009B0E0B /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		40E5B3DB18D8DF8600918FB3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1637,8 +1637,8 @@
 				4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */,
 				4067D50A18EF91EC002F6163 /* Chat+EncoderDecoder.h */,
 				4067D50B18EF91EC002F6163 /* Chat+EncoderDecoder.m */,
-				40E2202718F11AB5009B0E0B /* Chat.h */,
-				40E2202818F11AB5009B0E0B /* Chat.m */,
+				40E2205418F12BFC009B0E0B /* Chat.h */,
+				40E2205518F12BFC009B0E0B /* Chat.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1763,8 +1763,8 @@
 			children = (
 				40FBDCE818D3E68C00A4D174 /* Contact+AddRemove.h */,
 				40FBDCE918D3E68C00A4D174 /* Contact+AddRemove.m */,
-				40E2202D18F11AE0009B0E0B /* Contact.h */,
-				40E2202E18F11AE0009B0E0B /* Contact.m */,
+				40E2205118F12BFC009B0E0B /* Contact.h */,
+				40E2205218F12BFC009B0E0B /* Contact.m */,
 			);
 			name = Contact;
 			sourceTree = "<group>";
@@ -1970,6 +1970,7 @@
 				400DC1A218C2E9EA00C806ED /* ContextFilterLogFormatter.m in Sources */,
 				40A995E418C31E4800C23AB6 /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */,
+				40E2205618F12BFC009B0E0B /* Chat.m in Sources */,
 				40A995F118C31E4800C23AB6 /* XEP_0223.m in Sources */,
 				40A995D118C31E4800C23AB6 /* XMPPIQ+XEP_0060.m in Sources */,
 				40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */,
@@ -1994,7 +1995,6 @@
 				40A995A918C31E4800C23AB6 /* XMPPResourceMemoryStorageObject.m in Sources */,
 				400DC1DD18C2ECAE00C806ED /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				40A995AD18C31E4800C23AB6 /* XMPPSystemInputActivityMonitor.m in Sources */,
-				40E2202918F11AB5009B0E0B /* Chat.m in Sources */,
 				40A995CA18C31E4800C23AB6 /* XMPPvCardTempBase.m in Sources */,
 				40A995D418C31E4800C23AB6 /* XMPPIQ+XEP_0066.m in Sources */,
 				4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */,
@@ -2042,7 +2042,7 @@
 				40A995C718C31E4800C23AB6 /* XMPPvCardTemp.m in Sources */,
 				40A995C018C31E4800C23AB6 /* XMPPMUC.m in Sources */,
 				400DC1EC18C2ECC000C806ED /* NSXMLElement+XMPP.m in Sources */,
-				40E2202F18F11AE0009B0E0B /* Contact.m in Sources */,
+				40E2205318F12BFC009B0E0B /* Contact.m in Sources */,
 				40E2201F18F104BC009B0E0B /* TSBlurView.m in Sources */,
 				400DC20318C2ECC900C806ED /* XMPPJID.m in Sources */,
 				40A995C218C31E4800C23AB6 /* XMPPvCard.xcdatamodeld in Sources */,

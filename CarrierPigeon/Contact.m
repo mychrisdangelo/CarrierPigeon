@@ -16,6 +16,8 @@
 @dynamic displayName;
 @dynamic jidStr;
 @dynamic photo;
-@dynamic messageAuthored;
+@dynamic lastMessageAuthoredOrReceived;
+@dynamic messagesReceived;
+@dynamic messagesAuthored;
 
 @end
