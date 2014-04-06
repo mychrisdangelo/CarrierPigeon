@@ -18,7 +18,6 @@
 #import "CPMessenger.h"
 #import "CPMessageDetailTableViewController.h"
 #import "CPNetworkStatusAssistant.h"
-#import "TSMessage.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate, UISplitViewControllerDelegate>
 
@@ -186,6 +185,9 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [self.view setNeedsDisplay];
     
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.conversationFromUserCurrentlyViewing = self.contact.jidStr;
+    
     // Listen for will show/hide notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -207,6 +209,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.conversationFromUserCurrentlyViewing = nil;
+    
     // Stop listening for keyboard notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

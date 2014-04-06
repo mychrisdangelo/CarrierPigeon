@@ -26,6 +26,7 @@ extern NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNoti
 @property (nonatomic, strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
+@property (nonatomic, strong) NSString *conversationFromUserCurrentlyViewing;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

@@ -22,6 +22,7 @@
 #import "CPNetworkStatusAssistant.h"
 #import "XMPPMessageDeliveryReceipts.h"
 #import "User+AddOrUpdate.h"
+#import "TSMessage.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -652,7 +653,13 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
 //                                                               delegate:nil
 //                                                      cancelButtonTitle:@"OK"
 //                                                      otherButtonTitles:nil];
-//			[alertView show];            
+//			[alertView show];
+            
+            if (![self.conversationFromUserCurrentlyViewing isEqualToString:user.jidStr]) {
+                NSString *parsedDisplayName = [CPHelperFunctions parseOutHostIfInDisplayName:displayName];
+                [TSMessage showNotificationWithTitle:body subtitle:parsedDisplayName type:TSMessageNotificationTypeMessage];
+            }
+
 		} else {
 			// We are not active, so use a local notification instead
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
