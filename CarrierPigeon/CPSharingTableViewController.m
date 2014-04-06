@@ -11,6 +11,7 @@
 #import "XMPP.h"
 #import "CPNearbyPigeonsTableViewController.h"
 #import "CPSessionContainer.h"
+#import "CPNetworkStatusAssistant.h"
 
 @interface CPSharingTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *networkStatus;
@@ -68,15 +69,14 @@
 {
     self.servicesRequiringRefreshing++;
     if ([self.xmppStream isConnected]) {
-        self.networkStatus.imageView.image = [UIImage imageNamed:@"GreenCircle"];
         self.networkStatus.textLabel.text = @"Connected";
     } else if ([[[CPSessionContainer sharedInstance] peersInRangeConnected] count]) {
-        self.networkStatus.imageView.image = [UIImage imageNamed:@"YellowCircle"];
         self.networkStatus.textLabel.text = @"Nearby Pigeons Connected";
     } else {
-        self.networkStatus.imageView.image = [UIImage imageNamed:@"RedCircle"];
         self.networkStatus.textLabel.text = @"No network connection";
     }
+    
+    [self.networkStatus.textLabel setTextColor:[CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO]];
     
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [self endRefreshing];
