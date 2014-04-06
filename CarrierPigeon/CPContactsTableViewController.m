@@ -50,7 +50,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewWillAppear:animated];
     self.fetchedResultsController = nil;
-    [self updateNetworkStatusIndicatorsInContactsView];
     [self.tableView reloadData];
 }
 
@@ -157,6 +156,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
+    [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [self setSettingsTabBarName];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicatorsInContactsView) name:kNetworkStatusDidChangeNotification object:nil];
 }
@@ -190,22 +190,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
 }
-
-//- (void)showSignInNowIfNecessary
-//{
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-//        if (![delegate userHasLoggedInPreviously]) {
-//            [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
-//
-//        } else {
-//            [delegate connect];
-//        }
-//    } else {
-//        // we're in the iPhone and launching Signin has been taken care of by CPAppDelegate
-//    }
-//
-//}
 
 - (void)endRefreshing
 {
@@ -241,14 +225,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSManagedObjectContext *context = [appDelegate managedObjectContext_roster];
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XMPPUserCoreDataStorageObject"];
-    NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"jidStr" ascending:YES];
-    [request setSortDescriptors:@[s]];
-    
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
     NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    
     for (XMPPUserCoreDataStorageObject *each in matches) {
         [Contact addRemoveContactFromXMPPUserCoreDataStorageObject:each forCurrentUser:myJID inManagedObjectContext:self.managedObjectContext removeContact:NO];
     }
@@ -529,6 +509,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
     [tableView endUpdates];
+}
+
+#pragma mark - XMPPRosterDelegate
+
+- (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender
+{
+    [self refreshContactsCache];
 }
 
 @end
