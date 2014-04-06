@@ -199,8 +199,8 @@
     }
 
     // Set the dynamic frames
-    _messageLabel.frame = CGRectMake(xOffsetLabel, yOffset + 5, labelSize.width, labelSize.height);
-    _balloonView.frame = CGRectMake(xOffsetBalloon, yOffset, balloonSize.width, balloonSize.height);
+    _messageLabel.frame = CGRectMake(xOffsetLabel, yOffset + 9, labelSize.width, labelSize.height);
+    _balloonView.frame = CGRectMake(xOffsetBalloon, yOffset + 4, balloonSize.width, balloonSize.height);
     
 //    _balloonView.translatesAutoresizingMaskIntoConstraints = NO;
 //    _messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
