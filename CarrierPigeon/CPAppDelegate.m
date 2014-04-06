@@ -648,20 +648,17 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
 		NSString *displayName = [user displayName];
         
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-//			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
-//                                                                message:body
-//                                                               delegate:nil
-//                                                      cancelButtonTitle:@"OK"
-//                                                      otherButtonTitles:nil];
-//			[alertView show];
-            
             if (![self.conversationFromUserCurrentlyViewing isEqualToString:user.jidStr]) {
                 NSString *parsedDisplayName = [CPHelperFunctions parseOutHostIfInDisplayName:displayName];
-                [TSMessage showNotificationWithTitle:body subtitle:parsedDisplayName type:TSMessageNotificationTypeMessage];
+                 [TSMessage showNotificationWithTitle:body subtitle:parsedDisplayName type:TSMessageNotificationTypeMessage];
             }
-
 		} else {
-			// We are not active, so use a local notification instead
+			/*
+             * We are not active, so use a local notification instead. this will only work if we enable backgrounding. Xmppframework
+             * gives this as an example where this will work with VOIP service enabled. However, applications will be rejected by
+             * Apple if a service is enabled without just cause: 
+             * http://stackoverflow.com/questions/22756142/xmpp-chat-app-got-rejected-for-using-voip-service-as-background-mode
+             */
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 			localNotification.alertAction = @"Ok";
 			localNotification.alertBody = [NSString stringWithFormat:@"From: %@\n\n%@", displayName, body];
