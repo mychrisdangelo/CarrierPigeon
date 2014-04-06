@@ -99,8 +99,9 @@
     
     NSMutableArray *predicateArray = [NSMutableArray array];
     
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@ AND chatOwner == %@", self.contact.jidStr, self.myJid, self.myJid]];
-    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@ AND chatOwner == %@", self.myJid, self.contact.jidStr, self.myJid]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@ AND chatOwner == %@ AND reallyFromJID == nil", self.contact.jidStr, self.myJid, self.myJid]];
+    [predicateArray addObject:[NSPredicate predicateWithFormat:@"fromJID == %@ AND toJID == %@ AND chatOwner == %@ AND reallyFromJID == nil", self.myJid, self.contact.jidStr, self.myJid]];
+    
     NSPredicate *filterPredicate = nil;
     if (filterPredicate) {
         filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
