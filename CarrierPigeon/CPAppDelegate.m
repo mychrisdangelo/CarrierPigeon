@@ -129,11 +129,7 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
         }
     }
     
-    // set global appearances
     [[UITabBar appearance] setTintColor:kCarrierPigeonBlueColor];
-    [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    
     // [self testMessageArchiving];
     // [self testContactArchiving];
     
