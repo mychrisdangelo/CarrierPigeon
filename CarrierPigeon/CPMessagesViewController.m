@@ -18,6 +18,7 @@
 #import "CPMessenger.h"
 #import "CPMessageDetailTableViewController.h"
 #import "CPNetworkStatusAssistant.h"
+#import "TSMessage.h"
 
 @interface CPMessagesViewController () <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, PHFComposeBarViewDelegate, UISplitViewControllerDelegate>
 
