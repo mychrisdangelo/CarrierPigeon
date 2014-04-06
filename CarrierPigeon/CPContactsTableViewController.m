@@ -352,6 +352,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 #pragma mark - Table view data source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    /*
+     * Subtle point here: the cell identifier is pulled out from the tableview as defined in the storyboard.
+     * tableView:cellForRowAtIndexPath: is called both for the standard table and the searchDisplayController created
+     * table. In order to get the cells in the style we need we will always generate cells of the type from the storyboard.
+     * http://stackoverflow.com/questions/10189243/custom-cellidentifier-is-null-when-using-search-display-controller
+     */
+    return self.tableView.rowHeight;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[[self fetchedResultsControllerForTableView:tableView] sections] count];
@@ -374,7 +385,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
 	static NSString *CellIdentifier = @"ContactsCell";
 	
-	CPContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    /*
+     * See note in tableView:heightForRowAtIndexPath: the same subtelty in choosing self.tableView here applies.
+     */
+	CPContactsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		cell = [[CPContactsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}

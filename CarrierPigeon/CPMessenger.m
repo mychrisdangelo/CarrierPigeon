@@ -30,7 +30,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
     [messageElement addAttributeWithName:@"to" stringValue:to];
     [messageElement addChild:body];
-    [messageElement addAttributeWithName:@"id" stringValue:[NSString stringWithFormat:@"%lu", chatIDNumber]];
+    [messageElement addAttributeWithName:@"id" stringValue:[NSString stringWithFormat:@"%lu", (unsigned long)chatIDNumber]];
     NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
     [messageElement addChild:status];
     
