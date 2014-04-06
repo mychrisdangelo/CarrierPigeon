@@ -202,9 +202,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessages" id="NZX-7U-jpg"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -229,6 +226,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="YFe-Iu-NWv" id="bK7-Kn-Xux"/>
+                        <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessages" id="M2N-xj-sGi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqf-Wh-ORH" userLabel="First Responder" sceneMemberID="firstResponder"/>

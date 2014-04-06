@@ -256,6 +256,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // Dispose of any resources that can be recreated.
 }
 
+- (UITableView *)tableViewForCell:(UITableViewCell *)cell
+{
+    UIView *superView = cell.superview;
+    while (superView != nil) {
+            if([superView isKindOfClass:[UITableView class]]) {
+                return (UITableView *)superView;
+            }
+            superView = superView.superview;
+    }
+    
+    return nil;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowAddFriendController"]) {
@@ -268,10 +281,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([segue.identifier isEqualToString:@"ShowContactMessages"]) {
         if ([segue.destinationViewController isMemberOfClass:[CPMessagesViewController class]]) {
             CPMessagesViewController *cpmtvc = (CPMessagesViewController *)segue.destinationViewController;
-            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            Contact *contact = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            cpmtvc.contact = contact;
-            cpmtvc.xmppStream = self.xmppStream;
+            if ([sender isKindOfClass:[UITableViewCell class]]) {
+                UITableViewCell *cell = (UITableViewCell *)sender;
+                UITableView *tableView = nil;
+                if ((tableView = [self tableViewForCell:cell])) {
+                    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+                    Contact *contact = [[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath];
+                    cpmtvc.contact = contact;
+                    cpmtvc.xmppStream = self.xmppStream;
+                }
+            }
         }
     }
     
@@ -294,6 +313,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     Contact *contact = [fetchedResultsController objectAtIndexPath:theIndexPath];
 	
 	cell.textLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	[self configurePhotoForCell:cell contact:contact];
 }
 
@@ -387,10 +407,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     id nc = [self.splitViewController.viewControllers lastObject];
     id mvc = [nc topViewController];
     if ([mvc isKindOfClass:[CPMessagesViewController class]]) {
-        Contact *contact = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        Contact *contact = [[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath];
         [mvc setContact:contact];
         [mvc setXmppStream:self.xmppStream];
+    } else {
+        // we are in iPhone
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"ShowContactMessages" sender:cell];
     }
+    
+    
 }
 
 #pragma mark - UISearchDisplayDelegate
