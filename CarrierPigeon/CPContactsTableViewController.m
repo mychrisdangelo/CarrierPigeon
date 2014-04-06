@@ -21,6 +21,7 @@
 #import "CPSessionContainer.h"
 #import "CPSettingsViewController.h"
 #import "CPNetworkStatusAssistant.h"
+#import "CPContactsTableViewCell.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -308,11 +309,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return tableView == self.tableView ? self.fetchedResultsController : self.searchFetchedResultsController;
 }
 
-- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
+- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(CPContactsTableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
 {
     Contact *contact = [fetchedResultsController objectAtIndexPath:theIndexPath];
 	
-	cell.textLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
+	cell.authorLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	[self configurePhotoForCell:cell contact:contact];
 }
@@ -369,10 +370,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
 	static NSString *CellIdentifier = @"ContactsCell";
 	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	CPContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+		cell = [[CPContactsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
     [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];	
@@ -488,7 +488,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeUpdate:
-            [self fetchedResultsController:controller configureCell:[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
+            [self fetchedResultsController:controller configureCell:(CPContactsTableViewCell *)[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
             break;
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];

@@ -9,8 +9,34 @@
 #import "Chat+Create.h"
 #import "PigeonPeer+MCPeer.h"
 #import "Chat+IdentificationNumberMaker.h"
+#import "Contact+AddRemove.h"
 
 @implementation Chat (Create)
+
++ (Contact *)getContactForThisMessageWithFromUser:(NSString *)fromUser andWithDeviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    Contact *contact;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
+    request.predicate = [NSPredicate predicateWithFormat:@"jidStr = %@ AND contactOwnerJidStr = %@", fromUser, deviceUser];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"jidStr" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    if (!matches || ([matches count] > 1)) {
+        // sanity check
+        NSLog(@"contact exists more than once");
+    } else if ([matches count] == 0) {
+        NSLog(@"contact doesn't exist for sent/received message");
+    } else {
+        // only one object found
+        contact = [matches lastObject];
+    }
+    
+    return contact;
+}
 
 + (Chat *)addChatWithXMPPMessage:(XMPPMessage *)message
                         fromUser:(NSString *)fromUser
@@ -41,6 +67,9 @@
         chat.chatIDNumberPerOwner = [NSNumber numberWithInteger:chatIDNumber];
     }
 
+    Contact *author = [self getContactForThisMessageWithFromUser:fromUser andWithDeviceUser:deviceUser inManagedObjectContext:context];
+    [author addMessageAuthoredObject:chat];
+    chat.authorOfMessage = author;
     
     NSError *error = nil;
     if (![context save:&error]) {

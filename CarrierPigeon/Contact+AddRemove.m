@@ -27,7 +27,7 @@
     
     if (!matches || ([matches count] > 1)) {
         // sanity check
-        NSLog(@"contact exists twice");
+        NSLog(@"contact exists more than once");
     } else if ([matches count] == 0) {
         contact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
         contact.jidStr = xmppContact.jidStr;

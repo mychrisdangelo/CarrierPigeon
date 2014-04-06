@@ -24,7 +24,7 @@
     
     if (!matches || ([matches count] > 1)) {
         // sanity check
-        NSLog(@"pigeon peer exists twice");
+        NSLog(@"pigeon peer exists more than once");
     } else if ([matches count] == 0) {
         pigeon = [NSEntityDescription insertNewObjectForEntityForName:@"PigeonPeer" inManagedObjectContext:context];
         pigeon.jidStr = peerID.displayName;

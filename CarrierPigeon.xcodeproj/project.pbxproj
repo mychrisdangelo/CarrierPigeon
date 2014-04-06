@@ -201,6 +201,7 @@
 		40E2202018F104BC009B0E0B /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2200C18F104BC009B0E0B /* TSMessageView.m */; };
 		40E2202918F11AB5009B0E0B /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2202818F11AB5009B0E0B /* Chat.m */; };
 		40E2202F18F11AE0009B0E0B /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2202E18F11AE0009B0E0B /* Contact.m */; };
+		40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */; };
 		40E5B3DC18D8DF8600918FB3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DB18D8DF8600918FB3 /* CoreText.framework */; };
 		40E5B3DE18D8DF9400918FB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */; };
 		40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */; };
@@ -587,6 +588,8 @@
 		40E2202818F11AB5009B0E0B /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		40E2202D18F11AE0009B0E0B /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		40E2202E18F11AE0009B0E0B /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		40E2203318F1222F009B0E0B /* CPContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPContactsTableViewCell.h; sourceTree = "<group>"; };
+		40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewCell.m; sourceTree = "<group>"; };
 		40E5B3DB18D8DF8600918FB3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1014,6 +1017,8 @@
 			children = (
 				408CFE5618C40E77009F991C /* CPContactsTableViewController.h */,
 				408CFE5718C40E77009F991C /* CPContactsTableViewController.m */,
+				40E2203318F1222F009B0E0B /* CPContactsTableViewCell.h */,
+				40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -1967,6 +1972,7 @@
 				400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */,
 				40A995F118C31E4800C23AB6 /* XEP_0223.m in Sources */,
 				40A995D118C31E4800C23AB6 /* XMPPIQ+XEP_0060.m in Sources */,
+				40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */,
 				4032C56718BDAE0500E0CDD1 /* CPAppDelegate.m in Sources */,
 				40A995DB18C31E4800C23AB6 /* NSString+XEP_0106.m in Sources */,
 				40A995F018C31E4800C23AB6 /* NSXMLElement+XEP_0203.m in Sources */,
