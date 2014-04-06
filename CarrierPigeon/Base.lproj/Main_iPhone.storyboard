@@ -8,6 +8,7 @@
         <scene sceneID="cUi-kZ-frf">
             <objects>
                 <navigationController storyboardIdentifier="SignInNavigationControllerStoryboardID" id="rS3-R9-Ivy" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="D9V-8c-UEe"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yXu-0R-QUA">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -734,7 +735,7 @@
                                             <segue destination="s69-Se-TqT" kind="push" identifier="ShowEditProfile" id="KXA-wV-muQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3x8-XS-yiT">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3x8-XS-yiT">
                                         <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3x8-XS-yiT" id="6gj-db-mUa">
@@ -785,7 +786,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="smd-CZ-2SU" kind="modal" identifier="ShowSignInSegue" modalTransitionStyle="crossDissolve" id="jZx-kx-bAz"/>
+                                            <segue destination="smd-CZ-2SU" kind="modal" identifier="ShowSignInSegue" modalTransitionStyle="crossDissolve" id="3V1-Mx-5F5"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -820,8 +821,8 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="210" translatesAutoresizingMaskIntoConstraints="NO" id="5uP-sE-n84">
                                 <rect key="frame" x="55" y="172" width="210" height="224"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">If you "Only Use Pigeons" you will be relying on the kindness of strangers to send your message. While in this state you are not able to receive messages so it is in your best interested to leave this setting off.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <string key="text">If you "Only Use Pigeons" you will be relying on the kindness of strangers to send your message. While in this state you are not able to receive messages so it is in your best interested to leave this setting turned OFF.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1314,7 +1315,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jZx-kx-bAz"/>
+        <segue reference="3V1-Mx-5F5"/>
         <segue reference="Ejs-QW-Xex"/>
     </inferredMetricsTieBreakers>
 </document>

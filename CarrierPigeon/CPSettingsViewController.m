@@ -84,8 +84,16 @@
 
 - (IBAction)onlyUsePigeonsSwitchDidChange:(UISwitch *)sender
 {
-
     [User addOrUpdateWithJidStr:self.myJID withOnlyUsePigeonsSettings:sender.on forUpdate:YES inManagedObjectContext:self.context];
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (sender.on) {
+        // user doesn't want to use xmpp stream
+        [delegate.xmppStream disconnect];
+    } else {
+        if (![delegate connect]) {
+            NSLog(@"%s: self connect failed", __PRETTY_FUNCTION__);
+        }
+    }
 }
 
 #pragma mark - CPSignInViewControllerPresenterDelegate

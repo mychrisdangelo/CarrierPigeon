@@ -28,6 +28,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
+@property (nonatomic) BOOL isAlreadyConnected;
 
 @end
 
@@ -38,14 +39,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.xmppStream removeDelegate:self];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showContactsViewNow) name:kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification object:nil];
     
     if (self.autoLoginHasBegun) {
         [self.activityView startAnimating];
@@ -78,6 +88,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
+- (void)viewDidUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification];
+}
 
 - (IBAction)autoLoginButtonOnePressed:(UIButton *)sender {
     self.usernameTextField.text = @"CarrierPigeon1";
@@ -89,11 +103,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.usernameTextField.text = @"CarrierPigeon2";
     self.passwordTextField.text = @"keyboardflub";
     [self signInButtonPressed:nil];
-}
-
-- (void)dealloc
-{
-    [self.xmppStream removeDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -177,6 +186,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 - (void)xmppStreamDidAuthenticateHandler
+{
+    [self showContactsViewNow];
+}
+
+- (void)showContactsViewNow
 {
     if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
         [self.presenterDelegate CPSignInViewControllerDidSignIn:self];

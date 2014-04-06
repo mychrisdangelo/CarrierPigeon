@@ -21,6 +21,7 @@
 #import "CPSessionContainer.h"
 #import "CPNetworkStatusAssistant.h"
 #import "XMPPMessageDeliveryReceipts.h"
+#import "User+AddOrUpdate.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -30,6 +31,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
 NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConnectionDidChangeNotification";
+NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification = @"kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification";
 
 @interface CPAppDelegate() 
 
@@ -186,11 +188,20 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
 
 - (BOOL)connect
 {
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    User *user = [User addOrUpdateWithJidStr:myJID withOnlyUsePigeonsSettings:NO forUpdate:NO inManagedObjectContext:self.managedObjectContext];
+    if ([user.onlyUsePigeons boolValue]) {
+        // user not interested in signing in only on connecting to peers
+        [[CPSessionContainer sharedInstance] signInUserWithDisplayName:myJID];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification object:nil userInfo:nil];
+        return YES;
+    }
+    
+    
 	if (![self.xmppStream isDisconnected]) {
 		return YES;
 	}
     
-	NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
  	NSString *myPassword = [keychain objectForKey:(__bridge id)kSecValueData];
     self.userPassword = myPassword;

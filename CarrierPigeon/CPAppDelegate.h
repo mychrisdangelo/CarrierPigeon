@@ -12,6 +12,7 @@
 #import "CPSignInViewController.h"
 
 extern NSString * const kXMPPStreamConnectionDidChangeNotification;
+extern NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification;
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPSignInViewControllerDelegate, UIAlertViewDelegate>
 
@@ -30,5 +31,6 @@ extern NSString * const kXMPPStreamConnectionDidChangeNotification;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
+- (BOOL)connect;
 
 @end
