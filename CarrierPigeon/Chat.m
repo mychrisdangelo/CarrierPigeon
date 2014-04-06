@@ -2,16 +2,19 @@
 //  Chat.m
 //  CarrierPigeon
 //
-//  Created by Chris D'Angelo on 4/5/14.
+//  Created by Chris D'Angelo on 4/6/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
 
 #import "Chat.h"
+#import "Contact.h"
 #import "PigeonPeer.h"
 
 
 @implementation Chat
 
+@dynamic chatIDNumberPerOwner;
+@dynamic chatOwner;
 @dynamic filenameAsSent;
 @dynamic fromJID;
 @dynamic hasMedia;
@@ -25,8 +28,7 @@
 @dynamic reallyFromJID;
 @dynamic timeStamp;
 @dynamic toJID;
-@dynamic chatOwner;
-@dynamic chatIDNumberPerOwner;
 @dynamic pigeonsCarryingMessage;
+@dynamic authorOfMessage;
 
 @end

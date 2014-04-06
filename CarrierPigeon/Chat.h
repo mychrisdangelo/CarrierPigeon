@@ -2,17 +2,19 @@
 //  Chat.h
 //  CarrierPigeon
 //
-//  Created by Chris D'Angelo on 4/5/14.
+//  Created by Chris D'Angelo on 4/6/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class PigeonPeer;
+@class Contact, PigeonPeer;
 
 @interface Chat : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * chatIDNumberPerOwner;
+@property (nonatomic, retain) NSString * chatOwner;
 @property (nonatomic, retain) NSString * filenameAsSent;
 @property (nonatomic, retain) NSString * fromJID;
 @property (nonatomic, retain) NSNumber * hasMedia;
@@ -26,9 +28,8 @@
 @property (nonatomic, retain) NSString * reallyFromJID;
 @property (nonatomic, retain) NSDate * timeStamp;
 @property (nonatomic, retain) NSString * toJID;
-@property (nonatomic, retain) NSString * chatOwner;
-@property (nonatomic, retain) NSNumber * chatIDNumberPerOwner;
 @property (nonatomic, retain) NSSet *pigeonsCarryingMessage;
+@property (nonatomic, retain) Contact *authorOfMessage;
 @end
 
 @interface Chat (CoreDataGeneratedAccessors)

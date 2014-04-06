@@ -16,6 +16,7 @@
         <attribute name="reallyFromJID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="toJID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="authorOfMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="messageAuthored" inverseEntity="Contact" syncable="YES"/>
         <relationship name="pigeonsCarryingMessage" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PigeonPeer" inverseName="messagesPigeonIsCarrying" inverseEntity="PigeonPeer" syncable="YES"/>
     </entity>
     <entity name="Contact" representedClassName="Contact" syncable="YES">
@@ -23,6 +24,7 @@
         <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jidStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="messageAuthored" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="authorOfMessage" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="PigeonPeer" representedClassName="PigeonPeer" syncable="YES">
         <attribute name="jidStr" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,9 +35,9 @@
         <attribute name="onlyUsePigeons" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-405" positionY="-108" width="128" height="283"/>
-        <element name="Contact" positionX="-11" positionY="32" width="128" height="103"/>
-        <element name="PigeonPeer" positionX="-173" positionY="-108" width="182" height="73"/>
-        <element name="User" positionX="-198" positionY="27" width="128" height="73"/>
+        <element name="Chat" positionX="-405" positionY="-108" width="128" height="298"/>
+        <element name="Contact" positionX="-209" positionY="35" width="128" height="118"/>
+        <element name="PigeonPeer" positionX="-209" positionY="225" width="182" height="73"/>
+        <element name="User" positionX="-668" positionY="-100" width="128" height="73"/>
     </elements>
 </model>
