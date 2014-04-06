@@ -80,7 +80,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"ShowSignInSegue"]) {
+    if ([segue.identifier isEqualToString:@"SignInSegue"]) {
         if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
             CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
             cpsivc.userWantsToLogOut = YES;
