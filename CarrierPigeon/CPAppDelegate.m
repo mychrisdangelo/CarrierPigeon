@@ -105,8 +105,8 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
                 sivc.xmppStream = self.xmppStream;
                 sivc.xmppRoster = self.xmppRoster;
                 [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
-                
-                [self connect];
+                // I don't think you need to call 'connect' here since the user signed out and you don't want to sign the user in automatically
+               // [self connect];
             } else {
                 NSLog(@"Error: unexpected initial controller");
             }
