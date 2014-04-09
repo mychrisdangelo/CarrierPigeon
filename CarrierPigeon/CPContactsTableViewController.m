@@ -180,6 +180,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification];
 }
 
+// TODO: For use in banner callback. Currently not used because knowledge of the current tableview is necessary to avoid potential crash
+- (Contact *)getContactFromJID:(NSString *)jid
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
+    NSString *stringWithDomainName = [NSString stringWithFormat:@"%@@%@", jid, kXMPPDomainName];
+    request.predicate = [NSPredicate predicateWithFormat:@"contactOwnerJidStr = %@ AND jidStr = %@", self.myJID, stringWithDomainName];
+    
+    NSError *error = nil;
+    NSArray *matches = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if ([matches count] == 1) {
+        return [matches lastObject];
+    } else {
+        return nil;
+    }
+}
+
 - (void)showBannerAlert:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
