@@ -189,6 +189,7 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
 
 - (BOOL)connect
 {
+    NSError *error = nil;
     NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     User *user = [User addOrUpdateWithJidStr:myJID withOnlyUsePigeonsSettings:NO forUpdate:NO inManagedObjectContext:self.managedObjectContext];
     if ([user.onlyUsePigeons boolValue]) {
@@ -197,11 +198,6 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
         [[NSNotificationCenter defaultCenter] postNotificationName:kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification object:nil userInfo:nil];
         return YES;
     }
-    
-    
-	if (![self.xmppStream isDisconnected]) {
-		return YES;
-	}
     
     KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
  	NSString *myPassword = [keychain objectForKey:(__bridge id)kSecValueData];
@@ -220,7 +216,18 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
     
 	[self.xmppStream setMyJID:[XMPPJID jidWithString:myJID]];
     
-	NSError *error = nil;
+    if (![self.xmppStream isDisconnected]) {
+        // xmpp stream is already connected, try to authenticate with password if it is not authenticated
+        if (!self.xmppStream.isAuthenticated) {
+            if (![[self xmppStream] authenticateWithPassword:self.userPassword error:&error])
+            {
+                DDLogError(@"Error authenticating: %@", error);
+            }
+        }
+        
+		return YES;
+	}
+    
 	if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
 	{
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting"
