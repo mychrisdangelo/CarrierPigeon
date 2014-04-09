@@ -67,6 +67,7 @@
 		4032C58218BDAE0600E0CDD1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55A18BDAE0500E0CDD1 /* CoreData.framework */; };
 		4032C58A18BDAE0600E0CDD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4032C58818BDAE0600E0CDD1 /* InfoPlist.strings */; };
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
+		4033ED4518F5283B008CEA03 /* CustomBannerAlertDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 4033ED4418F5283B008CEA03 /* CustomBannerAlertDesign.json */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
 		4051415D18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */; };
 		4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139A18E0A6AC00687944 /* CPSessionContainer.m */; };
@@ -334,6 +335,7 @@
 		4032C58718BDAE0600E0CDD1 /* CarrierPigeonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CarrierPigeonTests-Info.plist"; sourceTree = "<group>"; };
 		4032C58918BDAE0600E0CDD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrierPigeonTests.m; sourceTree = "<group>"; };
+		4033ED4418F5283B008CEA03 /* CustomBannerAlertDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CustomBannerAlertDesign.json; path = CarrierPigeon/CustomBannerAlertDesign.json; sourceTree = SOURCE_ROOT; };
 		403972C718C661AD007F592D /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		4051415B18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+IdentificationNumberMaker.h"; sourceTree = "<group>"; };
@@ -954,6 +956,7 @@
 			children = (
 				4032C55E18BDAE0500E0CDD1 /* CarrierPigeon-Info.plist */,
 				4032C55F18BDAE0500E0CDD1 /* InfoPlist.strings */,
+				4033ED4418F5283B008CEA03 /* CustomBannerAlertDesign.json */,
 				4032C56218BDAE0500E0CDD1 /* main.m */,
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
 				40ACCC6C18C328AD00081B7F /* Constants.h */,
@@ -1878,6 +1881,7 @@
 				4032C56A18BDAE0500E0CDD1 /* Main_iPhone.storyboard in Resources */,
 				40E2200E18F104BC009B0E0B /* NotificationBackgroundError.png in Resources */,
 				4032C56118BDAE0500E0CDD1 /* InfoPlist.strings in Resources */,
+				4033ED4518F5283B008CEA03 /* CustomBannerAlertDesign.json in Resources */,
 				40E2201618F104BC009B0E0B /* NotificationBackgroundSuccessIcon.png in Resources */,
 				40E2201C18F104BC009B0E0B /* NotificationButtonBackground.png in Resources */,
 				40E2201E18F104BC009B0E0B /* TSMessagesDefaultDesign.json in Resources */,

@@ -13,6 +13,7 @@
 
 extern NSString * const kXMPPStreamConnectionDidChangeNotification;
 extern NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification;
+extern NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification;
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPSignInViewControllerDelegate, UIAlertViewDelegate>
 

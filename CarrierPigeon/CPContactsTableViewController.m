@@ -24,6 +24,8 @@
 #import "CPContactsTableViewCell.h"
 #import "Chat.h"
 #import "NSDate+Helper.h"
+#import "TSMessage.h"
+#import "TSMessageView.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -168,12 +170,30 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [self setSettingsTabBarName];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicatorsInContactsView) name:kNetworkStatusDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBannerAlert:) name:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification object:nil];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kNetworkStatusDidChangeNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification];
+}
+
+- (void)showBannerAlert:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    [TSMessage showNotificationInViewController:self.navigationController.topViewController
+                                          title:userInfo[@"body"]
+                                       subtitle:userInfo[@"parsedDisplayName"]
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:3.0
+                                       callback:NULL
+                                    buttonTitle:nil
+                                 buttonCallback:NULL
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES];
 }
 
 - (void)updateNetworkStatusIndicatorsInContactsView

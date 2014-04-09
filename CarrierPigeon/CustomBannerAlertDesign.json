@@ -1,0 +1,20 @@
+{
+    "success": {
+        "borderColor": "#005700",
+        "borderHeight": 1,
+        "buttonBackgroundImageName": "NotificationButtonBackground.png",
+        "buttonTitleTextColor": "#FFFFFF",
+        "buttonTitleShadowColor": "#67B759",
+        "buttonTitleShadowOffsetX": 0,
+        "buttonTitleShadowOffsetY": -1,
+        "contentFontSize": 12,
+        "contentTextColor": "#FFFFFF",
+        "shadowColor": "#67B759",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": -1,
+        "textColor": "#FFFFFF",
+        "titleFontSize": 14,
+        "backgroundColor": "#76CF67",
+        "backgroundAlpha": 0.8
+    }
+}

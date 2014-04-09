@@ -33,6 +33,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConnectionDidChangeNotification";
 NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification = @"kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification";
+NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification = @"kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification";
 
 @interface CPAppDelegate() 
 
@@ -133,7 +134,14 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
     // [self testMessageArchiving];
     // [self testContactArchiving];
     
+    [self setupTSMessageCustomDesign];
+    
     return YES;
+}
+
+- (void)setupTSMessageCustomDesign
+{
+    [TSMessage addCustomDesignFromFileWithName:@"CustomBannerAlertDesign.json"];
 }
 
 - (BOOL)userHasLoggedInPreviously
@@ -657,7 +665,7 @@ NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotificatio
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
             if (![self.conversationFromUserCurrentlyViewing isEqualToString:user.jidStr]) {
                 NSString *parsedDisplayName = [CPHelperFunctions parseOutHostIfInDisplayName:displayName];
-                 [TSMessage showNotificationWithTitle:body subtitle:parsedDisplayName type:TSMessageNotificationTypeMessage];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification object:self userInfo:@{@"parsedDisplayName" : parsedDisplayName, @"body" : body}];
             }
 		} else {
 			/*
