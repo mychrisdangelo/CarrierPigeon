@@ -118,6 +118,8 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
         NSString *eachConnectedPeerDisplayName = eachConnectedPeer.displayName;
         if ([previousCarriersOfThisMessageInStringArray containsObject:eachConnectedPeerDisplayName]) {
             NSLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
+        } else if ([eachConnectedPeerDisplayName isEqualToString:self.myDisplayName]) {
+            NSLog(@"Error: A connected peer has my display name");
         } else {
             if (pigeonsCarryingMessageCount++ < kMaxCarrierPigeonsThatMayReceiveMessagePeerToPeer) {
                 [peersToSendTo addObject:eachConnectedPeer];
@@ -219,6 +221,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 {
     if ([peerID.displayName isEqualToString:self.myDisplayName]) {
         NSLog(@"Error: I found someone with my own display name.");
+        return;
     }
     
     if (![self.session.connectedPeers containsObject:peerID]) {
