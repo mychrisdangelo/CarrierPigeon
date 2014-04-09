@@ -183,7 +183,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)showBannerAlert:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
-    [TSMessage showNotificationInViewController:self.navigationController.topViewController
+    UIViewController *vc = [self.navigationController visibleViewController];
+    [TSMessage showNotificationInViewController:vc
                                           title:userInfo[@"body"]
                                        subtitle:userInfo[@"parsedDisplayName"]
                                           image:nil
