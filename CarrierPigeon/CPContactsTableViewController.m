@@ -38,6 +38,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) int servicesRequiringRefreshing;
 @property (nonatomic, strong) CPSessionContainer *sessionContainer;
+@property (nonatomic, strong) NSString *myJID;
 
 @end
 
@@ -45,6 +46,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
+
+- (NSString *)myJID
+{
+    if (_myJID == nil) {
+        _myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    }
+    
+    return _myJID;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -74,9 +84,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSSortDescriptor *userNameAlpha = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
     NSArray *sortDescriptors = @[lastMessage, userNameAlpha];
     
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     NSMutableArray *predicateArray = [NSMutableArray array];
-    filterPredicate = [NSPredicate predicateWithFormat:@"contactOwnerJidStr = %@", myJID];
+    filterPredicate = [NSPredicate predicateWithFormat:@"contactOwnerJidStr = %@", self.myJID];
     if (searchString.length) {
         // your search predicate(s) are added to this array
         [predicateArray addObject:[NSPredicate predicateWithFormat:@"displayName CONTAINS[cd] %@", searchString]];
@@ -176,8 +185,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)setSettingsTabBarName
 {
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    NSArray *parsedJID = [myJID componentsSeparatedByString: @"@"];
+    NSArray *parsedJID = [self.myJID componentsSeparatedByString: @"@"];
     NSString *username = [parsedJID objectAtIndex:0];
     for (UIViewController *eachViewController in self.tabBarController.viewControllers) {
         if ([eachViewController isKindOfClass:[UINavigationController class]]) {
@@ -228,9 +236,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
     for (XMPPUserCoreDataStorageObject *each in matches) {
-        [Contact addRemoveContactFromXMPPUserCoreDataStorageObject:each forCurrentUser:myJID inManagedObjectContext:self.managedObjectContext removeContact:NO];
+        [Contact addRemoveContactFromXMPPUserCoreDataStorageObject:each forCurrentUser:self.myJID inManagedObjectContext:self.managedObjectContext removeContact:NO];
     }
     
     [self endRefreshing];
@@ -297,10 +304,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(CPContactsTableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
 {
     Contact *contact = [fetchedResultsController objectAtIndexPath:theIndexPath];
-	
 	cell.authorLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.messageBodyLabel.text = [contact.lastMessageAuthoredOrReceived messageBody];
+    
+    NSString *messageLabelText;
+    NSString *messageBody = [contact.lastMessageAuthoredOrReceived messageBody];
+    if ([contact.lastMessageAuthoredOrReceived.authorOfMessage.jidStr isEqualToString:contact.jidStr]) {
+        messageLabelText = messageBody;
+    } else if (messageBody) {
+        // there is a message body and it is not from the other person so it is from me
+        messageLabelText = [NSString stringWithFormat:@"Me: %@", messageBody];
+    }
+    
+    cell.messageBodyLabel.text = messageLabelText;
     NSDate *timeStamp = nil;
     if ((timeStamp = contact.lastMessageAuthoredOrReceived.timeStamp)) {
         // NSDate+Helper doesn't accept nil
