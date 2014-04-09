@@ -180,7 +180,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification];
 }
 
-// TODO: For use in banner callback. Currently not used because knowledge of the current tableview is necessary to avoid potential crash
 - (Contact *)getContactFromJID:(NSString *)jid
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
@@ -207,7 +206,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                           image:nil
                                            type:TSMessageNotificationTypeSuccess
                                        duration:3.0
-                                       callback:NULL
+                                       callback:^{
+                                           [self.navigationController popToRootViewControllerAnimated:NO];
+                                           Contact *contact = [self getContactFromJID:userInfo[@"parsedDisplayName"]];
+                                           
+                                           id nc = [self.splitViewController.viewControllers lastObject];
+                                           id mvc = [nc topViewController];
+                                           if ([mvc isKindOfClass:[CPMessagesViewController class]]) {
+                                               [mvc setContact:contact];
+                                               [mvc setXmppStream:self.xmppStream];
+                                           } else {
+                                               // we are in the iPhone
+                                               [self performSegueWithIdentifier:@"ShowContactMessagesQuickly" sender:contact];
+                                           }
+                                           
+                                       }
                                     buttonTitle:nil
                                  buttonCallback:NULL
                                      atPosition:TSMessageNotificationPositionTop
@@ -309,7 +322,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
-    if ([segue.identifier isEqualToString:@"ShowContactMessages"]) {
+    if ([segue.identifier isEqualToString:@"ShowContactMessages"] || [segue.identifier isEqualToString:@"ShowContactMessagesQuickly"]) {
         if ([segue.destinationViewController isMemberOfClass:[CPMessagesViewController class]]) {
             CPMessagesViewController *cpmtvc = (CPMessagesViewController *)segue.destinationViewController;
             if ([sender isKindOfClass:[UITableViewCell class]]) {
@@ -321,6 +334,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     cpmtvc.contact = contact;
                     cpmtvc.xmppStream = self.xmppStream;
                 }
+            } else if ([sender isKindOfClass:[Contact class]]) {
+                cpmtvc.contact = sender;
+                cpmtvc.xmppStream = self.xmppStream;
             }
         }
     }

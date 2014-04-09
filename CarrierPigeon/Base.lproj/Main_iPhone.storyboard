@@ -254,6 +254,7 @@
                     <connections>
                         <outlet property="searchDisplayController" destination="YFe-Iu-NWv" id="bK7-Kn-Xux"/>
                         <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessages" id="M2N-xj-sGi"/>
+                        <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessagesQuickly" id="eNf-kM-Oob"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqf-Wh-ORH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1476,6 +1477,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="qEk-U8-C5J"/>
+        <segue reference="eNf-kM-Oob"/>
         <segue reference="rUn-Ng-c2X"/>
     </inferredMetricsTieBreakers>
 </document>
