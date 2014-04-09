@@ -40,12 +40,19 @@
     self.xmppStream = delegate.xmppStream;
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
-    [self refreshDisplayOfNetworkStatus];
-    [self updatePigeonCountInTableView];
+
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(updatePigeonCountInTableView) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(refreshDisplayOfNetworkStatus) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self refreshDisplayOfNetworkStatus];
+    [self updatePigeonCountInTableView];
 }
 
 - (void)endRefreshing

@@ -161,8 +161,11 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
             [self.peersInRangeConnected addObject:peerID];
             break;
         case MCSessionStateNotConnected:
-        case MCSessionStateConnecting:
             [self.peersInRangeConnected removeObject:peerID];
+            break;
+        case MCSessionStateConnecting:
+        default:
+            // not interested in this state
             break;
     }
     
@@ -214,6 +217,10 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
+    if ([peerID.displayName isEqualToString:self.myDisplayName]) {
+        NSLog(@"Error: I found someone with my own display name.");
+    }
+    
     if (![self.session.connectedPeers containsObject:peerID]) {
         [browser invitePeer:peerID toSession:self.session withContext:nil timeout:5.0];
     }
