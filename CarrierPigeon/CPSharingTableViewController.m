@@ -60,7 +60,7 @@
     self.servicesRequiringRefreshing++;
     int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] peersInRange] count];
     int connectedPeersCount = (int)[[[CPSessionContainer sharedInstance] peersInRangeConnected] count];
-    self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d / %d", currentPeersCount, connectedPeersCount];
+    self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d / %d", connectedPeersCount, currentPeersCount];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0]; // getting indexPathForCell doesn't work in static table it seems
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self endRefreshing];
@@ -73,7 +73,7 @@
     if (networkStatus & CPNetworkStatusConnectedToXMPPStream) {
         self.networkStatus.textLabel.text = @"Connected";
     } else if (networkStatus & CPNetworkStatusConnectedToPeerPigeons) {
-        self.networkStatus.textLabel.text = @"Nearby Pigeons Connected";
+        self.networkStatus.textLabel.text = @"Nearby / Connected Pigeons Connected";
     } else {
         self.networkStatus.textLabel.text = @"No network connection";
     }
