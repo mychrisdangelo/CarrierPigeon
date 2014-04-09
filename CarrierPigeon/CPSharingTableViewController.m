@@ -59,7 +59,8 @@
 {
     self.servicesRequiringRefreshing++;
     int currentPeersCount = (int)[[[CPSessionContainer sharedInstance] peersInRange] count];
-    self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d", currentPeersCount];
+    int connectedPeersCount = (int)[[[CPSessionContainer sharedInstance] peersInRangeConnected] count];
+    self.nearByPigeonsCell.detailTextLabel.text = [NSString stringWithFormat:@"%d / %d", currentPeersCount, connectedPeersCount];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0]; // getting indexPathForCell doesn't work in static table it seems
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self endRefreshing];
