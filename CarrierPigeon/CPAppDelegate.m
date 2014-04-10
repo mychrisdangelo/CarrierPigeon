@@ -35,7 +35,7 @@ NSString * const kXMPPStreamConnectionDidChangeNotification = @"kXMPPStreamConne
 NSString * const kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification = @"kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification";
 NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification = @"kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification";
 
-@interface CPAppDelegate() 
+@interface CPAppDelegate()
 
 
 @property (nonatomic, strong) XMPPReconnect *xmppReconnect;
@@ -106,8 +106,6 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
                 sivc.xmppStream = self.xmppStream;
                 sivc.xmppRoster = self.xmppRoster;
                 [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
-                // I don't think you need to call 'connect' here since the user signed out and you don't want to sign the user in automatically
-               // [self connect];
             } else {
                 NSLog(@"Error: unexpected initial controller");
             }
@@ -148,7 +146,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 {
     return [[[NSUserDefaults standardUserDefaults] stringForKey:kUserHasConnectedPreviously] boolValue];
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -157,7 +155,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -296,9 +294,9 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
     //
     self.xmppMessageArchivingStorage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
     self.xmppMessageArchive = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:self.xmppMessageArchivingStorage];
-
+    
     [self.xmppMessageArchive setClientSideMessageArchivingOnly:NO];
-
+    
     [self.xmppMessageArchive activate:self.xmppStream];
     [self.xmppMessageArchive  addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
@@ -615,10 +613,27 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	
 	NSError *error = nil;
 	
-	if (![[self xmppStream] authenticateWithPassword:self.userPassword error:&error])
-	{
-		DDLogError(@"Error authenticating: %@", error);
-	}
+    // check if the user wants to register
+    if (self.userWantsToRegister) {
+        
+        KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
+        self.userPassword = [keychain objectForKey:(__bridge id)kSecValueData];
+        
+        // check if inband registration is supported
+        if (self.xmppStream.supportsInBandRegistration) {
+            if (![self.xmppStream registerWithPassword:self.userPassword error:&error]) {
+                DDLogError(@"Registration error: %@", error);
+            }
+            self.userWantsToRegister = NO;
+        } else {
+            DDLogError(@"Inband registration is not supported");
+        }
+    } else {
+        if (![[self xmppStream] authenticateWithPassword:self.userPassword error:&error])
+        {
+            DDLogError(@"Error authenticating: %@", error);
+        }
+    }
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
@@ -671,7 +686,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 			/*
              * We are not active, so use a local notification instead. this will only work if we enable backgrounding. Xmppframework
              * gives this as an example where this will work with VOIP service enabled. However, applications will be rejected by
-             * Apple if a service is enabled without just cause: 
+             * Apple if a service is enabled without just cause:
              * http://stackoverflow.com/questions/22756142/xmpp-chat-app-got-rejected-for-using-voip-service-as-background-mode
              */
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];

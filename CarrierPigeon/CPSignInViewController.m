@@ -117,7 +117,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self showAlertMissingUsernameOrPassword];
     } else {
         [self.activityView startAnimating];
-        sender.enabled = NO;
+        self.signInButton.enabled = NO;
         self.signUpButton.enabled = NO;
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
@@ -131,24 +131,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self showAlertMissingUsernameOrPassword];
         
     } else {
-        [self saveUserInfoAndBeginSignIn];
-        
+        [self.activityView startAnimating];
         self.signUpButton.enabled = NO;
         self.signInButton.enabled = NO;
-        [self.activityView startAnimating];
         
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         
-        NSError *err=nil;
-        // check if inband registration is supported
-        if (self.xmppStream.supportsInBandRegistration) {
-            if (![self.xmppStream registerWithPassword:self.passwordTextField.text error:&err]) {
-                DDLogError(@"Oops, I forgot something: %@", err);
-            }
-        } else {
-            DDLogError(@"Inband registration is not supported");
-        }
+        [self beginSignUp];
     }
     
 }
@@ -204,7 +194,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    //TODO: fix bug alert appears more than once on sign-in error
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login"
                                                     message:@"Unable to sign in. Do you have an account?"
                                                    delegate:self cancelButtonTitle:@"OK"
@@ -250,12 +239,47 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+- (void) beginSignUp {
+    
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.userWantsToRegister = YES;
+    
+    KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
+    [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
+    
+    NSError *error = nil;
+    NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
+    
+    [self.xmppStream setMyJID:[XMPPJID jidWithString:jid]];
+    
+    if([self.xmppStream isDisconnected]){
+        // stream is not connected, attempt to connect
+        if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
+            DDLogError(@"Error connecting: %@", error);
+        }
+    } else {
+        // check if inband registration is supported
+        if (self.xmppStream.supportsInBandRegistration) {
+            if (![self.xmppStream registerWithPassword:self.passwordTextField.text error:&error]) {
+                DDLogError(@"Registration error: %@", error);
+            }
+            delegate.userWantsToRegister = NO;
+        } else {
+            DDLogError(@"Inband registration is not supported");
+        }
+    }
+}
+
+
 - (void)xmppStreamDidRegister:(XMPPStream *)sender
 {
     
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self xmppStreamDidAuthenticateHandler];
-
+    // registration successful, disconnect stream to prevent unexpected authentication&connection errors
+    [self.xmppStream disconnect];
+    
+    //begin sign in
+    [self saveUserInfoAndBeginSignIn];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
