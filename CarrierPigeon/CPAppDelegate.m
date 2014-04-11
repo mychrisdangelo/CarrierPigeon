@@ -135,8 +135,10 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
     [self setupTSMessageCustomDesign];
     
     // register for push notifications
+#if !TARGET_IPHONE_SIMULATOR
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    
+#endif
+
     return YES;
 }
 
@@ -829,6 +831,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 # pragma mark - Push Notifications
 
 -(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // the phone token can be sent to the server using a http post request
     NSLog(@"Device token: %@", deviceToken);
 }
 
