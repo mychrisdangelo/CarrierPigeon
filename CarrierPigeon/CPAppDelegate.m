@@ -134,6 +134,9 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
     
     [self setupTSMessageCustomDesign];
     
+    // register for push notifications
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
     return YES;
 }
 
@@ -823,4 +826,13 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
     }
 }
 
+# pragma mark - Push Notifications
+
+-(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"Device token: %@", deviceToken);
+}
+
+-(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Error registering for remote notification: %@", error);
+}
 @end
