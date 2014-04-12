@@ -365,7 +365,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    //withdraw the keyboard when the any area in the view outside the textview is touched
+    //withdraw the keyboard when any area in the view outside the textfield is touched
     UITouch *touch = [[event allTouches] anyObject];
     if ([self.usernameTextField isFirstResponder] && [touch view] != self.usernameTextField) {
         [self.usernameTextField resignFirstResponder];
