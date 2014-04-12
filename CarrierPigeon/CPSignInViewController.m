@@ -22,7 +22,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
-@interface CPSignInViewController ()
+#define kAlertViewSignUpSuccess 11
+#define kAlertViewSignUpFailure 12
+#define kAlertViewSignInFailure 13
+#define kAlertViewMissingUsernamePassword 14
+
+@interface CPSignInViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
@@ -93,6 +98,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kPreviousUserConnectedWithPreferenceToUsePigeonsOnlyNotification];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - IB Actions
+
 - (IBAction)autoLoginButtonOnePressed:(UIButton *)sender {
     self.usernameTextField.text = @"CarrierPigeon1";
     self.passwordTextField.text = @"keyboardflub";
@@ -103,12 +117,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.usernameTextField.text = @"CarrierPigeon2";
     self.passwordTextField.text = @"keyboardflub";
     [self signInButtonPressed:nil];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)signInButtonPressed:(UIButton *)sender {
@@ -143,6 +151,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+#pragma mark - Navigation
+
 - (void)prepareContactsViewController:(NSArray *)viewControllers
 {
     if ([viewControllers[0] isMemberOfClass:[UINavigationController class]]) {
@@ -175,30 +185,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.activityView stopAnimating];
 }
 
-- (void)xmppStreamDidAuthenticateHandler
-{
-    [self showContactsViewNow];
-}
-
-- (void)showContactsViewNow
-{
-    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
-        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
-    } else {
-        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
-    }
-}
-
 #pragma mark XMPPStreamDelegate
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login"
-                                                    message:@"Unable to sign in. Do you have an account?"
-                                                   delegate:self cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil, nil];
-    [alert show];
+    [self showAlertSignInFailure];
     
     [self.signInButton setEnabled:YES];
     [self.signUpButton setEnabled:YES];
@@ -214,13 +206,73 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self xmppStreamDidAuthenticateHandler];
 }
 
-- (void)showAlertMissingUsernameOrPassword {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required"
-                                                    message:@"Username & Password required."
-                                                   delegate:self cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    return;
+- (void)xmppStreamDidRegister:(XMPPStream *)sender
+{
+    // registration successful, disconnect stream to prevent unexpected authentication&connection errors
+    [self.xmppStream disconnect];
+    
+	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    [self showAlertSignUpSuccess];
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
+{
+    [self.activityView stopAnimating];
+    [self.signInButton setEnabled:YES];
+    [self.signUpButton setEnabled:YES];
+    
+    [self showAlertSignUpFailure];
+}
+
+#pragma mark - Alert View Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    switch (alertView.tag) {
+        case kAlertViewSignUpSuccess:
+            if (buttonIndex == 0) { //  Yes clicked, user wants to sign in now
+                [self saveUserInfoAndBeginSignIn];
+            } else if (buttonIndex == 1) { //  No clicked, user doesn't want to sign in now
+                [self.activityView stopAnimating];
+                [self.signInButton setEnabled:YES];
+                [self.signUpButton setEnabled:YES];
+            }
+            break;
+            
+        case kAlertViewSignUpFailure:
+            if (buttonIndex == 0) {
+                return;
+            }
+            break;
+            
+        case kAlertViewSignInFailure:
+            if (buttonIndex == 0) {
+                return;
+            }
+            break;
+            
+        case kAlertViewMissingUsernamePassword:
+            if (buttonIndex == 0) {
+                return;
+            }
+            break;
+    }
+}
+
+# pragma mark - Helper Functions
+
+- (void)xmppStreamDidAuthenticateHandler
+{
+    [self showContactsViewNow];
+}
+
+- (void)showContactsViewNow
+{
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
+        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
+    } else {
+        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
+    }
 }
 
 - (void)saveUserInfoAndBeginSignIn {
@@ -270,31 +322,59 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
-
-- (void)xmppStreamDidRegister:(XMPPStream *)sender
-{
-    
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    // registration successful, disconnect stream to prevent unexpected authentication&connection errors
-    [self.xmppStream disconnect];
-    
-    //begin sign in
-    [self saveUserInfoAndBeginSignIn];
+- (void)showAlertMissingUsernameOrPassword {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required"
+                                                    message:@"Username & Password required."
+                                                   delegate:self cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    alert.tag = kAlertViewMissingUsernamePassword;
+    [alert show];
+    return;
 }
 
-- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
-{
-    [self.activityView stopAnimating];
-    [self.signInButton setEnabled:YES];
-    [self.signUpButton setEnabled:YES];
-    
-    //TODO: fix bug alert appears more than once on sign-in error
+
+-(void) showAlertSignUpSuccess {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Success"
+                                                    message:@"Your account has been created. Do you want to sign in now?"
+                                                   delegate:self cancelButtonTitle:@"Yes"
+                                          otherButtonTitles:@"No", nil];
+    alert.tag = kAlertViewSignUpSuccess;
+    [alert show];
+    return;
+}
+
+-(void) showAlertSignInFailure {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login"
+                                                    message:@"Unable to sign in. Do you have an account?"
+                                                   delegate:self cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    alert.tag = kAlertViewSignInFailure;
+    [alert show];
+    return;
+}
+
+-(void) showAlertSignUpFailure {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Unsuccessful"
                                                     message:@"Unable to complete registration. Username may be taken."
                                                    delegate:self cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
+    alert.tag = kAlertViewSignUpFailure;
     [alert show];
     return;
+}
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    //withdraw the keyboard when the any area in the view outside the textview is touched
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.usernameTextField isFirstResponder] && [touch view] != self.usernameTextField) {
+        [self.usernameTextField resignFirstResponder];
+    }
+    
+    if ([self.passwordTextField isFirstResponder] && [touch view] != self.passwordTextField) {
+        [self.passwordTextField resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end
