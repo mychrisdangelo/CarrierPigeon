@@ -70,7 +70,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    NSError *error = nil;
     
     if (textField == self.passwordFirst) {
         [self.passwordSecond becomeFirstResponder];
@@ -205,9 +204,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void) doChangePassword {
     NSError* error = nil;
     
+    KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
+    [keychain setObject:self.passwordFirst.text forKey:(__bridge id)kSecValueData];
+    
+    NSString *newPassword = [keychain objectForKey:(__bridge id)kSecValueData];
+
     // check if inband registration is supported
     if (self.xmppStream.supportsInBandRegistration) {
-        if (![self.xmppStream registerWithPassword:self.passwordFirst.text error:&error]) {
+        if (![self.xmppStream registerWithPassword:newPassword error:&error]) {
             DDLogError(@"Registration error: %@", error);
             [self showAlertChangePasswordFailure];
         } else {

@@ -299,6 +299,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
     [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
     
+    NSString *password = [keychain objectForKey:(__bridge id)kSecValueData];
+    
     NSError *error = nil;
     NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
     
@@ -312,7 +314,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     } else {
         // check if inband registration is supported
         if (self.xmppStream.supportsInBandRegistration) {
-            if (![self.xmppStream registerWithPassword:self.passwordTextField.text error:&error]) {
+            if (![self.xmppStream registerWithPassword:password error:&error]) {
                 DDLogError(@"Registration error: %@", error);
             }
             delegate.userWantsToRegister = NO;
