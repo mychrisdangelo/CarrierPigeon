@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "XMPPStream.h"
+#import "XMPPRoster.h"
 
 @interface CPEditProfileTableViewController : UITableViewController
 
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) XMPPStream *xmppStream;
+@property (nonatomic, strong) XMPPRoster *xmppRoster;
 
 @end
