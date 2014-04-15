@@ -329,7 +329,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:self.xmppRosterStorage];
 	
 	self.xmppRoster.autoFetchRoster = YES;
-	self.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
+	self.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
 	
 	// Setup vCard support
 	//
