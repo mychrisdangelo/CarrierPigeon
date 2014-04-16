@@ -88,8 +88,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
         self.delegate = delegate;
         self.xmppStream = delegate.xmppStream;
+        self.xmppRoster = delegate.xmppRoster;
         [self.xmppStream disconnect];
         [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
 }
 
