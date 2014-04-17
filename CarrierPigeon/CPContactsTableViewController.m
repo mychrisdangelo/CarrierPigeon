@@ -51,11 +51,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (NSString *)myJID
 {
-    if (_myJID == nil) {
-        _myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    }
-    
-    return _myJID;
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
 }
 
 - (void)viewWillAppear:(BOOL)animated
