@@ -760,7 +760,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4iF-MO-Cfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132" y="2233"/>
+            <point key="canvasLocation" x="1232" y="1633"/>
         </scene>
         <!--Settings View Controller - Me-->
         <scene sceneID="SDa-GW-8gp">
@@ -934,7 +934,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBS-o6-Ylh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1630" y="2226"/>
+            <point key="canvasLocation" x="1730" y="1626"/>
         </scene>
         <!--View Controller - Only Use Pigeons-->
         <scene sceneID="wr9-fc-76i">
@@ -962,7 +962,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X2z-lI-pqQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2156" y="2001"/>
+            <point key="canvasLocation" x="2256" y="1401"/>
         </scene>
         <!--Edit Profile Table View Controller - Edit Profile-->
         <scene sceneID="IvZ-wa-Tdy">
@@ -1049,7 +1049,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2F2-Bs-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2156" y="2770"/>
+            <point key="canvasLocation" x="2256" y="2170"/>
         </scene>
         <!--Table View Controller - Credits-->
         <scene sceneID="Jxg-yE-mbw">
@@ -1078,7 +1078,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXe-Ze-kcT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2159" y="3455"/>
+            <point key="canvasLocation" x="2246" y="2943"/>
         </scene>
         <!--Navigation Controller - Sharing-->
         <scene sceneID="mQ5-n1-whX">
@@ -1457,25 +1457,6 @@
             </objects>
             <point key="canvasLocation" x="2256" y="580"/>
         </scene>
-        <!--View Controller - Graph Todo-->
-        <scene sceneID="Lr9-op-O8W">
-            <objects>
-                <viewController id="F3d-Db-WDX" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3Go-RE-VQZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="Hnq-yg-uZB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZT4-Ck-vhw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Graph Todo" id="HNm-o9-fkT"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="quZ-Jd-eD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2256" y="1254"/>
-        </scene>
     </scenes>
     <resources>
         <image name="DefaultProfileImage" width="150" height="150"/>
@@ -1489,8 +1470,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="rUn-Ng-c2X"/>
         <segue reference="eNf-kM-Oob"/>
-        <segue reference="AI6-Wv-EJv"/>
+        <segue reference="mut-xm-qX8"/>
+        <segue reference="rUn-Ng-c2X"/>
     </inferredMetricsTieBreakers>
 </document>
