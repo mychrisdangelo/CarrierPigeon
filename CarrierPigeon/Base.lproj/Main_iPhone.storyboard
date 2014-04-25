@@ -1200,34 +1200,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Your Generosity" id="COF-ER-vxa">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ekW-S9-hZv" rowHeight="194" style="IBUITableViewCellStyleDefault" id="sio-1m-L8a">
-                                        <rect key="frame" x="0.0" y="391" width="320" height="194"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sio-1m-L8a" id="WHT-9I-BaI">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="193"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Graph of Data TODO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ekW-S9-hZv">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="193"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="F3d-Db-WDX" kind="push" id="Fvx-ht-2tC"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Network Usage" id="mEx-ug-YKf">
                                 <cells>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="mV2-v4-nHG" detailTextLabel="9M6-ur-nlK" style="IBUITableViewCellStyleValue1" id="Nxu-KF-0te">
-                                        <rect key="frame" x="0.0" y="633" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="391" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nxu-KF-0te" id="zkO-0b-ONL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1251,7 +1227,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="38i-6c-Ahr" detailTextLabel="maE-un-Cak" style="IBUITableViewCellStyleValue1" id="AML-yZ-Que">
-                                        <rect key="frame" x="0.0" y="677" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="435" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AML-yZ-Que" id="mRK-ie-KtV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1275,7 +1251,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="axO-Ib-zKY" detailTextLabel="wXn-N3-1gX" style="IBUITableViewCellStyleValue1" id="RKG-dR-FwU">
-                                        <rect key="frame" x="0.0" y="721" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="479" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RKG-dR-FwU" id="aKF-O7-2Oo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1299,7 +1275,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="VGk-aY-8KN" detailTextLabel="ZLx-Rk-NSt" style="IBUITableViewCellStyleValue1" id="aiP-3X-1hy">
-                                        <rect key="frame" x="0.0" y="765" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="523" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aiP-3X-1hy" id="RLB-fZ-86N">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>

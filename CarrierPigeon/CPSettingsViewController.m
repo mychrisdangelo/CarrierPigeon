@@ -96,18 +96,6 @@
     }
 }
 
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([segue.identifier isEqualToString:@"ShowSignInSegue"]) {
-//        if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
-//            CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
-//            cpsivc.userWantsToLogOut = YES;
-//            cpsivc.presenterDelegate = self;
-//        }
-//    }
-//}
-
 - (IBAction)onlyUsePigeonsSwitchDidChange:(UISwitch *)sender
 {
     [User addOrUpdateWithJidStr:self.myJID withOnlyUsePigeonsSettings:sender.on forUpdate:YES inManagedObjectContext:self.context];

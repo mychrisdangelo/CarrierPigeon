@@ -165,6 +165,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     
     [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [self setSettingsTabBarName];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicatorsInContactsView) name:kNetworkStatusDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBannerAlert:) name:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification object:nil];
 }
