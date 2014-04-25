@@ -82,6 +82,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
         [messageElement addAttributeWithName:@"to" stringValue:each.toJID];
         [messageElement addChild:body];
+        [messageElement addAttributeWithName:@"id" integerValue:[each.chatIDNumberPerOwner integerValue]];
         NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
         [messageElement addChild:status];
         
