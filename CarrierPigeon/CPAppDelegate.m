@@ -78,10 +78,10 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
                     CPContactsTableViewController *controller = (CPContactsTableViewController *)nc.viewControllers[0];
                     controller.xmppStream = self.xmppStream;
                     controller.xmppRoster = self.xmppRoster;
-                    if (![self userHasLoggedInPreviously]) {
-                        controller.showPadSignInNow = YES;
+                    if (![CPAppDelegate userHasLoggedInPreviously]) {
+                        controller.userNeedsToSignIn = YES;
                     } else {
-                        controller.showPadSignInNow = NO;
+                        controller.userNeedsToSignIn = NO;
                         [self connect];
                     }
                 } else {
@@ -94,37 +94,26 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
             NSLog(@"Error: unexpected initial controller");
         }
     } else {
-        UIStoryboard *storyboard;
-        storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-        if (![self userHasLoggedInPreviously]) {
-            UINavigationController *nc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
-            self.window.rootViewController = nc;
-            
-            if ([nc.viewControllers[0] isMemberOfClass:[CPSignInViewController class]]) {
-                CPSignInViewController *sivc = (CPSignInViewController *)nc.viewControllers[0];
-                sivc.delegate = self;
-                sivc.xmppStream = self.xmppStream;
-                sivc.xmppRoster = self.xmppRoster;
-                [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
-            } else {
-                NSLog(@"Error: unexpected initial controller");
-            }
-        } else {
-            // we are in contacts view
-            [self connect];
-            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-            if ([tabBarController.viewControllers[0] isKindOfClass:[UINavigationController class]]) {
-                UINavigationController *nc = (UINavigationController *)tabBarController.viewControllers[0];
-                if ([nc.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
-                    CPContactsTableViewController *controller = (CPContactsTableViewController *)nc.viewControllers[0];
-                    controller.xmppStream = self.xmppStream;
-                    controller.xmppRoster = self.xmppRoster;
+        // iPhone
+        UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        if ([tabBarController.viewControllers[0] isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *nc = (UINavigationController *)tabBarController.viewControllers[0];
+            if ([nc.viewControllers[0] isMemberOfClass:[CPContactsTableViewController class]]) {
+                CPContactsTableViewController *controller = (CPContactsTableViewController *)nc.viewControllers[0];
+                controller.xmppStream = self.xmppStream;
+                controller.xmppRoster = self.xmppRoster;
+                
+                if (![CPAppDelegate userHasLoggedInPreviously]) {
+                    controller.userNeedsToSignIn = YES;
                 } else {
-                    NSLog(@"Error: unexpected initial controller");
+                    controller.userNeedsToSignIn = NO;
+                    [self connect];
                 }
             } else {
                 NSLog(@"Error: unexpected initial controller");
             }
+        } else {
+            NSLog(@"Error: unexpected initial controller");
         }
     }
     
@@ -147,7 +136,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
     [TSMessage addCustomDesignFromFileWithName:@"CustomBannerAlertDesign.json"];
 }
 
-- (BOOL)userHasLoggedInPreviously
++ (BOOL)userHasLoggedInPreviously
 {
     return [[[NSUserDefaults standardUserDefaults] stringForKey:kUserHasConnectedPreviously] boolValue];
 }
@@ -649,7 +638,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kUserHasConnectedPreviously];
+    [[NSUserDefaults standardUserDefaults] setValue:@YES forKey:kUserHasConnectedPreviously];
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[self goOnline];

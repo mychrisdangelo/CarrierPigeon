@@ -35,5 +35,6 @@ extern NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotView
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
 - (BOOL)connect;
++ (BOOL)userHasLoggedInPreviously;
 
 @end
