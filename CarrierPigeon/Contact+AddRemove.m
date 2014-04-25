@@ -29,6 +29,7 @@
         // sanity check
         NSLog(@"contact exists more than once");
     } else if ([matches count] == 0) {
+        //TODO: only add to contacts when subscription=both
         contact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
         contact.jidStr = xmppContact.jidStr;
         contact.displayName = xmppContact.displayName;
