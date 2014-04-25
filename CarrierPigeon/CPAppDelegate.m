@@ -94,22 +94,22 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
             NSLog(@"Error: unexpected initial controller");
         }
     } else {
-        UIStoryboard *storyboard;
-        storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-        if (![self userHasLoggedInPreviously]) {
-            UINavigationController *nc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
-            self.window.rootViewController = nc;
-            
-            if ([nc.viewControllers[0] isMemberOfClass:[CPSignInViewController class]]) {
-                CPSignInViewController *sivc = (CPSignInViewController *)nc.viewControllers[0];
-                sivc.delegate = self;
-                sivc.xmppStream = self.xmppStream;
-                sivc.xmppRoster = self.xmppRoster;
-                [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
-            } else {
-                NSLog(@"Error: unexpected initial controller");
-            }
-        } else {
+//        UIStoryboard *storyboard;
+//        storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+//        if (![self userHasLoggedInPreviously]) {
+//            UINavigationController *nc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInNavigationControllerStoryboardID"];
+//            self.window.rootViewController = nc;
+//            
+//            if ([nc.viewControllers[0] isMemberOfClass:[CPSignInViewController class]]) {
+//                CPSignInViewController *sivc = (CPSignInViewController *)nc.viewControllers[0];
+//                sivc.delegate = self;
+//                sivc.xmppStream = self.xmppStream;
+//                sivc.xmppRoster = self.xmppRoster;
+//                [self.xmppStream addDelegate:sivc delegateQueue:dispatch_get_main_queue()];
+//            } else {
+//                NSLog(@"Error: unexpected initial controller");
+//            }
+//        } else {
             // we are in contacts view
             [self connect];
             UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
@@ -125,7 +125,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
             } else {
                 NSLog(@"Error: unexpected initial controller");
             }
-        }
+//        }
     }
     
     [[UITabBar appearance] setTintColor:kCarrierPigeonBlueColor];

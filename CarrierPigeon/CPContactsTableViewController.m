@@ -154,6 +154,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewDidLoad];
     
+    [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO];
     [self.refreshControl addTarget:self action:@selector(refreshContactsCache) forControlEvents:UIControlEventValueChanged];

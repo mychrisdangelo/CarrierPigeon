@@ -4,22 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="cUi-kZ-frf">
-            <objects>
-                <navigationController storyboardIdentifier="SignInNavigationControllerStoryboardID" id="rS3-R9-Ivy" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="D9V-8c-UEe"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yXu-0R-QUA">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="smd-CZ-2SU" kind="relationship" relationship="rootViewController" id="hnX-2W-MxQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-252" y="73"/>
-        </scene>
         <!--Sign In View Controller - Sign In-->
         <scene sceneID="k7s-Aj-Q1y">
             <objects>
@@ -100,12 +84,11 @@
                         <outlet property="signInButton" destination="rxV-cZ-4KL" id="TOY-cn-iJd"/>
                         <outlet property="signUpButton" destination="AQX-TM-1M3" id="CIM-cp-RtJ"/>
                         <outlet property="usernameTextField" destination="cfw-bm-svl" id="sgS-PB-Z0h"/>
-                        <segue destination="3I6-Ny-I5y" kind="modal" identifier="ShowHomeTabBarController" modalTransitionStyle="crossDissolve" id="3gF-Lf-6Nh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtC-fj-67X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="202" y="78"/>
+            <point key="canvasLocation" x="63" y="78"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="GSG-vL-dRt">
@@ -126,7 +109,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkC-Zv-Ff2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="675" y="78"/>
+            <point key="canvasLocation" x="661" y="78"/>
         </scene>
         <!--Add Friend View Controller - Add Friend-->
         <scene sceneID="ljt-7N-PaT">
@@ -255,6 +238,7 @@
                         <outlet property="searchDisplayController" destination="YFe-Iu-NWv" id="bK7-Kn-Xux"/>
                         <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessages" id="M2N-xj-sGi"/>
                         <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessagesQuickly" id="eNf-kM-Oob"/>
+                        <segue destination="smd-CZ-2SU" kind="modal" identifier="ShowSignInSegue" modalTransitionStyle="crossDissolve" animates="NO" id="mut-xm-qX8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqf-Wh-ORH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -858,9 +842,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="smd-CZ-2SU" kind="modal" identifier="ShowSignInSegue" modalTransitionStyle="crossDissolve" id="qEk-U8-C5J"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1530,7 +1511,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qEk-U8-C5J"/>
         <segue reference="eNf-kM-Oob"/>
         <segue reference="rUn-Ng-c2X"/>
     </inferredMetricsTieBreakers>
