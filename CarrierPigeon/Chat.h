@@ -2,7 +2,7 @@
 //  Chat.h
 //  CarrierPigeon
 //
-//  Created by Chris D'Angelo on 4/6/14.
+//  Created by Chris D'Angelo on 4/25/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
 
@@ -26,17 +26,17 @@
 @property (nonatomic, retain) NSNumber * messageStatus;
 @property (nonatomic, retain) NSString * mimeType;
 @property (nonatomic, retain) NSString * reallyFromJID;
-@property (nonatomic, retain) NSDate * timeStamp;
-@property (nonatomic, retain) NSString * toJID;
-@property (nonatomic, retain) NSSet *pigeonsCarryingMessage;
-@property (nonatomic, retain) Contact *authorOfMessage;
-@property (nonatomic, retain) Contact *recipientOfMessage;
-@property (nonatomic, retain) Contact *lastAuthorOrRecipient;
 @property (nonatomic, retain) NSDate * receiverReadTimestamp;
 @property (nonatomic, retain) NSDate * receiverReceivedTimestamp;
 @property (nonatomic, retain) NSDate * senderSentTimestamp;
 @property (nonatomic, retain) NSDate * serverReceivedTimestamp;
-
+@property (nonatomic, retain) NSDate * timeStamp;
+@property (nonatomic, retain) NSString * toJID;
+@property (nonatomic, retain) NSNumber * reallyFromChatIDNumber;
+@property (nonatomic, retain) Contact *authorOfMessage;
+@property (nonatomic, retain) Contact *lastAuthorOrRecipient;
+@property (nonatomic, retain) NSSet *pigeonsCarryingMessage;
+@property (nonatomic, retain) Contact *recipientOfMessage;
 @end
 
 @interface Chat (CoreDataGeneratedAccessors)

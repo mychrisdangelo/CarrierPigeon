@@ -86,7 +86,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         [messageElement addChild:status];
         
         if (each.reallyFromJID) {
-            [messageElement addAttributeWithName:@"reallyfrom" stringValue:each.reallyFromJID];
+            [messageElement addAttributeWithName:@"reallyFrom" stringValue:each.reallyFromJID];
+            [messageElement addAttributeWithName:@"reallyFromID" integerValue:[each.reallyFromChatIDNumber integerValue]];
         }
         
         CPMessageStatus sendStatus = CPChatSendStatusOfflinePending;

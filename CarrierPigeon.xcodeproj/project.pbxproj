@@ -69,6 +69,7 @@
 		4032C58C18BDAE0600E0CDD1 /* CarrierPigeonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4032C58B18BDAE0600E0CDD1 /* CarrierPigeonTests.m */; };
 		4033ED4518F5283B008CEA03 /* CustomBannerAlertDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 4033ED4418F5283B008CEA03 /* CustomBannerAlertDesign.json */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
+		4041DA29190AAC94002CBE16 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4041DA28190AAC94002CBE16 /* Chat.m */; };
 		4051415D18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */; };
 		4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139A18E0A6AC00687944 /* CPSessionContainer.m */; };
 		405813A018E0AF5400687944 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */; };
@@ -201,7 +202,6 @@
 		40E2202018F104BC009B0E0B /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2200C18F104BC009B0E0B /* TSMessageView.m */; };
 		40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */; };
 		40E2205318F12BFC009B0E0B /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205218F12BFC009B0E0B /* Contact.m */; };
-		40E2205618F12BFC009B0E0B /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205518F12BFC009B0E0B /* Chat.m */; };
 		40E2205B18F13CD3009B0E0B /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2205918F13CD3009B0E0B /* NSDate+Helper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		40E2205C18F13CD3009B0E0B /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 40E2205A18F13CD3009B0E0B /* README.textile */; };
 		40E2206718F14E2E009B0E0B /* CPEditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E2206618F14E2E009B0E0B /* CPEditProfileTableViewController.m */; };
@@ -338,6 +338,8 @@
 		4033ED4418F5283B008CEA03 /* CustomBannerAlertDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CustomBannerAlertDesign.json; path = CarrierPigeon/CustomBannerAlertDesign.json; sourceTree = SOURCE_ROOT; };
 		403972C718C661AD007F592D /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
+		4041DA27190AAC94002CBE16 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		4041DA28190AAC94002CBE16 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		4051415B18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+IdentificationNumberMaker.h"; sourceTree = "<group>"; };
 		4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+IdentificationNumberMaker.m"; sourceTree = "<group>"; };
 		4058139918E0A6AC00687944 /* CPSessionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSessionContainer.h; sourceTree = "<group>"; };
@@ -590,8 +592,6 @@
 		40E2203418F1222F009B0E0B /* CPContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPContactsTableViewCell.m; sourceTree = "<group>"; };
 		40E2205118F12BFC009B0E0B /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		40E2205218F12BFC009B0E0B /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		40E2205418F12BFC009B0E0B /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
-		40E2205518F12BFC009B0E0B /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		40E2205818F13CD3009B0E0B /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		40E2205918F13CD3009B0E0B /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		40E2205A18F13CD3009B0E0B /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
@@ -1648,8 +1648,8 @@
 				4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */,
 				4067D50A18EF91EC002F6163 /* Chat+EncoderDecoder.h */,
 				4067D50B18EF91EC002F6163 /* Chat+EncoderDecoder.m */,
-				40E2205418F12BFC009B0E0B /* Chat.h */,
-				40E2205518F12BFC009B0E0B /* Chat.m */,
+				4041DA27190AAC94002CBE16 /* Chat.h */,
+				4041DA28190AAC94002CBE16 /* Chat.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1999,7 +1999,6 @@
 				400DC1A218C2E9EA00C806ED /* ContextFilterLogFormatter.m in Sources */,
 				40A995E418C31E4800C23AB6 /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				400DC21B18C2ECD000C806ED /* XMPPStringPrep.m in Sources */,
-				40E2205618F12BFC009B0E0B /* Chat.m in Sources */,
 				40A995F118C31E4800C23AB6 /* XEP_0223.m in Sources */,
 				40A995D118C31E4800C23AB6 /* XMPPIQ+XEP_0060.m in Sources */,
 				40E2203518F1222F009B0E0B /* CPContactsTableViewCell.m in Sources */,
@@ -2008,6 +2007,7 @@
 				40A995F018C31E4800C23AB6 /* NSXMLElement+XEP_0203.m in Sources */,
 				400DC21918C2ECD000C806ED /* XMPPIDTracker.m in Sources */,
 				400DC1A018C2E9EA00C806ED /* DDLog.m in Sources */,
+				4041DA29190AAC94002CBE16 /* Chat.m in Sources */,
 				40E2202018F104BC009B0E0B /* TSMessageView.m in Sources */,
 				40A995A118C31E4800C23AB6 /* XMPPGoogleSharedStatus.m in Sources */,
 				40A995D218C31E4800C23AB6 /* XMPPPubSub.m in Sources */,

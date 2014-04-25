@@ -80,7 +80,7 @@
     if (networkStatus & CPNetworkStatusConnectedToXMPPStream) {
         self.networkStatus.textLabel.text = @"Connected";
     } else if (networkStatus & CPNetworkStatusConnectedToPeerPigeons) {
-        self.networkStatus.textLabel.text = @"Nearby / Connected Pigeons Connected";
+        self.networkStatus.textLabel.text = @"Nearby Pigeons Connected";
     } else {
         self.networkStatus.textLabel.text = @"No network connection";
     }

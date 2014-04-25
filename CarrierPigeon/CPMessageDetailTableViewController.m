@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *received;
 @property (weak, nonatomic) IBOutlet UILabel *read;
 @property (weak, nonatomic) IBOutlet UITableViewCell *carrierCell;
+@property (weak, nonatomic) IBOutlet UILabel *reallyFromID;
+@property (weak, nonatomic) IBOutlet UILabel *ownerSendID;
 
 @end
 
@@ -80,6 +82,10 @@
     self.delivered.text = @"todo";
     self.received.text = @"todo";
     self.read.text = @"todo";
+    
+    self.ownerSendID.text = self.chat.chatIDNumberPerOwner ? [self.chat.chatIDNumberPerOwner stringValue] : @"n/a";
+    self.reallyFromID.text = self.chat.reallyFromChatIDNumber ? [self.chat.reallyFromChatIDNumber stringValue] : @"n/a";
+    
 }
 
 - (void)didReceiveMemoryWarning

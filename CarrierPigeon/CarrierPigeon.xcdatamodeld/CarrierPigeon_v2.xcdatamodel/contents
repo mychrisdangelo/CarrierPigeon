@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Chat" representedClassName="Chat" syncable="YES">
         <attribute name="chatIDNumberPerOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="chatOwner" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +13,7 @@
         <attribute name="messageBody" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reallyFromChatIDNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="reallyFromJID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="receiverReadTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="receiverReceivedTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
@@ -43,7 +44,7 @@
         <attribute name="onlyUsePigeons" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-513" positionY="-151" width="198" height="390"/>
+        <element name="Chat" positionX="-513" positionY="-151" width="198" height="403"/>
         <element name="Contact" positionX="-234" positionY="-130" width="128" height="148"/>
         <element name="PigeonPeer" positionX="-209" positionY="225" width="182" height="73"/>
         <element name="User" positionX="-668" positionY="-100" width="128" height="73"/>

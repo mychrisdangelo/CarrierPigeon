@@ -672,8 +672,6 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-	// A simple example of inbound message handling.
-    
 	if ([message isChatMessageWithBody])
 	{
         XMPPUserCoreDataStorageObject *user = [self.xmppRosterStorage userForJID:[message from]

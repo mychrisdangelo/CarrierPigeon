@@ -2,7 +2,7 @@
 //  Chat.m
 //  CarrierPigeon
 //
-//  Created by Chris D'Angelo on 4/6/14.
+//  Created by Chris D'Angelo on 4/25/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
 //
 
@@ -26,15 +26,16 @@
 @dynamic messageStatus;
 @dynamic mimeType;
 @dynamic reallyFromJID;
-@dynamic timeStamp;
-@dynamic toJID;
-@dynamic pigeonsCarryingMessage;
-@dynamic authorOfMessage;
-@dynamic recipientOfMessage;
-@dynamic lastAuthorOrRecipient;
 @dynamic receiverReadTimestamp;
 @dynamic receiverReceivedTimestamp;
 @dynamic senderSentTimestamp;
 @dynamic serverReceivedTimestamp;
+@dynamic timeStamp;
+@dynamic toJID;
+@dynamic reallyFromChatIDNumber;
+@dynamic authorOfMessage;
+@dynamic lastAuthorOrRecipient;
+@dynamic pigeonsCarryingMessage;
+@dynamic recipientOfMessage;
 
 @end
