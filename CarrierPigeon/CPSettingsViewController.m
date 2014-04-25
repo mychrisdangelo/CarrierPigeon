@@ -10,6 +10,7 @@
 #import "CPSignInViewController.h"
 #import "CPAppDelegate.h"
 #import "User+AddOrUpdate.h"
+#import "CPContactsTableViewController.h"
 
 @interface CPSettingsViewController () <CPSignInViewControllerPresenterDelegate>
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) NSString *myJID;
 @property (weak, nonatomic) IBOutlet UITableViewCell *versionCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *buildCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *signoutCell;
 
 @end
 
@@ -78,16 +80,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([segue.identifier isEqualToString:@"ShowSignInSegue"]) {
-        if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
-            CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
-            cpsivc.userWantsToLogOut = YES;
-            cpsivc.presenterDelegate = self;
+    if ([tableView cellForRowAtIndexPath:indexPath] == self.signoutCell) {
+        id vc = self.tabBarController.viewControllers[0];
+        if ([vc isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *nc = (UINavigationController *)vc;
+            id ctvc = nc.viewControllers[0];
+            if ([ctvc isMemberOfClass:[CPContactsTableViewController class]]) {
+                [self.tabBarController setSelectedIndex:0];
+                [ctvc logoutAndShowSignInNow];
+            }
         }
+
     }
 }
+
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.identifier isEqualToString:@"ShowSignInSegue"]) {
+//        if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
+//            CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
+//            cpsivc.userWantsToLogOut = YES;
+//            cpsivc.presenterDelegate = self;
+//        }
+//    }
+//}
 
 - (IBAction)onlyUsePigeonsSwitchDidChange:(UISwitch *)sender
 {

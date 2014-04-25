@@ -154,7 +154,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewDidLoad];
     
-    [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+    if (self.userNeedsToSignIn) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [CPNetworkStatusAssistant colorForNetworkStatusWithLightColor:NO];
@@ -162,11 +162,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.refreshControl addTarget:self action:@selector(setupPeerToPeerSession) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(sendUnsentMessages) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl addTarget:self action:@selector(updateNetworkStatusIndicatorsInContactsView) forControlEvents:UIControlEventValueChanged];
-    
-    if (self.showPadSignInNow) [self performSegueWithIdentifier:@"ShowSignInSegue" sender:self];
+
     
     [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [self setSettingsTabBarName];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNetworkStatusIndicatorsInContactsView) name:kNetworkStatusDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBannerAlert:) name:kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurrentlyNotification object:nil];
 }
@@ -311,6 +309,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return nil;
 }
 
+- (void)logoutAndShowSignInNow
+{
+    [self performSegueWithIdentifier:@"ShowSignInSegueWithAnimation" sender:self];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowAddFriendController"]) {
@@ -339,7 +342,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
-    if ([segue.identifier isEqualToString:@"ShowSignInSegue"]) {
+    if ([segue.identifier isEqualToString:@"ShowSignInSegue"] || [segue.identifier isEqualToString:@"ShowSignInSegueWithAnimation"]) {
         if ([segue.destinationViewController isMemberOfClass:[CPSignInViewController class]]) {
             CPSignInViewController *cpsivc = (CPSignInViewController *)segue.destinationViewController;
             cpsivc.userWantsToLogOut = YES;
@@ -384,8 +387,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)CPSignInViewControllerDidSignIn:(CPSignInViewController *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.tabBarController setSelectedIndex:0];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self setSettingsTabBarName];
 }
 
 #pragma mark - CPAddFriendViewControllerDelegate

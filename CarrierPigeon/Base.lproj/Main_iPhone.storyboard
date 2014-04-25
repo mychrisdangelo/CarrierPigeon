@@ -239,6 +239,7 @@
                         <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessages" id="M2N-xj-sGi"/>
                         <segue destination="dAd-bt-sy6" kind="push" identifier="ShowContactMessagesQuickly" id="eNf-kM-Oob"/>
                         <segue destination="smd-CZ-2SU" kind="modal" identifier="ShowSignInSegue" modalTransitionStyle="crossDissolve" animates="NO" id="mut-xm-qX8"/>
+                        <segue destination="smd-CZ-2SU" kind="modal" identifier="ShowSignInSegueWithAnimation" modalTransitionStyle="crossDissolve" id="AI6-Wv-EJv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqf-Wh-ORH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -927,6 +928,7 @@
                     <connections>
                         <outlet property="buildCell" destination="kiO-As-XjB" id="AgT-YK-2Og"/>
                         <outlet property="onlyUsePigeonsSwitch" destination="bp4-F3-6S0" id="HtM-5A-Rrt"/>
+                        <outlet property="signoutCell" destination="pVn-Vg-wYl" id="xke-hD-FEs"/>
                         <outlet property="versionCell" destination="InZ-aV-Eg3" id="83p-VM-18W"/>
                     </connections>
                 </tableViewController>
@@ -1511,7 +1513,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eNf-kM-Oob"/>
         <segue reference="rUn-Ng-c2X"/>
+        <segue reference="eNf-kM-Oob"/>
+        <segue reference="AI6-Wv-EJv"/>
     </inferredMetricsTieBreakers>
 </document>

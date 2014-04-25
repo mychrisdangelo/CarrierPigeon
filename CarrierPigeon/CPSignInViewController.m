@@ -81,7 +81,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [[CPSessionContainer sharedInstance] signOutUser];
         self.userWantsToLogOut = NO;
         
-        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously];
+        [[NSUserDefaults standardUserDefaults] setValue:@NO forKey:kUserHasConnectedPreviously];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         // Reorganize this code. should not assign own delegate!
@@ -92,6 +92,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.xmppStream disconnect];
         [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
         [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    }
+    
+    if ([CPAppDelegate userHasLoggedInPreviously]) {
+        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
+        return;
     }
 }
 
@@ -270,11 +275,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)showContactsViewNow
 {
-    if (self.modalPresentationStyle == UIModalPresentationFormSheet) {
-        [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
-    } else {
-        [self performSegueWithIdentifier:@"ShowHomeTabBarController" sender:self];
-    }
+    [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
 }
 
 - (void)saveUserInfoAndBeginSignIn {
@@ -282,7 +283,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:kKeyChainItemWrapperPasswordIdentifer accessGroup:nil];
     NSString *jid = [NSString stringWithFormat:@"%@@%@", self.usernameTextField.text, kXMPPDomainName];
     [[NSUserDefaults standardUserDefaults] setValue:jid forKey:kXMPPmyJID];
-    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:kUserHasConnectedPreviously]; // will set YES on connect
+    [[NSUserDefaults standardUserDefaults] setValue:@NO forKey:kUserHasConnectedPreviously]; // will set YES on connect
     [[NSUserDefaults standardUserDefaults] synchronize];
     [keychain setObject:self.passwordTextField.text forKey:(__bridge id)kSecValueData];
     
@@ -293,7 +294,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
-- (void) beginSignUp {
+- (void)beginSignUp {
     
     CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     delegate.userWantsToRegister = YES;
@@ -333,41 +334,37 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                           otherButtonTitles:nil, nil];
     alert.tag = kAlertViewMissingUsernamePassword;
     [alert show];
-    return;
 }
 
 
--(void) showAlertSignUpSuccess {
+- (void)showAlertSignUpSuccess {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Success"
                                                     message:@"Your account has been created. Do you want to sign in now?"
                                                    delegate:self cancelButtonTitle:@"Yes"
                                           otherButtonTitles:@"No", nil];
     alert.tag = kAlertViewSignUpSuccess;
     [alert show];
-    return;
 }
 
--(void) showAlertSignInFailure {
+- (void)showAlertSignInFailure {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login"
                                                     message:@"Unable to sign in. Do you have an account?"
                                                    delegate:self cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
     alert.tag = kAlertViewSignInFailure;
     [alert show];
-    return;
 }
 
--(void) showAlertSignUpFailure {
+- (void)showAlertSignUpFailure {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Unsuccessful"
                                                     message:@"Unable to complete registration. Username may be taken."
                                                    delegate:self cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
     alert.tag = kAlertViewSignUpFailure;
     [alert show];
-    return;
 }
 
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //withdraw the keyboard when any area in the view outside the textfield is touched
     UITouch *touch = [[event allTouches] anyObject];
@@ -378,6 +375,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([self.passwordTextField isFirstResponder] && [touch view] != self.passwordTextField) {
         [self.passwordTextField resignFirstResponder];
     }
+    
     [super touchesBegan:touches withEvent:event];
 }
 
