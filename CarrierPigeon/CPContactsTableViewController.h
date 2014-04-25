@@ -11,7 +11,7 @@
 #import "XMPPRoster.h"
 #import "CPAddFriendViewController.h"
 
-@interface CPContactsTableViewController : UITableViewController <CPAddFriendViewControllerDelegate>
+@interface CPContactsTableViewController : UITableViewController <CPAddFriendViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;

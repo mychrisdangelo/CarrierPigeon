@@ -998,25 +998,6 @@
             </objects>
             <point key="canvasLocation" x="-1761" y="-1850"/>
         </scene>
-        <!--View Controller - Graph Todo-->
-        <scene sceneID="i11-Ue-wOZ">
-            <objects>
-                <viewController id="a3O-LK-RIk" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="X3O-AI-3D2"/>
-                        <viewControllerLayoutGuide type="bottom" id="kz2-fu-Xfb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="82T-ev-oYv">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Graph Todo" id="D05-Au-2AW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ULd-yP-wrs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1055" y="666"/>
-        </scene>
         <!--Your Pending Messages Table View Controller - Your Pending Messages-->
         <scene sceneID="BOa-lx-afP">
             <objects>

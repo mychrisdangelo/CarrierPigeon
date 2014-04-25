@@ -37,6 +37,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *xmppRosterFetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) int servicesRequiringRefreshing;
 @property (nonatomic, strong) CPSessionContainer *sessionContainer;
@@ -68,6 +69,32 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     return _managedObjectContext;
+}
+
+- (NSFetchedResultsController *)xmppRosterFetchedResultsController
+{
+	if (_xmppRosterFetchedResultsController == nil) {
+        CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext_roster];
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		[fetchRequest setEntity:entity];
+        NSSortDescriptor *sd1 = [[NSSortDescriptor alloc] initWithKey:@"sectionNum" ascending:YES];
+		NSSortDescriptor *sd2 = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
+		NSArray *sortDescriptors = [NSArray arrayWithObjects:sd1, sd2, nil];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+		
+		_xmppRosterFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+		[_xmppRosterFetchedResultsController setDelegate:self];
+		
+		NSError *error = nil;
+		if (![_xmppRosterFetchedResultsController performFetch:&error]) {
+			DDLogError(@"Error performing fetch: %@", error);
+		}
+	}
+	
+	return _xmppRosterFetchedResultsController;
 }
 
 - (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
@@ -272,19 +299,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self endRefreshing];
 }
 
-// TODO: presently only an appending cache
 - (void)refreshContactsCache
 {
     self.servicesRequiringRefreshing++;
     
-    CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext_roster];
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XMPPUserCoreDataStorageObject"];
-    NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-    
-    for (XMPPUserCoreDataStorageObject *each in matches) {
+    for (XMPPUserCoreDataStorageObject *each in [self.xmppRosterFetchedResultsController fetchedObjects]) {
+        // TODO: presently only an appending cache
         [Contact addRemoveContactFromXMPPUserCoreDataStorageObject:each forCurrentUser:self.myJID inManagedObjectContext:self.managedObjectContext removeContact:NO];
     }
     
@@ -359,6 +379,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(CPContactsTableViewCell *)cell atIndexPath:(NSIndexPath *)theIndexPath
 {
+    if (fetchedResultsController == self.xmppRosterFetchedResultsController) return; // xmppRosterFetchedResltsController only for feeding CarrierPigeon database
+    
     Contact *contact = [fetchedResultsController objectAtIndexPath:theIndexPath];
 	cell.authorLabel.text = [CPHelperFunctions parseOutHostIfInDisplayName:contact.displayName];
     
@@ -556,6 +578,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
+    if (controller == self.xmppRosterFetchedResultsController) return; // xmppRosterFetchedResltsController only for feeding CarrierPigeon database
+    
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
     
     switch(type) {
@@ -578,6 +602,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    if (controller == self.xmppRosterFetchedResultsController) {
+        [self refreshContactsCache]; // if there is a change to the xmpp roster force update our database
+    }
+    
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
     [tableView endUpdates];
 }
@@ -586,6 +614,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender
 {
+    /*
+     * This delegate function is unreliable. The roster will be written to disk asynchronously (apart of the XMPP Framework)
+     * therfore we setup a fetched results controller and listen for changes
+     */
     [self refreshContactsCache];
 }
 
