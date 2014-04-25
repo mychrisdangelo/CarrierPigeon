@@ -32,6 +32,11 @@
 @property (nonatomic, retain) Contact *authorOfMessage;
 @property (nonatomic, retain) Contact *recipientOfMessage;
 @property (nonatomic, retain) Contact *lastAuthorOrRecipient;
+@property (nonatomic, retain) NSDate * receiverReadTimestamp;
+@property (nonatomic, retain) NSDate * receiverReceivedTimestamp;
+@property (nonatomic, retain) NSDate * senderSentTimestamp;
+@property (nonatomic, retain) NSDate * serverReceivedTimestamp;
+
 @end
 
 @interface Chat (CoreDataGeneratedAccessors)

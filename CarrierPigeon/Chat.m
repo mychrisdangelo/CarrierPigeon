@@ -32,5 +32,9 @@
 @dynamic authorOfMessage;
 @dynamic recipientOfMessage;
 @dynamic lastAuthorOrRecipient;
+@dynamic receiverReadTimestamp;
+@dynamic receiverReceivedTimestamp;
+@dynamic senderSentTimestamp;
+@dynamic serverReceivedTimestamp;
 
 @end

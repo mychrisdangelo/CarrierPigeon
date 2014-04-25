@@ -14,6 +14,10 @@
         <attribute name="messageStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reallyFromJID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiverReadTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="receiverReceivedTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="senderSentTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="serverReceivedTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="toJID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="authorOfMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="messagesAuthored" inverseEntity="Contact" syncable="YES"/>
@@ -39,7 +43,7 @@
         <attribute name="onlyUsePigeons" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-513" positionY="-151" width="198" height="330"/>
+        <element name="Chat" positionX="-513" positionY="-151" width="198" height="390"/>
         <element name="Contact" positionX="-234" positionY="-130" width="128" height="148"/>
         <element name="PigeonPeer" positionX="-209" positionY="225" width="182" height="73"/>
         <element name="User" positionX="-668" positionY="-100" width="128" height="73"/>

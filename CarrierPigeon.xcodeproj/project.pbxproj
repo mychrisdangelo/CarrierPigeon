@@ -608,6 +608,7 @@
 		40FBDCFA18D40D6800A4D174 /* CPMessageDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMessageDetailTableViewController.h; sourceTree = "<group>"; };
 		40FBDCFB18D40D6800A4D174 /* CPMessageDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessageDetailTableViewController.m; sourceTree = "<group>"; };
 		4D6186C0F89A479687742E4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F6EBBCD190A387E00EAC320 /* CarrierPigeon_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarrierPigeon_v2.xcdatamodel; sourceTree = "<group>"; };
 		F3D5B48F07F14553BF53FCF8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2382,9 +2383,10 @@
 		4032C56E18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7F6EBBCD190A387E00EAC320 /* CarrierPigeon_v2.xcdatamodel */,
 				4032C56F18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodel */,
 			);
-			currentVersion = 4032C56F18BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodel */;
+			currentVersion = 7F6EBBCD190A387E00EAC320 /* CarrierPigeon_v2.xcdatamodel */;
 			path = CarrierPigeon.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
