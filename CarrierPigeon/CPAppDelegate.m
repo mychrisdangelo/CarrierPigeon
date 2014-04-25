@@ -679,7 +679,13 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
                                                             managedObjectContext:[self managedObjectContext_roster]];
         
         NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-        [Chat addChatWithXMPPMessage:message fromUser:user.jidStr toUser:myJID deviceUser:myJID inManagedObjectContext:self.managedObjectContext withMessageStatus:CPChatSendStatusReceivedMessage withChatIDNumber:(-1)];
+        [Chat addChatWithXMPPMessage:message
+                            fromUser:user.jidStr
+                              toUser:myJID
+                          deviceUser:myJID
+              inManagedObjectContext:self.managedObjectContext
+                   withMessageStatus:CPChatSendStatusReceivedMessage
+                    withChatIDNumber:(-1)];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
 		NSString *displayName = [user displayName];

@@ -62,7 +62,8 @@
      */
     chat.chatOwner = deviceUser;
     if (chatIDNumber == -1) {
-        // TODO: incoming message. server should hand back an id of some kind.
+        // incoming message. use the fromUser's id number that they sent with message
+        chat.chatIDNumberPerOwner = [NSNumber numberWithInteger:[[[message attributeForName:@"id"] stringValue] integerValue]];
     } else {
         chat.chatIDNumberPerOwner = [NSNumber numberWithInteger:chatIDNumber];
     }
