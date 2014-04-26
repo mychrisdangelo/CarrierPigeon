@@ -16,7 +16,6 @@
 #import "PigeonPeer.h"
 
 NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
-
 @interface CPSessionContainer() <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
 @property (nonatomic) MCNearbyServiceAdvertiser *serviceAdvertiser;
@@ -26,11 +25,11 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 @property (readwrite, nonatomic) NSMutableSet *peersInRangeConnected;
 @property (nonatomic) NSString *myDisplayName;
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readwrite) NSMutableArray *eventLog;
 
 @end
 
 @implementation CPSessionContainer
-
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -61,6 +60,8 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     
     _peersInRange = [[NSMutableSet alloc] init];
     _peersInRangeConnected = [[NSMutableSet alloc] init];
+    
+    self.eventLog = [[NSMutableArray alloc] init];
 }
 
 - (void)signOutUser
@@ -69,6 +70,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     [si.serviceAdvertiser stopAdvertisingPeer];
     [si.serviceBrowser stopBrowsingForPeers];
     [si.session disconnect];
+    self.eventLog = nil;
 }
 
 + (id)sharedInstance
@@ -117,7 +119,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     for (MCPeerID *eachConnectedPeer in connectedPeers) {
         NSString *eachConnectedPeerDisplayName = eachConnectedPeer.displayName;
         if ([previousCarriersOfThisMessageInStringArray containsObject:eachConnectedPeerDisplayName]) {
-            NSLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
+            CPLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
         } else if ([eachConnectedPeerDisplayName isEqualToString:self.myDisplayName]) {
             NSLog(@"Error: A connected peer has my display name");
         } else {
@@ -158,12 +160,15 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"%@ state: %@", peerID.displayName, [self stringForPeerConnectionState:state]];
+    [self logPeerConnectivityEvent:diagnosticMessage];
+    
     switch (state) {
         case MCSessionStateConnected:
-            [self.peersInRangeConnected addObject:peerID];
+            [self.peersInRangeConnected addObject:peerID.displayName];
             break;
         case MCSessionStateNotConnected:
-            [self.peersInRangeConnected removeObject:peerID];
+            [self.peersInRangeConnected removeObject:peerID.displayName];
             break;
         case MCSessionStateConnecting:
         default:
@@ -207,7 +212,12 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
-    invitationHandler(YES, self.session);
+    if (![self.session.connectedPeers containsObject:peerID]) {
+        NSString *diagnosticMessage = [NSString stringWithFormat:@"accepting invite from: %@", peerID.displayName];
+        [self logPeerConnectivityEvent:diagnosticMessage];
+        invitationHandler(YES, self.session);
+    }
+
 }
 
 #pragma mark - MCNearbyServiceBrowserDelegate
@@ -219,21 +229,44 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"found peer: %@", peerID.displayName];
+    [self logPeerConnectivityEvent:diagnosticMessage];
+    
     if ([peerID.displayName isEqualToString:self.myDisplayName]) {
         NSLog(@"Error: I found someone with my own display name.");
         return;
     }
     
     if (![self.session.connectedPeers containsObject:peerID]) {
-        [browser invitePeer:peerID toSession:self.session withContext:nil timeout:5.0];
+        NSString *diagnosticMessage = [NSString stringWithFormat:@"inviting peer: %@", peerID.displayName];
+        [self logPeerConnectivityEvent:diagnosticMessage];
+        [browser invitePeer:peerID toSession:self.session withContext:nil timeout:30.0];
     }
     
-    [self.peersInRange addObject:peerID];
+    [self.peersInRange addObject:peerID.displayName];
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
-    [self.peersInRange removeObject:peerID];
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"lost peer: %@", peerID.displayName];
+    [self logPeerConnectivityEvent:diagnosticMessage];
+    
+    [self.peersInRange removeObject:peerID.displayName];
+}
+
+- (void)logPeerConnectivityEvent:(NSString *)message
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+//        CPLog(@"%@", message);
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"CPSessionDiagnosticMessage"
+//                                                            message:message
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
+//        [alertView show];
+        
+        [self.eventLog addObject:@{ @"date" : [NSDate date], @"message" : message }];
+    });
 }
 
 @end
