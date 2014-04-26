@@ -16,20 +16,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfw-bm-svl">
-                                <rect key="frame" x="20" y="81" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfw-bm-svl">
+                                <rect key="frame" x="20" y="111" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZr-Ia-aj8">
-                                <rect key="frame" x="20" y="119" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZr-Ia-aj8">
+                                <rect key="frame" x="20" y="149" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxV-cZ-4KL">
-                                <rect key="frame" x="203" y="157" width="97" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxV-cZ-4KL">
+                                <rect key="frame" x="203" y="187" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Sign In">
@@ -40,9 +40,13 @@
                                     <action selector="signInButtonPressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="QTH-uq-tH8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQX-TM-1M3">
-                                <rect key="frame" x="20" y="157" width="92" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQX-TM-1M3">
+                                <rect key="frame" x="20" y="187" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="cd7-KB-g8e"/>
+                                    <constraint firstAttribute="height" constant="30" id="sY0-1c-ZLU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,13 +56,13 @@
                                     <action selector="signUpButtonPressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="BcQ-6m-0GL"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-mb-0jD">
-                                <rect key="frame" x="143" y="157" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-mb-0jD">
+                                <rect key="frame" x="143" y="187" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Oo-mh-Sab">
-                                <rect key="frame" x="56" y="202" width="211" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Oo-mh-Sab">
+                                <rect key="frame" x="56" y="442" width="211" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Auto-Login CarrierPigeon1">
@@ -69,9 +73,12 @@
                                     <action selector="autoLoginButtonOnePressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="lOn-35-zNj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff9-QR-kUM">
-                                <rect key="frame" x="56" y="227" width="211" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff9-QR-kUM">
+                                <rect key="frame" x="56" y="480" width="211" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="211" id="YH2-ge-bjY"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Auto-Login CarrierPigeon2">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,8 +88,8 @@
                                     <action selector="autoLoginButtonTworessed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="sac-vZ-fYq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROU-y0-uYc">
-                                <rect key="frame" x="56" y="251" width="211" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROU-y0-uYc">
+                                <rect key="frame" x="55" y="518" width="210" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Auto-Login CarrierPigeon3">
@@ -93,9 +100,12 @@
                                     <action selector="autoLoginButtonThreePressed:" destination="smd-CZ-2SU" eventType="touchUpInside" id="ko4-hK-yfQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CarrierPigeon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmy-iB-q4Z">
-                                <rect key="frame" x="20" y="20" width="280" height="53"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CarrierPigeon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmy-iB-q4Z">
+                                <rect key="frame" x="20" y="20" width="280" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="83" id="gsT-uP-T2C"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -103,6 +113,33 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="QZr-Ia-aj8" firstAttribute="centerX" secondItem="ROU-y0-uYc" secondAttribute="centerX" id="1sw-Kg-6Jl"/>
+                            <constraint firstItem="k1E-mb-0jD" firstAttribute="centerX" secondItem="1Oo-mh-Sab" secondAttribute="centerX" id="2Bp-lH-kjQ"/>
+                            <constraint firstItem="QZr-Ia-aj8" firstAttribute="trailing" secondItem="rxV-cZ-4KL" secondAttribute="trailing" id="2MO-bZ-xio"/>
+                            <constraint firstItem="cfw-bm-svl" firstAttribute="leading" secondItem="QZr-Ia-aj8" secondAttribute="leading" id="A75-xt-2LA"/>
+                            <constraint firstItem="QZr-Ia-aj8" firstAttribute="top" secondItem="cfw-bm-svl" secondAttribute="bottom" constant="8" symbolic="YES" id="ALt-LD-cm1"/>
+                            <constraint firstItem="k1E-mb-0jD" firstAttribute="leading" secondItem="AQX-TM-1M3" secondAttribute="trailing" constant="31" id="CRV-OV-Saf"/>
+                            <constraint firstItem="AQX-TM-1M3" firstAttribute="bottom" secondItem="rxV-cZ-4KL" secondAttribute="bottom" id="D0U-et-Uiq"/>
+                            <constraint firstItem="Zmy-iB-q4Z" firstAttribute="leading" secondItem="9t7-YS-Skt" secondAttribute="leading" constant="20" symbolic="YES" id="KQN-Su-NG1"/>
+                            <constraint firstAttribute="bottom" secondItem="ROU-y0-uYc" secondAttribute="bottom" constant="20" symbolic="YES" id="MUZ-Bt-Nmv"/>
+                            <constraint firstItem="AQX-TM-1M3" firstAttribute="top" secondItem="QZr-Ia-aj8" secondAttribute="bottom" constant="8" symbolic="YES" id="SQN-bC-ZE6"/>
+                            <constraint firstItem="Zmy-iB-q4Z" firstAttribute="leading" secondItem="cfw-bm-svl" secondAttribute="leading" id="Ums-5p-26P"/>
+                            <constraint firstItem="cfw-bm-svl" firstAttribute="trailing" secondItem="Zmy-iB-q4Z" secondAttribute="trailing" id="YKc-To-yXu"/>
+                            <constraint firstItem="QZr-Ia-aj8" firstAttribute="trailing" secondItem="cfw-bm-svl" secondAttribute="trailing" id="bE7-nV-rra"/>
+                            <constraint firstItem="rxV-cZ-4KL" firstAttribute="leading" secondItem="k1E-mb-0jD" secondAttribute="trailing" constant="23" id="dL6-Oz-6p2"/>
+                            <constraint firstItem="Ff9-QR-kUM" firstAttribute="top" secondItem="1Oo-mh-Sab" secondAttribute="bottom" constant="8" symbolic="YES" id="f3B-QE-ZzA"/>
+                            <constraint firstItem="rxV-cZ-4KL" firstAttribute="top" secondItem="QZr-Ia-aj8" secondAttribute="bottom" constant="8" symbolic="YES" id="fKO-bG-jFq"/>
+                            <constraint firstItem="ROU-y0-uYc" firstAttribute="leading" secondItem="9t7-YS-Skt" secondAttribute="leading" constant="55" id="g00-1d-sbe"/>
+                            <constraint firstItem="Ff9-QR-kUM" firstAttribute="leading" secondItem="1Oo-mh-Sab" secondAttribute="leading" id="hth-Dq-btc"/>
+                            <constraint firstAttribute="trailing" secondItem="Zmy-iB-q4Z" secondAttribute="trailing" constant="20" symbolic="YES" id="j03-ac-b6O"/>
+                            <constraint firstItem="1Oo-mh-Sab" firstAttribute="trailing" secondItem="Ff9-QR-kUM" secondAttribute="trailing" id="ks0-P4-fl0"/>
+                            <constraint firstItem="AQX-TM-1M3" firstAttribute="leading" secondItem="QZr-Ia-aj8" secondAttribute="leading" id="m6o-ti-y7Q"/>
+                            <constraint firstItem="cfw-bm-svl" firstAttribute="top" secondItem="Zmy-iB-q4Z" secondAttribute="bottom" constant="8" symbolic="YES" id="qo5-0r-kIe"/>
+                            <constraint firstItem="Zmy-iB-q4Z" firstAttribute="top" secondItem="9t7-YS-Skt" secondAttribute="top" constant="20" symbolic="YES" id="toP-zg-6BY"/>
+                            <constraint firstItem="k1E-mb-0jD" firstAttribute="top" secondItem="QZr-Ia-aj8" secondAttribute="bottom" constant="8" symbolic="YES" id="tpg-bh-lRg"/>
+                            <constraint firstItem="ROU-y0-uYc" firstAttribute="top" secondItem="Ff9-QR-kUM" secondAttribute="bottom" constant="8" symbolic="YES" id="yWd-du-f17"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="jew-DP-2ep"/>
                     <connections>
