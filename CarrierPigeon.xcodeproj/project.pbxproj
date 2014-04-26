@@ -70,6 +70,8 @@
 		4033ED4518F5283B008CEA03 /* CustomBannerAlertDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 4033ED4418F5283B008CEA03 /* CustomBannerAlertDesign.json */; };
 		403972C918C661AD007F592D /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 403972C818C661AD007F592D /* CPSettingsViewController.m */; };
 		4041DA29190AAC94002CBE16 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4041DA28190AAC94002CBE16 /* Chat.m */; };
+		404A82D7190B69A90030BE1B /* CPCreditDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 404A82D6190B69A90030BE1B /* CPCreditDetailViewController.m */; };
+		404A82DD190B6A110030BE1B /* CPCreditsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 404A82DC190B6A110030BE1B /* CPCreditsTableViewController.m */; };
 		4051415D18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */; };
 		4058139B18E0A6AC00687944 /* CPSessionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058139A18E0A6AC00687944 /* CPSessionContainer.m */; };
 		405813A018E0AF5400687944 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */; };
@@ -341,6 +343,10 @@
 		403972C818C661AD007F592D /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		4041DA27190AAC94002CBE16 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
 		4041DA28190AAC94002CBE16 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		404A82D5190B69A90030BE1B /* CPCreditDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCreditDetailViewController.h; sourceTree = "<group>"; };
+		404A82D6190B69A90030BE1B /* CPCreditDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCreditDetailViewController.m; sourceTree = "<group>"; };
+		404A82DB190B6A110030BE1B /* CPCreditsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCreditsTableViewController.h; sourceTree = "<group>"; };
+		404A82DC190B6A110030BE1B /* CPCreditsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCreditsTableViewController.m; sourceTree = "<group>"; };
 		4051415B18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+IdentificationNumberMaker.h"; sourceTree = "<group>"; };
 		4051415C18F0C30F005C8E79 /* Chat+IdentificationNumberMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chat+IdentificationNumberMaker.m"; sourceTree = "<group>"; };
 		4058139918E0A6AC00687944 /* CPSessionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSessionContainer.h; sourceTree = "<group>"; };
@@ -1002,6 +1008,10 @@
 				403972C818C661AD007F592D /* CPSettingsViewController.m */,
 				40E2206518F14E2E009B0E0B /* CPEditProfileTableViewController.h */,
 				40E2206618F14E2E009B0E0B /* CPEditProfileTableViewController.m */,
+				404A82DB190B6A110030BE1B /* CPCreditsTableViewController.h */,
+				404A82DC190B6A110030BE1B /* CPCreditsTableViewController.m */,
+				404A82D5190B69A90030BE1B /* CPCreditDetailViewController.h */,
+				404A82D6190B69A90030BE1B /* CPCreditDetailViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1974,6 +1984,7 @@
 				40A995CC18C31E4800C23AB6 /* XMPPvCardTempLabel.m in Sources */,
 				400DC1BB18C2EB5600C806ED /* DDXMLDocument.m in Sources */,
 				400DC1EB18C2ECC000C806ED /* NSNumber+XMPP.m in Sources */,
+				404A82D7190B69A90030BE1B /* CPCreditDetailViewController.m in Sources */,
 				400DC1A818C2EA5000C806ED /* GCDAsyncSocket.m in Sources */,
 				40A995B918C31E4800C23AB6 /* XMPPRoomHybridStorage.m in Sources */,
 				40D2C09018C4678000A9E6FD /* CPHelperFunctions.m in Sources */,
@@ -1998,6 +2009,7 @@
 				40FBDCEA18D3E68C00A4D174 /* Contact+AddRemove.m in Sources */,
 				40A995A718C31E4800C23AB6 /* XMPPRosterCoreDataStorage.m in Sources */,
 				40A995F618C31E4800C23AB6 /* XMPPMessage+XEP_0333.m in Sources */,
+				404A82DD190B6A110030BE1B /* CPCreditsTableViewController.m in Sources */,
 				40A995E718C31E4800C23AB6 /* XMPPMessage+XEP_0172.m in Sources */,
 				400DC19D18C2E9EA00C806ED /* DDAbstractDatabaseLogger.m in Sources */,
 				4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */,
