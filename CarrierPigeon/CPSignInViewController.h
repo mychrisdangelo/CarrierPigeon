@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "XMPPStream.h"
 #import "XMPPRoster.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @class CPSignInViewController;
 
@@ -33,5 +34,6 @@
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic) BOOL autoLoginHasBegun;
 @property (nonatomic) BOOL userWantsToLogOut;
+@property (weak, nonatomic) IBOutlet UIView *signInBackgroundView;
 
 @end

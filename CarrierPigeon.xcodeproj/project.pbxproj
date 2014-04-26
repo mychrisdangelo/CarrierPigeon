@@ -176,6 +176,8 @@
 		40A995F718C31E4800C23AB6 /* NSXMLElement+XEP_0335.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A9959E18C31E4800C23AB6 /* NSXMLElement+XEP_0335.m */; };
 		40A995FB18C31FF000C23AB6 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A995FA18C31FF000C23AB6 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		40ACCC6B18C3254A00081B7F /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */; };
+		40C0683F190C0CBD00AA7691 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40C0683E190C0CBD00AA7691 /* MediaPlayer.framework */; };
+		40C0685C190C306400AA7691 /* traffic.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 40C0685B190C306400AA7691 /* traffic.m4v */; };
 		40C12F51190B3DC3001D8B86 /* CPSessionEventLogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C12F50190B3DC3001D8B86 /* CPSessionEventLogTableViewController.m */; };
 		40D2C07518C438CA00A9E6FD /* CPAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */; };
 		40D2C08218C45E0800A9E6FD /* Chat+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D2C08118C45E0800A9E6FD /* Chat+Create.m */; };
@@ -559,6 +561,8 @@
 		40ACCC6918C3254A00081B7F /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
 		40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignInViewController.m; sourceTree = "<group>"; };
 		40ACCC6C18C328AD00081B7F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Constants.h; sourceTree = "<group>"; };
+		40C0683E190C0CBD00AA7691 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		40C0685B190C306400AA7691 /* traffic.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = traffic.m4v; sourceTree = "<group>"; };
 		40C12F4E190B318D001D8B86 /* CPLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLog.h; sourceTree = "<group>"; };
 		40C12F4F190B3DC3001D8B86 /* CPSessionEventLogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSessionEventLogTableViewController.h; sourceTree = "<group>"; };
 		40C12F50190B3DC3001D8B86 /* CPSessionEventLogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSessionEventLogTableViewController.m; sourceTree = "<group>"; };
@@ -627,6 +631,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40C0683F190C0CBD00AA7691 /* MediaPlayer.framework in Frameworks */,
 				405813A018E0AF5400687944 /* MultipeerConnectivity.framework in Frameworks */,
 				4032C55918BDAE0500E0CDD1 /* UIKit.framework in Frameworks */,
 				40E5B3E018D8DFA100918FB3 /* SystemConfiguration.framework in Frameworks */,
@@ -925,6 +930,7 @@
 		4032C55318BDAE0500E0CDD1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40C0683E190C0CBD00AA7691 /* MediaPlayer.framework */,
 				4058139F18E0AF5400687944 /* MultipeerConnectivity.framework */,
 				40E5B3DF18D8DFA100918FB3 /* SystemConfiguration.framework */,
 				40E5B3DD18D8DF9400918FB3 /* QuartzCore.framework */,
@@ -1054,6 +1060,7 @@
 			children = (
 				40ACCC6918C3254A00081B7F /* CPSignInViewController.h */,
 				40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */,
+				40C0685B190C306400AA7691 /* traffic.m4v */,
 			);
 			name = SignIn;
 			sourceTree = "<group>";
@@ -1895,6 +1902,7 @@
 				40E2205C18F13CD3009B0E0B /* README.textile in Resources */,
 				4032C56D18BDAE0500E0CDD1 /* Main_iPad.storyboard in Resources */,
 				40E2201318F104BC009B0E0B /* NotificationBackgroundMessage@2x.png in Resources */,
+				40C0685C190C306400AA7691 /* traffic.m4v in Resources */,
 				4032C57818BDAE0500E0CDD1 /* Images.xcassets in Resources */,
 				4032C56A18BDAE0500E0CDD1 /* Main_iPhone.storyboard in Resources */,
 				40E2200E18F104BC009B0E0B /* NotificationBackgroundError.png in Resources */,

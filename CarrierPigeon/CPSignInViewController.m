@@ -15,6 +15,7 @@
 #import "CPSessionContainer.h"
 #import "User+AddOrUpdate.h"
 
+
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -34,6 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (nonatomic) BOOL isAlreadyConnected;
+@property (nonatomic) MPMoviePlayerController *moviePlayerController;
 
 @end
 
@@ -47,6 +49,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
     }
     return self;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -98,6 +105,29 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.presenterDelegate CPSignInViewControllerDidSignIn:self];
         return;
     }
+    
+    [self setupBackgroundVideo];
+}
+
+- (void)setupBackgroundVideo
+{
+    [self.moviePlayerController.view setAlpha:0.0];
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"traffic" ofType:@"m4v"];
+    NSURL *fileURL = [NSURL fileURLWithPath:filepath];
+    self.moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
+    
+    self.moviePlayerController.repeatMode = MPMovieRepeatModeOne;
+    self.moviePlayerController.controlStyle = MPMovieControlStyleNone;
+    [self.moviePlayerController.view setFrame:self.view.bounds];
+    self.moviePlayerController.scalingMode = MPMovieScalingModeAspectFill;
+    [self.view addSubview:self.moviePlayerController.view];
+    [self.view sendSubviewToBack:self.moviePlayerController.view];
+    [self.moviePlayerController play];
+    
+    self.moviePlayerController.view.alpha = 0.0f;
+    [UIView animateWithDuration:1.5 animations:^{
+        self.moviePlayerController.view.alpha = 1.0f;
+    }];
 }
 
 - (void)viewDidUnload
