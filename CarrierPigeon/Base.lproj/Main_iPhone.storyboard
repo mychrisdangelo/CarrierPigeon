@@ -618,7 +618,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Diagnostic" id="Ugv-fb-eeg">
+                            <tableViewSection headerTitle="Identifiers" id="Ugv-fb-eeg">
                                 <cells>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="f2o-jC-ird" detailTextLabel="fGf-1i-esa" style="IBUITableViewCellStyleValue1" id="8hq-4N-Es0">
                                         <rect key="frame" x="0.0" y="655" width="320" height="44"/>
