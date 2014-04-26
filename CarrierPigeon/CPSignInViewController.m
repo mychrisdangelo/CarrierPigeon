@@ -111,6 +111,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)setupBackgroundVideo
 {
+    // video from http://www.beachfrontbroll.com/p/cities-and-traffic.html
+    
     [self.moviePlayerController.view setAlpha:0.0];
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"traffic" ofType:@"m4v"];
     NSURL *fileURL = [NSURL fileURLWithPath:filepath];

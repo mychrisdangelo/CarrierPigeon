@@ -236,7 +236,8 @@
         _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
         [_composeBarView setMaxLinesCount:5];
         [_composeBarView setPlaceholder:@"Send a message"];
-        [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
+        // TODO: Add in image sending
+        // [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
         [_composeBarView setDelegate:self];
     }
     
