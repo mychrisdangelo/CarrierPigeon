@@ -1059,6 +1059,8 @@
 				4067D50518EF87BE002F6163 /* CPCarrierPendingMessagesTableViewController.m */,
 				4071A65F18EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.h */,
 				4071A66018EF2C2D00E62A95 /* CPNearbyPigeonsTableViewController.m */,
+				40C12F4F190B3DC3001D8B86 /* CPSessionEventLogTableViewController.h */,
+				40C12F50190B3DC3001D8B86 /* CPSessionEventLogTableViewController.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -1664,8 +1666,6 @@
 			children = (
 				4058139918E0A6AC00687944 /* CPSessionContainer.h */,
 				4058139A18E0A6AC00687944 /* CPSessionContainer.m */,
-				40C12F4F190B3DC3001D8B86 /* CPSessionEventLogTableViewController.h */,
-				40C12F50190B3DC3001D8B86 /* CPSessionEventLogTableViewController.m */,
 				40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */,
 				40FBDCEC18D3F81E00A4D174 /* CPMessenger.m */,
 				401B0C8518C4FFAA00EE43CA /* CPMessagesViewController.h */,

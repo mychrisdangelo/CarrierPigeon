@@ -84,7 +84,7 @@
     self.read.text = @"todo";
     
     self.ownerSendID.text = self.chat.chatIDNumberPerOwner ? [self.chat.chatIDNumberPerOwner stringValue] : @"n/a";
-    self.reallyFromID.text = self.chat.reallyFromChatIDNumber ? [self.chat.reallyFromChatIDNumber stringValue] : @"n/a";
+    self.reallyFromID.text = self.chat.reallyFromChatIDNumber == 0 ? [self.chat.reallyFromChatIDNumber stringValue] : @"n/a";
     
 }
 

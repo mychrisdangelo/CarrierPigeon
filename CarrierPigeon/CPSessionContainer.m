@@ -15,8 +15,6 @@
 #import "CPAppDelegate.h"
 #import "PigeonPeer.h"
 
-#define DEBUG_CPSESSION
-
 NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 @interface CPSessionContainer() <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
@@ -121,7 +119,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     for (MCPeerID *eachConnectedPeer in connectedPeers) {
         NSString *eachConnectedPeerDisplayName = eachConnectedPeer.displayName;
         if ([previousCarriersOfThisMessageInStringArray containsObject:eachConnectedPeerDisplayName]) {
-            NSLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
+            CPLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
         } else if ([eachConnectedPeerDisplayName isEqualToString:self.myDisplayName]) {
             NSLog(@"Error: A connected peer has my display name");
         } else {
@@ -163,7 +161,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
     NSString *diagnosticMessage = [NSString stringWithFormat:@"%@ state: %@", peerID.displayName, [self stringForPeerConnectionState:state]];
-    [self showNotificationOnDevice:diagnosticMessage];
+    [self logPeerConnectivityEvent:diagnosticMessage];
     
     switch (state) {
         case MCSessionStateConnected:
@@ -215,8 +213,8 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
     if (![self.session.connectedPeers containsObject:peerID]) {
-        NSString *diagnosticMessage = [NSString stringWithFormat:@"accepting invitation from: %@", peerID.displayName];
-        [self showNotificationOnDevice:diagnosticMessage];
+        NSString *diagnosticMessage = [NSString stringWithFormat:@"accepting invite from: %@", peerID.displayName];
+        [self logPeerConnectivityEvent:diagnosticMessage];
         invitationHandler(YES, self.session);
     }
 
@@ -232,7 +230,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
     NSString *diagnosticMessage = [NSString stringWithFormat:@"found peer: %@", peerID.displayName];
-    [self showNotificationOnDevice:diagnosticMessage];
+    [self logPeerConnectivityEvent:diagnosticMessage];
     
     if ([peerID.displayName isEqualToString:self.myDisplayName]) {
         NSLog(@"Error: I found someone with my own display name.");
@@ -241,7 +239,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     
     if (![self.session.connectedPeers containsObject:peerID]) {
         NSString *diagnosticMessage = [NSString stringWithFormat:@"inviting peer: %@", peerID.displayName];
-        [self showNotificationOnDevice:diagnosticMessage];
+        [self logPeerConnectivityEvent:diagnosticMessage];
         [browser invitePeer:peerID toSession:self.session withContext:nil timeout:30.0];
     }
     
@@ -251,15 +249,15 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
     NSString *diagnosticMessage = [NSString stringWithFormat:@"lost peer: %@", peerID.displayName];
-    [self showNotificationOnDevice:diagnosticMessage];
+    [self logPeerConnectivityEvent:diagnosticMessage];
     
     [self.peersInRange removeObject:peerID.displayName];
 }
 
-- (void)showNotificationOnDevice:(NSString *)message
+- (void)logPeerConnectivityEvent:(NSString *)message
 {
-#ifdef DEBUG_CPSESSION
     dispatch_async(dispatch_get_main_queue(), ^{
+//        CPLog(@"%@", message);
 //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"CPSessionDiagnosticMessage"
 //                                                            message:message
 //                                                           delegate:nil
@@ -269,7 +267,6 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
         
         [self.eventLog addObject:@{ @"date" : [NSDate date], @"message" : message }];
     });
-#endif
 }
 
 @end
