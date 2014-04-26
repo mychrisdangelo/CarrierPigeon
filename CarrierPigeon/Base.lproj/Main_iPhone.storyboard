@@ -983,35 +983,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Profile Image" id="pbj-iK-1CE">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="OTe-yJ-5Ic" imageView="Xsw-ZR-Yl9" style="IBUITableViewCellStyleDefault" id="ypi-oK-5Gu">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ypi-oK-5Gu" id="Jev-W1-Lpm">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Change Profile Image" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OTe-yJ-5Ic">
-                                                    <rect key="frame" x="74" y="0.0" width="231" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="DefaultProfileImage" id="Xsw-ZR-Yl9">
-                                                    <rect key="frame" x="15" y="0.0" width="44" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Change Password" id="CpO-Ei-asD">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NJ7-6h-y1e">
-                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NJ7-6h-y1e" id="5VF-yt-Gwu">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1027,7 +1002,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PgE-W9-azK">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PgE-W9-azK" id="O8k-mZ-NGg">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1052,7 +1027,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit Profile" id="17F-wX-Yki"/>
                     <connections>
-                        <outlet property="changeProfileImageCell" destination="ypi-oK-5Gu" id="MZ4-gS-YsA"/>
                         <outlet property="passwordFirst" destination="GFT-G3-qUY" id="FzT-mM-nPD"/>
                         <outlet property="passwordSecond" destination="9s9-Ty-cPT" id="2CO-Jo-C0Z"/>
                     </connections>
@@ -1311,30 +1285,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="VGk-aY-8KN" detailTextLabel="ZLx-Rk-NSt" style="IBUITableViewCellStyleValue1" id="aiP-3X-1hy">
-                                        <rect key="frame" x="0.0" y="567" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aiP-3X-1hy" id="RLB-fZ-86N">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Megabytes Sent This Month" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VGk-aY-8KN">
-                                                    <rect key="frame" x="15" y="11" width="216" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZLx-Rk-NSt">
-                                                    <rect key="frame" x="261" y="11" width="44" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1345,6 +1295,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Sharing" id="EtG-a1-fGX"/>
                     <connections>
+                        <outlet property="messagesSentDirectlyLabel" destination="9M6-ur-nlK" id="Jy8-mo-O2B"/>
+                        <outlet property="messagesSentForPigeonsLabel" destination="wXn-N3-1gX" id="Ce2-5s-Wjq"/>
+                        <outlet property="messagesSentViaPigeonsLabel" destination="maE-un-Cak" id="3Sr-gd-uxO"/>
                         <outlet property="nearByPigeonsCell" destination="fQE-ac-yK6" id="TIz-rH-eeV"/>
                         <outlet property="networkStatus" destination="NjQ-kT-hlI" id="Yve-49-lC2"/>
                     </connections>
@@ -1541,7 +1494,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DefaultProfileImage" width="150" height="150"/>
         <image name="HomeIcon" width="24" height="24"/>
         <image name="SharingStats" width="26" height="23"/>
     </resources>

@@ -119,7 +119,7 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
     for (MCPeerID *eachConnectedPeer in connectedPeers) {
         NSString *eachConnectedPeerDisplayName = eachConnectedPeer.displayName;
         if ([previousCarriersOfThisMessageInStringArray containsObject:eachConnectedPeerDisplayName]) {
-            CPLog(@"Do Nothing. This user pigeon peer is already carrying our message.");
+            CPLog(@"Do Nothing. This %@ is already carrying our message %@.", eachConnectedPeerDisplayName, chat.chatIDNumberPerOwner);
         } else if ([eachConnectedPeerDisplayName isEqualToString:self.myDisplayName]) {
             NSLog(@"Error: A connected peer has my display name");
         } else {
