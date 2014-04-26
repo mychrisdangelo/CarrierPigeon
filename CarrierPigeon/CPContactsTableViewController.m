@@ -619,6 +619,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
      * therfore we setup a fetched results controller and listen for changes
      */
     [self refreshContactsCache];
+    
+    /*
+     * If we received a Roster list from the server we know that we are also online and can send out our outbox messages
+     */
+    [self sendUnsentMessages];
 }
 
 @end
