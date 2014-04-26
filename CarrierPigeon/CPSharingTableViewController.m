@@ -104,9 +104,9 @@ typedef NS_ENUM(NSInteger, CPMessageSentCategory) {
 - (void)updateNetworkUsageStatistics
 {
     self.servicesRequiringRefreshing++;
-    self.messagesSentDirectlyLabel.text = [NSString stringWithFormat:@"%lu", [self messagesSent:CPMessageSentDirectly]];
-    self.messagesSentViaPigeonsLabel.text = [NSString stringWithFormat:@"%lu", [self messagesSent:CPMessageSentViaPigeons]];
-    self.messagesSentForPigeonsLabel.text = [NSString stringWithFormat:@"%lu", [self messagesSent:CPMessageSentForPigeons]];
+    self.messagesSentDirectlyLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self messagesSent:CPMessageSentDirectly]];
+    self.messagesSentViaPigeonsLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self messagesSent:CPMessageSentViaPigeons]];
+    self.messagesSentForPigeonsLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self messagesSent:CPMessageSentForPigeons]];
     [self endRefreshing];
 }
 
