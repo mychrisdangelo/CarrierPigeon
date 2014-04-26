@@ -15,8 +15,9 @@
 #import "CPAppDelegate.h"
 #import "PigeonPeer.h"
 
-NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
+#define DEBUG_CPSESSION
 
+NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 @interface CPSessionContainer() <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
 @property (nonatomic) MCNearbyServiceAdvertiser *serviceAdvertiser;
@@ -158,6 +159,9 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"%s, ME: %@, PEER: %@, STATE: %@", __PRETTY_FUNCTION__, self.myDisplayName, peerID, [self stringForPeerConnectionState:state]];
+    [self showNotificationOnDevice:diagnosticMessage];
+    
     switch (state) {
         case MCSessionStateConnected:
             [self.peersInRangeConnected addObject:peerID];
@@ -176,6 +180,10 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"%s, ME: %@, PEER: %@, SESSION: %@", __PRETTY_FUNCTION__, self.myDisplayName, peerID, session];
+    [self showNotificationOnDevice:diagnosticMessage];
+
+    
     NSDictionary *chatAsDictionary = (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     [Chat decodeDictionaryToChat:chatAsDictionary inManagedObjectContext:self.managedObjectContext asMessageRelayedByCurrentUser:self.myDisplayName];
 
@@ -207,6 +215,9 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"%s, ME: %@, PEER: %@, ADVERTISER: %@, SESSION: %@", __PRETTY_FUNCTION__, self.myDisplayName, peerID, advertiser, self.session];
+    [self showNotificationOnDevice:diagnosticMessage];
+    
     invitationHandler(YES, self.session);
 }
 
@@ -219,13 +230,16 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"%s, ME: %@, PEER: %@", __PRETTY_FUNCTION__, self.myDisplayName, peerID];
+    [self showNotificationOnDevice:diagnosticMessage];
+    
     if ([peerID.displayName isEqualToString:self.myDisplayName]) {
         NSLog(@"Error: I found someone with my own display name.");
         return;
     }
     
     if (![self.session.connectedPeers containsObject:peerID]) {
-        [browser invitePeer:peerID toSession:self.session withContext:nil timeout:5.0];
+        [browser invitePeer:peerID toSession:self.session withContext:nil timeout:30.0];
     }
     
     [self.peersInRange addObject:peerID];
@@ -233,7 +247,24 @@ NSString * const kPeerListChangedNotification = @"kPeerListChangedNotification";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
+    NSString *diagnosticMessage = [NSString stringWithFormat:@"%s, ME: %@, PEER: %@", __PRETTY_FUNCTION__, self.myDisplayName, peerID];
+    [self showNotificationOnDevice:diagnosticMessage];
+    
     [self.peersInRange removeObject:peerID];
+}
+
+- (void)showNotificationOnDevice:(NSString *)message
+{
+#ifdef DEBUG_CPSESSION
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"CPSessionDiagnosticMessage"
+                                                            message:message
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    });
+#endif
 }
 
 @end

@@ -17,4 +17,5 @@
     #import "Constants.h"
     #import "Credentials.h"
     #import "CPHelperFunctions.h"
+    #import "CPLog.h"
 #endif

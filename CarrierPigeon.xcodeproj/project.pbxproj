@@ -552,6 +552,7 @@
 		40ACCC6918C3254A00081B7F /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
 		40ACCC6A18C3254A00081B7F /* CPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignInViewController.m; sourceTree = "<group>"; };
 		40ACCC6C18C328AD00081B7F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Constants.h; sourceTree = "<group>"; };
+		40C12F4E190B318D001D8B86 /* CPLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLog.h; sourceTree = "<group>"; };
 		40D2C07318C438CA00A9E6FD /* CPAddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAddFriendViewController.h; sourceTree = "<group>"; };
 		40D2C07418C438CA00A9E6FD /* CPAddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAddFriendViewController.m; sourceTree = "<group>"; };
 		40D2C08018C45E0800A9E6FD /* Chat+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chat+Create.h"; sourceTree = "<group>"; };
@@ -961,6 +962,7 @@
 				4032C56218BDAE0500E0CDD1 /* main.m */,
 				4032C56418BDAE0500E0CDD1 /* CarrierPigeon-Prefix.pch */,
 				40ACCC6C18C328AD00081B7F /* Constants.h */,
+				40C12F4E190B318D001D8B86 /* CPLog.h */,
 				40A64B8018CA3CCE0089CDA7 /* Credentials.h */,
 				4032C56518BDAE0500E0CDD1 /* CPAppDelegate.h */,
 				4032C56618BDAE0500E0CDD1 /* CPAppDelegate.m */,
