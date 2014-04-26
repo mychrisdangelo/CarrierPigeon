@@ -126,6 +126,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self signInButtonPressed:nil];
 }
 
+- (IBAction)autoLoginButtonThreePressed:(UIButton *)sender {
+    self.usernameTextField.text = @"CarrierPigeon3";
+    self.passwordTextField.text = @"keyboardflub";
+    [self signInButtonPressed:nil];
+}
+
 - (IBAction)signInButtonPressed:(UIButton *)sender {
     
     if ([self.usernameTextField.text length] == 0 || [self.passwordTextField.text length] == 0) {

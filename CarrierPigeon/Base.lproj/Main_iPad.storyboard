@@ -184,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGX-x0-pDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1215" y="-3504"/>
+            <point key="canvasLocation" x="-1199" y="-4648"/>
         </scene>
         <!--Messages View Controller - Messages-->
         <scene sceneID="xjv-QB-vxL">
@@ -277,7 +277,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xok-ZV-Flu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2284" y="-2876"/>
+            <point key="canvasLocation" x="-2268" y="-4020"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="lz6-Va-psa">
@@ -697,7 +697,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-1754" y="-2868"/>
+            <point key="canvasLocation" x="-1738" y="-4012"/>
         </scene>
         <!--Nearby Pigeons Table View Controller - Nearby Pigeons-->
         <scene sceneID="cuS-99-Id9">
@@ -742,7 +742,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNg-Si-Sge" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055" y="-2461"/>
+            <point key="canvasLocation" x="-1055" y="-3789"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="j5H-TH-M6d">
@@ -836,12 +836,39 @@
                                             <segue destination="oOL-xG-hmT" kind="push" identifier="ShowNearbyPigeons" id="mEq-9Y-AU1"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ogr-Oh-5Y3" detailTextLabel="ZGO-8p-Ohc" style="IBUITableViewCellStyleValue1" id="52L-7b-Axp">
+                                        <rect key="frame" x="0.0" y="207" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="52L-7b-Axp" id="nzk-QV-BeR">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Pigeon Event Log" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ogr-Oh-5Y3">
+                                                    <rect key="frame" x="15" y="11" width="136" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZGO-8p-Ohc">
+                                                    <rect key="frame" x="241" y="11" width="44" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="lYp-Xw-9Vb" kind="push" id="D4T-pC-YqH"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Outbox" id="XQr-HD-HNH">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Qmg-Ia-wmn" style="IBUITableViewCellStyleDefault" id="X3t-Jd-fYO">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X3t-Jd-fYO" id="uQn-Aq-hwm">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -861,7 +888,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nTn-Bh-Hmm" style="IBUITableViewCellStyleDefault" id="5lI-vq-C5f">
-                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="343" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5lI-vq-C5f" id="nxl-qz-n4L">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -885,7 +912,7 @@
                             <tableViewSection headerTitle="Network Usage" id="9gx-je-eKf">
                                 <cells>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9b9-6m-yDO" detailTextLabel="jP2-G2-VQS" style="IBUITableViewCellStyleValue1" id="HI3-Yf-fpy">
-                                        <rect key="frame" x="0.0" y="391" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="435" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HI3-Yf-fpy" id="Ds0-KN-tyf">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -909,7 +936,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="gTT-iV-OkQ" detailTextLabel="nF2-xH-34A" style="IBUITableViewCellStyleValue1" id="Cf1-bv-TXn">
-                                        <rect key="frame" x="0.0" y="435" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="479" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cf1-bv-TXn" id="eVN-9v-TSz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -933,7 +960,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="kFu-CN-UYp" detailTextLabel="N3b-hs-cVh" style="IBUITableViewCellStyleValue1" id="nOR-ZN-2Wh">
-                                        <rect key="frame" x="0.0" y="479" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="523" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nOR-ZN-2Wh" id="e2y-5L-lq0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -957,7 +984,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cdG-mC-YQT" detailTextLabel="Jpd-qR-ZFN" style="IBUITableViewCellStyleValue1" id="P5Z-bB-rJB">
-                                        <rect key="frame" x="0.0" y="523" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="567" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P5Z-bB-rJB" id="SuZ-Ej-1Hc">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1424,6 +1451,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4W3-NN-jRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1068" y="4023"/>
+        </scene>
+        <!--Session Event Log Table View Controller - Pigeon Event Log-->
+        <scene sceneID="0NS-F1-nRN">
+            <objects>
+                <tableViewController id="lYp-Xw-9Vb" customClass="CPSessionEventLogTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="X2K-v2-fAQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PigeonEventLogCell" textLabel="3O6-Kz-Cqs" detailTextLabel="WBO-CY-frw" style="IBUITableViewCellStyleSubtitle" id="x5s-pJ-mmm">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x5s-pJ-mmm" id="HLU-K5-uQd">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3O6-Kz-Cqs">
+                                            <rect key="frame" x="15" y="9" width="26" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WBO-CY-frw">
+                                            <rect key="frame" x="15" y="25" width="19" height="9"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="7"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lYp-Xw-9Vb" id="gWw-KC-wxH"/>
+                            <outlet property="delegate" destination="lYp-Xw-9Vb" id="M53-o9-vev"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Pigeon Event Log" id="tdQ-ng-x4f"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4V4-Xv-5LF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1055" y="-2702"/>
         </scene>
     </scenes>
     <resources>

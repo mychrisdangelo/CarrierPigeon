@@ -25,6 +25,7 @@ extern NSString * const kPeerListChangedNotification;
 
 @property (readonly, nonatomic) NSMutableSet *peersInRange;
 @property (readonly, nonatomic) NSMutableSet *peersInRangeConnected;
+@property (readonly) NSMutableArray *eventLog;
 
 //- (void)testEncoding:(Chat *)chat;
 //- (void)testDecoding:(NSData *)encodedChat;
