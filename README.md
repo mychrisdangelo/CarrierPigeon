@@ -23,4 +23,4 @@ The [verbose logging](https://github.com/robbiehanson/XMPPFramework/wiki/IntroTo
 Documentation
 =============
 
-[May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation), [April 26, 2014 Demo Video](bit.ly/carrierpigeondemo)
+[May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation), [April 26, 2014 Demo Video](http://bit.ly/carrierpigeondemo)
