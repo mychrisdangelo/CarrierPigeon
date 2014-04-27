@@ -160,10 +160,10 @@ typedef NS_ENUM(NSInteger, CPMessageSentCategory) {
     
     switch (sentCategory) {
         case CPMessageSentDirectly:
-            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"fromJID == %@ AND chatOwner == %@ AND pigeonsCarryingMessage.@count >= 1", self.myJid, self.myJid]];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"fromJID == %@ AND chatOwner == %@ AND pigeonsCarryingMessage.@count >= 0", self.myJid, self.myJid]];
             break;
         case CPMessageSentViaPigeons:
-            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"fromJID == %@ AND chatOwner == %@ AND pigeonsCarryingMessage.@count >= 0", self.myJid, self.myJid]];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"fromJID == %@ AND chatOwner == %@ AND pigeonsCarryingMessage.@count >= 1", self.myJid, self.myJid]];
             break;
         case CPMessageSentForPigeons:
             [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"fromJID == %@ AND chatOwner == %@ AND reallyFromJID != nil", self.myJid, self.myJid]];
