@@ -661,13 +661,79 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
+    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+    
+    //TODO: you can check for "message read" here as well, when it has been implemented
+    // check is the message is a receipt
+    if ([message elementForName:@"received" xmlns:@"urn:xmpp:receipts"]) {
+        NSXMLElement *receivedElement = [message elementForName:@"received"];
+        Chat *chat = nil;
+        int messageIDNumber = [[[receivedElement attributeForName:@"id"] stringValue] intValue];
+        
+        int timestamp = 0;
+        BOOL serverSending = NO;
+        
+        if ([receivedElement attributeForName:@"serverTimestamp"]) {
+            timestamp = [[[receivedElement attributeForName:@"serverTimestamp"] stringValue] intValue];
+            serverSending = YES;
+        } else if ([receivedElement attributeForName:@"receivedTimestamp"]) {
+            timestamp = [[[receivedElement attributeForName:@"receivedTimestamp"] stringValue] intValue];
+            serverSending = NO;
+        }
+        
+        NSManagedObjectContext *context = self.managedObjectContext;
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Chat" inManagedObjectContext:context];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chatIDNumberPerOwner = %d AND chatOwner = %@", messageIDNumber, myJID];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:entity];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *result = [context executeFetchRequest:fetchRequest error:&error];
+        
+        if ([result count] == 1) {
+            chat = [result lastObject];
+            [Chat updateChat:chat withTimestamp:timestamp forServer:serverSending inManagedObjectContext:context];
+        } else {
+            NSLog(@"no such message, error %@", error);
+        }
+    }
+    
+    // receipt request received, respond with a message receipt
+    if ([message elementForName:@"request" xmlns:@"urn:xmpp:receipts"] && [[[message attributeForName:@"type"] stringValue] isEqualToString:@"chat"]) {
+        
+        NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
+        NSUInteger messageIDNumber = [[[message attributeForName:@"id"] stringValue] intValue];
+        
+        [messageElement addAttributeWithName:@"from" stringValue:[[message attributeForName:@"to"] stringValue]];
+        [messageElement addAttributeWithName:@"to" stringValue:[[message attributeForName:@"from"] stringValue]];
+        
+        NSXMLElement *receivedElement = [NSXMLElement elementWithName:@"received" xmlns:@"urn:xmpp:receipts"];
+        [receivedElement addAttributeWithName:@"id" integerValue:messageIDNumber];
+        
+        NSDate *receivedDate = [NSDate date];
+        NSTimeInterval timeInterval = [receivedDate timeIntervalSince1970];
+        
+        [receivedElement addAttributeWithName:@"receivedTimestamp" integerValue:timeInterval];
+        
+        [messageElement addChild:receivedElement];
+        
+        if ([self.xmppStream isConnected]) {
+            //send message received acknowledgement
+            [self.xmppStream sendElement:messageElement];
+        } else {
+            NSLog(@" stream is not connected");
+        }
+    }
+    
 	if ([message isChatMessageWithBody])
 	{
         XMPPUserCoreDataStorageObject *user = [self.xmppRosterStorage userForJID:[message from]
                                                                       xmppStream:self.xmppStream
                                                             managedObjectContext:[self managedObjectContext_roster]];
         
-        NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
         [Chat addChatWithXMPPMessage:message
                             fromUser:user.jidStr
                               toUser:myJID

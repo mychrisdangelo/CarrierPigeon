@@ -15,7 +15,7 @@
                                         inManagedObjectContext:(NSManagedObjectContext *)context
                                                  removeContact:(BOOL)remove
 {
-    Contact *contact;
+    Contact *contact = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
     request.predicate = [NSPredicate predicateWithFormat:@"jidStr = %@ AND contactOwnerJidStr = %@", xmppContact.jidStr, currentUser];
@@ -29,17 +29,21 @@
         // sanity check
         NSLog(@"contact exists more than once");
     } else if ([matches count] == 0) {
-        //TODO: only add to contacts when subscription=both
-        contact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
-        contact.jidStr = xmppContact.jidStr;
-        contact.displayName = xmppContact.displayName;
-        contact.photo = xmppContact.photo;
-        contact.contactOwnerJidStr = currentUser;
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            NSLog(@"error saving");
+        if ([xmppContact.subscription isEqualToString:@"both"]) {
+            contact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
+            contact.jidStr = xmppContact.jidStr;
+            contact.displayName = xmppContact.displayName;
+            contact.photo = xmppContact.photo;
+            contact.contactOwnerJidStr = currentUser;
+            
+            NSError *error = nil;
+            if (![context save:&error]) {
+                NSLog(@"error saving");
+            }
+        } else {
+            //TODO populate invites list
         }
+        
     } else {
         // only one object
         contact = [matches lastObject];

@@ -37,4 +37,6 @@ typedef NS_ENUM(NSInteger, CPMessageStatus) {
 
 + (NSString *)stringForMessageStatus:(CPMessageStatus)messageStatus;
 
++ (Chat *)updateChat:(Chat *)chat withTimestamp:(int)timestamp forServer:(BOOL)serverSending inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end

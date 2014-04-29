@@ -15,7 +15,7 @@
 
 + (Contact *)getContactForThisMessageForUser:(NSString *)user andWithDeviceUser:(NSString *)deviceUser inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    Contact *contact;
+    Contact *contact = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
     request.predicate = [NSPredicate predicateWithFormat:@"jidStr = %@ AND contactOwnerJidStr = %@", user, deviceUser];
@@ -56,6 +56,25 @@
     chat.hasMedia = [NSNumber numberWithBool:NO];
     chat.fromJID = fromUser;
     chat.toJID = toUser;
+    
+    /* store the send date as UTC, retrieve in the user's timezone */
+    NSString *statusString = [Chat stringForMessageStatus:[chat.messageStatus intValue]];
+    int sendDateTimestamp = [[[message attributeForName:@"senderTimestamp"] stringValue] intValue];
+    
+    NSDate *sendDate = [NSDate dateWithTimeIntervalSince1970:sendDateTimestamp];
+    chat.senderSentTimestamp = sendDate;
+
+    if ([statusString isEqualToString:@"received"]) {
+        chat.receiverReceivedTimestamp = [NSDate date];
+    }
+    
+    if (![[[message attributeForName:@"serverTimestamp"] stringValue] isEqualToString:@""]) {
+        int serverTimestamp = [[[message attributeForName:@"serverTimestamp"] stringValue] intValue];
+        NSDate *serverDate = [NSDate dateWithTimeIntervalSince1970:serverTimestamp];
+        chat.serverReceivedTimestamp = serverDate;
+    }
+    
+    
     /*
      * chatOwner represents the user that is logged in. they can hold onto messages they are sending, they have received
      * or any message that they are relaying is always "owned" by the chatOwner
@@ -162,4 +181,21 @@
     return statusString;
 }
 
++ (Chat *)updateChat:(Chat *)chat withTimestamp:(int)timestamp forServer:(BOOL)serverSending inManagedObjectContext:(NSManagedObjectContext *)context {
+    
+    // save the date as UTC (implemented on the server)
+    NSDate *dateTimestamp = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)timestamp];
+    NSError *error = nil;
+    if (serverSending) {
+        chat.serverReceivedTimestamp = dateTimestamp;
+    } else {
+        chat.receiverReceivedTimestamp = dateTimestamp;
+    }
+    
+    if (![context save:&error]) {
+        NSLog(@"error saving updated timestamp");
+    }
+    
+    return chat;
+}
 @end

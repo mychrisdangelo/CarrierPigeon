@@ -75,11 +75,25 @@
     
     NSString *statusString = [Chat stringForMessageStatus:[self.chat.messageStatus intValue]];
     
+    NSDate *senderSentTimestamp = self.chat.senderSentTimestamp ? self.chat.senderSentTimestamp : nil;
+    NSDate *serverReceivedTimestamp = self.chat.serverReceivedTimestamp ? self.chat.serverReceivedTimestamp : nil;
+    NSDate *receiverReceivedTimestamp = self.chat.receiverReceivedTimestamp ? self.chat.receiverReceivedTimestamp : nil;
+    
+    // date is stored as UTC, needs to be changed to the user's timezone
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"h:mm a dd-MM-yyyy"];
+    [dateFormatter setTimeZone:timeZone];
+    
+    NSString *senderSentTimestampString = [dateFormatter stringFromDate:senderSentTimestamp];
+    NSString *serverReceivedTimestampString = [dateFormatter stringFromDate:serverReceivedTimestamp];
+    NSString *receiverReceivedTimestampString = [dateFormatter stringFromDate:receiverReceivedTimestamp];
+    
     self.status.text = statusString;
-    self.sent.text = @"todo";
-    self.delivered.text = @"todo";
-    self.received.text = @"todo";
-    self.read.text = @"todo";
+    self.sent.text = senderSentTimestampString;
+    self.delivered.text = serverReceivedTimestampString;
+    self.received.text = receiverReceivedTimestampString;
+    self.read.text = @"";
     
     self.ownerSendID.text = self.chat.chatIDNumberPerOwner ? [self.chat.chatIDNumberPerOwner stringValue] : @"n/a";
     self.reallyFromID.text = self.chat.reallyFromChatIDNumber ? [self.chat.reallyFromChatIDNumber stringValue] : @"n/a";

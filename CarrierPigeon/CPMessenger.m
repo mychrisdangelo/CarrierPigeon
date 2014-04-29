@@ -24,11 +24,16 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSUInteger chatIDNumber = [Chat generateNewIDNumberWithManagedObjectContext:context withCurrentUser:deviceUser];
     
+    NSDate *sendDate = [NSDate date];
+    int sendDateTimestamp = [sendDate timeIntervalSince1970];
+    
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:messageBody];
     NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
     [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
     [messageElement addAttributeWithName:@"to" stringValue:to];
+    [messageElement addAttributeWithName:@"senderTimestamp" stringValue:[NSString stringWithFormat:@"%d", sendDateTimestamp]];
+    [messageElement addAttributeWithName:@"serverTimestamp" stringValue:@""];
     [messageElement addChild:body];
     [messageElement addAttributeWithName:@"id" stringValue:[NSString stringWithFormat:@"%lu", (unsigned long)chatIDNumber]];
     NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
@@ -74,13 +79,20 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 
     NSError *error;
     NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
+    NSDate *sendDate = nil;
+    int sendDateTimestamp = 0;
     
     for (Chat *each in matches) {
+        sendDate = [NSDate date];
+        sendDateTimestamp = [sendDate timeIntervalSince1970];
+        
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
         [body setStringValue:each.messageBody];
         NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
         [messageElement addAttributeWithName:@"type" stringValue:@"chat"];
         [messageElement addAttributeWithName:@"to" stringValue:each.toJID];
+        [messageElement addAttributeWithName:@"senderTimestamp" stringValue:[NSString stringWithFormat:@"%d", sendDateTimestamp]];
+        [messageElement addAttributeWithName:@"serverTimestamp" stringValue:@""];
         [messageElement addChild:body];
         [messageElement addAttributeWithName:@"id" integerValue:[each.chatIDNumberPerOwner integerValue]];
         NSXMLElement *status = [NSXMLElement elementWithName:@"active" xmlns:@"http://jabber.org/protocol/chatstates"];
