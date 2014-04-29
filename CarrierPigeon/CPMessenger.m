@@ -62,6 +62,11 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     }
 }
 
++ (NSString *)myJid
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+}
+
 + (void)sendPendingMessagesWithStream:(XMPPStream *)xmppStream
 {
     NSManagedObjectContext *context = ((CPAppDelegate *)([[UIApplication sharedApplication] delegate])).managedObjectContext;
@@ -70,6 +75,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
                               [NSNumber numberWithInt:CPChatSendStatusOfflinePending],
                               [NSNumber numberWithInt:CPChatSendStatusRelaying],
                               [NSNumber numberWithInt:CPChatSendStatusRelayed]];
+    // only allow currently signed in user to send out their own messages
+    predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate, [NSPredicate predicateWithFormat:@"chatOwner == %@", [CPMessenger myJid]]]];
     NSSortDescriptor *s = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

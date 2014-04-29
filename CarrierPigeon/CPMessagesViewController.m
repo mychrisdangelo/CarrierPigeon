@@ -62,11 +62,7 @@
 
 - (NSString *)myJid
 {
-    if (_myJid == nil) {
-        _myJid = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    }
-    
-    return _myJid;
+    return _myJid = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
 }
 
 - (NSManagedObjectContext *)managedObjectContext
