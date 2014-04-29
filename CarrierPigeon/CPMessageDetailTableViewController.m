@@ -93,7 +93,7 @@
     self.sent.text = senderSentTimestampString;
     self.delivered.text = serverReceivedTimestampString;
     self.received.text = receiverReceivedTimestampString;
-    self.read.text = @"";
+    self.read.text = @"todo";
     
     self.ownerSendID.text = self.chat.chatIDNumberPerOwner ? [self.chat.chatIDNumberPerOwner stringValue] : @"n/a";
     self.reallyFromID.text = self.chat.reallyFromChatIDNumber ? [self.chat.reallyFromChatIDNumber stringValue] : @"n/a";
