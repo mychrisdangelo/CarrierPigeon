@@ -4,7 +4,8 @@
 //
 //  Created by Chris D'Angelo on 2/26/14.
 //  Copyright (c) 2014 ColumbiaMobileComputing. All rights reserved.
-//
+// // Source:
+// 1. https://github.com/manifestinteractive/easyapns
 
 #import "CPAppDelegate.h"
 #import "DDLog.h"
@@ -123,12 +124,15 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
     
     [self setupTSMessageCustomDesign];
     
-    // register for push notifications
-#if !TARGET_IPHONE_SIMULATOR
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-#endif
-
     return YES;
+}
+
+-(void)applicationDidFinishLaunching:(UIApplication *)application {
+    // register for push notifications
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    
+	// Clear application badge when app launches
+	application.applicationIconBadgeNumber = 0;
 }
 
 - (void)setupTSMessageCustomDesign
@@ -161,6 +165,8 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    application.applicationIconBadgeNumber = 0;
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -894,11 +900,100 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 # pragma mark - Push Notifications
 
 -(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // the phone token can be sent to the server using a http post request
     NSLog(@"Device token: %@", deviceToken);
+    
+#if !TARGET_IPHONE_SIMULATOR
+    
+	// Get Bundle Info for Remote Registration
+	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    
+	// Check what notifications the user has turned on.
+	NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    
+	NSString *pushBadge = (rntypes & UIRemoteNotificationTypeBadge) ? @"enabled" : @"disabled";
+	NSString *pushAlert = (rntypes & UIRemoteNotificationTypeAlert) ? @"enabled" : @"disabled";
+	NSString *pushSound = (rntypes & UIRemoteNotificationTypeSound) ? @"enabled" : @"disabled";
+    
+	// Get the users Device Model, Display Name, Unique ID, Token & Version Number
+	UIDevice *dev = [UIDevice currentDevice];
+	NSString *deviceUuid;
+    
+	if ([dev respondsToSelector:@selector(identifierForVendor)])
+        //TODO confirm using a real device that this works and is correct
+		deviceUuid = [[dev identifierForVendor] UUIDString];
+	else {
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		id uuid = [defaults objectForKey:@"deviceUuid"];
+		if (uuid)
+			deviceUuid = (NSString *)uuid;
+		else {
+			CFStringRef cfUuid = CFUUIDCreateString(NULL, CFUUIDCreate(NULL));
+			deviceUuid = (__bridge NSString *)cfUuid;
+			CFRelease(cfUuid);
+			[defaults setObject:deviceUuid forKey:@"deviceUuid"];
+		}
+	}
+	NSString *deviceName = dev.name;
+	NSString *deviceModel = dev.model;
+	NSString *deviceSystemVersion = dev.systemVersion;
+    
+	// Prepare the Device Token for Registration (remove spaces and < >)
+	NSString *deviceTokenString = [[[[deviceToken description]
+                                     stringByReplacingOccurrencesOfString:@"<"withString:@""]
+                                    stringByReplacingOccurrencesOfString:@">" withString:@""]
+                                   stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+	// Build URL String for Registration
+	NSString *host = kXMPPHostname;
+    
+	NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, deviceTokenString, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
+    
+	// Register the Device Data (https?)
+	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *urlR, NSData *returnData, NSError *e) {
+                               NSLog(@"Return Data: %@", returnData);
+                               
+                           }];
+    
+	NSLog(@"Register URL: %@", url);
+	
+#endif
+    
 }
 
 -(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+#if !TARGET_IPHONE_SIMULATOR
+    
     NSLog(@"Error registering for remote notification: %@", error);
+    
+#endif
+    
 }
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+	
+#if !TARGET_IPHONE_SIMULATOR
+    
+	NSLog(@"remote notification: %@",[userInfo description]);
+	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+    
+	NSString *alert = [apsInfo objectForKey:@"alert"];
+	NSLog(@"Received Push Alert: %@", alert);
+    
+	NSString *sound = [apsInfo objectForKey:@"sound"];
+	NSLog(@"Received Push Sound: %@", sound);
+    
+	NSString *badge = [apsInfo objectForKey:@"badge"];
+	NSLog(@"Received Push Badge: %@", badge);
+	application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
+	
+#endif
+    
+}
+
 @end
