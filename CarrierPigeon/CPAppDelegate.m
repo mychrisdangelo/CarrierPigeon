@@ -23,7 +23,7 @@
 #import "XMPPMessageDeliveryReceipts.h"
 #import "User+AddOrUpdate.h"
 #import "TSMessage.h"
-
+#import "CPXMPPMessageArchiving.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -654,10 +654,11 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	
-    if ([[[iq attributeForName:@"id"] stringValue] isEqualToString:kXMPPArchiveListID]) {
-        
-        
-        
+    NSString *iqIdValue = [[iq attributeForName:@"id"] stringValue];
+    if ([iqIdValue isEqualToString:kXMPPArchiveListID]) {
+        [CPXMPPMessageArchiving saveChatsFromArchiveResultsIq:iq onStream:self.xmppStream];
+    } else if ([iqIdValue isEqualToString:kXMPPArchiveRetrieveID]) {
+        // TODO: handle each response for chat
     }
     
 	return NO;

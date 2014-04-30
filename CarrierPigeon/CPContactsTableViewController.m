@@ -53,7 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 - (IBAction)testButtonPressed:(UIBarButtonItem *)sender {
-    [CPXMPPMessageArchiving getChatsOnStream:self.xmppStream withFromJidStr:@"david@localhost" withMaxConversations:30];
+    [CPXMPPMessageArchiving getChatsOnStream:self.xmppStream withFromJidStr:@"chris@localhost" withMaxConversations:30];
 }
 
 

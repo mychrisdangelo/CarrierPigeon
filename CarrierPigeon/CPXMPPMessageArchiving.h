@@ -13,5 +13,6 @@
 @interface CPXMPPMessageArchiving : NSObject
 
 + (void)getChatsOnStream:(XMPPStream *)xmppStream withFromJidStr:(NSString *)fromJidStr withMaxConversations:(int)maxConversations;
++ (void)saveChatsFromArchiveResultsIq:(XMPPIQ *)resultIq onStream:(XMPPStream *)stream;
 
 @end
