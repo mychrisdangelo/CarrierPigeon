@@ -654,6 +654,12 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	
+    if ([[[iq attributeForName:@"id"] stringValue] isEqualToString:kXMPPArchiveListID]) {
+        
+        
+        
+    }
+    
 	return NO;
 }
 

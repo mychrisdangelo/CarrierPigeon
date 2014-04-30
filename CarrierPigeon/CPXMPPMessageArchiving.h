@@ -10,8 +10,8 @@
 #import "XMPPIQ.h"
 #import "XMPPStream.h"
 
-@interface CPXMPPMessageArchiving : XMPPModule
+@interface CPXMPPMessageArchiving : NSObject
 
-+ (void)getChatsOnStream:(XMPPStream *)xmppStream withFromJidStr:(NSString *)fromJidStr;
++ (void)getChatsOnStream:(XMPPStream *)xmppStream withFromJidStr:(NSString *)fromJidStr withMaxConversations:(int)maxConversations;
 
 @end

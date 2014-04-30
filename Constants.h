@@ -18,6 +18,9 @@
 // notification identifiers
 #define kNewMessageReceivedNotificationIdentifier @"kNewMessageReceivedNotificationIdentifier"
 
+// XMPP Extension Protocols
+#define kXMPPArchiveListID @"CPArchiveList"
+
 // Color
 #define kCarrierPigeonBlueColor [UIColor colorWithRed:101.0/255.0 green:166.0/255.0 blue:230.0/255.0 alpha:1.0]
 

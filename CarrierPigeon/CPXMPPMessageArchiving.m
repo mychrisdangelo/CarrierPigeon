@@ -10,12 +10,13 @@
 
 @implementation CPXMPPMessageArchiving
 
-+ (void)getChatsOnStream:(XMPPStream *)xmppStream withFromJidStr:(NSString *)fromJidStr
++ (void)getChatsOnStream:(XMPPStream *)xmppStream withFromJidStr:(NSString *)fromJidStr withMaxConversations:(int)maxConversations
 {
+    if (maxConversations <= 0) maxConversations = 30;
     
     DDXMLElement *iq = [DDXMLElement elementWithName:@"iq"];
     [iq addAttribute:[DDXMLNode attributeWithName:@"type" stringValue:@"get"]];
-    [iq addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"CarrierPigeon"]];
+    [iq addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:kXMPPArchiveListID]];
     
     DDXMLElement *list = [DDXMLElement elementWithName:@"list"];
     [list addAttribute:[DDXMLNode attributeWithName:@"xmlns" stringValue:@"http://www.xmpp.org/extensions/xep-0136.html#ns"]];
@@ -25,7 +26,7 @@
     [set addAttribute:[DDXMLNode attributeWithName:@"xmlns" stringValue:@"http://jabber.org/protocol/rsm"]];
     
     DDXMLElement *max = [DDXMLElement elementWithName:@"max"];
-    [max setStringValue:@"30"];
+    [max setStringValue:[NSString stringWithFormat:@"%d", maxConversations]];
     
     [iq addChild:list];
     [list addChild:set];
@@ -33,7 +34,6 @@
     
     XMPPIQ *iqPackage = [XMPPIQ iqFromElement:iq];
     [xmppStream sendElement:iqPackage];
-    
 }
 
 @end
