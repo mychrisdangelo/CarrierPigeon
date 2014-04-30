@@ -50,6 +50,7 @@
 		400DC21D18C2ECF200C806ED /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 400DC21C18C2ECF200C806ED /* libresolv.dylib */; };
 		401B0C8718C4FFAA00EE43CA /* CPMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */; };
 		40265B9F18D376D8005A7D7A /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40265B9E18D376D8005A7D7A /* MessageView.m */; };
+		402B7E021910727100A71274 /* CPXMPPMessageArchiving.m in Sources */ = {isa = PBXBuildFile; fileRef = 402B7E011910727100A71274 /* CPXMPPMessageArchiving.m */; };
 		4032C55518BDAE0500E0CDD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55418BDAE0500E0CDD1 /* Foundation.framework */; };
 		4032C55718BDAE0500E0CDD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55618BDAE0500E0CDD1 /* CoreGraphics.framework */; };
 		4032C55918BDAE0500E0CDD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4032C55818BDAE0500E0CDD1 /* UIKit.framework */; };
@@ -320,6 +321,8 @@
 		401B0C8618C4FFAA00EE43CA /* CPMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMessagesViewController.m; sourceTree = "<group>"; };
 		40265B9D18D376D8005A7D7A /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
 		40265B9E18D376D8005A7D7A /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
+		402B7E001910727100A71274 /* CPXMPPMessageArchiving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPXMPPMessageArchiving.h; sourceTree = "<group>"; };
+		402B7E011910727100A71274 /* CPXMPPMessageArchiving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPXMPPMessageArchiving.m; sourceTree = "<group>"; };
 		4032C55118BDAE0500E0CDD1 /* CarrierPigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarrierPigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4032C55418BDAE0500E0CDD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4032C55618BDAE0500E0CDD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1681,6 +1684,8 @@
 		40D2C0A018C46D5800A9E6FD /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				402B7E001910727100A71274 /* CPXMPPMessageArchiving.h */,
+				402B7E011910727100A71274 /* CPXMPPMessageArchiving.m */,
 				4058139918E0A6AC00687944 /* CPSessionContainer.h */,
 				4058139A18E0A6AC00687944 /* CPSessionContainer.m */,
 				40FBDCEB18D3F81E00A4D174 /* CPMessenger.h */,
@@ -2022,6 +2027,7 @@
 				400DC19D18C2E9EA00C806ED /* DDAbstractDatabaseLogger.m in Sources */,
 				4032C57018BDAE0500E0CDD1 /* CarrierPigeon.xcdatamodeld in Sources */,
 				40FBDCED18D3F81E00A4D174 /* CPMessenger.m in Sources */,
+				402B7E021910727100A71274 /* CPXMPPMessageArchiving.m in Sources */,
 				40A995D818C31E4800C23AB6 /* XMPPMessage+XEP_0085.m in Sources */,
 				400DC1A218C2E9EA00C806ED /* ContextFilterLogFormatter.m in Sources */,
 				40A995E418C31E4800C23AB6 /* XMPPMessageArchivingCoreDataStorage.m in Sources */,

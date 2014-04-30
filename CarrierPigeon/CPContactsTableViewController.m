@@ -26,6 +26,7 @@
 #import "NSDate+Helper.h"
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import "CPXMPPMessageArchiving.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -49,6 +50,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
+
+
+- (IBAction)testButtonPressed:(UIBarButtonItem *)sender {
+    [CPXMPPMessageArchiving getChatsOnStream:self.xmppStream withFromJidStr:@"david@localhost"];
+}
+
 
 - (NSString *)myJID
 {
