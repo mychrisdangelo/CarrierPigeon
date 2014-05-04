@@ -29,6 +29,7 @@ extern NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotView
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) NSString *conversationFromUserCurrentlyViewing;
 @property (nonatomic) BOOL userWantsToRegister;
+@property (nonatomic, strong) NSString *deviceTokenString;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

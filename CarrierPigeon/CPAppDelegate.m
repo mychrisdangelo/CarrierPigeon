@@ -416,6 +416,8 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	self.xmppvCardAvatarModule = nil;
 	self.xmppCapabilities = nil;
 	self.xmppCapabilitiesStorage = nil;
+    
+    self.deviceTokenString = nil;
 }
 
 
@@ -939,7 +941,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	NSString *deviceSystemVersion = dev.systemVersion;
     
 	// Prepare the Device Token for Registration (remove spaces and < >)
-	NSString *deviceTokenString = [[[[deviceToken description]
+	self.deviceTokenString = [[[[deviceToken description]
                                      stringByReplacingOccurrencesOfString:@"<"withString:@""]
                                     stringByReplacingOccurrencesOfString:@">" withString:@""]
                                    stringByReplacingOccurrencesOfString: @" " withString: @""];
@@ -947,7 +949,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	// Build URL String for Registration
 	NSString *host = kXMPPHostname;
     
-	NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, deviceTokenString, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
+	NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, self.deviceTokenString, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
     
 	// Register the Device Data (https?)
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

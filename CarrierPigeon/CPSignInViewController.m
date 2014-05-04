@@ -99,6 +99,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.xmppStream disconnect];
         [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
         [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        
+        delegate.deviceTokenString = @"";
     }
     
     if ([CPAppDelegate userHasLoggedInPreviously]) {
@@ -308,6 +310,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppStreamDidAuthenticateHandler
 {
+#if !TARGET_IPHONE_SIMULATOR
+    [self updateAPNSTable];
+#endif
     [self showContactsViewNow];
 }
 
@@ -415,6 +420,30 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     [super touchesBegan:touches withEvent:event];
+}
+
+- (void) updateAPNSTable {
+    
+    // update the apns table, so that the user's device token can be associated with his/her username
+    CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSArray *myJIDArray = [[[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID] componentsSeparatedByString: @"@"];
+    NSString *username = [myJIDArray objectAtIndex:0];
+    
+    if (![delegate.deviceTokenString isEqualToString:@""]) {
+        NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&devicetoken=%@&username=%@", @"update", delegate.deviceTokenString, username];
+        
+        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:kXMPPHostname path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *urlR, NSData *returnData, NSError *e) {
+                                   NSLog(@"Return Data: %@", returnData);
+                                   
+                               }];
+    } else {
+        NSLog(@"Device token not available or APNS table has already been updated");
+    }
 }
 
 @end
