@@ -424,8 +424,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         //TODO: add a "pending" tag to the newly added contact, which would be removed when the
         // add friend request is accepted.
         // An alternative to this would be to create a separate list that shows all pending friend requests
-        [self.xmppRoster addUser:[XMPPJID jidWithString:jidString] withNickname:userName];
-        [self.xmppRoster subscribePresenceToUser:[XMPPJID jidWithString:jidString]];
+        [self.xmppRoster addUser:[XMPPJID jidWithString:jidString] withNickname:userName groups:nil subscribeToPresence:YES];
     }];
 }
 
