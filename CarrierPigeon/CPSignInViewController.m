@@ -101,8 +101,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
         
         delegate.deviceTokenString = @"";
+#if !TARGET_IPHONE_SIMULATOR
         BOOL isLogin = NO;
         [self updateAPNSTable: isLogin];
+#endif
     }
     
     if ([CPAppDelegate userHasLoggedInPreviously]) {
@@ -495,7 +497,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     } else {
         // user has logged out, update the APNS table and remove the username for the credentials of the device
         updateReason = @"3"; // third update reason
-        urlString = [NSString stringWithFormat:@"/apns.php?task=%@&username=%@&updatereason=%@", @"update", username, updateReason];
+        urlString = [NSString stringWithFormat:@"/apns.php?task=%@&username=%@&deviceuid=%@&updatereason=%@", @"update", username, deviceUid, updateReason];
         
         NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:kXMPPHostname path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
