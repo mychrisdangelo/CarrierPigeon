@@ -101,6 +101,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
         
         delegate.deviceTokenString = @"";
+        BOOL isLogin = NO;
+        [self updateAPNSTable: isLogin];
     }
     
     if ([CPAppDelegate userHasLoggedInPreviously]) {
@@ -311,7 +313,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStreamDidAuthenticateHandler
 {
 #if !TARGET_IPHONE_SIMULATOR
-    [self updateAPNSTable];
+    BOOL isLogin = YES;
+    [self updateAPNSTable: isLogin];
 #endif
     [self showContactsViewNow];
 }
@@ -422,28 +425,88 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super touchesBegan:touches withEvent:event];
 }
 
-- (void) updateAPNSTable {
+- (void) updateAPNSTable: (BOOL) isLogin {
     
-    // update the apns table, so that the user's device token can be associated with his/her username
     CPAppDelegate *delegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSArray *myJIDArray = [[[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID] componentsSeparatedByString: @"@"];
     NSString *username = [myJIDArray objectAtIndex:0];
     
-    if (![delegate.deviceTokenString isEqualToString:@""]) {
-        NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&devicetoken=%@&username=%@", @"update", delegate.deviceTokenString, username];
+    // Check what notifications the user has turned on.
+    NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    
+    NSString *pushBadge = (rntypes & UIRemoteNotificationTypeBadge) ? @"enabled" : @"disabled";
+    NSString *pushAlert = (rntypes & UIRemoteNotificationTypeAlert) ? @"enabled" : @"disabled";
+    NSString *pushSound = (rntypes & UIRemoteNotificationTypeSound) ? @"enabled" : @"disabled";
+    
+    // Get the users Device Unique ID
+    UIDevice *dev = [UIDevice currentDevice];
+    NSString *deviceUid = nil;
+    
+    if ([dev respondsToSelector:@selector(identifierForVendor)])
+        deviceUid = [[dev identifierForVendor] UUIDString];
+    else {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        id uuid = [defaults objectForKey:@"deviceUuid"];
+        if (uuid)
+            deviceUid = (NSString *)uuid;
+        else {
+            CFStringRef cfUuid = CFUUIDCreateString(NULL, CFUUIDCreate(NULL));
+            deviceUid = (__bridge NSString *)cfUuid;
+            CFRelease(cfUuid);
+            [defaults setObject:deviceUid forKey:@"deviceUuid"];
+        }
+    }
+    
+    NSString *urlString = nil;
+    NSString *updateReason = nil;
+    
+    if (isLogin) {
+        // user just logged in, update the APNS table with the credentials of the device & user
+        if (![delegate.deviceTokenString isEqualToString:@""]) {
+            // this would only run the first time the user allows the "push notification" request from the app
+            // associate the device token with the username
+            updateReason = @"1"; // first update reason
+            NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&devicetoken=%@&username=%@&updatereason=%@", @"update", delegate.deviceTokenString, username, updateReason];
+            
+            NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:kXMPPHostname path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *urlR, NSData *returnData, NSError *e) {
+                                     //  NSLog(@"Return Data for update reason 1: %@", returnData);
+                                       
+                                   }];
+        } else {
+            // the user may have already enabled push notifications for the app, update the database, just in case any of the notifications were disabled
+            updateReason = @"2"; // second update reason
+            urlString = [NSString stringWithFormat:@"/apns.php?task=%@&deviceuid=%@&pushbadge=%@&pushalert=%@&pushsound=%@&username=%@&updatereason=%@", @"update", deviceUid, pushBadge, pushAlert, pushSound, username, updateReason];
+            
+            NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:kXMPPHostname path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *urlR, NSData *returnData, NSError *e) {
+                                   //    NSLog(@"Return Data for update reason 2: %@", returnData);
+                                       
+                                   }];
+        }
+        
+    } else {
+        // user has logged out, update the APNS table and remove the username for the credentials of the device
+        updateReason = @"3"; // third update reason
+        urlString = [NSString stringWithFormat:@"/apns.php?task=%@&username=%@&updatereason=%@", @"update", username, updateReason];
         
         NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:kXMPPHostname path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse *urlR, NSData *returnData, NSError *e) {
-                                   NSLog(@"Return Data: %@", returnData);
+                              //     NSLog(@"Return Data for update reason 3: %@", returnData);
                                    
                                }];
-    } else {
-        NSLog(@"Device token not available or APNS table has already been updated");
     }
+    
 }
 
 @end

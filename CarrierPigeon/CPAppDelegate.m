@@ -941,18 +941,18 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	NSString *deviceSystemVersion = dev.systemVersion;
     
 	// Prepare the Device Token for Registration (remove spaces and < >)
+    // this token would be used to update the APNS table with the user's username
 	self.deviceTokenString = [[[[deviceToken description]
                                      stringByReplacingOccurrencesOfString:@"<"withString:@""]
                                     stringByReplacingOccurrencesOfString:@">" withString:@""]
                                    stringByReplacingOccurrencesOfString: @" " withString: @""];
     
 	// Build URL String for Registration
-	NSString *host = kXMPPHostname;
     
 	NSString *urlString = [NSString stringWithFormat:@"/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, self.deviceTokenString, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
     
 	// Register the Device Data (https?)
-	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:kXMPPHostname path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
@@ -981,7 +981,7 @@ NSString * const kCurrentUserRecivingMessageInAConversationTheyAreNotViewingCurr
 	
 #if !TARGET_IPHONE_SIMULATOR
     
-	NSLog(@"remote notification: %@",[userInfo description]);
+	NSLog(@"Remote Notification: %@",[userInfo description]);
 	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
     
 	NSString *alert = [apsInfo objectForKey:@"alert"];
