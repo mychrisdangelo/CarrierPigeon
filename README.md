@@ -27,4 +27,6 @@ CarrierPigeon uses a custom XMPP Server which is partially closed source. The Ej
 Documentation
 =============
 
-[May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation), [April 26, 2014 Demo Video](http://bit.ly/carrierpigeondemo)
+* [May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation)
+* [April 26, 2014 Demo Video](http://bit.ly/carrierpigeondemo)
+* [May 12, 2014 Paper](http://bit.ly/carrierpigeonpaper)
