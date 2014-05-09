@@ -20,6 +20,10 @@ Changes Made to the XMPP Framework
 ==================================
 The [verbose logging](https://github.com/robbiehanson/XMPPFramework/wiki/IntroToFramework#xmpp-logging) in the default [XMPP Framework](https://github.com/robbiehanson/XMPPFramework) has been turned off in certain files. 
 
+Server Details
+==============
+CarrierPigeon uses a custom XMPP Server which is partially closed source. The Ejabberd server [relay module](http://github.com/rlyspn/mod_bot_relay) is freely available.
+
 Documentation
 =============
 
