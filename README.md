@@ -22,11 +22,14 @@ The [verbose logging](https://github.com/robbiehanson/XMPPFramework/wiki/IntroTo
 
 Server Details
 ==============
-CarrierPigeon uses a custom XMPP Server which is partially closed source. The Ejabberd server [relay module](http://github.com/rlyspn/mod_bot_relay) is freely available.
+CarrierPigeon uses a custom XMPP Server which is partially closed source. The following elements of the Ejabberd server are open source:
+* [relay module](http://github.com/rlyspn/mod_bot_relay)
+* [push notifications module](https://github.com/IRuth/CarrierPigeonPushNotifications)
+* [time stamp module](https://github.com/IRuth/mod_server_timestamp)
 
 Documentation
 =============
 
-* [May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation)
 * [April 26, 2014 Demo Video](http://bit.ly/carrierpigeondemo)
+* [May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation)
 * [May 12, 2014 Paper](http://bit.ly/carrierpigeonpaper)
