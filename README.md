@@ -31,5 +31,5 @@ Documentation
 =============
 
 * [April 26, 2014 Demo Video](http://bit.ly/carrierpigeondemo)
-* [May 5, 2014 Presentation](http://bit.ly/carrierpigeonpresentation)
-* [May 12, 2014 Paper](http://bit.ly/carrierpigeonpaper)
+* [May 5, 2014 Presentation](assets/CarrierPigeonPresentation.pdf)
+* [May 12, 2014 Paper](assets/CarrierPigeonPaper.pdf)
